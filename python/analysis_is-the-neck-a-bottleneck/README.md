@@ -1,0 +1,16 @@
+# Is the neck connective a bottleneck in the connectome?
+
+## Motivation
+The neck connective is clearly an anatomical bottleneck in the nervous system, and that makes it easy to believe that it would be a signaling bottleneck (meaning there are fewer channels for communication between the brain and VNC than would be expected if there wasn't an anatomical bottleneck in the neck). Indeed, such a thing has been stated in the introduction of many papers and talks as a motivation for studying descending neurons. However this has never been investigated at the level of the connectome.
+
+## Approaches
+### 1. Compare ANs/DNs in the adult and the larva
+The larval nervous system also has a brain and a VNC, but they're not physically separated by a long thin neck connective, instead they're right next to each other. This means that the larval nervous system could also give us a sense for how much connectivity we would expect between the brain and VNC if there were no anatomical bottleneck in the neck. I'm not yet sure exactly how I'd do this comparison, but probably something along the lines of looking at what fraction of the nervous system's neurons interconnect the brain and VNC in the larva and comparing that to the fraction in the adult.
+
+### 2. Compare brain-VNC connectivity (ANs and DNs) to within-brain and within-VNC connectivity
+- First, get a sense for how many neurons interconnect different regions within the brain and within the VNC. The hope is that we can roughly predict the number of neurons/synapses interconnecting different brain regions based on properties things like the brain regions' physical sizes, number of intrinsic neurons, and distance to one another.
+- If such a prediction can be made with any reasonable degree of accuracy, then we can use this model to predict how many neurons/synapses should interconnect the brain and VNC. For the sake of this prediction perhaps we could pretend the brain and VNC were connected by a zero micron long neck connective (that is, they're physically adjacent) to ask the question of how much connectivity we would expect if there were no anatomical bottleneck in the neck.
+- We can then compare the predictions of this model that has been fit to the within-brain and within-VNC connectivity to the actual connectivity between the brain and VNC. If the actual connectivity is less than the predicted connectivity, then we can say that the neck connective is a bottleneck in the connectome.
+
+### 3. Perform graph clustering on the entire connectome and see how readily the brain and VNC go into different clusters
+I don't know anything about graph clustering yet, but one can treat the connectome as a graph and run an algorithm to partition it into clusters such that the number of edges between clusters is minimized. One hypothesis is that if you insist on having n=2 clusters, that the two clusters would just be brain neurons and VNC neurons. If this is the case, it would suggest that the neck connective is a bottleneck in the connectome. If you have to go up to n=3 or more clusters before the brain and VNC separate, then it would suggest that the neck connective is not the most significant bottleneck in the connectome. Seeing what  n is necessary to split the brain and VNC, and seeing what other clusters emerge for small ns (between 2 and ~10), would be quite interesting.

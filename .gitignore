@@ -1,0 +1,101 @@
+# Images files
+*.nrrd
+*.lsm
+*.lsm.bz2
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+
+# raw neuron data, for now
+.rda
+*.rda
+.rda
+*.rds
+.swc
+*.swc
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+images/plotly/*
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
+fig/Identification_PNs/Validation_uPNs_cache/
+fig/Symmetry_PNs/Symmetry_PNs_Connectivity_cache/
+fig/Symmetry_PNs/Symmetry_PNs_Morphology_cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+.Rproj.user
+
+# Python-related stuff
+/.ipynb_checkpoints/
+.ipynb_checkpoints
+
+# OS generated files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.png
+
+# Large files
+*.nd2
+*.obj
+*.nrrd
+*.tifs
+*.zip
+*.czi
+
+# Jingxuan analysis intermediate files
+**/cascade_results/
+**/__pycache__/
+slurm-*.out
+data/cascade/
+**/sbatch_logs/
+*.html
+
+# Cascade files
+data/influence/frankenbrain_v1.5/
+data/cascade/frankenbrain_v1.5/an
+data/cascade/frankenbrain_v1.5/an2
+data/cascade/frankenbrain_v1.5/dn
+data/cascade/frankenbrain_v1.5/dn2
+data/cascade/frankenbrain_v1.5/mb_project
+
+# PNG files in extra and neuroanatomy subdirectories
+figures/*/links/neuroanatomy/*.pdf
+
+# PNG files in figure_4 links directory (including all subdirectories)
+figures/figure_4/links/**/*.png
+figures/schematics/
+figures/figures_biorxiv/
+*banc_meta.csv
+
+
+# R data
+.RDataTmp
