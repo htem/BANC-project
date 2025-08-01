@@ -92,7 +92,6 @@ figures/*/links/neuroanatomy/*.pdf
 
 # PNG files in figure_4 links directory (including all subdirectories)
 figures/figure_4/links/**/*.png
-figures/schematics/
 figures/figures_biorxiv/
 *banc_meta.csv
 
