@@ -64,7 +64,7 @@ BANC-project/
 **No installation required** - Use these web interfaces:
 - **[FlyWire Codex](https://codex.flywire.ai/banc)** - Interactive neuron browser
 - **[Neuroglancer](https://ng.banc.community/view)** - 3D visualization and circuit exploration  
-- **[CAVE Explorer](https://spelunker.cave-explorer.org/)** - Advanced connectivity analysis
+- **[CAVE Explorer](https://github.com/CAVEconnectome/CAVEclient)** - Advanced connectivity analysis
 
 ### For Data Analysis and Reproduction
 ```bash
