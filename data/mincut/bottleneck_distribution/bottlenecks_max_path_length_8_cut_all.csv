@@ -1,0 +1,15 @@
+modality,min cut neurons in brain,min cut neurons in neck,min cut neurons in vnc
+visual_achromatic,407,1203,12
+visual_chromatic,610,1282,19
+olfactory,808,33,0
+mechanosensory,644,365,0
+wind_gravity,641,125,0
+auditory,359,47,0
+gustatory,672,246,1
+ocellar,31,2,0
+grooming,84,43,0
+hygrosensory,258,21,0
+enteric_gustatory,376,38,0
+johnstons_organ_other,235,48,0
+ciberial_mechanosensory_neuron,186,30,0
+thermosensory,252,25,0
