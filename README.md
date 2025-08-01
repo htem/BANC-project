@@ -1,6 +1,7 @@
 <div align="center">
 
 ![BANC Banner](https://github.com/htem/BANC-project/blob/main/notes/banc-poster-new-neurons.png?raw=true)
+Artwork by [Amy Sterling](https://www.amysterling.org/)
 
 # The Brain-And-Nerve-Cord (BANC) Connectome
 
