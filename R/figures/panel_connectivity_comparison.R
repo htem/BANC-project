@@ -20,9 +20,298 @@ fw.meta <- franken.meta %>%
 mc.meta <- franken.meta %>%
   dplyr::filter(!is.na(manc_id))
 
+##############################################
+## MISSING CONNECTIVITY ANALYSIS W.R.T FAFB ##
+##############################################
+
+fw.filtered <- fw.meta %>%
+  group_by(cell_type) %>%
+  filter(all(c("left", "right") %in% side)) %>%
+  ungroup()
+
+banc.filtered <- banc.meta %>%
+  group_by(cell_type) %>%
+  filter(all(c("left", "right") %in% side)) %>%
+  ungroup()
+
+common_cell_types <- na.omit(intersect(unique(fw.filtered$cell_type), unique(banc.filtered$cell_type)))
+
+fafb_edges <- dplyr::filter(franken.edgelist.simple,
+                             pre_cell_type %in% common_cell_types,
+                             post_cell_type %in% common_cell_types) %>%
+  dplyr::mutate(pre_cell_type=gsub("_.*","",pre_cell_type),
+                post_cell_type=gsub("_.*","",post_cell_type))
+banc_edges <- dplyr::filter(banc.edgelist.simple,
+                            pre_cell_type %in% common_cell_types,
+                            post_cell_type %in% common_cell_types) %>%
+  dplyr::mutate(pre_cell_type=gsub("_.*","",pre_cell_type),
+                post_cell_type=gsub("_.*","",post_cell_type))
+
+# Make a vector of thresholds
+thresholds_fafb <- 1:50
+thresholds_banc <- c(1,3,5,10)
+
+# Modified function: Add banc_threshold as argument
+compute_hit_rate <- function(count_threshold_fafb, count_threshold_banc, normalise = TRUE) {
+  # Filter by thresholds
+  fafb_thr <- dplyr::filter(fafb_edges, count >= count_threshold_fafb)
+  banc_edges_sub <- dplyr::filter(banc_edges, count >= count_threshold_banc)
+  
+  # Add edge_id for matching
+  fafb_thr <- dplyr::mutate(fafb_thr, edge_id = paste(pre_cell_type, post_cell_type, sep="->"))
+  banc_edges_sub <- dplyr::mutate(banc_edges_sub, edge_id = paste(pre_cell_type, post_cell_type, sep="->"))
+  
+  # For each edge, get its pre and post group
+  fafb_groups <- fafb_thr %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      n_links_fafb = dplyr::n(),
+      .groups = "drop"
+    )
+  
+  # For each cell_type group: calculate # unique pre and post for denom
+  fafb_group_denom <- fafb_thr %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      fafb_denom = length(unique(post))*length(unique(pre)),
+      .groups = "drop"
+    )
+  
+  # Merge for every edge
+  fafb_groups <- dplyr::left_join(fafb_groups, fafb_group_denom, 
+                                  by = c("pre_cell_type", "post_cell_type"))
+  
+  # Find matching counts in BANC  
+  banc_counts <- banc_edges_sub %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(n_links_banc = dplyr::n(), .groups = "drop")
+  banc_group_denom <- banc_edges_sub %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      banc_denom = length(unique(post))*length(unique(pre)),
+      .groups = "drop"
+    )
+  banc_counts <- dplyr::left_join(banc_counts, banc_group_denom, 
+                                  by = c("pre_cell_type", "post_cell_type"))
+  res <- dplyr::left_join(fafb_groups, banc_counts, by = c("pre_cell_type", "post_cell_type"))
+  res$n_links_banc[is.na(res$n_links_banc)] <- 0
+  res$n_links_fafb[is.na(res$n_links_fafb)] <- 0
+  if(normalise){
+    # Calculate per-edge normalised recovery, capped at 1
+    f <- (res$n_links_banc / res$banc_denom) / (res$n_links_fafb / res$fafb_denom)
+    f <- f * res$fafb_denom
+    f[is.na(f)] <- 0
+    f[f > 1] <- 1
+    val <- mean(f)
+  }else{
+    # Simple presence/absence
+    val <- mean(res$n_links_banc > 0)
+  }
+  return(val)
+}
+
+# Create a data.frame of all threshold combinations
+results <- expand.grid(
+  fafb_threshold = thresholds_fafb,
+  banc_threshold = thresholds_banc
+)
+results$hit_rate <- pbapply::pbmapply(
+  compute_hit_rate, 
+  results$fafb_threshold, 
+  results$banc_threshold,
+  normalise = TRUE
+)
+results$ct_hit_rate <- pbapply::pbmapply(
+  compute_hit_rate, 
+  results$fafb_threshold, 
+  results$banc_threshold,
+  normalise = FALSE
+)
+
+# Plot: one curve per BANC threshold, viridis color
+g <- ggplot2::ggplot(results, ggplot2::aes(x = fafb_threshold, y = hit_rate, color = factor(banc_threshold))) +
+  ggplot2::geom_line(size = 1.1) +
+  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::labs(
+    x = "Minimum synapses in FAFB",
+    y = "Normalised fraction of FAFB edges found in BANC (cell-type-to-cell-type weighted by number of members of pre and post cell type)",
+    title = expression(
+      paste("Normalised P(connection in BANC" >= T[BANC], 
+            " | connection in FAFB" >= T[FAFB], 
+            ")")
+    )
+  ) +
+  ggplot2::theme_minimal()
+ggsave(plot = g, 
+       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc.png"), 
+       width = 10, height = 10, dpi = 300)
+
+# Plot: one curve per BANC threshold, viridis color
+g <- ggplot2::ggplot(results, ggplot2::aes(x = fafb_threshold, y = ct_hit_rate, color = factor(banc_threshold))) +
+  ggplot2::geom_line(size = 1.1) +
+  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::labs(
+    x = "Minimum synapses in FAFB",
+    y = "Normalised fraction of FAFB edges found in BANC (cell-type-to-cell-type)",
+    title = expression(
+      paste("Normalised P(connection in BANC" >= T[BANC], 
+            " | connection in FAFB" >= T[FAFB], 
+            ")")
+    )
+  ) +
+  ggplot2::theme_minimal()
+ggsave(plot = g, 
+       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc_by_cell_type.png"), 
+       width = 10, height = 10, dpi = 300)
+
+##############################################
+## MISSING CONNECTIVITY ANALYSIS W.R.T MANC ##
+##############################################
+
+mc.filtered <- mc.meta %>%
+  group_by(cell_type) %>%
+  filter(all(c("left", "right") %in% side)) %>%
+  ungroup()
+
+banc.filtered <- banc.meta %>%
+  group_by(cell_type) %>%
+  filter(all(c("left", "right") %in% side)) %>%
+  ungroup()
+
+common_cell_types <- na.omit(intersect(unique(mc.filtered$cell_type), unique(banc.filtered$cell_type)))
+
+manc_edges <- dplyr::filter(franken.edgelist.simple,
+                            pre_cell_type %in% common_cell_types,
+                            post_cell_type %in% common_cell_types) %>%
+  dplyr::mutate(pre_cell_type=gsub("_.*","",pre_cell_type),
+                post_cell_type=gsub("_.*","",post_cell_type))
+banc_edges <- dplyr::filter(banc.edgelist.simple,
+                            pre_cell_type %in% common_cell_types,
+                            post_cell_type %in% common_cell_types) %>%
+  dplyr::mutate(pre_cell_type=gsub("_.*","",pre_cell_type),
+                post_cell_type=gsub("_.*","",post_cell_type))
+
+# Make a vector of thresholds
+thresholds_manc <- 1:50
+thresholds_banc <- c(1,3,5,10)
+
+# Modified function: Add banc_threshold as argument
+compute_hit_rate <- function(count_threshold_manc, count_threshold_banc, normalise = TRUE) {
+  # Filter by thresholds
+  manc_thr <- dplyr::filter(manc_edges, count >= count_threshold_manc)
+  banc_edges_sub <- dplyr::filter(banc_edges, count >= count_threshold_banc)
+  
+  # Add edge_id for matching
+  manc_thr <- dplyr::mutate(manc_thr, edge_id = paste(pre_cell_type, post_cell_type, sep="->"))
+  banc_edges_sub <- dplyr::mutate(banc_edges_sub, edge_id = paste(pre_cell_type, post_cell_type, sep="->"))
+  
+  # For each edge, get its pre and post group
+  manc_groups <- manc_thr %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      n_links_manc = dplyr::n(),
+      .groups = "drop"
+    )
+  
+  # For each cell_type group: calculate # unique pre and post for denom
+  manc_group_denom <- manc_thr %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      manc_denom = length(unique(post))*length(unique(pre)),
+      .groups = "drop"
+    )
+  
+  # Merge for every edge
+  manc_groups <- dplyr::left_join(manc_groups, manc_group_denom, 
+                                  by = c("pre_cell_type", "post_cell_type"))
+  
+  # Find matching counts in BANC  
+  banc_counts <- banc_edges_sub %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(n_links_banc = dplyr::n(), .groups = "drop")
+  banc_group_denom <- banc_edges_sub %>%
+    dplyr::group_by(pre_cell_type, post_cell_type) %>%
+    dplyr::summarise(
+      banc_denom = length(unique(post))*length(unique(pre)),
+      .groups = "drop"
+    )
+  banc_counts <- dplyr::left_join(banc_counts, banc_group_denom, 
+                                  by = c("pre_cell_type", "post_cell_type"))
+  res <- dplyr::left_join(manc_groups, banc_counts, by = c("pre_cell_type", "post_cell_type"))
+  res$n_links_banc[is.na(res$n_links_banc)] <- 0
+  res$n_links_manc[is.na(res$n_links_manc)] <- 0
+  if(normalise){
+    # Calculate per-edge normalised recovery, capped at 1
+    f <- (res$n_links_banc / res$banc_denom) / (res$n_links_manc / res$manc_denom)
+    f <- f * res$manc_denom
+    f[is.na(f)] <- 0
+    f[f > 1] <- 1
+    val <- mean(f)
+  }else{
+    # Simple presence/absence
+    val <- mean(res$n_links_banc > 0)
+  }
+  return(val)
+}
+
+# Create a data.frame of all threshold combinations
+results <- expand.grid(
+  manc_threshold = thresholds_manc,
+  banc_threshold = thresholds_banc
+)
+results$hit_rate <- pbapply::pbmapply(
+  compute_hit_rate, 
+  results$manc_threshold, 
+  results$banc_threshold,
+  normalise = TRUE
+)
+results$ct_hit_rate <- pbapply::pbmapply(
+  compute_hit_rate, 
+  results$manc_threshold, 
+  results$banc_threshold,
+  normalise = FALSE
+)
+
+# Plot: one curve per BANC threshold, viridis color
+g <- ggplot2::ggplot(results, ggplot2::aes(x = manc_threshold, y = hit_rate, color = factor(banc_threshold))) +
+  ggplot2::geom_line(size = 1.1) +
+  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::labs(
+    x = "Minimum synapses in MANC",
+    y = "Normalised fraction of MANC edges found in BANC (cell-type-to-cell-type weighted by number of members of pre and post cell type)",
+    title = expression(
+      paste("Normalised P(connection in BANC" >= T[BANC], 
+            " | connection in MANC" >= T[manc], 
+            ")")
+    )
+  ) +
+  ggplot2::theme_minimal()
+ggsave(plot = g, 
+       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc.png"), 
+       width = 10, height = 10, dpi = 300)
+
+# Plot: one curve per BANC threshold, viridis color
+g <- ggplot2::ggplot(results, ggplot2::aes(x = manc_threshold, y = ct_hit_rate, color = factor(banc_threshold))) +
+  ggplot2::geom_line(size = 1.1) +
+  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::labs(
+    x = "Minimum synapses in MANC",
+    y = "Normalised fraction of MANC edges found in BANC (cell-type-to-cell-type)",
+    title = expression(
+      paste("Normalised P(connection in BANC" >= T[BANC], 
+            " | connection in manc" >= T[manc], 
+            ")")
+    )
+  ) +
+  ggplot2::theme_minimal()
+ggsave(plot = g, 
+       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc_by_cell_type.png"), 
+       width = 10, height = 10, dpi = 300)
+
 ###################################
 ## CONNECTIVITY SCATTER ANALYSIS ##
 ###################################
+
 # Generate scatter plots comparing connectivity strengths across datasets
 franken.chosen.cts <- unique(c(subset(franken.meta,grepl("neck",region))$cell_type,
                                subset(franken.meta,grepl("neck",region))$fafb_cell_type,
@@ -182,7 +471,7 @@ g2 <- ggplot(el.chosen.ct.updown, aes(x = banc_norm_mean,
   scale_color_manual(values=paper.cols) +
   coord_fixed()
 
-# Save the plot (optional)
+# Save the plot 
 ggsave(plot = g2, 
        filename = file.path(banc.fig1.supp.path,"franken_vs_banc_norm_all.pdf"), 
        width = 8, height = 6, dpi = 300)
@@ -270,7 +559,7 @@ create_plot <- function(data, title) {
 pre_plot <- create_plot(pre_binned_data, "Distribution of pre_super_class across norm_diff bins")
 post_plot <- create_plot(post_binned_data, "Distribution of post_super_class across norm_diff bins")
 
-# Save the plot (optional)
+# Save the plot 
 ggsave(plot = post_plot, filename = file.path(banc.fig1.extra.path,"andn_post_norm_diff_pre_cell_type_distribution.pdf"), 
        width = 16, height = 8, dpi = 300)
 ggsave(plot = pre_plot, filename = file.path(banc.fig1.extra.path,"andn_pre_norm_diff_pre_cell_type_distribution.pdf"), 
