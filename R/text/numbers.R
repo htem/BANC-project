@@ -40,13 +40,27 @@ df <- rbind(df,
 # Proofread neurons
 banc.proofread.count <- banc.meta %>% 
   dplyr::distinct(root_id, .keep_all = TRUE) %>%
-  dplyr::filter(!super_class%in%c("glia","trachea","not_a_neuron")) %>%
+  dplyr::filter(!super_class%in%c("glia","trachea","not_a_neuron"),
+                !grepl("DEBRIS|NOT_A_NEURON|TRACHEA",status)) %>%
   dplyr::filter(proofread=="TRUE") %>%
   nrow()
 df <- rbind(df,
             data.frame(identity = "proofread_neuron_count",
                        number = banc.proofread.count)
 )
+
+# Identified neurons
+banc.identified.count <- banc.meta %>% 
+  dplyr::distinct(root_id, .keep_all = TRUE) %>%
+  dplyr::filter(!super_class%in%c("trachea","not_a_neuron"),
+                !grepl("DEBRIS|NOT_A_NEURON|TRACHEA",status)) %>%
+  dplyr::filter(proofread=="TRUE"|(roughly_proofread=="TRUE")&!is.na(nucleus_id)|(roughly_proofread=="TRUE")&!grepl("sensory",super_class)) %>%
+  nrow()
+df <- rbind(df,
+            data.frame(identity = "identified_neuron_count",
+                       number = banc.identified.count)
+)
+
 
 # Cell type count, total
 banc.ct.count <- banc.meta %>% 
@@ -77,10 +91,7 @@ df <- rbind(df,
 )
 
 # proportion of cell typed neurons
-banc.proofread.prop <- banc.ct.count/banc.meta %>% 
-  dplyr::filter(!super_class%in%c("glia","trachea","not_a_neuron")) %>%
-  dplyr::distinct(root_id, .keep_all = TRUE) %>%
-  nrow()
+banc.proofread.prop <- banc.ct.count/(166000-9390)
 df <- rbind(df,
             data.frame(identity = "cell_typed_neuron_proportion",
                        number = banc.proofread.prop)
@@ -406,7 +417,7 @@ df <- rbind(df,
 
 
 # Get UMAP coordinates
-cns.umap <- readr::read_csv("data/cns_network/spectral_clustering_assignments_banc_591.csv", 
+cns.umap <- readr::read_csv("data/cns_network/spectral_clustering_min_connection_strength_1_banc_version_626_cluster_count_13_cluster_seed_10_embedding_seed_3.csv", 
                             col_types = banc.col.types) %>%
   dplyr::select(root_id, 
                 spectral_cluster, 
@@ -431,13 +442,98 @@ cns.umap.prop.intrinsic <- nrow(cns.umap)/banc.meta %>%
   nrow()
 df <- rbind(df,
             data.frame(identity = "cns_network_neuron_prop",
-                       number = nrow(cns.umap))
+                       number = cns.umap.prop.intrinsic)
 )
+
+# AN/DN metadata
+banc.an.dn.meta <- banc.meta %>%
+  dplyr::filter(super_class %in% c("ascending","descending")) %>%
+  dplyr::filter(!grepl("^SA|^SN|^AN_4|AN_5|^IN",cell_type))
+
+# AN/Dn cell types of known function
+neck.ct<-banc.an.dn.meta %>%
+  dplyr::distinct(cell_type) %>%
+  dplyr::pull(cell_type)
+neck.ct.function <-banc.an.dn.meta %>%
+  dplyr::filter(!is.na(cell_function))%>%
+  dplyr::distinct(cell_type) %>%
+  dplyr::pull(cell_type)
+df <- rbind(df,
+            data.frame(identity = "an_dn_function_prop",
+                       number = round(length(neck.ct.function)/length(neck.ct),2))
+)
+
+# Missing types
+fafb.cts <- franken.meta %>%
+  dplyr::filter(!region%in%"neck_connective",
+                flow!="efferent",dataset=="FAFB") %>%
+  dplyr::distinct(cell_type) %>%
+  dplyr::pull(cell_type)
+manc.cts <- franken.meta %>%
+  dplyr::filter(!region%in%"neck_connective",
+                flow!="efferent",dataset=="MANC") %>%
+  dplyr::distinct(cell_type) %>%
+  dplyr::pull(cell_type)
+banc.cts <- banc.meta %>%
+  dplyr::filter(region!="neck_connective")
+banc.cts <- unique(c(banc.cts$cell_type,banc.cts$fafb_cell_type,banc.cts$manc_cell_type))
+fafb.cts.not.in.banc <- sum(!fafb.cts%in%banc.cts)
+manc.cts.not.in.banc <- sum(!manc.cts%in%banc.cts)
+fafb.ct.prop.missing <- fafb.cts.not.in.banc/length(fafb.cts)
+manc.ct.prop.missing <- manc.cts.not.in.banc/length(manc.cts)
+df <- rbind(df,
+            data.frame(identity = "manc_ct_prop_missing",
+                       number = manc.ct.prop.missing))
+df <- rbind(df,
+            data.frame(identity = "fafb_ct_prop_missing",
+                       number = fafb.ct.prop.missing))
+df <- rbind(df,
+            data.frame(identity = "manc_ct_count_missing",
+                       number = manc.cts.not.in.banc))
+df <- rbind(df,
+            data.frame(identity = "fafb_ct_count_missing",
+                       number = fafb.cts.not.in.banc))
+
+
+# Flow percentages by region
+flow_by_region <- banc.meta %>%
+  dplyr::distinct(root_id, .keep_all = TRUE) %>%
+  dplyr::filter(!super_class %in% c("glia", "trachea", "not_a_neuron")) %>%
+  dplyr::filter(!is.na(region), region != "", !is.na(flow), region != "brain") %>%
+  dplyr::group_by(region) %>%
+  dplyr::summarise(
+    n_total = dplyr::n(),
+    n_afferent = sum(grepl("afferent", flow), na.rm = TRUE),
+    n_efferent = sum(grepl("efferent", flow), na.rm = TRUE),
+    n_intrinsic = sum(grepl("intrinsic", flow), na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  dplyr::mutate(
+    pct_afferent = n_afferent / n_total,
+    pct_efferent = n_efferent / n_total,
+    pct_intrinsic = n_intrinsic / n_total
+  )
+
+for (i in seq_len(nrow(flow_by_region))) {
+  r <- flow_by_region$region[i]
+  df <- rbind(df,
+              data.frame(identity = paste0("flow_afferent_pct_", r),
+                         number = flow_by_region$pct_afferent[i]))
+  df <- rbind(df,
+              data.frame(identity = paste0("flow_efferent_pct_", r),
+                         number = flow_by_region$pct_efferent[i]))
+  df <- rbind(df,
+              data.frame(identity = paste0("flow_intrinsic_pct_", r),
+                         number = flow_by_region$pct_intrinsic[i]))
+}
 
 # save
 readr::write_csv(x = df %>%
-                   dplyr::distinct(), 
-                 "submission/numbers.csv")
+                   dplyr::distinct(),
+                 "manuscript/resubmission_2/numbers.csv")
+
+
+
 
 
 

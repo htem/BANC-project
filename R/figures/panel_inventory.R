@@ -14,9 +14,16 @@ banc.fig1.path <- "figures/figure_1/links/"
 banc.fig1.extra.path <- "figures/figure_1/links/extra"
 banc.fig1.supp.path <- "figures/figure_1/links/supplement"
 
-##############################
+# Load required libraries
+library(dplyr)
+library(gt)
+library(webshot2) 
+library(tidyr)
+library(stringr)
+
+###############################
 ## METADATA STACKED BAR PLOT ##
-##############################
+###############################
 
 # Prepare metadata to visualise anatomical distribution and functional classification
 # of proofread neurons across the BANC connectome
@@ -25,15 +32,15 @@ plot.data <- banc.meta %>%
   dplyr::filter(proofread=="TRUE",
                 !super_class %in% c("glia","trachea","not_a_neuron")) %>%
   dplyr::mutate(region = dplyr::case_when(
-    !is.na(region) ~ region,
+    super_class %in% c("visual_centrifugal") ~ "central_brain",
+    region %in% c("midbrain","brain","central_brain") ~ "central_brain",
+    region %in% c("vnc","ventral_nerve_cord") ~ "ventral_nerve_cord",
+    region %in% c("optic") ~ "optic_lobe",
     grepl('neck_connective', region) ~ "neck_connective",
-    grepl('_vnc_',root_region) ~ "neck_connective",
     grepl('CAN|FLA|GNG|AMMC|SAD|PRW',root_region)|region=="sez" ~ "central_brain",
     grepl('_midbrain_',root_region) ~ "central_brain",
     grepl('optic', root_region) ~ "optic_lobe",
     grepl('optic', region) ~ "optic_lobe",
-    region == "midbrain" ~ "central_brain",
-    region == "vnc" ~ "ventral_nerve_cord",
     TRUE ~ region
   )) %>%
   dplyr::mutate(top_nt = dplyr::case_when(
@@ -202,12 +209,6 @@ ggsave(plot = g.hm,
 ############
 ## TABLE  ##
 ############
-# Load required libraries
-library(dplyr)
-library(gt)
-library(webshot2)  # For saving gt tables as PDF
-library(tidyr)
-library(stringr)
 
 # Create horizontal metadata summary table
 meta_table_data <- positioned_data %>%
@@ -216,10 +217,10 @@ meta_table_data <- positioned_data %>%
   # Clean up value names for better presentation
   dplyr::mutate(
     value_clean = dplyr::case_when(
-      value == "ventral_nerve_cord" ~ "VNC",
-      value == "central_brain" ~ "CB", 
-      value == "brain" ~ "CB",
-      value == "optic_lobe" ~ "OL",
+      value == "ventral_nerve_cord" ~ "ventral nerve cord",
+      value == "central_brain" ~ "central brain", 
+      value == "brain" ~ "central brain",
+      value == "optic_lobe" ~ "optic lobe",
       TRUE ~ gsub("_", " ", value)
     ),
     # Combine count and proportion into one column
@@ -259,14 +260,28 @@ meta_table <- table_data %>%
     title = "BANC connectome metadata summary",
     subtitle = "distribution of proofread neurons (count and proportion) - excluding undetermined"
   ) %>%
-  # Style the table for readability
+  # Style the table for readability with Arial font
   gt::tab_style(
-    style = gt::cell_text(size = gt::px(9)),
+    style = gt::cell_text(size = gt::px(9), font = "Arial"),
     locations = gt::cells_body()
   ) %>%
   gt::tab_style(
-    style = gt::cell_text(weight = "bold", size = gt::px(10)),
+    style = gt::cell_text(weight = "bold", size = gt::px(10), font = "Arial"),
     locations = gt::cells_column_labels()
+  ) %>%
+  # Style the title and subtitle with Arial
+  gt::tab_style(
+    style = gt::cell_text(font = "Arial"),
+    locations = gt::cells_title(groups = "title")
+  ) %>%
+  gt::tab_style(
+    style = gt::cell_text(font = "Arial"),
+    locations = gt::cells_title(groups = "subtitle")
+  ) %>%
+  # Style the source note with Arial
+  gt::tab_style(
+    style = gt::cell_text(font = "Arial"),
+    locations = gt::cells_source_notes()
   ) %>%
   # Make columns equal width
   gt::cols_width(
@@ -276,9 +291,10 @@ meta_table <- table_data %>%
   gt::tab_source_note(
     source_note = "data filtered for proofread neurons excluding glia, trachea, non-neuronal cells, and undetermined values"
   ) %>%
-  # Table options for horizontal layout
+  # Table options for horizontal layout with Arial as default font
   gt::tab_options(
     table.font.size = gt::px(9),
+    table.font.names = "Arial",
     heading.title.font.size = gt::px(14),
     heading.subtitle.font.size = gt::px(11),
     data_row.padding = gt::px(2),

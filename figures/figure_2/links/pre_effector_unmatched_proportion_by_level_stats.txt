@@ -1,0 +1,12 @@
+Paired Wilcoxon signed-rank test: Pre vs Pre-pre unmatched proportion
+  N pairs (body parts): 21
+  Pre    — median: 0.5159, IQR: [0.4157, 0.6363]
+  Pre-pre — median: 0.8885, IQR: [0.8667, 0.9053]
+
+  V statistic: 0.0
+  p-value: 0.000000954
+  Effect size (rank-biserial r): 1.000
+
+  Pairs where Pre < Pre-pre: 21 / 21
+  Pairs where Pre > Pre-pre: 0 / 21
+  Ties: 0 / 21

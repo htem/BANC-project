@@ -1,0 +1,16 @@
+
+Crossed source × target interaction summary
+-------------------------------------------
+Date: 2025-12-01 13:47:42
+Observations: 4072
+Unique sources: 4 | Unique targets: 1018
+Replication present: FALSE
+
+No replication detected — using a permutation test of non-additivity.
+
+Permutation test details
+Permutations: 5000
+Observed lack-of-fit (RSS under additive model): 6927.8
+Permutation p-value: 1e+00
+
+Plain-language summary: The mapping from sources to targets is not significantly non-additive (p = 1e+00). When non-additive, which sources are most influential depends on the target, beyond overall source and target tendencies.

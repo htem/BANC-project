@@ -125,6 +125,7 @@ tryCatch({
   suppress(library(jsonlite))
   suppress(library(foreach))
   suppress(library(nat.jrcbrains))
+  suppress(library(glue))
   suppress(library(doMC))
   suppress(library(doParallel))
   suppress(library(progressr))
@@ -164,6 +165,9 @@ tryCatch({
   suppress(library(htmltools))
   suppress(library(htmlwidgets))
   suppress(library(googlesheets4))
+  suppress(library(influencer))
+  suppress(library(ggpubr))
+  suppress(library(rstatix))
   try(suppress(library(webshot2)))
 }, warning = function(w) {
   warning("A warning occurred: ", conditionMessage(w))
@@ -494,141 +498,10 @@ log.const <- 0.0000000000000000000000001
 inf.threshold <- 0.000000002
 inf.threshold <- 0.00000000015
 inf.norm.threshold <- 0.0000000001
-threshold.inf.value <- 15.903
+threshold.inf.value <- 17.15 #17.18 #15.903
 threshold.sens.inf.value <- 12.14715
 
-########################
-##### PLOT COLOURS #####
-########################
 
-# # Read the CSV file
-# colors_df <- read.csv("settings/paper_colours_lacroix.csv")
 # 
-# # Clean and prepare the data
-# colors_clean <- colors_df %>%
-#   # Remove duplicates (keep first occurrence of each label-hex combination)
-#   distinct(label, hex, type, .keep_all = TRUE) %>%
-#   # Clean up labels for better display
-#   mutate(
-#     label_clean = str_replace_all(label, "_", " "),
-#     label_clean = str_to_title(label_clean)
-#   ) %>%
-#   # Order types by frequency for better layout
-#   mutate(type = fct_infreq(type))
 # 
-# # Create a function to determine text color based on background
-# get_text_color <- function(hex_color) {
-#   # Convert hex to RGB
-#   rgb_vals <- col2rgb(hex_color)
-#   # Calculate luminance
-#   luminance <- (0.299 * rgb_vals[1] + 0.587 * rgb_vals[2] + 0.114 * rgb_vals[3]) / 255
-#   # Return white for dark backgrounds, black for light backgrounds
-#   ifelse(luminance < 0.5, "white", "black")
-# }
 # 
-# # Add text color column
-# colors_clean$text_color <- sapply(colors_clean$hex, get_text_color)
-# 
-# # Create the main visualization
-# p1 <- ggplot(colors_clean, aes(x = fct_reorder(label_clean, hex), y = 1)) +
-#   geom_tile(fill = colors_clean$hex, color = "white", size = 0.5) +
-#   geom_text(aes(label = label_clean), 
-#             color = colors_clean$text_color, 
-#             size = 2.5, 
-#             angle = 45, 
-#             hjust = 1, 
-#             vjust = 0.5) +
-#   facet_wrap(~type, scales = "free_x", ncol = 3) +
-#   labs(
-#     title = "Color Mapping by Type",
-#     subtitle = "Hex codes mapped to labels, grouped by category",
-#     x = NULL,
-#     y = NULL
-#   ) +
-#   theme_minimal() +
-#   theme(
-#     axis.text.x = element_blank(),
-#     axis.text.y = element_blank(),
-#     axis.ticks = element_blank(),
-#     panel.grid = element_blank(),
-#     strip.text = element_text(face = "bold", size = 12),
-#     plot.title = element_text(size = 16, face = "bold"),
-#     plot.subtitle = element_text(size = 12),
-#     plot.margin = margin(20, 20, 20, 20)
-#   )
-# 
-# # Create a summary table
-# summary_stats <- colors_clean %>%
-#   group_by(type) %>%
-#   summarise(
-#     count = n(),
-#     unique_colors = n_distinct(hex),
-#     .groups = 'drop'
-#   ) %>%
-#   arrange(desc(count))
-# 
-# print("Summary of color mappings by type:")
-# print(summary_stats)
-# 
-# # Create a color palette visualization for each type
-# create_palette_plot <- function(type_name) {
-#   type_data <- colors_clean %>% filter(type == type_name)
-#   
-#   ggplot(type_data, aes(x = 1:nrow(type_data), y = 1)) +
-#     geom_tile(fill = type_data$hex, width = 0.9, height = 0.8) +
-#     geom_text(aes(label = paste0(label_clean, "\n", hex)), 
-#               color = type_data$text_color, 
-#               size = 2.5) +
-#     labs(title = paste("Color Palette:", str_to_title(type_name)),
-#          x = NULL, y = NULL) +
-#     theme_void() +
-#     theme(
-#       plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
-#       axis.text = element_blank(),
-#       axis.ticks = element_blank()
-#     ) +
-#     coord_fixed()
-# }
-# 
-# # Create individual palette plots for each type (uncomment to generate)
-# # unique_types <- unique(colors_clean$type)
-# # for(type_name in unique_types) {
-# #   p <- create_palette_plot(type_name)
-# #   print(p)
-# # }
-# 
-# # Alternative compact visualization showing hex codes
-# p2 <- colors_clean %>%
-#   group_by(type) %>%
-#   mutate(row_num = row_number()) %>%
-#   ggplot(aes(x = row_num, y = fct_rev(type))) +
-#   geom_tile(fill = colors_clean$hex, color = "white", size = 0.3) +
-#   geom_text(aes(label = str_sub(hex, 2, 7)), 
-#             color = colors_clean$text_color, 
-#             size = 1.8) +
-#   labs(
-#     title = "Hex Color Codes by Type",
-#     subtitle = "Each tile shows the actual color with its hex code",
-#     x = "Color Index",
-#     y = "Type"
-#   ) +
-#   theme_minimal() +
-#   theme(
-#     panel.grid = element_blank(),
-#     plot.title = element_text(size = 16, face = "bold"),
-#     plot.subtitle = element_text(size = 12),
-#     axis.text.y = element_text(size = 10),
-#     axis.text.x = element_text(size = 8)
-#   )
-# 
-# # Save
-# ggsave(plot = p1,
-#        filename = file.path("settings", "paper_colours_1.png"),
-#        width = 12, height = 12, dpi = 300)
-# ggsave(plot = p2,
-#        filename = file.path("settings", "paper_colours_2.png"),
-#        width = 12, height = 12, dpi = 300)
-
-
-
-

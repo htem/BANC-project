@@ -406,15 +406,13 @@ influence.plot.wide <- influence.plot.df %>%
   dplyr::filter(seed %in% c("ascending", "descending")) %>%
   dplyr::select(id, 
                 seed, 
-                influence_norm_log, 
+                influence_log, 
                 body_part_effector) %>%
-  tidyr::pivot_wider(names_from = seed, values_from = influence_norm_log,
-              names_prefix = "influence_norm_log_") %>%
-  dplyr::filter(influence_norm_log_ascending>threshold.inf.value,
-                influence_norm_log_descending>threshold.inf.value) %>%
-  dplyr::arrange(influence_norm_log_ascending)
-
-# Shapes and colors
+  tidyr::pivot_wider(names_from = seed, values_from = influence_log,
+              names_prefix = "influence_log_") %>%
+  dplyr::filter(influence_log_ascending>threshold.inf.value,
+                influence_log_descending>threshold.inf.value) %>%
+  dplyr::arrange(influence_log_ascending)
 
 # Coordinate coloursand shapes
 body.part.shapes <- c("retrocerebral complex" = 21, 
@@ -464,8 +462,8 @@ influence.plot.wide$body_part_effector <- factor(influence.plot.wide$body_part_e
 
 # Plot
 g.inf.an.dn.corr <- ggplot(influence.plot.wide, 
-       aes(x = influence_norm_log_ascending, 
-           y = influence_norm_log_descending,
+       aes(x = influence_log_ascending, 
+           y = influence_log_descending,
            #color = body_part_effector,
            #shape = body_part_effector,
            group = 1)) +
@@ -499,9 +497,10 @@ g.inf.an.dn.corr <- ggplot(influence.plot.wide,
   #scale_color_manual(values = paper.cols) +
   #scale_shape_manual(values = body.part.shapes) +
   theme_minimal() + 
-  coord_equal() +
+  #coord_equal() +
   theme(legend.position = "none")  +
-  ggplot2::coord_fixed() + theme(
+  #ggplot2::coord_fixed() + 
+  theme(
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   ) +
@@ -513,7 +512,7 @@ plot(g.inf.an.dn.corr)
 
 # Save
 ggsave(g.inf.an.dn.corr, 
-       filename = file.path(banc.fig2.path, "influence_log_norm_ascending_descending_to_efferent_scatter.pdf"), 
-       width = 3, height = 3, dpi = 300, bg = "transparent")
+       filename = file.path(banc.fig3.path, "influence_log_ascending_descending_to_efferent_scatter.pdf"), 
+       width = 5, height = 3, dpi = 300, bg = "transparent")
 
 

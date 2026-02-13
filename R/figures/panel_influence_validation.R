@@ -63,15 +63,15 @@ for(inf.metric in inf.metrics){
                 se = FALSE, 
                 color = "black", 
                 linetype = "solid") +
-    stat_poly_eq(aes(color = NULL, 
-                     label = paste(after_stat(eq.label), 
-                                   after_stat(rr.label), sep = "~~~")),
-                 formula = y ~ x, 
-                 parse = TRUE, 
-                 label.x = 0.75, 
-                 label.y = 0.95, 
-                 fontface = "bold",
-                 size =5) +
+    # stat_poly_eq(aes(color = NULL, 
+    #                  label = paste(after_stat(eq.label), 
+    #                                after_stat(rr.label), sep = "~~~")),
+    #              formula = y ~ x, 
+    #              parse = TRUE, 
+    #              label.x = 0.75, 
+    #              label.y = 0.95, 
+    #              fontface = "bold",
+    #              size =5) +
     labs(
       title = "",
       x = "layer mean, graph traversal",
@@ -170,7 +170,7 @@ for(inf.metric in inf.metrics){
   # Save
   if(inf.metric == inf.primary.metric){
     ggsave(g.olf1, 
-           filename = file.path(banc.fig2.path, sprintf("%s_vs_layer_mean_super_class.png",inf.metric)), 
+           filename = file.path(banc.fig2.path, sprintf("%s_vs_layer_mean_super_class.pdf",inf.metric)), 
            width = 6, height = 3, dpi = 300)
     ggsave(g.olf2, 
            filename = file.path(banc.fig2.path, sprintf("%s_vs_cascade_mean.png",inf.metric)), 

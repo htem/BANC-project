@@ -1,0 +1,41 @@
+
+Two-way ANOVA (source × target) Summary
+---------------------------------------
+
+Date: 2026-02-10 13:27:58
+Observations: 23437
+Unique sources: 21 | Unique targets: 21
+Replication present: TRUE
+
+Type-III ANOVA table
+--------------------
+
+|              |   Sum Sq|    Df|   F value| Pr(>F)|
+|:-------------|--------:|-----:|---------:|------:|
+|(Intercept)   |  30.9146|     1| 1616.9968|      0|
+|source        |  42.2320|    20|  110.4479|      0|
+|target        |  13.5777|    20|   35.5092|      0|
+|source:target | 858.5915|   400|  112.2723|      0|
+|Residuals     | 439.6492| 22996|        NA|     NA|
+
+Partial eta^2 (95% CI)
+----------------------
+
+|Parameter     | Eta2_partial|   CI| CI_low| CI_high|
+|:-------------|------------:|----:|------:|-------:|
+|source        |       0.0876| 0.95| 0.0813|       1|
+|target        |       0.0300| 0.95| 0.0257|       1|
+|source:target |       0.6613| 0.95| 0.6824|       1|
+
+Concise figure-legend statement
+-------------------------------
+
+[1] "Two-way ANOVA (Type-III SS; session contrasts) on 23437 observations with 21 sources and 21 targets found a significant source×target interaction, F(400, 22996) = 112.27, p < 2.2×10^-16, partial η² = 0.66 [0.68–1.00, large]. Source main effect was significant, F(20, 22996) = 110.45, p < 2.2×10^-16, partial η² = 0.09 (moderate); target main effect was significant, F(20, 22996) = 35.51, p < 2.2×10^-16, partial η² = 0.03 (small). The interaction carried the largest effect size among tested terms."
+
+Model comparison: additive vs interaction
+-----------------------------------------
+
+| Res.Df|       RSS|  Df| Sum of Sq|        F| Pr(>F)|
+|------:|---------:|---:|---------:|--------:|------:|
+|  23396| 1298.2408|  NA|        NA|       NA|     NA|
+|  22996|  439.6492| 400|  858.5915| 112.2723|      0|

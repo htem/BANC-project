@@ -17,7 +17,7 @@ if(is.null(banc.version)){
     dplyr::distinct()
 }else{
   con <- DBI::dbConnect(RSQLite::SQLite(),
-                        file.path(banc.dropbox.connectivity.save.path,"banc_572_data.sqlite"))
+                        file.path(banc.dropbox.connectivity.save.path,banc.connectivity.version))
   banc.edgelist.simple <- dplyr::tbl(con, "edgelist_simple") %>%
     dplyr::collect()
   dbDisconnect(con)
@@ -27,14 +27,14 @@ if(is.null(banc.version)){
 banc.edgelist.simple <- banc.edgelist.simple %>%
   dplyr::left_join(banc.meta.post %>% 
                      dplyr::select(post_id, post_top_nt, post_cluster,
-                                   post_side, post_region, post_super_class, 
+                                   post_side, post_region, post_super_class, post_super_cluster,
                                    post_hemilineage, post_cell_function, post_nerve, 
                                    post_cell_class, post_cell_sub_class, post_cell_type, post_composite_cell_type) %>%
                      dplyr::distinct(post_id, .keep_all = TRUE),
                    by = c("post"="post_id")) %>%
   dplyr::left_join(banc.meta.pre %>% 
                        dplyr::select(pre_id, pre_top_nt, pre_cluster,
-                                     pre_side, pre_region, pre_super_class, 
+                                     pre_side, pre_region, pre_super_class, pre_super_cluster,
                                      pre_hemilineage, pre_cell_function, pre_nerve, 
                                      pre_cell_class, pre_cell_sub_class, pre_cell_type, pre_composite_cell_type) %>%
                        dplyr::distinct(pre_id, .keep_all = TRUE),

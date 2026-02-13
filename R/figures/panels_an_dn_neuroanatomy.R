@@ -273,58 +273,80 @@ for(clust in clusters){
 #########################
 ### PLOT CNS CLUSTERS ###
 #########################
+synapses <- TRUE
+if(synapses){
+  version.path <- file.path(banc.save.path,"v626")
+  proof.ids <- na.omit(unique(banc.meta %>%
+                                dplyr::filter(!is.na(cns_network)) %>%
+                                dplyr::pull(root_626)))
+  #  Get synapses
+  desired_columns <- c('id', 'size', 'pre_root_id', 'post_root_id', 'ctr_x', 'ctr_y', 'ctr_z')
+  col_types <- cols(
+    id = col_character(),
+    size = col_double(),
+    pre_root_id = col_character(),
+    post_root_id = col_character(),
+    ctr_x = col_double(),
+    ctr_y = col_double(),
+    ctr_z = col_double(),
+    .default = col_double()
+  )
+  column_names <- c('id', 'pre_x', 'pre_y', 'pre_z', 'post_x', 'post_y', 'post_z',
+                    'ctr_x', 'ctr_y', 'ctr_z', 'size', 'pre_supervoxel_id',
+                    'pre_root_id', 'post_supervoxel_id', 'post_root_id')
+  
+banc.syns <- vroom::vroom(file.path(version.path,"synapses_250226_human_readable.csv"),
+                            col_names = column_names,
+                            col_select = dplyr::all_of(desired_columns),
+                            col_types = col_types,
+                            skip = 1) %>%
+    dplyr::rename(X=ctr_x,
+                  Y=ctr_y,
+                  Z=ctr_z) %>%
+    dplyr::filter(pre_root_id %in% proof.ids,
+                  post_root_id %in% proof.ids,
+                  post_root_id!=pre_root_id
+    ) %>%
+    tibble::as_tibble()
+  # # Colours
+  # paper.cols2 <- paper.cols
+  # paper.cols2[["central_brain"]] = "grey50"
+  # paper.cols2[["ventral_nerve_cord"]] = "grey10"
+  # paper.cols2[["optic_lobe"]] = "grey90" 
+}
 clusters <- sort(na.omit(unique(banc.meta$cns_network)))
-# # Colours
-# paper.cols2 <- paper.cols
-# paper.cols2[["central_brain"]] = "grey50"
-# paper.cols2[["ventral_nerve_cord"]] = "grey10"
-# paper.cols2[["optic_lobe"]] = "grey90"
 for(clust in clusters){
   try({
     message("working on:", clust)
+    clust.nam <- gsub(" |\\/","_",clust)
     banc.cns.clust <- banc.meta %>%
       dplyr::filter(cns_network==clust) 
 
     ##### NBLAST clustering
     
     # get neuron skeletons
-    synapses <- FALSE
     if(synapses){
-      # On O2
-      neck.synapses.list <- pbapply::pblapply(unique(banc.cns.clust$root_id), function(x)
-        bancr::banc_partners(x,
-                             partners = "output"))
-      neck.synapses.list.select <- pbapply::pblapply(neck.synapses.list, function(x){
-        tryCatch({points <- nat::xyzmatrix(x$pre_pt_position)
-        x$pre_pt_root_id <- as.character(x$pre_pt_root_id)
-        cbind(x,points) %>%
-          dplyr::select(pre_pt_root_id,X,Y,Z)
-        }, function(e)
-          NULL)
-      }
-      )
-      neurons.plot <- do.call(rbind, neck.synapses.list.select) %>%
-        dplyr::mutate(X=as.numeric(X),
-                      Y=as.numeric(Y),
-                      Z=as.numeric(Z)) %>%
-        dplyr::filter(!is.na(X)) %>%
+      neurons.plot <- banc.syns %>%
+        dplyr::filter(
+          pre_root_id %in% !!unique(banc.cns.clust$root_id) |
+            post_root_id %in% !!unique(banc.cns.clust$root_id),
+          size > 5
+        ) %>%
+        dplyr::slice_sample(n = 1e5, replace = FALSE) %>%
         nat::xyzmatrix()
     }else{
       l2 <- banc_read_l2skel(unique(banc.cns.clust$root_id), OmitFailures = TRUE)
       e <- nlapply(l2,function(x) xyzmatrix(x)[nat::endpoints(x),])
       neurons.plot <- do.call(rbind,e)
+      n_rows <- nrow(neurons.plot)
+      sampled_idx <- sample(n_rows, size = floor(n_rows / 10))
+      neurons.plot <- neurons.plot[sampled_idx, , drop = FALSE]
     }
     neurons.plot <- neurons.plot[pointsinside(neurons.plot,banc_neuropil.surf),]
-    n_rows <- nrow(neurons.plot)
-    sampled_idx <- sample(n_rows, size = floor(n_rows / 10))
-    neurons.plot <- neurons.plot[sampled_idx, , drop = FALSE]
     
     # Find neuropil inclusion
-    # Define the chunk size
     message("making: neurons.np")
-    chunk_size <- 1000
-    
-    # Split the dataframe into a list of chunks
+    chunk_size <- 10000
     neurons.np <- neurons.plot %>%
       as.data.frame() %>%
       dplyr::mutate(id = row_number()) %>%
@@ -335,17 +357,15 @@ for(clust in clusters){
                     ) %>%
       dplyr::group_by(chunk) %>%
       dplyr::group_split()
-
-    # Process each chunk
     neurons.np <- purrr::map(neurons.np, function(chunk) {
       message("running: pointsinside_banc")
-      data <-pointsinside_banc(chunk)
+      data <-tryCatch(pointsinside_banc(chunk), error = function(e) data)
       message("running: pointsnearby_banc")
-      data <- pointsnearby_banc(data)
+      data <- tryCatch(pointsnearby_banc(data), error = function(e) data)
       data
     })
     neurons.np.df <- bind_rows(neurons.np) %>%
-      dplyr::mutate(neuropil = gsub("ITO_optic_|ITO_midbrain_|COURT_vnc_|_L|_R|_right|_left","",neuropil)) %>%
+      dplyr::mutate(neuropil = gsub("ITO_optic_|ITO_midbrain_|COURT_vnc_|_L|_R|_right|_left|MANC_.*|\\,.*","",neuropil)) %>%
       dplyr::mutate(neuropil = gsub("MB_.*","MB",neuropil)) %>%
       dplyr::arrange(region, neuropil)
     
@@ -371,7 +391,7 @@ for(clust in clusters){
     
     # Plot pie chart
     ggsave(plot = g.np,
-           filename = file.path(banc.fig6.anat.path,paste0(clust,"_neuropil_bar.pdf")),
+           filename = file.path(banc.fig6.anat.path,paste0(clust.nam,"_neuropil_bar.pdf")),
            width = 2, height = 2, dpi = 300)
     
     ##### Plot neuroanatomy
@@ -418,7 +438,11 @@ for(clust in clusters){
       ggplot2::theme_void() +
       ggplot2::guides(fill = "none", color = "none") 
     ggsave(plot = g.anat.main,
+<<<<<<< HEAD
+           filename = file.path(banc.fig6.anat.path,paste0(clust.nam,"_main_neuroanatomy.pdf")),
+=======
            filename = file.path(banc.fig6.anat.path,paste0(clust,"_main_neuroanatomy.png")),
+>>>>>>> 9d967d3faf35b6312226f9edf100979d7a66c04a
            width = 10, height = 10, dpi = 300)
     Sys.sleep(2)
     neurons.plot.brain <- banc_decapitate(neurons.plot, invert = TRUE, OmitFailures = TRUE)
@@ -439,7 +463,11 @@ for(clust in clusters){
         ggplot2::theme_void() +
         ggplot2::guides(fill = "none", color = "none") 
       ggsave(plot = g.anat.brain,
+<<<<<<< HEAD
+             filename = file.path(banc.fig6.anat.path,paste0(clust.nam,"_brain_neuroanatomy.pdf")),
+=======
              filename = file.path(banc.fig6.anat.path,paste0(clust,"_brain_neuroanatomy.png")),
+>>>>>>> 9d967d3faf35b6312226f9edf100979d7a66c04a
              width = 10, height = 10, dpi = 300)
       Sys.sleep(2)
     }
@@ -461,7 +489,11 @@ for(clust in clusters){
         ggplot2::theme_void() +
         ggplot2::guides(fill = "none", color = "none") 
       ggsave(plot = g.anat.vnc,
+<<<<<<< HEAD
+             filename = file.path(banc.fig6.anat.path,paste0(clust.nam,"_vnc_neuroanatomy.pdf")),
+=======
              filename = file.path(banc.fig6.anat.path,paste0(clust,"_vnc_neuroanatomy.png")),
+>>>>>>> 9d967d3faf35b6312226f9edf100979d7a66c04a
              width = 10, height = 10, dpi = 300)
       Sys.sleep(2)
     }

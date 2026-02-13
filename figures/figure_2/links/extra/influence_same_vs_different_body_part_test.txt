@@ -1,0 +1,23 @@
+Same vs Different Body Part Analysis
+======================================================================
+Date: 2026-02-10 12:57:05
+Metric: influence | Body parts: 14
+Test: Wilcoxon rank-sum (one-sided, on-diagonal > off-diagonal)
+Note: single test, no multiple comparisons correction needed
+
+Group summaries
+----------------------------------------------------------------------
+On-diagonal (same body part):      n=14, median=1.92, IQR=3.71, range=[0.01, 8.08]
+Off-diagonal (different body part): n=182, median=0.03, IQR=0.11, range=[0.00, 2.70]
+
+Test results
+----------------------------------------------------------------------
+W = 2321.0
+p = 1.55×10^-7
+Rank-biserial r = -0.822 (large effect)
+
+======================================================================
+FIGURE LEGEND (copy-paste ready)
+======================================================================
+A one-sided Wilcoxon rank-sum test showed that same body part (on-diagonal) sensory-to-effector influence was significantly greater than different body part (off-diagonal) influence (W=2321.0, p=1.55×10^-7, rank-biserial r=-0.822, large effect). On-diagonal median=1.92 (n=14); off-diagonal median=0.03 (n=182).
+======================================================================

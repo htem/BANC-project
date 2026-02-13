@@ -1,12 +1,14 @@
 label,hex,type,colour
 corpus_allatum,#695B52,body_part,brown_grey
 corpus allatum,#695B52,body_part,brown_grey
+hemolymph,#EE4244,body_part,red
 retrocerebral complex,#EE4244,body_part,red
 retrocerebral_complex,#EE4244,body_part,red
 enteric complex,#937B68,body_part,taupe
 enteric complex,#937B68,body_part,taupe
 digestive tract,#D05633,body_part,rust_orange
 digestive_tract,#D05633,body_part,rust_orange
+enteric,#736c26,body_part,muddy
 crop,#736c26,body_part,muddy
 salivary gland,#1BB6AF,body_part,teal
 salivary_gland,#1BB6AF,body_part,teal
@@ -26,6 +28,7 @@ hind_leg,#916730,body_part,gold
 ureter,#FFD700,body_part,gold
 abdomen,#60BC5B,body_part,light_green
 reproductive tract,#6495ED,body_part,cornflower_blue
+reproductive,#6495ED,body_part,cornflower_blue
 reproductive_tract,#6495ED,body_part,cornflower_blue
 uterus,#4169E1,body_part,royal_blue
 neurohemal complex,#FF4500,body_part,orange_red
@@ -56,6 +59,7 @@ antennal_lobe_projection_neuron,#d55e3a,class,rust_red
 uniglomerular_projection_neuron,#FC5A50,class,coral
 biglomerular_projection_neuron,#1BB6AF,class,teal
 multiglomerular_projection_neuron,#AF6125,class,brown
+sensory_descending,#f018ec,class,deep_pink
 descending,#FF1493,class,deep_pink
 olfactory_receptor_neuron,#F0E442,class,yellow
 wedge_projection_neuron,#132157,class,navy_blue
@@ -63,6 +67,7 @@ suboesophageal_projection_neuron,#009F3F,class,green
 third_order_olfactory_neuron,#D72000,class,red
 third_order_olfactory_output_neuron,#D72000,class,red
 third_order_olfactory_local_neuron,#8b0000,class,dark_red
+mushroom_body_output,#800080,class,purple
 mushroom_body_output_neuron,#800080,class,purple
 projection_neuron,#FBBB48,class,golden_yellow
 axon,#EE4244,compartment,red
@@ -96,11 +101,13 @@ frankenbrain,#7D8091,dataset,blue_grey
 banc,#2a5f75,dataset,regal_blue
 BANC,#2a5f75,dataset,regal_blue
 fanc,#6495ED,dataset,corn_blue
+malecns,#389636,dataset,dark_green
+maleCNS,#389636,dataset,dark_green
 intrinsic,#1FA99F,flow,teal
 afferent,#F39A13,flow,orange
 efferent,#EFC7E6,flow,pink
 effectors,#EFC7E6,flow,pink
-motor,#EFC7E6,flow,pink
+motor,#ee756f,super class,vibrant pink
 sensors,#F39A13,flow,orange
 sensory,#F39A13,flow,orange
 vision,#1BB6AF,flow,teal
@@ -118,7 +125,7 @@ antennal_lobe,#FF0000,region,red
 brain_central_other,#CB0705,flow,red
 brain_endocrine,#527D5B,flow,dark_green
 brain_motor_neuron,#AA2207,flow,dark_red
-motor_neuron,#EFC7E6,flow,pink
+motor_neuron,#ee756f,super class,vibrant pink
 sensory_neuron,#F39A13,flow,orange
 central_brain_sensory,#EBEF37,flow,yellow
 central_brain_efferent,#AA2207,flow,dark_red
@@ -170,7 +177,10 @@ midline,#54BCD1,misc,sky_blue
 soft,#B3B3B3,misc,light_grey
 missing,#FFFFFF,misc,white
 TRUE,#EFC7E6,misc,pink
+ROUGHLY_PROOFREAD,#FF986C,misc,fuchsia
 FALSE,#B3B3B3,misc,light_grey
+MISSING,#B3B3B3,misc,light_grey
+LAMINA,#6B6B6B,misc,dark_grey
 ambiguous,#A1D8EB,misc,light_blue
 Ambiguous,#A1D8EB,misc,light_blue
 MATCHED,#1BB6AF,misc,teal
@@ -190,9 +200,8 @@ chemosensory,#8FD40D,modality,lime_green
 visceral_circulatory,#F1DDBB,modality,beige
 endocrine,#F1DDBB,modality,beige
 sensory_ascending,#B0D989,modality,light_green
-descending,#FF1493,modality,deep_pink
-tactile,#731102,modality,dark_red
-proprioceptive,#9E4D1C,modality,brown
+tactile,#FF1493,super_cluster,deep_pink
+proprioceptive,#1BB6AF,super_cluster,teal
 johnstons_organ_other,#121B56,modality,navy_blue
 johnstons_organ,#121B56,modality,navy_blue
 wind_gravity,#1186CB,modality,blue
@@ -248,10 +257,11 @@ TOO_SMALL,#B3B3B3,status,light_grey
 NBLAST,#FBBB48,status,golden_yellow
 vnc,#8FD40D,region,lime_green
 ascending,#089c39,super_class,regular_green
+central_complex_output,#54BCD1,super_class,light blue
 central_complex,#2a5f75,super_class,regal_blue
 clock,#9E4D1C,super_class,brown
-efferent_ascending,#B80068,super_class,magenta
-glia,#8FD40D,super_class,lime_green
+efferent_ascending,#6A6E09,super_class,green-brown
+glia,#e1ad01,super_class,yellow
 lateral_horn,#FFD700,super_class,gold
 mushroom_body,#800080,super_class,pink
 optic,#1BB6AF,super_class,teal
@@ -264,7 +274,7 @@ vnc_motor_neuron,#39AC1F,super_class,green
 ascending_neuron,#8FDA04,super_class,lime_green
 ventral_nerve_cord,#8FD40D,super_class,lime_green
 circadian_neuron,#9E4D1C,super_class,brown
-ascending_visceral_circulatory,#B80068,super_class,magenta
+ascending_visceral_circulatory,#6A6E09,super_class,green-brown
 ventral_nerve_cord_intrinsic,#8FD40D,super_class,lime_green
 ventral_nerve_cord_visceral_circulatory,#9E4D1C,super_class,brown
 ventral_nerve_cord_motor,#39AC1F,super_class,green
@@ -378,19 +388,20 @@ probing,#60BC5B,super_cluster,light_green
 visceral control,#6D2C7B,super_cluster,purple
 flight steering 2,#046785,super_cluster,dark_turquoise
 flight steering 1,#FF6347,super_cluster,tomato
+head and eye,#A1D8EB,super_cluster,light_blue
 head and eye orienting,#A1D8EB,super_cluster,light_blue
 grooming,#32CD32,super_cluster,lime_green
 flight steering ,#00CED1,modality,dark_turquoise
 escape,#ae0000,modality,deep_red
-01,#000000,neck_cluster,black
-02,#4D4D4D,neck_cluster,dark_grey
-03,#F4B95A,neck_cluster,peach
-04,#F1DDBB,neck_cluster,beige
-05,#AF6125,neck_cluster,brown
-06,#D72000,neck_cluster,red
-07,#FC5A50,neck_cluster,coral
-08,#EF5834,neck_cluster,orange_red
-09,#F58B42,neck_cluster,orange
+1,#000000,neck_cluster,black
+2,#4D4D4D,neck_cluster,dark_grey
+3,#F4B95A,neck_cluster,peach
+4,#F1DDBB,neck_cluster,beige
+5,#AF6125,neck_cluster,brown
+6,#D72000,neck_cluster,red
+7,#FC5A50,neck_cluster,coral
+8,#EF5834,neck_cluster,orange_red
+9,#F58B42,neck_cluster,orange
 10,#F39A13,neck_cluster,orange
 11,#F0E442,neck_cluster,yellow
 12,#FBBB48,neck_cluster,golden_yellow
@@ -409,6 +420,9 @@ escape,#ae0000,modality,deep_red
 25,#963DA8,neck_cluster,purple
 26,#B56FCC,neck_cluster,lavender
 27,#EFC7E6,neck_cluster,pink
+short,#EE4244,range,cerise
+medium,#B3B3B3,range,lightgrey
+long,#1BB6AF,range,long
 highlight,#EE4244,misc,cerise
 accent,#FC6882,misc,pink
 EFF_01,#F4B95A,efferent_cluster,peach
@@ -452,7 +466,7 @@ flight 4,#EF7C12,braun_cluster,orange
 unknown 5,#60BC5B,braun_cluster,light_green
 unknown 14,#9e958a,braun_cluster,latte
 unknown 6,#1BB6AF,braun_cluster,teal
-proprioception,#000000,cns_network,black
+proprioception,#1BB6AF,cns_network,light blue
 takeoff-landing,#4D4D4D,cns_network,dark_grey
 feeding-energy,#F4B95A,cns_network,peach
 navigation guidance,#EF7C12,cns_network,orange
@@ -468,3 +482,8 @@ compass cues,#54BCD1,cns_network,sky_blue
 medial-superior brain,#7D8091,cns_network,blue_grey
 navigation drives,#963DA8,cns_network,purple
 leg-proboscis,#EFC7E6,cns_network,pink
+identified,#EFC7E6,completion,pink
+double_identified,#EFC7E6,completion,pink
+pre_identified,#D72000,completion,red
+post_identified,#54BCD1,completion,sky_blue
+unidentified,#B3B3B3,completion,lightgrey

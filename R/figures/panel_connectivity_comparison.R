@@ -25,16 +25,17 @@ mc.meta <- franken.meta %>%
 ##############################################
 
 fw.filtered <- fw.meta %>%
-  group_by(cell_type) %>%
-  filter(all(c("left", "right") %in% side)) %>%
-  ungroup()
+  dplyr::group_by(cell_type) %>%
+  dplyr::filter(all(c("left", "right") %in% side)) %>%
+  dplyr::ungroup()
 
 banc.filtered <- banc.meta %>%
-  group_by(cell_type) %>%
-  filter(all(c("left", "right") %in% side)) %>%
-  ungroup()
+  dplyr::group_by(cell_type) %>%
+  dplyr::filter(all(c("left", "right") %in% side)) %>%
+  dplyr::ungroup()
 
 common_cell_types <- na.omit(intersect(unique(fw.filtered$cell_type), unique(banc.filtered$cell_type)))
+common_cell_types <- setdiff(common_cell_types,c("NA",""))
 
 fafb_edges <- dplyr::filter(franken.edgelist.simple,
                              pre_cell_type %in% common_cell_types,
@@ -131,54 +132,69 @@ results$ct_hit_rate <- pbapply::pbmapply(
 # Plot: one curve per BANC threshold, viridis color
 g <- ggplot2::ggplot(results, ggplot2::aes(x = fafb_threshold, y = hit_rate, color = factor(banc_threshold))) +
   ggplot2::geom_line(size = 1.1) +
-  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
-  ggplot2::labs(
-    x = "Minimum synapses in FAFB",
-    y = "Normalised fraction of FAFB edges found in BANC (cell-type-to-cell-type weighted by number of members of pre and post cell type)",
-    title = expression(
-      paste("Normalised P(connection in BANC" >= T[BANC], 
-            " | connection in FAFB" >= T[FAFB], 
-            ")")
-    )
+  ggplot2::scale_color_manual(values = c(`1`=adjust_color_brightness(paper.cols[["fafb"]],1),
+                                         `3`=adjust_color_brightness(paper.cols[["fafb"]],0.8),
+                                         `5`=adjust_color_brightness(paper.cols[["fafb"]],0.6),
+                                         `10`=adjust_color_brightness(paper.cols[["fafb"]],0.4)),
+                              name = "BANC min synapses") +
+   ggplot2::labs(
+    # title = expression(
+    #   paste("normalised P(connection in BANC" >= T[BANC], 
+    #         " | connection in FAFB" >= T[FAFB], 
+    #         ")")
+    # )
+    x = "minimum synapses in FAFB",
+    y = "proportion of FAFB edges found in BANC \n(cell-type-to-cell-type weighted by number of members of pre and post cell type)",
   ) +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ylim(c(0,1))
 ggsave(plot = g, 
-       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc.png"), 
-       width = 10, height = 10, dpi = 300)
+       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc.pdf"), 
+       width = 6, height =3, dpi = 300)
 
-# Plot: one curve per BANC threshold, viridis color
+# Make plot
 g <- ggplot2::ggplot(results, ggplot2::aes(x = fafb_threshold, y = ct_hit_rate, color = factor(banc_threshold))) +
   ggplot2::geom_line(size = 1.1) +
-  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::scale_color_manual(values = c(`1`=adjust_color_brightness(paper.cols[["fafb"]],1),
+                                         `3`=adjust_color_brightness(paper.cols[["fafb"]],0.8),
+                                         `5`=adjust_color_brightness(paper.cols[["fafb"]],0.6),
+                                         `10`=adjust_color_brightness(paper.cols[["fafb"]],0.4)), 
+                              name = "BANC min synapses") +
   ggplot2::labs(
-    x = "Minimum synapses in FAFB",
-    y = "Normalised fraction of FAFB edges found in BANC (cell-type-to-cell-type)",
-    title = expression(
-      paste("Normalised P(connection in BANC" >= T[BANC], 
-            " | connection in FAFB" >= T[FAFB], 
-            ")")
-    )
+    # title = expression(
+    #   paste("normalised P(connection in BANC" >= T[BANC], 
+    #         " | connection in FAFB" >= T[FAFB], 
+    #         ")"),
+    x = "minimum synapses in FAFB",
+    y = "proportion of FAFB edges found in BANC \n(cell-type-to-cell-type)"
   ) +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none")+
+  ggplot2::ylim(c(0,1))
+
+# Save
 ggsave(plot = g, 
-       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc_by_cell_type.png"), 
-       width = 10, height = 10, dpi = 300)
+       filename = file.path(banc.fig1.supp.path,"fafb_edges_in_banc_by_cell_type.pdf"), 
+       width = 6, height =3, dpi = 300)
+
 
 ##############################################
 ## MISSING CONNECTIVITY ANALYSIS W.R.T MANC ##
 ##############################################
 
 mc.filtered <- mc.meta %>%
-  group_by(cell_type) %>%
-  filter(all(c("left", "right") %in% side)) %>%
+  dplyr::group_by(cell_type) %>%
+  dplyr::filter(all(c("left", "right") %in% side)) %>%
   ungroup()
 
 banc.filtered <- banc.meta %>%
-  group_by(cell_type) %>%
-  filter(all(c("left", "right") %in% side)) %>%
+  dplyr::group_by(cell_type) %>%
+  dplyr::filter(all(c("left", "right") %in% side)) %>%
   ungroup()
 
 common_cell_types <- na.omit(intersect(unique(mc.filtered$cell_type), unique(banc.filtered$cell_type)))
+common_cell_types <- setdiff(common_cell_types,c("NA",""))
 
 manc_edges <- dplyr::filter(franken.edgelist.simple,
                             pre_cell_type %in% common_cell_types,
@@ -255,58 +271,70 @@ compute_hit_rate <- function(count_threshold_manc, count_threshold_banc, normali
 }
 
 # Create a data.frame of all threshold combinations
-results <- expand.grid(
+results.mc <- expand.grid(
   manc_threshold = thresholds_manc,
   banc_threshold = thresholds_banc
 )
-results$hit_rate <- pbapply::pbmapply(
+results.mc$hit_rate <- pbapply::pbmapply(
   compute_hit_rate, 
-  results$manc_threshold, 
-  results$banc_threshold,
+  results.mc$manc_threshold, 
+  results.mc$banc_threshold,
   normalise = TRUE
 )
-results$ct_hit_rate <- pbapply::pbmapply(
+results.mc$ct_hit_rate <- pbapply::pbmapply(
   compute_hit_rate, 
-  results$manc_threshold, 
-  results$banc_threshold,
+  results.mc$manc_threshold, 
+  results.mc$banc_threshold,
   normalise = FALSE
 )
 
 # Plot: one curve per BANC threshold, viridis color
-g <- ggplot2::ggplot(results, ggplot2::aes(x = manc_threshold, y = hit_rate, color = factor(banc_threshold))) +
+g <- ggplot2::ggplot(results.mc, ggplot2::aes(x = manc_threshold, y = hit_rate, color = factor(banc_threshold))) +
   ggplot2::geom_line(size = 1.1) +
-  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::scale_color_manual(values = c(`1`=adjust_color_brightness(paper.cols[["manc"]],1),
+                                         `3`=adjust_color_brightness(paper.cols[["manc"]],0.8),
+                                         `5`=adjust_color_brightness(paper.cols[["manc"]],0.6),
+                                         `10`=adjust_color_brightness(paper.cols[["manc"]],0.4)), 
+                              name = "BANC min synapses") +  
   ggplot2::labs(
-    x = "Minimum synapses in MANC",
-    y = "Normalised fraction of MANC edges found in BANC (cell-type-to-cell-type weighted by number of members of pre and post cell type)",
-    title = expression(
-      paste("Normalised P(connection in BANC" >= T[BANC], 
-            " | connection in MANC" >= T[manc], 
-            ")")
-    )
+    # title = expression(
+    #   paste("normalised P(connection in BANC" >= T[BANC], 
+    #         " | connection in MANC" >= T[manc], 
+    #         ")")
+    # )
+    x = "minimum synapses in MANC",
+    y = "proportion of MANC edges found in BANC \n(cell-type-to-cell-type weighted by number of members of pre and post cell type)",
   ) +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ylim(c(0,1))
 ggsave(plot = g, 
-       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc.png"), 
-       width = 10, height = 10, dpi = 300)
+       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc.pdf"), 
+       width = 6, height = 3, dpi = 300)
 
 # Plot: one curve per BANC threshold, viridis color
-g <- ggplot2::ggplot(results, ggplot2::aes(x = manc_threshold, y = ct_hit_rate, color = factor(banc_threshold))) +
+g <- ggplot2::ggplot(results.mc, ggplot2::aes(x = manc_threshold, y = ct_hit_rate, color = factor(banc_threshold))) +
   ggplot2::geom_line(size = 1.1) +
-  ggplot2::scale_color_viridis_d(name = "BANC min synapses") +
+  ggplot2::scale_color_manual(values = c(`1`=adjust_color_brightness(paper.cols[["manc"]],1),
+                                         `3`=adjust_color_brightness(paper.cols[["manc"]],0.8),
+                                         `5`=adjust_color_brightness(paper.cols[["manc"]],0.6),
+                                         `10`=adjust_color_brightness(paper.cols[["manc"]],0.4)), 
+                              name = "BANC min synapses") +   
   ggplot2::labs(
-    x = "Minimum synapses in MANC",
-    y = "Normalised fraction of MANC edges found in BANC (cell-type-to-cell-type)",
-    title = expression(
-      paste("Normalised P(connection in BANC" >= T[BANC], 
-            " | connection in manc" >= T[manc], 
-            ")")
-    )
+    # title = expression(
+    #   paste("Normalised P(connection in BANC" >= T[BANC], 
+    #         " | connection in manc" >= T[manc], 
+    #         ")")
+    # ),
+    x = "minimum synapses in MANC",
+    y = "proportion of MANC edges found in BANC (cell-type-to-cell-type)",
   ) +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(legend.position = "none") +
+  ggplot2::ylim(c(0,1))
 ggsave(plot = g, 
-       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc_by_cell_type.png"), 
-       width = 10, height = 10, dpi = 300)
+       filename = file.path(banc.fig1.supp.path,"manc_edges_in_banc_by_cell_type.pdf"), 
+       width = 6, height = 3, dpi = 300)
 
 ###################################
 ## CONNECTIVITY SCATTER ANALYSIS ##

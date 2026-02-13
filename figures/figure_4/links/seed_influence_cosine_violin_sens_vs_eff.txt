@@ -1,0 +1,77 @@
+
+Diversity: non-parametric summary
+---------------------------------
+Date: 2026-02-07 21:08:40
+Observations: 9158316
+Categories (K): 3
+Groups (G): 2
+Category column: 'category' | Value column: 'cos_sim'
+Group column: 'group'
+Adjustment: holm | alpha = 0.05
+
+Group/category medians (descending)
+-----------------------------------
+# A tibble: 6 × 5
+  group            category                      n              median                 iqr
+  <fct>            <fct>                     <int>               <dbl>               <dbl>
+1 sensory → AN/DN  same cell type             6796 8.32475742498856e-1 4.24853479503589e-1
+2 AN/DN → effector same cell type             6620 6.60742103707388e-1 5.82155956547774e-1
+3 sensory → AN/DN  same supercluster        423169 4.38943465704931e-1 5.71856878161342e-1
+4 AN/DN → effector same supercluster        406202 3.01290795924257e-1 5.04145307733275e-1
+5 sensory → AN/DN  different superclusters 4271746 2.29088932869520e-1 4.42047467964494e-1
+6 AN/DN → effector different superclusters 4043783 1.31882156174526e-1 3.72025311951022e-1
+
+Kruskal–Wallis within group: AN/DN → effector
+---------------------------------------------
+
+	Kruskal-Wallis rank sum test
+
+data:  df_g[[value_col]] by df_g[[category_col]]
+Kruskal-Wallis chi-squared = 91893, df = 2, p-value < 0.00000000000000022
+
+
+Pairwise Wilcoxon across categories (AN/DN → effector)
+------------------------------------------------------
+                category1         category2 p_adj            group stars
+1       same supercluster    same cell type     0 AN/DN → effector  ****
+2 different superclusters    same cell type     0 AN/DN → effector  ****
+4 different superclusters same supercluster     0 AN/DN → effector  ****
+
+Kruskal–Wallis within group: sensory → AN/DN
+--------------------------------------------
+
+	Kruskal-Wallis rank sum test
+
+data:  df_g[[value_col]] by df_g[[category_col]]
+Kruskal-Wallis chi-squared = 100906, df = 2, p-value < 0.00000000000000022
+
+
+Pairwise Wilcoxon across categories (sensory → AN/DN)
+-----------------------------------------------------
+                category1         category2 p_adj           group stars
+1       same supercluster    same cell type     0 sensory → AN/DN  ****
+2 different superclusters    same cell type     0 sensory → AN/DN  ****
+4 different superclusters same supercluster     0 sensory → AN/DN  ****
+
+Within-group legend statements
+------------------------------
+[1] "[AN/DN → effector] Kruskal–Wallis: χ²(2) = 91893.02, p < 2.2e-16. Significant pairs (holm): same supercluster–same cell type (p < 2.2e-16); different superclusters–same cell type (p < 2.2e-16); different superclusters–same supercluster (p < 2.2e-16).\n[sensory → AN/DN] Kruskal–Wallis: χ²(2) = 100906.3, p < 2.2e-16. Significant pairs (holm): same supercluster–same cell type (p < 2.2e-16); different superclusters–same cell type (p < 2.2e-16); different superclusters–same supercluster (p < 2.2e-16)."
+
+Between-group Wilcoxon per category (adjusted p)
+------------------------------------------------
+           group1           group2
+1 sensory → AN/DN AN/DN → effector
+2 sensory → AN/DN AN/DN → effector
+3 sensory → AN/DN AN/DN → effector
+                                                                                                                                           p_adj
+1 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000334449
+2 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+3 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+                 category stars
+1          same cell type  ****
+2       same supercluster  ****
+3 different superclusters  ****
+
+Between-group legend statement
+------------------------------
+[1] "Between groups (pairwise Wilcoxon, holm): significant differences for same cell type [sensory → AN/DN–AN/DN → effector, p < 2.2e-16]; same supercluster [sensory → AN/DN–AN/DN → effector, p < 2.2e-16]; different superclusters [sensory → AN/DN–AN/DN → effector, p < 2.2e-16]."

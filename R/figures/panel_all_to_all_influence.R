@@ -391,49 +391,49 @@ cns.inf.data <- do.call(rbind,inf.data)
 #################
 ### PLOT DATA ###
 #################
-
-# Primary CNS cluster outputs
-cns.cluster.main.out.to.super.eff.key.plot <- banc_plot_key_features(
-  influence.meta = cns.inf.data %>%
-    dplyr::filter(grepl("EFF",target)) %>%
-    dplyr::left_join(inf.banc.meta %>%
-                       dplyr::distinct(id, .keep_all = TRUE) %>%
-                       dplyr::select(seed = id, seed_cns_network = cns_network),
-                     by = "seed") %>%
-    dplyr::left_join(inf.banc.meta %>%
-                       dplyr::distinct(cluster, .keep_all = TRUE) %>%
-                       dplyr::select(target = cluster, target_super_cluster = super_cluster),
-                     by = "target") %>%
-    dplyr::mutate(seed = seed_cns_network, id = target, target = target_super_cluster) %>%
-    dplyr::filter(!is.na(target),
-                  !is.na(seed),
-                  target!="0",
-                  target!="",
-                  seed!="0",
-                  seed!=""),
-  ###
-  inf.metric = "influence_log",
-  target.map = NULL,
-  cellheight = 12,
-  cellwidth = 12,
-  width = 5,
-  height = 5,
-  col.order = cns.network.order,
-  row.order = eff.super.order,
-  recalculate = TRUE,
-  show.annotation = FALSE,
-  influence.level = NULL,
-  save.path = banc.fig6.path,
-  seed.map  = NULL,
-  chosen.seeds = NULL,
-  chosen.targets = NULL, 
-  row.cols = NULL,
-  super.class = NULL,
-  plot.name = sprintf("major_cns_network_output_to_efferent_super_clusters_%s.pdf","influence_log"),
-  rev = FALSE,
-  symmetric = FALSE,
-  diagonal = TRUE
-)
+# 
+# # Primary CNS cluster outputs
+# cns.cluster.main.out.to.super.eff.key.plot <- banc_plot_key_features(
+#   influence.meta = cns.inf.data %>%
+#     dplyr::filter(grepl("EFF",target)) %>%
+#     dplyr::left_join(inf.banc.meta %>%
+#                        dplyr::distinct(id, .keep_all = TRUE) %>%
+#                        dplyr::select(seed = id, seed_cns_network = cns_network),
+#                      by = "seed") %>%
+#     dplyr::left_join(inf.banc.meta %>%
+#                        dplyr::distinct(cluster, .keep_all = TRUE) %>%
+#                        dplyr::select(target = cluster, target_super_cluster = super_cluster),
+#                      by = "target") %>%
+#     dplyr::mutate(seed = seed_cns_network, id = target, target = target_super_cluster) %>%
+#     dplyr::filter(!is.na(target),
+#                   !is.na(seed),
+#                   target!="0",
+#                   target!="",
+#                   seed!="0",
+#                   seed!=""),
+#   ###
+#   inf.metric = "influence_log",
+#   target.map = NULL,
+#   cellheight = 12,
+#   cellwidth = 12,
+#   width = 5,
+#   height = 5,
+#   col.order = cns.network.order,
+#   row.order = eff.super.order,
+#   recalculate = TRUE,
+#   show.annotation = FALSE,
+#   influence.level = NULL,
+#   save.path = banc.fig6.path,
+#   seed.map  = NULL,
+#   chosen.seeds = NULL,
+#   chosen.targets = NULL, 
+#   row.cols = NULL,
+#   super.class = NULL,
+#   plot.name = sprintf("major_cns_network_output_to_efferent_super_clusters_%s.pdf","influence_log"),
+#   rev = FALSE,
+#   symmetric = FALSE,
+#   diagonal = TRUE
+# )
 
 # Order
 #cns.network.order <- names(sort(colSums(cns.cluster.main.out.to.super.eff.key.plot$influence.matrix)))

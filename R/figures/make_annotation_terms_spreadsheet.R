@@ -8,16 +8,19 @@ library(tidyr)
 library(bit64)
 library(openxlsx)
 
-version <- 626
+# version <- 626
 
-codex_annotations_flat_table <- banc_codex_annotations(live = FALSE, version = version)
+# codex_annotations_flat_table <- banc_codex_annotations(live = FALSE, version = version)
+
+codex_annotations_flat_table <- banc_codex_annotations(live = 1)
 
 # Get unique terms for each column, splitting comma-separated values
 selected_columns <- codex_annotations_flat_table %>%
   select(flow, super_class, cell_class, cell_sub_class, region, side, 
          cell_function, cell_function_detailed, peripheral_target_type, 
          body_part_sensory, body_part_effector, nerve, hemilineage, 
-         neurotransmitter_verified, neuropeptide_verified, neurotransmitter_predicted)
+         sexually_dimorphic, neurotransmitter_verified, neuropeptide_verified, 
+         neurotransmitter_predicted)
 
 # Function to split comma-separated values and get unique terms
 get_unique_split_terms <- function(column) {
@@ -48,7 +51,7 @@ annotation_terms <- unique_terms_list %>%
   as_tibble()
 
 # Write to Excel file
-annotation_terms_filepath <- "/Users/papers/BANC-project/figures/annotation_terms_list.xlsx"
+annotation_terms_filepath <- "/Users/papers/BANC-project/data/banc_annotations/annotation_terms_list.xlsx"
 write.xlsx(annotation_terms, annotation_terms_filepath, rowNames = FALSE)
 
 cat("Excel file saved to:", annotation_terms_filepath)

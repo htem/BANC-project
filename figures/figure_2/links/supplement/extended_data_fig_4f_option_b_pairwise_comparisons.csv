@@ -1,0 +1,2449 @@
+"sensory_bp_1","sensory_bp_2","p_adj","effector_body_part","significant"
+"proboscis","head",0.000000000000000000000000000000000000000000000000000000000000562888459992182,"hemolymph",TRUE
+"proboscis","antenna",0.000000000000000000000000000000000000000000000157971913831363,"hemolymph",TRUE
+"hind leg","head",0.00000000000000000000000000000000000000000000588028868627506,"hemolymph",TRUE
+"wing","head",0.00000000000000000000000000000000000000000000686908574466987,"hemolymph",TRUE
+"pharynx","head",0.0000000000000000000000000000000000000000000562269086536015,"hemolymph",TRUE
+"reproductive","head",0.000000000000000000000000000000000000000158146814519468,"hemolymph",TRUE
+"thoracic-abdominal","head",0.000000000000000000000000000000000000000649420881212303,"hemolymph",TRUE
+"head","haltere",0.0000000000000000000000000000000000000238300647219073,"hemolymph",TRUE
+"middle leg","head",0.0000000000000000000000000000000000110273575549732,"hemolymph",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000000000000000000502279758437748,"hemolymph",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000000000000000140384948325579,"hemolymph",TRUE
+"pharynx","antenna",0.000000000000000000000000000000000379297236370279,"hemolymph",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000000000000621763623729129,"hemolymph",TRUE
+"thoracic-abdominal","front leg",0.000000000000000000000000000000181935037776259,"hemolymph",TRUE
+"reproductive","antenna",0.0000000000000000000000000000467110022246267,"hemolymph",TRUE
+"thorax","head",0.0000000000000000000000000000571262890966965,"hemolymph",TRUE
+"wing","thoracic-abdominal",0.000000000000000000000000000161164779552452,"hemolymph",TRUE
+"hemolymph","head",0.000000000000000000000000000708466676003561,"hemolymph",TRUE
+"head","enteric",0.000000000000000000000000000864238927749714,"hemolymph",TRUE
+"proboscis","hind leg",0.00000000000000000000000000113741907220008,"hemolymph",TRUE
+"haltere","antenna",0.00000000000000000000000000655048021864711,"hemolymph",TRUE
+"wing","antenna",0.0000000000000000000000000508786029614185,"hemolymph",TRUE
+"hind leg","hemolymph",0.0000000000000000000000000763622435377177,"hemolymph",TRUE
+"hemolymph","antenna",0.000000000000000000000000165519604422397,"hemolymph",TRUE
+"enteric","antenna",0.000000000000000000000000278104685453036,"hemolymph",TRUE
+"hind leg","enteric",0.000000000000000000000000630954010288709,"hemolymph",TRUE
+"middle leg","hemolymph",0.00000000000000000000000297828233359873,"hemolymph",TRUE
+"hemolymph","front leg",0.00000000000000000000000303202559828699,"hemolymph",TRUE
+"pharynx","hind leg",0.00000000000000000000000352071529811667,"hemolymph",TRUE
+"pharynx","front leg",0.000000000000000000000018448910606091,"hemolymph",TRUE
+"front leg","enteric",0.0000000000000000000000262380255081485,"hemolymph",TRUE
+"middle leg","enteric",0.0000000000000000000000377929345460223,"hemolymph",TRUE
+"thoracic-abdominal","reproductive",0.0000000000000000000000757888042668373,"hemolymph",TRUE
+"wing","hemolymph",0.000000000000000000000155622612822169,"hemolymph",TRUE
+"thoracic-abdominal","neck",0.000000000000000000000217723603994908,"hemolymph",TRUE
+"proboscis","neck",0.000000000000000000000354469527290015,"hemolymph",TRUE
+"proboscis","front leg",0.000000000000000000000652785510820439,"hemolymph",TRUE
+"hind leg","antenna",0.00000000000000000000100446848159109,"hemolymph",TRUE
+"wing","enteric",0.00000000000000000000141987627630809,"hemolymph",TRUE
+"pharynx","middle leg",0.00000000000000000000177757811442174,"hemolymph",TRUE
+"thorax","antenna",0.00000000000000000000423333374336569,"hemolymph",TRUE
+"proboscis","middle leg",0.0000000000000000000077837503424773,"hemolymph",TRUE
+"proboscis","body chordotonal",0.0000000000000000000406738118961231,"hemolymph",TRUE
+"reproductive","hemolymph",0.000000000000000000638716959507152,"hemolymph",TRUE
+"thorax","thoracic-abdominal",0.000000000000000000741664654919109,"hemolymph",TRUE
+"head","abdomen",0.00000000000000000139986252174984,"hemolymph",TRUE
+"middle leg","antenna",0.00000000000000000297975493260314,"hemolymph",TRUE
+"thoracic-abdominal","body chordotonal",0.00000000000000000391132537031313,"hemolymph",TRUE
+"neck","hemolymph",0.00000000000000000450451242611592,"hemolymph",TRUE
+"reproductive","enteric",0.00000000000000000467449725242194,"hemolymph",TRUE
+"neck","enteric",0.00000000000000000564151390265163,"hemolymph",TRUE
+"pharynx","neck",0.0000000000000000154092318789164,"hemolymph",TRUE
+"pharynx","body chordotonal",0.0000000000000000247163233576869,"hemolymph",TRUE
+"head","front leg",0.0000000000000000445880386092221,"hemolymph",TRUE
+"thorax","hemolymph",0.00000000000000011776115386512,"hemolymph",TRUE
+"proboscis","hemolymph",0.000000000000000119616328093605,"hemolymph",TRUE
+"wing","proboscis",0.000000000000000125739897340746,"hemolymph",TRUE
+"thoracic-abdominal","haltere",0.000000000000000130649176764112,"hemolymph",TRUE
+"hemolymph","abdomen",0.000000000000000134109656710922,"hemolymph",TRUE
+"thoracic-abdominal","proboscis",0.00000000000000017732639989173,"hemolymph",TRUE
+"wing","pharynx",0.000000000000000335555197984174,"hemolymph",TRUE
+"reproductive","body chordotonal",0.000000000000000538224218639123,"hemolymph",TRUE
+"thoracic-abdominal","abdomen",0.000000000000000556527195810582,"hemolymph",TRUE
+"hemolymph","haltere",0.000000000000000591755577033644,"hemolymph",TRUE
+"thorax","enteric",0.000000000000000796502667049254,"hemolymph",TRUE
+"haltere","body chordotonal",0.00000000000000165004361532296,"hemolymph",TRUE
+"hemolymph","body chordotonal",0.00000000000000325179878778972,"hemolymph",TRUE
+"antenna","abdomen",0.00000000000000357557086303628,"hemolymph",TRUE
+"proboscis","enteric",0.00000000000000386461732035358,"hemolymph",TRUE
+"enteric","body chordotonal",0.00000000000000388401798974364,"hemolymph",TRUE
+"enteric","abdomen",0.00000000000000690701509361096,"hemolymph",TRUE
+"wing","body chordotonal",0.00000000000000993892742016737,"hemolymph",TRUE
+"haltere","enteric",0.0000000000000242815967905777,"hemolymph",TRUE
+"reproductive","neck",0.0000000000000261658642954391,"hemolymph",TRUE
+"thorax","body chordotonal",0.000000000000133094168967393,"hemolymph",TRUE
+"hind leg","body chordotonal",0.00000000000070378777600807,"hemolymph",TRUE
+"neck","haltere",0.00000000000422100174038755,"hemolymph",TRUE
+"thorax","neck",0.0000000000572927799231155,"hemolymph",TRUE
+"middle leg","body chordotonal",0.000000000103074024513113,"hemolymph",TRUE
+"thoracic-abdominal","eye",0.000000000106479145203974,"hemolymph",TRUE
+"reproductive","pharynx",0.000000000256828105163305,"hemolymph",TRUE
+"hemolymph","eye",0.00000000118199835554787,"hemolymph",TRUE
+"eye","enteric",0.00000000163933721815722,"hemolymph",TRUE
+"hind leg","abdomen",0.00000000321694773644339,"hemolymph",TRUE
+"pharynx","hemolymph",0.00000000393385948196258,"hemolymph",TRUE
+"reproductive","proboscis",0.00000000908879385367914,"hemolymph",TRUE
+"wing","neck",0.0000000125498957579816,"hemolymph",TRUE
+"thorax","pharynx",0.0000000473670607258113,"hemolymph",TRUE
+"neck","abdomen",0.0000000679753910912252,"hemolymph",TRUE
+"front leg","antenna",0.0000000764187078623996,"hemolymph",TRUE
+"front leg","body chordotonal",0.000000354524668105065,"hemolymph",TRUE
+"body chordotonal","abdomen",0.00000130253298837936,"hemolymph",TRUE
+"thorax","proboscis",0.00000168246001376422,"hemolymph",TRUE
+"middle leg","abdomen",0.00000219088043262917,"hemolymph",TRUE
+"proboscis","eye",0.00000232956013302515,"hemolymph",TRUE
+"front leg","abdomen",0.00000295812716188033,"hemolymph",TRUE
+"hind leg","haltere",0.00000295812716188033,"hemolymph",TRUE
+"pharynx","enteric",0.00000332961048254539,"hemolymph",TRUE
+"haltere","front leg",0.00000376989552222526,"hemolymph",TRUE
+"pharynx","haltere",0.00000417247853446223,"hemolymph",TRUE
+"reproductive","hind leg",0.00000417247853446223,"hemolymph",TRUE
+"wing","abdomen",0.000009344375586778,"hemolymph",TRUE
+"head","eye",0.0000114318038206922,"hemolymph",TRUE
+"eye","body chordotonal",0.0000208851854973968,"hemolymph",TRUE
+"pharynx","eye",0.00002193127414768,"hemolymph",TRUE
+"pharynx","abdomen",0.0000371978314095549,"hemolymph",TRUE
+"neck","hind leg",0.0000835249675543013,"hemolymph",TRUE
+"reproductive","front leg",0.0000993730035191515,"hemolymph",TRUE
+"thoracic-abdominal","pharynx",0.000276336459170765,"hemolymph",TRUE
+"neck","body chordotonal",0.000311218224383209,"hemolymph",TRUE
+"neck","middle leg",0.000311218224383209,"hemolymph",TRUE
+"reproductive","abdomen",0.000322952966726846,"hemolymph",TRUE
+"proboscis","haltere",0.000344479268663981,"hemolymph",TRUE
+"eye","antenna",0.000664076867827225,"hemolymph",TRUE
+"thorax","hind leg",0.000752292294600455,"hemolymph",TRUE
+"body chordotonal","antenna",0.000833233521503375,"hemolymph",TRUE
+"middle leg","haltere",0.000833233521503375,"hemolymph",TRUE
+"thorax","front leg",0.0026211191652915,"hemolymph",TRUE
+"neck","head",0.0026211191652915,"hemolymph",TRUE
+"proboscis","pharynx",0.00361013581353241,"hemolymph",TRUE
+"head","body chordotonal",0.00639688807221583,"hemolymph",TRUE
+"thorax","abdomen",0.00658029646462615,"hemolymph",TRUE
+"reproductive","middle leg",0.0106200488434074,"hemolymph",TRUE
+"eye","abdomen",0.0129372660622931,"hemolymph",TRUE
+"reproductive","eye",0.0177554241029193,"hemolymph",TRUE
+"wing","front leg",0.0201728353757431,"hemolymph",TRUE
+"thoracic-abdominal","hemolymph",0.0201728353757431,"hemolymph",TRUE
+"wing","reproductive",0.0345061495083989,"hemolymph",TRUE
+"wing","haltere",0.034815948605162,"hemolymph",TRUE
+"neck","eye",0.0528757171927561,"hemolymph",FALSE
+"thorax","eye",0.0688374382124559,"hemolymph",FALSE
+"thorax","middle leg",0.0977363189291822,"hemolymph",FALSE
+"haltere","eye",0.107503999917415,"hemolymph",FALSE
+"wing","hind leg",0.140031653802671,"hemolymph",FALSE
+"neck","front leg",0.217056168902949,"hemolymph",FALSE
+"wing","thorax",0.279260022584735,"hemolymph",FALSE
+"haltere","abdomen",0.488973417967047,"hemolymph",FALSE
+"neck","antenna",0.613367090612298,"hemolymph",FALSE
+"middle leg","front leg",0.613367090612298,"hemolymph",FALSE
+"head","antenna",0.625679536555925,"hemolymph",FALSE
+"thoracic-abdominal","enteric",0.709836785774837,"hemolymph",FALSE
+"hemolymph","enteric",0.789176823549958,"hemolymph",FALSE
+"proboscis","abdomen",1,"hemolymph",FALSE
+"front leg","eye",1,"hemolymph",FALSE
+"hind leg","eye",1,"hemolymph",FALSE
+"middle leg","eye",1,"hemolymph",FALSE
+"wing","eye",1,"hemolymph",FALSE
+"hind leg","front leg",1,"hemolymph",FALSE
+"reproductive","haltere",1,"hemolymph",FALSE
+"thorax","haltere",1,"hemolymph",FALSE
+"middle leg","hind leg",1,"hemolymph",FALSE
+"wing","middle leg",1,"hemolymph",FALSE
+"thorax","reproductive",1,"hemolymph",FALSE
+"proboscis","head",0.00000000000000000000000000000000000000000000976580774735676,"enteric",TRUE
+"hind leg","head",0.000000000000000000000000000000000000290818054720945,"enteric",TRUE
+"proboscis","antenna",0.00000000000000000000000000000000000186052865587781,"enteric",TRUE
+"proboscis","hind leg",0.000000000000000000000000000000000323957772845668,"enteric",TRUE
+"wing","head",0.00000000000000000000000000000140010815906276,"enteric",TRUE
+"pharynx","head",0.0000000000000000000000000000896239297717149,"enteric",TRUE
+"proboscis","middle leg",0.000000000000000000000000000111209380061333,"enteric",TRUE
+"middle leg","head",0.000000000000000000000000000749988865445535,"enteric",TRUE
+"head","haltere",0.0000000000000000000000000241184358390991,"enteric",TRUE
+"proboscis","front leg",0.0000000000000000000000000341940498142903,"enteric",TRUE
+"wing","proboscis",0.000000000000000000000000064032879426832,"enteric",TRUE
+"thoracic-abdominal","head",0.000000000000000000000000114910803821081,"enteric",TRUE
+"reproductive","head",0.000000000000000000000000210626264874997,"enteric",TRUE
+"hind leg","antenna",0.000000000000000000000000649548109108321,"enteric",TRUE
+"pharynx","antenna",0.0000000000000000000000179090072302498,"enteric",TRUE
+"thoracic-abdominal","hind leg",0.0000000000000000000000236788880296677,"enteric",TRUE
+"wing","antenna",0.0000000000000000000000380923713337645,"enteric",TRUE
+"thoracic-abdominal","antenna",0.000000000000000000000127472877789884,"enteric",TRUE
+"reproductive","antenna",0.000000000000000000000589865152807331,"enteric",TRUE
+"haltere","antenna",0.000000000000000000000806018491589971,"enteric",TRUE
+"thorax","head",0.00000000000000000000358176899389441,"enteric",TRUE
+"thoracic-abdominal","middle leg",0.00000000000000000000501201609188676,"enteric",TRUE
+"wing","thoracic-abdominal",0.0000000000000000000143316815306315,"enteric",TRUE
+"pharynx","front leg",0.000000000000000000178476051415102,"enteric",TRUE
+"thoracic-abdominal","front leg",0.000000000000000000258218816486,"enteric",TRUE
+"proboscis","neck",0.000000000000000000615419764170642,"enteric",TRUE
+"thorax","antenna",0.000000000000000000960225189163643,"enteric",TRUE
+"pharynx","middle leg",0.00000000000000000104362900326757,"enteric",TRUE
+"middle leg","antenna",0.00000000000000000117267563964689,"enteric",TRUE
+"pharynx","hind leg",0.00000000000000000279594543266745,"enteric",TRUE
+"head","enteric",0.00000000000000000874351384108474,"enteric",TRUE
+"hind leg","enteric",0.00000000000000000874351384108474,"enteric",TRUE
+"hemolymph","head",0.00000000000000000874351384108474,"enteric",TRUE
+"hind leg","hemolymph",0.000000000000000013782969591501,"enteric",TRUE
+"middle leg","enteric",0.0000000000000000167322114772482,"enteric",TRUE
+"front leg","enteric",0.0000000000000000219134959880058,"enteric",TRUE
+"middle leg","hemolymph",0.0000000000000000282365128089888,"enteric",TRUE
+"hemolymph","front leg",0.000000000000000196496872031548,"enteric",TRUE
+"head","front leg",0.000000000000000214555284574538,"enteric",TRUE
+"enteric","antenna",0.000000000000000295455948917803,"enteric",TRUE
+"hemolymph","antenna",0.000000000000000295455948917803,"enteric",TRUE
+"wing","enteric",0.000000000000000595249800324216,"enteric",TRUE
+"wing","hemolymph",0.000000000000000745050050738171,"enteric",TRUE
+"thoracic-abdominal","reproductive",0.00000000000000417118681896562,"enteric",TRUE
+"reproductive","proboscis",0.0000000000000128311832868823,"enteric",TRUE
+"proboscis","body chordotonal",0.0000000000000149352347674252,"enteric",TRUE
+"thoracic-abdominal","neck",0.0000000000000154440041458147,"enteric",TRUE
+"proboscis","haltere",0.0000000000000206457275388684,"enteric",TRUE
+"enteric","abdomen",0.0000000000000421335040733831,"enteric",TRUE
+"thoracic-abdominal","haltere",0.0000000000000601161426932896,"enteric",TRUE
+"wing","pharynx",0.0000000000000648093981351866,"enteric",TRUE
+"haltere","enteric",0.0000000000000735489122444739,"enteric",TRUE
+"thorax","thoracic-abdominal",0.0000000000000791278674064132,"enteric",TRUE
+"proboscis","enteric",0.000000000000110016222438365,"enteric",TRUE
+"head","abdomen",0.000000000000208805675071755,"enteric",TRUE
+"hemolymph","haltere",0.000000000000547858775292797,"enteric",TRUE
+"reproductive","enteric",0.000000000000660245921637504,"enteric",TRUE
+"reproductive","hemolymph",0.000000000000660245921637504,"enteric",TRUE
+"thorax","proboscis",0.00000000000550933099783031,"enteric",TRUE
+"thoracic-abdominal","body chordotonal",0.0000000000147468827452111,"enteric",TRUE
+"neck","enteric",0.0000000000147468827452111,"enteric",TRUE
+"thorax","enteric",0.0000000000147468827452111,"enteric",TRUE
+"neck","hemolymph",0.0000000000147468827452111,"enteric",TRUE
+"thorax","hemolymph",0.0000000000147468827452111,"enteric",TRUE
+"antenna","abdomen",0.0000000000331336600668978,"enteric",TRUE
+"front leg","antenna",0.0000000000453593886490629,"enteric",TRUE
+"reproductive","neck",0.0000000000521908222223337,"enteric",TRUE
+"pharynx","neck",0.000000000085690917708669,"enteric",TRUE
+"thorax","neck",0.000000000111361190391048,"enteric",TRUE
+"reproductive","body chordotonal",0.000000000165502414278603,"enteric",TRUE
+"hemolymph","abdomen",0.000000000166858726565866,"enteric",TRUE
+"haltere","body chordotonal",0.000000000201197833123926,"enteric",TRUE
+"pharynx","body chordotonal",0.00000000022883663479139,"enteric",TRUE
+"thorax","body chordotonal",0.000000000281492902387604,"enteric",TRUE
+"pharynx","abdomen",0.00000000116074447985324,"enteric",TRUE
+"enteric","body chordotonal",0.00000000134954144262356,"enteric",TRUE
+"hemolymph","body chordotonal",0.00000000134954144262356,"enteric",TRUE
+"pharynx","haltere",0.00000000149008759093851,"enteric",TRUE
+"hind leg","body chordotonal",0.00000000183274503315714,"enteric",TRUE
+"neck","haltere",0.00000000198900355907739,"enteric",TRUE
+"pharynx","enteric",0.00000000275729088816454,"enteric",TRUE
+"wing","body chordotonal",0.00000000449453398887027,"enteric",TRUE
+"thoracic-abdominal","abdomen",0.00000000877957981170752,"enteric",TRUE
+"hemolymph","enteric",0.0000000120528832648028,"enteric",TRUE
+"proboscis","abdomen",0.0000000213593529954187,"enteric",TRUE
+"reproductive","pharynx",0.0000000213593529954187,"enteric",TRUE
+"thoracic-abdominal","enteric",0.0000000470588286425911,"enteric",TRUE
+"thoracic-abdominal","eye",0.000000376717049262853,"enteric",TRUE
+"middle leg","body chordotonal",0.000000526468573665758,"enteric",TRUE
+"proboscis","eye",0.000000526468573665758,"enteric",TRUE
+"hind leg","abdomen",0.000000877520715489732,"enteric",TRUE
+"thorax","pharynx",0.000000908842593922868,"enteric",TRUE
+"wing","neck",0.00000167318613063502,"enteric",TRUE
+"eye","enteric",0.00000260155817990173,"enteric",TRUE
+"hemolymph","eye",0.00000260155817990173,"enteric",TRUE
+"neck","abdomen",0.00000317597403640966,"enteric",TRUE
+"front leg","body chordotonal",0.0000088380740725786,"enteric",TRUE
+"wing","abdomen",0.0000091626255471091,"enteric",TRUE
+"neck","hind leg",0.0000216361239841212,"enteric",TRUE
+"eye","antenna",0.0000344111524666203,"enteric",TRUE
+"head","eye",0.000047784811996023,"enteric",TRUE
+"body chordotonal","abdomen",0.0000979281257854068,"enteric",TRUE
+"eye","body chordotonal",0.0000979281257854068,"enteric",TRUE
+"neck","middle leg",0.000618745510837074,"enteric",TRUE
+"proboscis","pharynx",0.00167900698187556,"enteric",TRUE
+"neck","eye",0.00369849174408908,"enteric",TRUE
+"hind leg","haltere",0.00369849174408908,"enteric",TRUE
+"proboscis","hemolymph",0.00419522072055527,"enteric",TRUE
+"pharynx","eye",0.00424251383139309,"enteric",TRUE
+"thorax","hind leg",0.00555272392886196,"enteric",TRUE
+"reproductive","hind leg",0.00647458673307259,"enteric",TRUE
+"neck","head",0.00843707043051243,"enteric",TRUE
+"front leg","abdomen",0.0143297636912567,"enteric",TRUE
+"reproductive","abdomen",0.0158227392455223,"enteric",TRUE
+"middle leg","abdomen",0.015956480226247,"enteric",TRUE
+"thorax","abdomen",0.0178921536389448,"enteric",TRUE
+"eye","abdomen",0.0214054600924938,"enteric",TRUE
+"neck","front leg",0.0215286925236532,"enteric",TRUE
+"neck","body chordotonal",0.0256307935913313,"enteric",TRUE
+"thorax","eye",0.0256307935913313,"enteric",TRUE
+"neck","antenna",0.0327804180373408,"enteric",TRUE
+"reproductive","eye",0.0404131097900186,"enteric",TRUE
+"wing","haltere",0.0620808885432278,"enteric",FALSE
+"wing","thorax",0.0712505421924274,"enteric",FALSE
+"wing","reproductive",0.114586156471886,"enteric",FALSE
+"haltere","front leg",0.170781680910785,"enteric",FALSE
+"head","body chordotonal",0.235183804326611,"enteric",FALSE
+"body chordotonal","antenna",0.297788257078606,"enteric",FALSE
+"middle leg","haltere",0.346052053278166,"enteric",FALSE
+"haltere","abdomen",0.459378345271375,"enteric",FALSE
+"haltere","eye",0.577961964058732,"enteric",FALSE
+"thoracic-abdominal","hemolymph",0.71401343237302,"enteric",FALSE
+"thorax","front leg",0.904564602654067,"enteric",FALSE
+"head","antenna",1,"enteric",FALSE
+"front leg","eye",1,"enteric",FALSE
+"hind leg","eye",1,"enteric",FALSE
+"middle leg","eye",1,"enteric",FALSE
+"wing","eye",1,"enteric",FALSE
+"hind leg","front leg",1,"enteric",FALSE
+"middle leg","front leg",1,"enteric",FALSE
+"reproductive","front leg",1,"enteric",FALSE
+"wing","front leg",1,"enteric",FALSE
+"reproductive","haltere",1,"enteric",FALSE
+"thorax","haltere",1,"enteric",FALSE
+"pharynx","hemolymph",1,"enteric",FALSE
+"middle leg","hind leg",1,"enteric",FALSE
+"wing","hind leg",1,"enteric",FALSE
+"reproductive","middle leg",1,"enteric",FALSE
+"thorax","middle leg",1,"enteric",FALSE
+"wing","middle leg",1,"enteric",FALSE
+"thoracic-abdominal","pharynx",1,"enteric",FALSE
+"thoracic-abdominal","proboscis",1,"enteric",FALSE
+"thorax","reproductive",1,"enteric",FALSE
+"proboscis","head",0.0000000000000000000000000000000000000000000000000000000000266597701731742,"pharynx",TRUE
+"proboscis","antenna",0.0000000000000000000000000000000000000000000000000966864919020694,"pharynx",TRUE
+"proboscis","hind leg",0.00000000000000000000000000000000000000000000000191692986167936,"pharynx",TRUE
+"hind leg","head",0.00000000000000000000000000000000000000000491854512569333,"pharynx",TRUE
+"middle leg","head",0.00000000000000000000000000000000000000182218618252157,"pharynx",TRUE
+"pharynx","head",0.00000000000000000000000000000000000000319187484987898,"pharynx",TRUE
+"wing","proboscis",0.00000000000000000000000000000000000000652903565006543,"pharynx",TRUE
+"proboscis","middle leg",0.0000000000000000000000000000000000007864583100412,"pharynx",TRUE
+"thoracic-abdominal","head",0.0000000000000000000000000000000000330997127838991,"pharynx",TRUE
+"proboscis","front leg",0.000000000000000000000000000000000434783965112914,"pharynx",TRUE
+"thoracic-abdominal","antenna",0.000000000000000000000000000000407116654249074,"pharynx",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000000000000517115439618282,"pharynx",TRUE
+"pharynx","antenna",0.00000000000000000000000000000449929130587747,"pharynx",TRUE
+"hind leg","antenna",0.0000000000000000000000000000869579830579318,"pharynx",TRUE
+"proboscis","haltere",0.000000000000000000000000000185478957483915,"pharynx",TRUE
+"wing","thoracic-abdominal",0.00000000000000000000000000747229884411423,"pharynx",TRUE
+"head","front leg",0.000000000000000000000000123543810107764,"pharynx",TRUE
+"reproductive","proboscis",0.000000000000000000000000428246551584204,"pharynx",TRUE
+"hemolymph","head",0.00000000000000000000000307549442413345,"pharynx",TRUE
+"head","enteric",0.00000000000000000000000699007400213637,"pharynx",TRUE
+"proboscis","neck",0.0000000000000000000000207673678230029,"pharynx",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000500972093691561,"pharynx",TRUE
+"thorax","proboscis",0.0000000000000000000000512617003860452,"pharynx",TRUE
+"middle leg","antenna",0.000000000000000000000237243892910033,"pharynx",TRUE
+"hemolymph","antenna",0.00000000000000000000024960307675264,"pharynx",TRUE
+"enteric","antenna",0.000000000000000000000279062153597857,"pharynx",TRUE
+"hind leg","enteric",0.000000000000000000000453635013704005,"pharynx",TRUE
+"pharynx","hind leg",0.000000000000000000000737077008478743,"pharynx",TRUE
+"wing","pharynx",0.000000000000000000000759038728478246,"pharynx",TRUE
+"thoracic-abdominal","reproductive",0.000000000000000000000894923922712558,"pharynx",TRUE
+"hind leg","hemolymph",0.00000000000000000000119495727694772,"pharynx",TRUE
+"proboscis","body chordotonal",0.000000000000000000041748750690563,"pharynx",TRUE
+"wing","enteric",0.0000000000000000000578525804221502,"pharynx",TRUE
+"pharynx","middle leg",0.000000000000000000121231221268309,"pharynx",TRUE
+"pharynx","front leg",0.000000000000000000130192211129928,"pharynx",TRUE
+"middle leg","enteric",0.000000000000000000163698388461494,"pharynx",TRUE
+"thoracic-abdominal","neck",0.000000000000000000222751666842069,"pharynx",TRUE
+"wing","hemolymph",0.000000000000000000388194904114678,"pharynx",TRUE
+"thorax","thoracic-abdominal",0.000000000000000000388194904114678,"pharynx",TRUE
+"head","abdomen",0.000000000000000000476892821729444,"pharynx",TRUE
+"front leg","enteric",0.00000000000000000390452840213692,"pharynx",TRUE
+"thoracic-abdominal","haltere",0.00000000000000000425837784211137,"pharynx",TRUE
+"proboscis","abdomen",0.00000000000000000820480428111808,"pharynx",TRUE
+"thoracic-abdominal","front leg",0.00000000000000000820480428111808,"pharynx",TRUE
+"pharynx","haltere",0.00000000000000000825278516282201,"pharynx",TRUE
+"hind leg","body chordotonal",0.0000000000000000601963535335977,"pharynx",TRUE
+"reproductive","hemolymph",0.0000000000000000874944651032219,"pharynx",TRUE
+"thorax","antenna",0.000000000000000352937241419349,"pharynx",TRUE
+"reproductive","enteric",0.000000000000000357357919167824,"pharynx",TRUE
+"thoracic-abdominal","body chordotonal",0.000000000000000531312546387879,"pharynx",TRUE
+"antenna","abdomen",0.000000000000000573790686052523,"pharynx",TRUE
+"reproductive","antenna",0.00000000000000073871397181871,"pharynx",TRUE
+"pharynx","body chordotonal",0.000000000000000973315203271067,"pharynx",TRUE
+"haltere","enteric",0.00000000000000116253218808356,"pharynx",TRUE
+"middle leg","hemolymph",0.00000000000000134361773780428,"pharynx",TRUE
+"thorax","hemolymph",0.00000000000000185794854325729,"pharynx",TRUE
+"thoracic-abdominal","abdomen",0.00000000000000204727800184369,"pharynx",TRUE
+"thorax","head",0.00000000000000221270398906203,"pharynx",TRUE
+"neck","hemolymph",0.0000000000000022467270228094,"pharynx",TRUE
+"front leg","antenna",0.00000000000000306853209283618,"pharynx",TRUE
+"thorax","enteric",0.00000000000000309093094567974,"pharynx",TRUE
+"neck","enteric",0.00000000000000475804685074341,"pharynx",TRUE
+"reproductive","head",0.00000000000000807066108375763,"pharynx",TRUE
+"thorax","body chordotonal",0.000000000000010133303696293,"pharynx",TRUE
+"enteric","abdomen",0.0000000000000172954129714933,"pharynx",TRUE
+"pharynx","neck",0.000000000000037135968150466,"pharynx",TRUE
+"hemolymph","abdomen",0.000000000000150536178003583,"pharynx",TRUE
+"wing","head",0.000000000000229263613540488,"pharynx",TRUE
+"enteric","body chordotonal",0.000000000000265322393847208,"pharynx",TRUE
+"hemolymph","body chordotonal",0.000000000000265322393847208,"pharynx",TRUE
+"middle leg","body chordotonal",0.000000000000361674142266003,"pharynx",TRUE
+"hemolymph","haltere",0.00000000000124345984877327,"pharynx",TRUE
+"reproductive","pharynx",0.00000000000174024764768939,"pharynx",TRUE
+"front leg","body chordotonal",0.00000000000857119423792694,"pharynx",TRUE
+"reproductive","body chordotonal",0.0000000000265476339516329,"pharynx",TRUE
+"hemolymph","front leg",0.0000000000323782278861048,"pharynx",TRUE
+"pharynx","abdomen",0.000000000117825506817083,"pharynx",TRUE
+"eye","antenna",0.00000000033571593985189,"pharynx",TRUE
+"thorax","pharynx",0.00000000218263564152389,"pharynx",TRUE
+"hind leg","abdomen",0.00000000226512971136591,"pharynx",TRUE
+"wing","body chordotonal",0.00000000438065214656239,"pharynx",TRUE
+"hind leg","haltere",0.00000000478902166075083,"pharynx",TRUE
+"wing","abdomen",0.00000000499974178051259,"pharynx",TRUE
+"thoracic-abdominal","eye",0.00000000499974178051259,"pharynx",TRUE
+"reproductive","abdomen",0.00000000562426480094512,"pharynx",TRUE
+"head","eye",0.0000000060854562128714,"pharynx",TRUE
+"thorax","haltere",0.00000000903408490651371,"pharynx",TRUE
+"eye","body chordotonal",0.00000000972853962909860,"pharynx",TRUE
+"wing","antenna",0.0000000442262674156122,"pharynx",TRUE
+"head","haltere",0.0000000516618551305631,"pharynx",TRUE
+"hemolymph","eye",0.0000000723552483098022,"pharynx",TRUE
+"neck","abdomen",0.0000000949744922388646,"pharynx",TRUE
+"proboscis","eye",0.000000139565755089512,"pharynx",TRUE
+"eye","enteric",0.000000221122130492959,"pharynx",TRUE
+"thorax","abdomen",0.00000041121651403819,"pharynx",TRUE
+"body chordotonal","abdomen",0.000000785478587405636,"pharynx",TRUE
+"haltere","body chordotonal",0.000000873234449896716,"pharynx",TRUE
+"hemolymph","enteric",0.00000185362089006076,"pharynx",TRUE
+"haltere","abdomen",0.00000349967065133073,"pharynx",TRUE
+"haltere","eye",0.00000820624031516536,"pharynx",TRUE
+"middle leg","haltere",0.00000972529300441192,"pharynx",TRUE
+"neck","head",0.0000102756930067916,"pharynx",TRUE
+"wing","middle leg",0.0000103671392043991,"pharynx",TRUE
+"neck","body chordotonal",0.0000182954809139363,"pharynx",TRUE
+"body chordotonal","antenna",0.0000211748490491237,"pharynx",TRUE
+"thoracic-abdominal","enteric",0.000025597645800973,"pharynx",TRUE
+"neck","middle leg",0.0000478522197799812,"pharynx",TRUE
+"thoracic-abdominal","proboscis",0.0000672067179016716,"pharynx",TRUE
+"wing","front leg",0.0000850977756662206,"pharynx",TRUE
+"proboscis","hemolymph",0.000128743175908758,"pharynx",TRUE
+"neck","front leg",0.000459062361793458,"pharynx",TRUE
+"haltere","front leg",0.000466259750215812,"pharynx",TRUE
+"neck","hind leg",0.000529965668529961,"pharynx",TRUE
+"neck","eye",0.000628634209923368,"pharynx",TRUE
+"reproductive","haltere",0.000860868239233315,"pharynx",TRUE
+"thoracic-abdominal","pharynx",0.000928225949436904,"pharynx",TRUE
+"thorax","neck",0.00119200776541472,"pharynx",TRUE
+"head","body chordotonal",0.0024800409750315,"pharynx",TRUE
+"pharynx","eye",0.00291831045322701,"pharynx",TRUE
+"thorax","eye",0.00469100521508782,"pharynx",TRUE
+"proboscis","pharynx",0.00621538372943376,"pharynx",TRUE
+"pharynx","hemolymph",0.00768013665069561,"pharynx",TRUE
+"hind leg","front leg",0.0120261389029648,"pharynx",TRUE
+"middle leg","hind leg",0.0176577491876815,"pharynx",TRUE
+"wing","eye",0.0201438605516813,"pharynx",TRUE
+"eye","abdomen",0.0234742315097704,"pharynx",TRUE
+"neck","antenna",0.044858050453577,"pharynx",TRUE
+"haltere","antenna",0.113764989455241,"pharynx",FALSE
+"hind leg","eye",0.121246635720049,"pharynx",FALSE
+"wing","hind leg",0.130030627473827,"pharynx",FALSE
+"reproductive","neck",0.138767018155217,"pharynx",FALSE
+"reproductive","front leg",0.143232151278154,"pharynx",FALSE
+"reproductive","middle leg",0.276568152570795,"pharynx",FALSE
+"thoracic-abdominal","hemolymph",0.301888107682943,"pharynx",FALSE
+"reproductive","eye",0.340368272676905,"pharynx",FALSE
+"thorax","reproductive",0.566671888794644,"pharynx",FALSE
+"wing","reproductive",0.566671888794644,"pharynx",FALSE
+"head","antenna",0.832134062732017,"pharynx",FALSE
+"thorax","front leg",0.984138287080075,"pharynx",FALSE
+"front leg","abdomen",1,"pharynx",FALSE
+"middle leg","abdomen",1,"pharynx",FALSE
+"pharynx","enteric",1,"pharynx",FALSE
+"proboscis","enteric",1,"pharynx",FALSE
+"front leg","eye",1,"pharynx",FALSE
+"middle leg","eye",1,"pharynx",FALSE
+"middle leg","front leg",1,"pharynx",FALSE
+"neck","haltere",1,"pharynx",FALSE
+"wing","haltere",1,"pharynx",FALSE
+"reproductive","hind leg",1,"pharynx",FALSE
+"thorax","hind leg",1,"pharynx",FALSE
+"thorax","middle leg",1,"pharynx",FALSE
+"wing","neck",1,"pharynx",FALSE
+"wing","thorax",1,"pharynx",FALSE
+"proboscis","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000091195632172828,"proboscis",TRUE
+"proboscis","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000386254955195473,"proboscis",TRUE
+"proboscis","middle leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000238139167845212,"proboscis",TRUE
+"proboscis","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000033555028645593,"proboscis",TRUE
+"proboscis","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000342829915386467,"proboscis",TRUE
+"wing","proboscis",0.00000000000000000000000000000000000000000000000000000000000000000000431830961544386,"proboscis",TRUE
+"pharynx","head",0.00000000000000000000000000000000000000000000000000000000139152123637943,"proboscis",TRUE
+"proboscis","haltere",0.0000000000000000000000000000000000000000000000000000651057746834762,"proboscis",TRUE
+"proboscis","abdomen",0.00000000000000000000000000000000000000000000000003788700453631,"proboscis",TRUE
+"pharynx","antenna",0.0000000000000000000000000000000000000000000000000730342449202132,"proboscis",TRUE
+"pharynx","hind leg",0.0000000000000000000000000000000000000000000000291884747842274,"proboscis",TRUE
+"reproductive","proboscis",0.00000000000000000000000000000000000000000000054869503397541,"proboscis",TRUE
+"wing","pharynx",0.0000000000000000000000000000000000000000000312732245347455,"proboscis",TRUE
+"pharynx","haltere",0.0000000000000000000000000000000000000000000451101734870369,"proboscis",TRUE
+"pharynx","middle leg",0.00000000000000000000000000000000000000000347916915227819,"proboscis",TRUE
+"thorax","proboscis",0.0000000000000000000000000000000000000372896733851903,"proboscis",TRUE
+"thoracic-abdominal","proboscis",0.0000000000000000000000000000000000000562557744026826,"proboscis",TRUE
+"hind leg","haltere",0.0000000000000000000000000000000000000769891069297234,"proboscis",TRUE
+"proboscis","neck",0.00000000000000000000000000000000000706456587572041,"proboscis",TRUE
+"pharynx","front leg",0.0000000000000000000000000000000000463945605638536,"proboscis",TRUE
+"head","enteric",0.000000000000000000000000000000172121192718644,"proboscis",TRUE
+"enteric","antenna",0.000000000000000000000000000000183060681484972,"proboscis",TRUE
+"reproductive","pharynx",0.00000000000000000000000000000129720426130454,"proboscis",TRUE
+"middle leg","head",0.0000000000000000000000000000016231616397077,"proboscis",TRUE
+"middle leg","haltere",0.00000000000000000000000000000293777282422895,"proboscis",TRUE
+"proboscis","body chordotonal",0.0000000000000000000000000000626184046257725,"proboscis",TRUE
+"hind leg","enteric",0.000000000000000000000000000264463509886841,"proboscis",TRUE
+"proboscis","hemolymph",0.00000000000000000000000000026822215833852,"proboscis",TRUE
+"wing","enteric",0.000000000000000000000000000328599388904098,"proboscis",TRUE
+"haltere","enteric",0.00000000000000000000000000143732551701854,"proboscis",TRUE
+"hemolymph","haltere",0.00000000000000000000000000398328181187948,"proboscis",TRUE
+"pharynx","body chordotonal",0.0000000000000000000000000197443228430737,"proboscis",TRUE
+"head","front leg",0.0000000000000000000000000235618301649628,"proboscis",TRUE
+"thorax","pharynx",0.000000000000000000000000127159737411427,"proboscis",TRUE
+"pharynx","abdomen",0.000000000000000000000000459002806647528,"proboscis",TRUE
+"thoracic-abdominal","haltere",0.000000000000000000000000479589874286303,"proboscis",TRUE
+"pharynx","neck",0.000000000000000000000000538570218962984,"proboscis",TRUE
+"hind leg","body chordotonal",0.000000000000000000000000668880698721349,"proboscis",TRUE
+"reproductive","enteric",0.00000000000000000000000131590198769459,"proboscis",TRUE
+"thoracic-abdominal","pharynx",0.000000000000000000000267377550324969,"proboscis",TRUE
+"middle leg","antenna",0.000000000000000000000508253858894831,"proboscis",TRUE
+"middle leg","body chordotonal",0.000000000000000000000990252461049716,"proboscis",TRUE
+"proboscis","enteric",0.00000000000000000000157447587177016,"proboscis",TRUE
+"thorax","enteric",0.0000000000000000000129065881241267,"proboscis",TRUE
+"front leg","antenna",0.0000000000000000000289817871157455,"proboscis",TRUE
+"hind leg","head",0.0000000000000000000312913240086107,"proboscis",TRUE
+"thoracic-abdominal","body chordotonal",0.0000000000000000000388571663171346,"proboscis",TRUE
+"thoracic-abdominal","enteric",0.000000000000000000105471799416037,"proboscis",TRUE
+"haltere","front leg",0.00000000000000000010917636473651,"proboscis",TRUE
+"hind leg","antenna",0.000000000000000000200784447452838,"proboscis",TRUE
+"enteric","body chordotonal",0.000000000000000000366326810423431,"proboscis",TRUE
+"hemolymph","body chordotonal",0.000000000000000000514872948348556,"proboscis",TRUE
+"front leg","body chordotonal",0.00000000000000000104952101101073,"proboscis",TRUE
+"hemolymph","antenna",0.0000000000000000205158130104123,"proboscis",TRUE
+"haltere","abdomen",0.0000000000000000452001804724126,"proboscis",TRUE
+"enteric","abdomen",0.0000000000000000532407282440777,"proboscis",TRUE
+"hemolymph","enteric",0.000000000000000139880201534754,"proboscis",TRUE
+"eye","antenna",0.00000000000000101915272557737,"proboscis",TRUE
+"head","eye",0.00000000000000342662663301023,"proboscis",TRUE
+"wing","middle leg",0.0000000000000138100370224728,"proboscis",TRUE
+"wing","eye",0.0000000000000214048470362769,"proboscis",TRUE
+"haltere","eye",0.0000000000000234227469918651,"proboscis",TRUE
+"wing","front leg",0.0000000000000261073810544265,"proboscis",TRUE
+"thorax","body chordotonal",0.0000000000000327308476851101,"proboscis",TRUE
+"hind leg","eye",0.0000000000000359959727538162,"proboscis",TRUE
+"reproductive","eye",0.000000000000294872432438458,"proboscis",TRUE
+"pharynx","hemolymph",0.000000000000435310649098202,"proboscis",TRUE
+"antenna","abdomen",0.000000000000509314425690486,"proboscis",TRUE
+"wing","body chordotonal",0.000000000000589251396484088,"proboscis",TRUE
+"reproductive","body chordotonal",0.00000000000307115722371677,"proboscis",TRUE
+"eye","body chordotonal",0.00000000000721680352292079,"proboscis",TRUE
+"hemolymph","head",0.0000000000109338445104188,"proboscis",TRUE
+"thorax","eye",0.0000000000129387042645953,"proboscis",TRUE
+"middle leg","enteric",0.0000000000227574458671492,"proboscis",TRUE
+"thorax","haltere",0.0000000000304644487569363,"proboscis",TRUE
+"thoracic-abdominal","eye",0.0000000000320569744812549,"proboscis",TRUE
+"hind leg","front leg",0.0000000000735464422409051,"proboscis",TRUE
+"body chordotonal","antenna",0.0000000000987574497247164,"proboscis",TRUE
+"head","body chordotonal",0.000000000102941715686184,"proboscis",TRUE
+"eye","abdomen",0.00000000014763775366877,"proboscis",TRUE
+"hemolymph","eye",0.000000000762172190063107,"proboscis",TRUE
+"body chordotonal","abdomen",0.000000000890830588626055,"proboscis",TRUE
+"head","abdomen",0.00000000104552068557577,"proboscis",TRUE
+"reproductive","hemolymph",0.00000000104552068557577,"proboscis",TRUE
+"neck","enteric",0.00000000136296153648907,"proboscis",TRUE
+"wing","hemolymph",0.00000000419515265690126,"proboscis",TRUE
+"middle leg","eye",0.0000000065645936782997,"proboscis",TRUE
+"reproductive","middle leg",0.0000000108889026952845,"proboscis",TRUE
+"reproductive","front leg",0.0000000438993059050546,"proboscis",TRUE
+"thorax","hemolymph",0.000000070540740766923,"proboscis",TRUE
+"thoracic-abdominal","head",0.000000108726039435222,"proboscis",TRUE
+"wing","hind leg",0.000000111988122210678,"proboscis",TRUE
+"pharynx","enteric",0.000000128626821076762,"proboscis",TRUE
+"neck","eye",0.000000145013253866346,"proboscis",TRUE
+"neck","body chordotonal",0.000000179757281394811,"proboscis",TRUE
+"proboscis","eye",0.000000185443936487349,"proboscis",TRUE
+"thoracic-abdominal","antenna",0.000000301590376687534,"proboscis",TRUE
+"wing","abdomen",0.000000912168319892516,"proboscis",TRUE
+"wing","haltere",0.000000998302332152416,"proboscis",TRUE
+"reproductive","abdomen",0.00000208248846449328,"proboscis",TRUE
+"haltere","body chordotonal",0.00000233431100944669,"proboscis",TRUE
+"reproductive","hind leg",0.00000411097789195001,"proboscis",TRUE
+"reproductive","haltere",0.0000148042426390451,"proboscis",TRUE
+"thorax","front leg",0.0000205211948637992,"proboscis",TRUE
+"middle leg","hind leg",0.0000308309649865523,"proboscis",TRUE
+"thorax","middle leg",0.0000797921822793364,"proboscis",TRUE
+"thorax","abdomen",0.000156534651074635,"proboscis",TRUE
+"front leg","eye",0.000269354384564629,"proboscis",TRUE
+"front leg","abdomen",0.000319336136998257,"proboscis",TRUE
+"middle leg","front leg",0.000630266427550265,"proboscis",TRUE
+"wing","thoracic-abdominal",0.00145723754765345,"proboscis",TRUE
+"thoracic-abdominal","hemolymph",0.00198784693429042,"proboscis",TRUE
+"front leg","enteric",0.00342743626936304,"proboscis",TRUE
+"thoracic-abdominal","front leg",0.00424260143293982,"proboscis",TRUE
+"head","haltere",0.00424260143293982,"proboscis",TRUE
+"neck","front leg",0.00498070467000676,"proboscis",TRUE
+"hind leg","hemolymph",0.00498070467000676,"proboscis",TRUE
+"thorax","hind leg",0.00719179436759217,"proboscis",TRUE
+"haltere","antenna",0.00872871449214214,"proboscis",TRUE
+"thoracic-abdominal","reproductive",0.00975116895763333,"proboscis",TRUE
+"neck","hemolymph",0.0103312549325575,"proboscis",TRUE
+"hind leg","abdomen",0.0172796198549095,"proboscis",TRUE
+"thorax","antenna",0.0201043648782951,"proboscis",TRUE
+"wing","antenna",0.0201043648782951,"proboscis",TRUE
+"neck","haltere",0.0201043648782951,"proboscis",TRUE
+"thorax","head",0.0207482292001992,"proboscis",TRUE
+"pharynx","eye",0.0231375957085309,"proboscis",TRUE
+"thoracic-abdominal","abdomen",0.0278663591171525,"proboscis",TRUE
+"thorax","thoracic-abdominal",0.0357449185537292,"proboscis",TRUE
+"thoracic-abdominal","neck",0.0552104186673169,"proboscis",FALSE
+"neck","middle leg",0.0583105929854195,"proboscis",FALSE
+"neck","antenna",0.0993392440012915,"proboscis",FALSE
+"thoracic-abdominal","middle leg",0.134249474855866,"proboscis",FALSE
+"proboscis","pharynx",0.134249474855866,"proboscis",FALSE
+"neck","head",0.140197188260133,"proboscis",FALSE
+"head","antenna",0.288927951373779,"proboscis",FALSE
+"neck","hind leg",0.440793119652136,"proboscis",FALSE
+"eye","enteric",0.501550109808336,"proboscis",FALSE
+"middle leg","abdomen",0.747998198565904,"proboscis",FALSE
+"hemolymph","front leg",0.931854746885072,"proboscis",FALSE
+"hemolymph","abdomen",1,"proboscis",FALSE
+"neck","abdomen",1,"proboscis",FALSE
+"reproductive","antenna",1,"proboscis",FALSE
+"reproductive","head",1,"proboscis",FALSE
+"wing","head",1,"proboscis",FALSE
+"middle leg","hemolymph",1,"proboscis",FALSE
+"thoracic-abdominal","hind leg",1,"proboscis",FALSE
+"reproductive","neck",1,"proboscis",FALSE
+"thorax","neck",1,"proboscis",FALSE
+"wing","neck",1,"proboscis",FALSE
+"thorax","reproductive",1,"proboscis",FALSE
+"wing","reproductive",1,"proboscis",FALSE
+"wing","thorax",1,"proboscis",FALSE
+"hind leg","head",0.000000000000327332752152794,"antenna",TRUE
+"middle leg","head",0.00000000157065591052339,"antenna",TRUE
+"proboscis","head",0.00000000315962297240962,"antenna",TRUE
+"thoracic-abdominal","proboscis",0.0000000433306428137379,"antenna",TRUE
+"thoracic-abdominal","hind leg",0.0000000583040822861637,"antenna",TRUE
+"thoracic-abdominal","pharynx",0.000000169055722996085,"antenna",TRUE
+"wing","thoracic-abdominal",0.000000827703549268271,"antenna",TRUE
+"hind leg","body chordotonal",0.00000104826202924814,"antenna",TRUE
+"thoracic-abdominal","middle leg",0.00000107797257767866,"antenna",TRUE
+"pharynx","head",0.00000140947344726974,"antenna",TRUE
+"head","antenna",0.00000213472218050137,"antenna",TRUE
+"hind leg","hemolymph",0.00000264124449783814,"antenna",TRUE
+"wing","head",0.00000300233821223734,"antenna",TRUE
+"proboscis","body chordotonal",0.00000350796234233425,"antenna",TRUE
+"proboscis","hemolymph",0.00000542815071254022,"antenna",TRUE
+"pharynx","body chordotonal",0.00000677036942352702,"antenna",TRUE
+"middle leg","body chordotonal",0.00000949323976415613,"antenna",TRUE
+"proboscis","enteric",0.0000134749414094156,"antenna",TRUE
+"pharynx","hemolymph",0.0000157495540136484,"antenna",TRUE
+"head","front leg",0.0000164575643573265,"antenna",TRUE
+"wing","body chordotonal",0.0000193406391341121,"antenna",TRUE
+"thoracic-abdominal","antenna",0.0000283468734521408,"antenna",TRUE
+"reproductive","hind leg",0.0000283468734521408,"antenna",TRUE
+"head","eye",0.0000304020182985031,"antenna",TRUE
+"body chordotonal","antenna",0.0000333960298445142,"antenna",TRUE
+"hind leg","eye",0.0000345011558159847,"antenna",TRUE
+"hind leg","enteric",0.0000373646122198948,"antenna",TRUE
+"pharynx","enteric",0.0000419885365821449,"antenna",TRUE
+"reproductive","proboscis",0.0000995839199815414,"antenna",TRUE
+"haltere","eye",0.00011296886092814,"antenna",TRUE
+"reproductive","middle leg",0.000171786636627766,"antenna",TRUE
+"reproductive","eye",0.000178215508738622,"antenna",TRUE
+"wing","hemolymph",0.000178215508738622,"antenna",TRUE
+"pharynx","eye",0.000179835243765488,"antenna",TRUE
+"front leg","body chordotonal",0.000193179198523895,"antenna",TRUE
+"middle leg","hemolymph",0.000280959356455273,"antenna",TRUE
+"reproductive","antenna",0.000307244310511634,"antenna",TRUE
+"thoracic-abdominal","eye",0.000346364549724221,"antenna",TRUE
+"thoracic-abdominal","neck",0.000542311446287875,"antenna",TRUE
+"proboscis","eye",0.00101795447439206,"antenna",TRUE
+"thoracic-abdominal","front leg",0.00101795447439206,"antenna",TRUE
+"wing","reproductive",0.00101795447439206,"antenna",TRUE
+"reproductive","pharynx",0.0011707778961487,"antenna",TRUE
+"eye","body chordotonal",0.00132103851928468,"antenna",TRUE
+"eye","enteric",0.00132103851928468,"antenna",TRUE
+"hemolymph","eye",0.00132103851928468,"antenna",TRUE
+"hemolymph","antenna",0.00146747418590457,"antenna",TRUE
+"middle leg","enteric",0.00206297268333063,"antenna",TRUE
+"middle leg","eye",0.00250920249854445,"antenna",TRUE
+"wing","enteric",0.0028186485822767,"antenna",TRUE
+"eye","abdomen",0.00319775347686812,"antenna",TRUE
+"wing","eye",0.00319775347686812,"antenna",TRUE
+"thorax","eye",0.00528688198286296,"antenna",TRUE
+"thoracic-abdominal","head",0.00648165862384927,"antenna",TRUE
+"proboscis","haltere",0.00672961659126837,"antenna",TRUE
+"hind leg","haltere",0.007380080586453,"antenna",TRUE
+"enteric","antenna",0.00838260864011444,"antenna",TRUE
+"front leg","eye",0.0139887435347074,"antenna",TRUE
+"eye","antenna",0.0149239521965208,"antenna",TRUE
+"haltere","body chordotonal",0.0149239521965208,"antenna",TRUE
+"thorax","body chordotonal",0.0150329386028812,"antenna",TRUE
+"haltere","antenna",0.0155354918283353,"antenna",TRUE
+"middle leg","haltere",0.0181788387774016,"antenna",TRUE
+"reproductive","front leg",0.0196142306838814,"antenna",TRUE
+"head","body chordotonal",0.0247579790635675,"antenna",TRUE
+"hemolymph","front leg",0.0297066418598892,"antenna",TRUE
+"neck","body chordotonal",0.0684493258799306,"antenna",FALSE
+"front leg","enteric",0.0798051393649059,"antenna",FALSE
+"neck","eye",0.0928594750495371,"antenna",FALSE
+"thoracic-abdominal","abdomen",0.104563949541686,"antenna",FALSE
+"pharynx","haltere",0.130454431600733,"antenna",FALSE
+"thorax","thoracic-abdominal",0.144644322537559,"antenna",FALSE
+"haltere","front leg",0.144700078728037,"antenna",FALSE
+"thoracic-abdominal","haltere",0.167727813079319,"antenna",FALSE
+"wing","haltere",0.193831809402486,"antenna",FALSE
+"neck","hemolymph",0.308203664199653,"antenna",FALSE
+"thorax","hemolymph",0.345502047565242,"antenna",FALSE
+"reproductive","body chordotonal",0.370504324631363,"antenna",FALSE
+"body chordotonal","abdomen",0.581390457767389,"antenna",FALSE
+"hemolymph","head",0.810540692147823,"antenna",FALSE
+"antenna","abdomen",1,"antenna",FALSE
+"enteric","abdomen",1,"antenna",FALSE
+"front leg","abdomen",1,"antenna",FALSE
+"haltere","abdomen",1,"antenna",FALSE
+"head","abdomen",1,"antenna",FALSE
+"hemolymph","abdomen",1,"antenna",FALSE
+"hind leg","abdomen",1,"antenna",FALSE
+"middle leg","abdomen",1,"antenna",FALSE
+"neck","abdomen",1,"antenna",FALSE
+"pharynx","abdomen",1,"antenna",FALSE
+"proboscis","abdomen",1,"antenna",FALSE
+"reproductive","abdomen",1,"antenna",FALSE
+"thorax","abdomen",1,"antenna",FALSE
+"wing","abdomen",1,"antenna",FALSE
+"front leg","antenna",1,"antenna",FALSE
+"hind leg","antenna",1,"antenna",FALSE
+"middle leg","antenna",1,"antenna",FALSE
+"neck","antenna",1,"antenna",FALSE
+"pharynx","antenna",1,"antenna",FALSE
+"proboscis","antenna",1,"antenna",FALSE
+"thorax","antenna",1,"antenna",FALSE
+"wing","antenna",1,"antenna",FALSE
+"enteric","body chordotonal",1,"antenna",FALSE
+"hemolymph","body chordotonal",1,"antenna",FALSE
+"thoracic-abdominal","body chordotonal",1,"antenna",FALSE
+"haltere","enteric",1,"antenna",FALSE
+"head","enteric",1,"antenna",FALSE
+"hemolymph","enteric",1,"antenna",FALSE
+"neck","enteric",1,"antenna",FALSE
+"reproductive","enteric",1,"antenna",FALSE
+"thoracic-abdominal","enteric",1,"antenna",FALSE
+"thorax","enteric",1,"antenna",FALSE
+"hind leg","front leg",1,"antenna",FALSE
+"middle leg","front leg",1,"antenna",FALSE
+"neck","front leg",1,"antenna",FALSE
+"pharynx","front leg",1,"antenna",FALSE
+"proboscis","front leg",1,"antenna",FALSE
+"thorax","front leg",1,"antenna",FALSE
+"wing","front leg",1,"antenna",FALSE
+"head","haltere",1,"antenna",FALSE
+"hemolymph","haltere",1,"antenna",FALSE
+"neck","haltere",1,"antenna",FALSE
+"reproductive","haltere",1,"antenna",FALSE
+"thorax","haltere",1,"antenna",FALSE
+"neck","head",1,"antenna",FALSE
+"reproductive","head",1,"antenna",FALSE
+"thorax","head",1,"antenna",FALSE
+"reproductive","hemolymph",1,"antenna",FALSE
+"thoracic-abdominal","hemolymph",1,"antenna",FALSE
+"middle leg","hind leg",1,"antenna",FALSE
+"neck","hind leg",1,"antenna",FALSE
+"pharynx","hind leg",1,"antenna",FALSE
+"proboscis","hind leg",1,"antenna",FALSE
+"thorax","hind leg",1,"antenna",FALSE
+"wing","hind leg",1,"antenna",FALSE
+"neck","middle leg",1,"antenna",FALSE
+"pharynx","middle leg",1,"antenna",FALSE
+"proboscis","middle leg",1,"antenna",FALSE
+"thorax","middle leg",1,"antenna",FALSE
+"wing","middle leg",1,"antenna",FALSE
+"pharynx","neck",1,"antenna",FALSE
+"proboscis","neck",1,"antenna",FALSE
+"reproductive","neck",1,"antenna",FALSE
+"thorax","neck",1,"antenna",FALSE
+"wing","neck",1,"antenna",FALSE
+"proboscis","pharynx",1,"antenna",FALSE
+"thorax","pharynx",1,"antenna",FALSE
+"wing","pharynx",1,"antenna",FALSE
+"thorax","proboscis",1,"antenna",FALSE
+"wing","proboscis",1,"antenna",FALSE
+"thoracic-abdominal","reproductive",1,"antenna",FALSE
+"thorax","reproductive",1,"antenna",FALSE
+"wing","thorax",1,"antenna",FALSE
+"hind leg","head",0.00000000000771700416684148,"eye",TRUE
+"middle leg","head",0.0000000735237140496858,"eye",TRUE
+"proboscis","head",0.00000012566271646043,"eye",TRUE
+"pharynx","head",0.000000358454544149512,"eye",TRUE
+"head","front leg",0.0000265128795853895,"eye",TRUE
+"thoracic-abdominal","proboscis",0.000213247578445522,"eye",TRUE
+"reproductive","proboscis",0.000417261131893786,"eye",TRUE
+"thoracic-abdominal","pharynx",0.0004692270511604,"eye",TRUE
+"thoracic-abdominal","hind leg",0.00112995056559689,"eye",TRUE
+"reproductive","hind leg",0.0013556423071853,"eye",TRUE
+"hind leg","abdomen",0.00154504515290299,"eye",TRUE
+"reproductive","pharynx",0.00299039317595994,"eye",TRUE
+"thoracic-abdominal","middle leg",0.00336085986817567,"eye",TRUE
+"wing","head",0.00385738690253755,"eye",TRUE
+"hind leg","body chordotonal",0.00415116670435289,"eye",TRUE
+"proboscis","body chordotonal",0.00440810567649332,"eye",TRUE
+"proboscis","enteric",0.00638431459379538,"eye",TRUE
+"proboscis","abdomen",0.00704379859230383,"eye",TRUE
+"pharynx","body chordotonal",0.00704379859230383,"eye",TRUE
+"pharynx","enteric",0.00704379859230383,"eye",TRUE
+"pharynx","hemolymph",0.00704379859230383,"eye",TRUE
+"head","antenna",0.0091684606294461,"eye",TRUE
+"pharynx","abdomen",0.0095372269805776,"eye",TRUE
+"wing","thoracic-abdominal",0.00955283464040396,"eye",TRUE
+"middle leg","body chordotonal",0.0141037953025517,"eye",TRUE
+"proboscis","hemolymph",0.0148561446906981,"eye",TRUE
+"reproductive","middle leg",0.0210811310931259,"eye",TRUE
+"hind leg","enteric",0.0261293804744648,"eye",TRUE
+"hind leg","hemolymph",0.0274493734140046,"eye",TRUE
+"thoracic-abdominal","antenna",0.0312489256830289,"eye",TRUE
+"front leg","body chordotonal",0.0492828057146374,"eye",TRUE
+"wing","body chordotonal",0.0843908138412661,"eye",FALSE
+"head","eye",0.0972202221945986,"eye",FALSE
+"hind leg","eye",0.0972202221945986,"eye",FALSE
+"middle leg","eye",0.102435370387802,"eye",FALSE
+"thoracic-abdominal","front leg",0.103605726532474,"eye",FALSE
+"front leg","eye",0.103789036422384,"eye",FALSE
+"middle leg","hemolymph",0.12953478860941,"eye",FALSE
+"body chordotonal","antenna",0.132299845394724,"eye",FALSE
+"eye","antenna",0.13340953745939,"eye",FALSE
+"haltere","body chordotonal",0.139371836078725,"eye",FALSE
+"wing","eye",0.141845794462712,"eye",FALSE
+"middle leg","abdomen",0.192475352343875,"eye",FALSE
+"middle leg","enteric",0.196320725800647,"eye",FALSE
+"proboscis","eye",0.196320725800647,"eye",FALSE
+"front leg","abdomen",0.213616364556219,"eye",FALSE
+"eye","abdomen",0.22980205212515,"eye",FALSE
+"haltere","eye",0.230736440157627,"eye",FALSE
+"pharynx","eye",0.230736440157627,"eye",FALSE
+"thoracic-abdominal","enteric",0.236348662400264,"eye",FALSE
+"wing","reproductive",0.257137800983286,"eye",FALSE
+"reproductive","front leg",0.284975430378765,"eye",FALSE
+"reproductive","eye",0.290223347906793,"eye",FALSE
+"thoracic-abdominal","neck",0.290223347906793,"eye",FALSE
+"reproductive","antenna",0.356247450515038,"eye",FALSE
+"head","haltere",0.39659679686142,"eye",FALSE
+"thoracic-abdominal","eye",0.411270752678318,"eye",FALSE
+"wing","proboscis",0.411270752678318,"eye",FALSE
+"thorax","eye",0.415602285746031,"eye",FALSE
+"wing","hemolymph",0.417317472993538,"eye",FALSE
+"thoracic-abdominal","haltere",0.497537083614325,"eye",FALSE
+"hemolymph","front leg",0.75483088618771,"eye",FALSE
+"eye","body chordotonal",0.771206972185999,"eye",FALSE
+"eye","enteric",0.771206972185999,"eye",FALSE
+"hemolymph","eye",0.771206972185999,"eye",FALSE
+"proboscis","antenna",0.785292712094264,"eye",FALSE
+"neck","eye",0.785292712094264,"eye",FALSE
+"thoracic-abdominal","abdomen",0.916367755120983,"eye",FALSE
+"antenna","abdomen",1,"eye",FALSE
+"body chordotonal","abdomen",1,"eye",FALSE
+"enteric","abdomen",1,"eye",FALSE
+"haltere","abdomen",1,"eye",FALSE
+"head","abdomen",1,"eye",FALSE
+"hemolymph","abdomen",1,"eye",FALSE
+"neck","abdomen",1,"eye",FALSE
+"reproductive","abdomen",1,"eye",FALSE
+"thorax","abdomen",1,"eye",FALSE
+"wing","abdomen",1,"eye",FALSE
+"enteric","antenna",1,"eye",FALSE
+"front leg","antenna",1,"eye",FALSE
+"haltere","antenna",1,"eye",FALSE
+"hemolymph","antenna",1,"eye",FALSE
+"hind leg","antenna",1,"eye",FALSE
+"middle leg","antenna",1,"eye",FALSE
+"neck","antenna",1,"eye",FALSE
+"pharynx","antenna",1,"eye",FALSE
+"thorax","antenna",1,"eye",FALSE
+"wing","antenna",1,"eye",FALSE
+"enteric","body chordotonal",1,"eye",FALSE
+"head","body chordotonal",1,"eye",FALSE
+"hemolymph","body chordotonal",1,"eye",FALSE
+"neck","body chordotonal",1,"eye",FALSE
+"reproductive","body chordotonal",1,"eye",FALSE
+"thoracic-abdominal","body chordotonal",1,"eye",FALSE
+"thorax","body chordotonal",1,"eye",FALSE
+"front leg","enteric",1,"eye",FALSE
+"haltere","enteric",1,"eye",FALSE
+"head","enteric",1,"eye",FALSE
+"hemolymph","enteric",1,"eye",FALSE
+"neck","enteric",1,"eye",FALSE
+"reproductive","enteric",1,"eye",FALSE
+"thorax","enteric",1,"eye",FALSE
+"wing","enteric",1,"eye",FALSE
+"haltere","front leg",1,"eye",FALSE
+"hind leg","front leg",1,"eye",FALSE
+"middle leg","front leg",1,"eye",FALSE
+"neck","front leg",1,"eye",FALSE
+"pharynx","front leg",1,"eye",FALSE
+"proboscis","front leg",1,"eye",FALSE
+"thorax","front leg",1,"eye",FALSE
+"wing","front leg",1,"eye",FALSE
+"hemolymph","haltere",1,"eye",FALSE
+"hind leg","haltere",1,"eye",FALSE
+"middle leg","haltere",1,"eye",FALSE
+"neck","haltere",1,"eye",FALSE
+"pharynx","haltere",1,"eye",FALSE
+"proboscis","haltere",1,"eye",FALSE
+"reproductive","haltere",1,"eye",FALSE
+"thorax","haltere",1,"eye",FALSE
+"wing","haltere",1,"eye",FALSE
+"hemolymph","head",1,"eye",FALSE
+"neck","head",1,"eye",FALSE
+"reproductive","head",1,"eye",FALSE
+"thoracic-abdominal","head",1,"eye",FALSE
+"thorax","head",1,"eye",FALSE
+"neck","hemolymph",1,"eye",FALSE
+"reproductive","hemolymph",1,"eye",FALSE
+"thoracic-abdominal","hemolymph",1,"eye",FALSE
+"thorax","hemolymph",1,"eye",FALSE
+"middle leg","hind leg",1,"eye",FALSE
+"neck","hind leg",1,"eye",FALSE
+"pharynx","hind leg",1,"eye",FALSE
+"proboscis","hind leg",1,"eye",FALSE
+"thorax","hind leg",1,"eye",FALSE
+"wing","hind leg",1,"eye",FALSE
+"neck","middle leg",1,"eye",FALSE
+"pharynx","middle leg",1,"eye",FALSE
+"proboscis","middle leg",1,"eye",FALSE
+"thorax","middle leg",1,"eye",FALSE
+"wing","middle leg",1,"eye",FALSE
+"pharynx","neck",1,"eye",FALSE
+"proboscis","neck",1,"eye",FALSE
+"reproductive","neck",1,"eye",FALSE
+"thorax","neck",1,"eye",FALSE
+"wing","neck",1,"eye",FALSE
+"proboscis","pharynx",1,"eye",FALSE
+"thorax","pharynx",1,"eye",FALSE
+"wing","pharynx",1,"eye",FALSE
+"thorax","proboscis",1,"eye",FALSE
+"thoracic-abdominal","reproductive",1,"eye",FALSE
+"thorax","reproductive",1,"eye",FALSE
+"thorax","thoracic-abdominal",1,"eye",FALSE
+"wing","thorax",1,"eye",FALSE
+"proboscis","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000202467255251026,"neck",TRUE
+"hind leg","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000499364973149105,"neck",TRUE
+"pharynx","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000490060283254128,"neck",TRUE
+"proboscis","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000201303737387775,"neck",TRUE
+"middle leg","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000091091806559802,"neck",TRUE
+"reproductive","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000552289831316212,"neck",TRUE
+"reproductive","pharynx",0.0000000000000000000000000000000000000000000000000000000000000000752733864650999,"neck",TRUE
+"reproductive","hind leg",0.000000000000000000000000000000000000000000000000000000000000000391836791317494,"neck",TRUE
+"pharynx","abdomen",0.000000000000000000000000000000000000000000000000000000000000000836264853081307,"neck",TRUE
+"hind leg","abdomen",0.000000000000000000000000000000000000000000000000000000000441204202474365,"neck",TRUE
+"thoracic-abdominal","proboscis",0.000000000000000000000000000000000000000000000000000000110553430408335,"neck",TRUE
+"proboscis","hind leg",0.00000000000000000000000000000000000000000000000000151910033694846,"neck",TRUE
+"wing","head",0.000000000000000000000000000000000000000000000000502322101283379,"neck",TRUE
+"thoracic-abdominal","pharynx",0.00000000000000000000000000000000000000000000000573269570745193,"neck",TRUE
+"proboscis","body chordotonal",0.00000000000000000000000000000000000000000000000614582930806361,"neck",TRUE
+"wing","reproductive",0.000000000000000000000000000000000000000000000197086978612426,"neck",TRUE
+"reproductive","middle leg",0.000000000000000000000000000000000000000000000719912789727609,"neck",TRUE
+"proboscis","hemolymph",0.00000000000000000000000000000000000000000000261304477466366,"neck",TRUE
+"pharynx","body chordotonal",0.0000000000000000000000000000000000000000000106005213277601,"neck",TRUE
+"hind leg","body chordotonal",0.0000000000000000000000000000000000000000000130723888057452,"neck",TRUE
+"proboscis","antenna",0.000000000000000000000000000000000000000000206001596016097,"neck",TRUE
+"pharynx","hemolymph",0.00000000000000000000000000000000000000000230754567947468,"neck",TRUE
+"head","front leg",0.00000000000000000000000000000000000000000534304719009565,"neck",TRUE
+"reproductive","antenna",0.0000000000000000000000000000000000000000106077685311234,"neck",TRUE
+"proboscis","enteric",0.00000000000000000000000000000000000000194419195184457,"neck",TRUE
+"head","haltere",0.00000000000000000000000000000000000000286933192788129,"neck",TRUE
+"thoracic-abdominal","hind leg",0.00000000000000000000000000000000000000781603345166409,"neck",TRUE
+"middle leg","abdomen",0.0000000000000000000000000000000000000348393121679838,"neck",TRUE
+"head","antenna",0.00000000000000000000000000000000000179393076222251,"neck",TRUE
+"wing","thoracic-abdominal",0.0000000000000000000000000000000000303825973655857,"neck",TRUE
+"hind leg","hemolymph",0.0000000000000000000000000000000000518297323956978,"neck",TRUE
+"pharynx","enteric",0.0000000000000000000000000000000000569512612036863,"neck",TRUE
+"haltere","abdomen",0.000000000000000000000000000000000142252638136002,"neck",TRUE
+"middle leg","body chordotonal",0.000000000000000000000000000000000142252638136002,"neck",TRUE
+"head","eye",0.00000000000000000000000000000000256177644972656,"neck",TRUE
+"hind leg","eye",0.00000000000000000000000000000000256177644972656,"neck",TRUE
+"middle leg","eye",0.00000000000000000000000000000000486428655532796,"neck",TRUE
+"front leg","eye",0.00000000000000000000000000000000649288748703811,"neck",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000000000000414942638264632,"neck",TRUE
+"eye","antenna",0.0000000000000000000000000000000915175662368298,"neck",TRUE
+"wing","eye",0.000000000000000000000000000000465458808026772,"neck",TRUE
+"haltere","body chordotonal",0.000000000000000000000000000000789322699183083,"neck",TRUE
+"wing","body chordotonal",0.00000000000000000000000000000281766496281029,"neck",TRUE
+"wing","proboscis",0.0000000000000000000000000000174229517804481,"neck",TRUE
+"proboscis","middle leg",0.0000000000000000000000000000178158329382424,"neck",TRUE
+"eye","abdomen",0.0000000000000000000000000000323531641803827,"neck",TRUE
+"pharynx","eye",0.0000000000000000000000000000518915755062428,"neck",TRUE
+"proboscis","eye",0.000000000000000000000000000100873553142259,"neck",TRUE
+"reproductive","front leg",0.000000000000000000000000000122259835005256,"neck",TRUE
+"reproductive","eye",0.000000000000000000000000000670063216373991,"neck",TRUE
+"reproductive","haltere",0.000000000000000000000000000891712596758603,"neck",TRUE
+"front leg","body chordotonal",0.000000000000000000000000000983881779213374,"neck",TRUE
+"body chordotonal","antenna",0.00000000000000000000000000543059690309498,"neck",TRUE
+"thoracic-abdominal","antenna",0.00000000000000000000000000783135116209953,"neck",TRUE
+"wing","abdomen",0.00000000000000000000000000853287600592458,"neck",TRUE
+"wing","hemolymph",0.0000000000000000000000000135858618363329,"neck",TRUE
+"reproductive","neck",0.0000000000000000000000000210262450229382,"neck",TRUE
+"front leg","abdomen",0.0000000000000000000000000300591836260334,"neck",TRUE
+"thoracic-abdominal","eye",0.0000000000000000000000000378663205611863,"neck",TRUE
+"thorax","eye",0.0000000000000000000000000386021533363836,"neck",TRUE
+"middle leg","hemolymph",0.0000000000000000000000000524691336244324,"neck",TRUE
+"thoracic-abdominal","neck",0.000000000000000000000000429490368642114,"neck",TRUE
+"eye","body chordotonal",0.0000000000000000000000348088971177854,"neck",TRUE
+"eye","enteric",0.0000000000000000000000348088971177854,"neck",TRUE
+"hemolymph","eye",0.0000000000000000000000366680435184602,"neck",TRUE
+"antenna","abdomen",0.0000000000000000000000480226024849283,"neck",TRUE
+"hind leg","enteric",0.0000000000000000000000740870409028654,"neck",TRUE
+"thorax","proboscis",0.000000000000000000000212672888364273,"neck",TRUE
+"pharynx","antenna",0.000000000000000000002300220151841,"neck",TRUE
+"pharynx","hind leg",0.00000000000000000000668223116530563,"neck",TRUE
+"proboscis","front leg",0.0000000000000000000249963962255265,"neck",TRUE
+"thoracic-abdominal","haltere",0.0000000000000000000301685115664159,"neck",TRUE
+"thoracic-abdominal","front leg",0.0000000000000000000322862094732028,"neck",TRUE
+"hemolymph","antenna",0.000000000000000000238976323862627,"neck",TRUE
+"hemolymph","haltere",0.0000000000000000231449502266134,"neck",TRUE
+"haltere","eye",0.000000000000000105681527157569,"neck",TRUE
+"reproductive","head",0.000000000000000534015668688019,"neck",TRUE
+"haltere","enteric",0.00000000000000486578702664558,"neck",TRUE
+"neck","eye",0.00000000000000937399974263855,"neck",TRUE
+"thorax","body chordotonal",0.00000000000000963779493106422,"neck",TRUE
+"hemolymph","front leg",0.0000000000000131489190194213,"neck",TRUE
+"hind leg","haltere",0.0000000000000167601516845344,"neck",TRUE
+"wing","pharynx",0.0000000000000375034853468218,"neck",TRUE
+"neck","hemolymph",0.0000000000000480253043139852,"neck",TRUE
+"haltere","antenna",0.0000000000000655447436856366,"neck",TRUE
+"neck","body chordotonal",0.0000000000000662719294926833,"neck",TRUE
+"middle leg","enteric",0.000000000000271840176968859,"neck",TRUE
+"neck","head",0.000000000000517195191467585,"neck",TRUE
+"thorax","pharynx",0.000000000000810298658339806,"neck",TRUE
+"reproductive","enteric",0.00000000000226577778312494,"neck",TRUE
+"thoracic-abdominal","enteric",0.00000000000436839481305463,"neck",TRUE
+"middle leg","haltere",0.00000000000793927173216145,"neck",TRUE
+"haltere","front leg",0.000000000050526470471386,"neck",TRUE
+"head","body chordotonal",0.000000000122218358773369,"neck",TRUE
+"thorax","reproductive",0.000000000159824589907135,"neck",TRUE
+"wing","haltere",0.000000000203898212832828,"neck",TRUE
+"pharynx","middle leg",0.000000000498355891997967,"neck",TRUE
+"wing","enteric",0.00000000109599121471229,"neck",TRUE
+"thoracic-abdominal","head",0.00000000194286692466373,"neck",TRUE
+"enteric","body chordotonal",0.00000000813037701389401,"neck",TRUE
+"thorax","haltere",0.000000034736971641132,"neck",TRUE
+"hemolymph","enteric",0.0000000862591650440726,"neck",TRUE
+"neck","abdomen",0.000000600754351539087,"neck",TRUE
+"front leg","enteric",0.000000600754351539087,"neck",TRUE
+"enteric","antenna",0.00000132188627379542,"neck",TRUE
+"proboscis","neck",0.00000640393341926551,"neck",TRUE
+"proboscis","pharynx",0.0000109155377966657,"neck",TRUE
+"thorax","abdomen",0.0000150016451750444,"neck",TRUE
+"pharynx","front leg",0.0000190717662612544,"neck",TRUE
+"pharynx","neck",0.0000963977878059252,"neck",TRUE
+"thorax","hemolymph",0.00021970009978936,"neck",TRUE
+"reproductive","abdomen",0.000260920156833464,"neck",TRUE
+"thorax","thoracic-abdominal",0.000443855632532636,"neck",TRUE
+"thoracic-abdominal","abdomen",0.000453801391145324,"neck",TRUE
+"hemolymph","head",0.000735305636801146,"neck",TRUE
+"thorax","middle leg",0.00258868554237786,"neck",TRUE
+"thorax","hind leg",0.00384269124965113,"neck",TRUE
+"thorax","head",0.00388225569856594,"neck",TRUE
+"body chordotonal","abdomen",0.00621528657672118,"neck",TRUE
+"middle leg","antenna",0.00828992467491512,"neck",TRUE
+"hind leg","antenna",0.0112703276405862,"neck",TRUE
+"wing","thorax",0.0114921496371291,"neck",TRUE
+"reproductive","body chordotonal",0.0190479577453776,"neck",TRUE
+"hemolymph","abdomen",0.0332345807281045,"neck",TRUE
+"hemolymph","body chordotonal",0.0522168445303666,"neck",FALSE
+"head","enteric",0.0605392416063492,"neck",FALSE
+"thorax","front leg",0.0751143455341601,"neck",FALSE
+"thoracic-abdominal","body chordotonal",0.0771794850844876,"neck",FALSE
+"front leg","antenna",0.0939084547857126,"neck",FALSE
+"neck","enteric",0.1205596462858,"neck",FALSE
+"neck","haltere",0.13817388261116,"neck",FALSE
+"pharynx","haltere",0.141845104467859,"neck",FALSE
+"thorax","neck",0.167047717758346,"neck",FALSE
+"reproductive","hemolymph",0.260540042194005,"neck",FALSE
+"neck","hind leg",0.260540042194005,"neck",FALSE
+"wing","hind leg",0.318883681145151,"neck",FALSE
+"thorax","enteric",0.338281567785065,"neck",FALSE
+"thorax","antenna",0.552369913801229,"neck",FALSE
+"enteric","abdomen",0.684261869772409,"neck",FALSE
+"thoracic-abdominal","reproductive",0.712443329101183,"neck",FALSE
+"wing","antenna",0.911525544411603,"neck",FALSE
+"head","abdomen",1,"neck",FALSE
+"neck","antenna",1,"neck",FALSE
+"hind leg","front leg",1,"neck",FALSE
+"middle leg","front leg",1,"neck",FALSE
+"neck","front leg",1,"neck",FALSE
+"wing","front leg",1,"neck",FALSE
+"proboscis","haltere",1,"neck",FALSE
+"thoracic-abdominal","hemolymph",1,"neck",FALSE
+"middle leg","hind leg",1,"neck",FALSE
+"neck","middle leg",1,"neck",FALSE
+"wing","middle leg",1,"neck",FALSE
+"wing","neck",1,"neck",FALSE
+"hind leg","head",0,"wing",TRUE
+"wing","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002960894854517,"wing",TRUE
+"middle leg","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000818013379622445,"wing",TRUE
+"wing","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000283604837964848,"wing",TRUE
+"head","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000344249157215301,"wing",TRUE
+"wing","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000347547753056413,"wing",TRUE
+"wing","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000217113647136357,"wing",TRUE
+"wing","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000130673216170876,"wing",TRUE
+"head","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000388092404118619,"wing",TRUE
+"wing","pharynx",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000113201640868818,"wing",TRUE
+"wing","reproductive",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032379763353254,"wing",TRUE
+"wing","middle leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000187788567660546,"wing",TRUE
+"head","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000173276594850747,"wing",TRUE
+"pharynx","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000890754034240659,"wing",TRUE
+"proboscis","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000289202513455621,"wing",TRUE
+"wing","abdomen",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000804094600518369,"wing",TRUE
+"neck","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000274041419940225,"wing",TRUE
+"thoracic-abdominal","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000663435912923234,"wing",TRUE
+"wing","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000126748779225498,"wing",TRUE
+"proboscis","hind leg",0.000000000000000000000000000000000000000000000000000000000000005598968414375,"wing",TRUE
+"proboscis","haltere",0.000000000000000000000000000000000000000000000000000000000341339133570785,"wing",TRUE
+"wing","enteric",0.00000000000000000000000000000000000000000000000000000000223432493440358,"wing",TRUE
+"haltere","front leg",0.0000000000000000000000000000000000000000000000000000000494711816960269,"wing",TRUE
+"reproductive","hind leg",0.0000000000000000000000000000000000000000000000000000000681188858907744,"wing",TRUE
+"head","abdomen",0.0000000000000000000000000000000000000000000000000000000916345088552124,"wing",TRUE
+"reproductive","haltere",0.00000000000000000000000000000000000000000000000000000630435043954166,"wing",TRUE
+"haltere","antenna",0.00000000000000000000000000000000000000000000000000111182798073415,"wing",TRUE
+"hind leg","body chordotonal",0.00000000000000000000000000000000000000000000000768131459206851,"wing",TRUE
+"wing","neck",0.0000000000000000000000000000000000000000000000107399166301671,"wing",TRUE
+"pharynx","haltere",0.0000000000000000000000000000000000000000000000559209895127458,"wing",TRUE
+"head","eye",0.00000000000000000000000000000000000000000000124805100974856,"wing",TRUE
+"thorax","head",0.00000000000000000000000000000000000000000000932982819209335,"wing",TRUE
+"hind leg","haltere",0.0000000000000000000000000000000000000000000180758072278558,"wing",TRUE
+"haltere","abdomen",0.0000000000000000000000000000000000000000000808060198174626,"wing",TRUE
+"haltere","body chordotonal",0.00000000000000000000000000000000000000000616584415054993,"wing",TRUE
+"reproductive","middle leg",0.000000000000000000000000000000000000000037676855405723,"wing",TRUE
+"pharynx","hind leg",0.000000000000000000000000000000000000000740062877272634,"wing",TRUE
+"proboscis","eye",0.000000000000000000000000000000000000019812601194584,"wing",TRUE
+"proboscis","middle leg",0.000000000000000000000000000000000000026089468913772,"wing",TRUE
+"wing","hemolymph",0.000000000000000000000000000000000000110028206619432,"wing",TRUE
+"reproductive","eye",0.000000000000000000000000000000000102427189350165,"wing",TRUE
+"pharynx","eye",0.00000000000000000000000000000000228968469326646,"wing",TRUE
+"middle leg","body chordotonal",0.00000000000000000000000000000000230217694063852,"wing",TRUE
+"hemolymph","head",0.000000000000000000000000000000158831649446701,"wing",TRUE
+"middle leg","haltere",0.00000000000000000000000000000052558735136541,"wing",TRUE
+"eye","body chordotonal",0.00000000000000000000000000000268598946696331,"wing",TRUE
+"eye","antenna",0.00000000000000000000000000000446377089180896,"wing",TRUE
+"eye","abdomen",0.00000000000000000000000000057606079024266,"wing",TRUE
+"haltere","enteric",0.000000000000000000000000019468658235578,"wing",TRUE
+"neck","body chordotonal",0.0000000000000000000000000333223582442581,"wing",TRUE
+"thoracic-abdominal","body chordotonal",0.00000000000000000000000011391237090407,"wing",TRUE
+"front leg","eye",0.000000000000000000000000427593662661618,"wing",TRUE
+"pharynx","middle leg",0.000000000000000000000000449879054415149,"wing",TRUE
+"hind leg","eye",0.00000000000000000000000056446726610496,"wing",TRUE
+"eye","enteric",0.000000000000000000000000865868195071505,"wing",TRUE
+"body chordotonal","antenna",0.00000000000000000000000385322607781208,"wing",TRUE
+"thoracic-abdominal","reproductive",0.00000000000000000000000385322607781208,"wing",TRUE
+"thorax","body chordotonal",0.0000000000000000000000226711009203475,"wing",TRUE
+"head","enteric",0.000000000000000000000091963041560249,"wing",TRUE
+"hind leg","antenna",0.000000000000000000000298302209715567,"wing",TRUE
+"reproductive","neck",0.00000000000000000000465826819901545,"wing",TRUE
+"thorax","front leg",0.0000000000000000000113835287596105,"wing",TRUE
+"hind leg","enteric",0.0000000000000000000142843971849998,"wing",TRUE
+"thorax","reproductive",0.000000000000000000023066899701836,"wing",TRUE
+"reproductive","antenna",0.00000000000000000102234938350383,"wing",TRUE
+"neck","eye",0.00000000000000000987365805947111,"wing",TRUE
+"wing","thoracic-abdominal",0.0000000000000000155267420871006,"wing",TRUE
+"middle leg","eye",0.0000000000000000285977079519658,"wing",TRUE
+"thoracic-abdominal","proboscis",0.0000000000000000453996535111436,"wing",TRUE
+"middle leg","front leg",0.00000000000000006715999046041,"wing",TRUE
+"proboscis","neck",0.000000000000000132394457454392,"wing",TRUE
+"neck","haltere",0.000000000000000155507581591522,"wing",TRUE
+"front leg","body chordotonal",0.000000000000000256491555466624,"wing",TRUE
+"thorax","abdomen",0.000000000000000424298740867463,"wing",TRUE
+"reproductive","head",0.000000000000000614777257325136,"wing",TRUE
+"middle leg","antenna",0.00000000000000141145050370233,"wing",TRUE
+"middle leg","enteric",0.00000000000000141145050370233,"wing",TRUE
+"hemolymph","eye",0.00000000000000433940821818004,"wing",TRUE
+"hind leg","front leg",0.000000000000011762067779474,"wing",TRUE
+"hemolymph","haltere",0.000000000000035769039595231,"wing",TRUE
+"thorax","antenna",0.000000000000122140553749249,"wing",TRUE
+"pharynx","body chordotonal",0.000000000000176409602476952,"wing",TRUE
+"proboscis","body chordotonal",0.00000000000114413750418777,"wing",TRUE
+"hemolymph","body chordotonal",0.00000000000166765561997728,"wing",TRUE
+"thorax","proboscis",0.0000000000022976287435598,"wing",TRUE
+"reproductive","front leg",0.00000000000256227386043278,"wing",TRUE
+"body chordotonal","abdomen",0.00000000000803597400994147,"wing",TRUE
+"thoracic-abdominal","enteric",0.0000000000210414697166199,"wing",TRUE
+"proboscis","abdomen",0.0000000000257617823221916,"wing",TRUE
+"thoracic-abdominal","pharynx",0.000000000083943250116391,"wing",TRUE
+"thorax","hind leg",0.0000000000865147496030655,"wing",TRUE
+"reproductive","abdomen",0.000000000131664585320195,"wing",TRUE
+"thorax","middle leg",0.000000000138019945716549,"wing",TRUE
+"thorax","pharynx",0.000000000184902274712177,"wing",TRUE
+"thoracic-abdominal","front leg",0.000000000241505966839114,"wing",TRUE
+"proboscis","antenna",0.00000000104530857383546,"wing",TRUE
+"reproductive","pharynx",0.00000000110607714874374,"wing",TRUE
+"pharynx","neck",0.00000000249988131264592,"wing",TRUE
+"middle leg","abdomen",0.00000000292785112714568,"wing",TRUE
+"hind leg","abdomen",0.00000000300459613215394,"wing",TRUE
+"thorax","enteric",0.00000000300459613215394,"wing",TRUE
+"neck","enteric",0.00000000422132193987006,"wing",TRUE
+"thoracic-abdominal","antenna",0.00000000450804491290162,"wing",TRUE
+"proboscis","front leg",0.0000000458329152152848,"wing",TRUE
+"reproductive","hemolymph",0.000000375603713920129,"wing",TRUE
+"thoracic-abdominal","abdomen",0.000000680994324170046,"wing",TRUE
+"enteric","body chordotonal",0.00000149564667251784,"wing",TRUE
+"thorax","hemolymph",0.00000365694917493367,"wing",TRUE
+"thoracic-abdominal","eye",0.0000115613492878686,"wing",TRUE
+"hind leg","hemolymph",0.0000413853868971418,"wing",TRUE
+"reproductive","proboscis",0.000137297608679837,"wing",TRUE
+"reproductive","body chordotonal",0.00019605915975444,"wing",TRUE
+"enteric","antenna",0.000197259130978557,"wing",TRUE
+"thoracic-abdominal","hemolymph",0.000402593122389025,"wing",TRUE
+"wing","haltere",0.000459897864417598,"wing",TRUE
+"pharynx","abdomen",0.000469846764719536,"wing",TRUE
+"thorax","neck",0.00126579108873165,"wing",TRUE
+"thoracic-abdominal","haltere",0.00137905355989454,"wing",TRUE
+"enteric","abdomen",0.00747478903191259,"wing",TRUE
+"front leg","enteric",0.008768848904253,"wing",TRUE
+"pharynx","enteric",0.00898034859206505,"wing",TRUE
+"neck","antenna",0.0122144670037335,"wing",TRUE
+"pharynx","antenna",0.0146975996621052,"wing",TRUE
+"pharynx","front leg",0.0270932520573959,"wing",TRUE
+"hemolymph","enteric",0.0287607211517118,"wing",TRUE
+"thoracic-abdominal","middle leg",0.0404895567710936,"wing",TRUE
+"wing","thorax",0.0455973135917968,"wing",TRUE
+"neck","front leg",0.0521796960734327,"wing",FALSE
+"neck","hemolymph",0.0521796960734327,"wing",FALSE
+"proboscis","hemolymph",0.0692424795573982,"wing",FALSE
+"thoracic-abdominal","hind leg",0.0692424795573982,"wing",FALSE
+"middle leg","hemolymph",0.0871099733165298,"wing",FALSE
+"proboscis","pharynx",0.0943681727600105,"wing",FALSE
+"reproductive","enteric",0.166340574503959,"wing",FALSE
+"thoracic-abdominal","neck",0.166340574503959,"wing",FALSE
+"pharynx","hemolymph",0.176168002990357,"wing",FALSE
+"neck","hind leg",0.422085807407726,"wing",FALSE
+"neck","abdomen",0.713525421857655,"wing",FALSE
+"front leg","abdomen",0.833702934772921,"wing",FALSE
+"antenna","abdomen",1,"wing",FALSE
+"hemolymph","abdomen",1,"wing",FALSE
+"front leg","antenna",1,"wing",FALSE
+"hemolymph","antenna",1,"wing",FALSE
+"head","body chordotonal",1,"wing",FALSE
+"proboscis","enteric",1,"wing",FALSE
+"haltere","eye",1,"wing",FALSE
+"thorax","eye",1,"wing",FALSE
+"wing","eye",1,"wing",FALSE
+"hemolymph","front leg",1,"wing",FALSE
+"thorax","haltere",1,"wing",FALSE
+"middle leg","hind leg",1,"wing",FALSE
+"neck","middle leg",1,"wing",FALSE
+"thorax","thoracic-abdominal",1,"wing",FALSE
+"hind leg","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000012448582300976,"haltere",TRUE
+"wing","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000136219926759104,"haltere",TRUE
+"middle leg","head",0.0000000000000000000000000000000000000000000000000000000000000000933497620792067,"haltere",TRUE
+"head","antenna",0.00000000000000000000000000000000176708953547599,"haltere",TRUE
+"wing","proboscis",0.000000000000000000000000000000991297995689838,"haltere",TRUE
+"head","front leg",0.000000000000000000000000000426393491379901,"haltere",TRUE
+"wing","pharynx",0.00000000000000000000000000172018019906371,"haltere",TRUE
+"wing","antenna",0.0000000000000000000000000174375764335313,"haltere",TRUE
+"wing","reproductive",0.0000000000000000000000000249519397266395,"haltere",TRUE
+"head","haltere",0.00000000000000000000000113650424478589,"haltere",TRUE
+"wing","abdomen",0.0000000000000000000000301976545522683,"haltere",TRUE
+"wing","front leg",0.0000000000000000000000757619411203288,"haltere",TRUE
+"proboscis","head",0.00000000000000000000115719599393574,"haltere",TRUE
+"pharynx","head",0.0000000000000000000152556852140667,"haltere",TRUE
+"wing","body chordotonal",0.0000000000000000000355162003169086,"haltere",TRUE
+"wing","thoracic-abdominal",0.000000000000000000173647810337793,"haltere",TRUE
+"haltere","front leg",0.000000000000000000594265082682665,"haltere",TRUE
+"reproductive","hind leg",0.00000000000000000928927919667525,"haltere",TRUE
+"wing","enteric",0.0000000000000000256592729504712,"haltere",TRUE
+"proboscis","hind leg",0.000000000000000269478349274979,"haltere",TRUE
+"hind leg","body chordotonal",0.000000000000000337488340364247,"haltere",TRUE
+"pharynx","hind leg",0.00000000000000302435957715356,"haltere",TRUE
+"haltere","antenna",0.00000000000000479207077515569,"haltere",TRUE
+"middle leg","haltere",0.0000000000000109538232938978,"haltere",TRUE
+"wing","hemolymph",0.0000000000000383113709133546,"haltere",TRUE
+"neck","head",0.0000000000000480413586777723,"haltere",TRUE
+"haltere","abdomen",0.0000000000000922058625717763,"haltere",TRUE
+"reproductive","middle leg",0.000000000000146570524935981,"haltere",TRUE
+"hind leg","haltere",0.000000000000165619745686431,"haltere",TRUE
+"middle leg","body chordotonal",0.000000000000416188635849035,"haltere",TRUE
+"reproductive","haltere",0.000000000000455571865399919,"haltere",TRUE
+"proboscis","haltere",0.000000000000889837495091362,"haltere",TRUE
+"head","eye",0.00000000000102240564402359,"haltere",TRUE
+"hind leg","enteric",0.00000000000346671860165366,"haltere",TRUE
+"haltere","body chordotonal",0.00000000000450450704909656,"haltere",TRUE
+"thoracic-abdominal","hind leg",0.00000000000550799556298531,"haltere",TRUE
+"hind leg","abdomen",0.00000000000681008297632043,"haltere",TRUE
+"wing","middle leg",0.00000000000705910086211664,"haltere",TRUE
+"pharynx","haltere",0.0000000000167868292221294,"haltere",TRUE
+"head","abdomen",0.00000000001701617520085,"haltere",TRUE
+"proboscis","middle leg",0.0000000000811606108098932,"haltere",TRUE
+"middle leg","enteric",0.000000000290775797243508,"haltere",TRUE
+"proboscis","eye",0.000000000353577024492778,"haltere",TRUE
+"hind leg","antenna",0.000000000609269353222367,"haltere",TRUE
+"pharynx","eye",0.000000000674490301957989,"haltere",TRUE
+"wing","hind leg",0.000000000674530572513151,"haltere",TRUE
+"pharynx","middle leg",0.00000000184639260305123,"haltere",TRUE
+"eye","abdomen",0.0000000020111031067957,"haltere",TRUE
+"reproductive","eye",0.00000000235915106193365,"haltere",TRUE
+"body chordotonal","antenna",0.00000000317719969817606,"haltere",TRUE
+"eye","body chordotonal",0.00000000391029965495856,"haltere",TRUE
+"thoracic-abdominal","middle leg",0.00000000412231950175167,"haltere",TRUE
+"wing","neck",0.00000000806733058820733,"haltere",TRUE
+"eye","antenna",0.0000000124711963720931,"haltere",TRUE
+"hind leg","hemolymph",0.0000000124711963720931,"haltere",TRUE
+"thoracic-abdominal","haltere",0.0000000228467835166319,"haltere",TRUE
+"thoracic-abdominal","eye",0.0000000259001293129938,"haltere",TRUE
+"front leg","body chordotonal",0.0000000380428924849236,"haltere",TRUE
+"eye","enteric",0.000000137282292399311,"haltere",TRUE
+"thorax","body chordotonal",0.000000140247543677167,"haltere",TRUE
+"middle leg","abdomen",0.000000146702889119535,"haltere",TRUE
+"haltere","enteric",0.000000171483744460382,"haltere",TRUE
+"hemolymph","haltere",0.000000215084937636764,"haltere",TRUE
+"pharynx","enteric",0.000000589148094834814,"haltere",TRUE
+"hemolymph","eye",0.000000591888093360605,"haltere",TRUE
+"front leg","eye",0.000000622842500978318,"haltere",TRUE
+"neck","body chordotonal",0.000000772573873359417,"haltere",TRUE
+"reproductive","antenna",0.000000886951874163434,"haltere",TRUE
+"enteric","antenna",0.000000982995314074318,"haltere",TRUE
+"hind leg","front leg",0.00000150673496363131,"haltere",TRUE
+"middle leg","hemolymph",0.00000155282563015146,"haltere",TRUE
+"thorax","head",0.00000173088663953398,"haltere",TRUE
+"proboscis","body chordotonal",0.00000201438104827804,"haltere",TRUE
+"thorax","haltere",0.00000385629192387113,"haltere",TRUE
+"wing","haltere",0.00000385629192387113,"haltere",TRUE
+"pharynx","body chordotonal",0.00000773824583193664,"haltere",TRUE
+"proboscis","enteric",0.00000802322826146549,"haltere",TRUE
+"neck","enteric",0.0000156676762334983,"haltere",TRUE
+"neck","haltere",0.0000177341319020311,"haltere",TRUE
+"neck","eye",0.000023189461121328,"haltere",TRUE
+"middle leg","antenna",0.000030381649915752,"haltere",TRUE
+"reproductive","front leg",0.000030381649915752,"haltere",TRUE
+"reproductive","neck",0.0000453042201157875,"haltere",TRUE
+"middle leg","eye",0.0000706761524488251,"haltere",TRUE
+"hind leg","eye",0.0000994193307120712,"haltere",TRUE
+"thorax","reproductive",0.000182197994951249,"haltere",TRUE
+"reproductive","pharynx",0.00034898571717642,"haltere",TRUE
+"front leg","enteric",0.000495619548579565,"haltere",TRUE
+"reproductive","proboscis",0.00107432619147358,"haltere",TRUE
+"thoracic-abdominal","antenna",0.00196279226690472,"haltere",TRUE
+"middle leg","front leg",0.00285459863002722,"haltere",TRUE
+"enteric","abdomen",0.00393228314826576,"haltere",TRUE
+"hemolymph","antenna",0.00462043250592321,"haltere",TRUE
+"thorax","abdomen",0.00596839323748499,"haltere",TRUE
+"thoracic-abdominal","head",0.00596839323748499,"haltere",TRUE
+"thoracic-abdominal","body chordotonal",0.00750382704820746,"haltere",TRUE
+"thoracic-abdominal","front leg",0.0114725346408382,"haltere",TRUE
+"thoracic-abdominal","neck",0.0121672016115847,"haltere",TRUE
+"front leg","abdomen",0.019667309872834,"haltere",TRUE
+"body chordotonal","abdomen",0.0200132823402733,"haltere",TRUE
+"neck","hemolymph",0.024579235682869,"haltere",TRUE
+"thoracic-abdominal","pharynx",0.0323536323072672,"haltere",TRUE
+"proboscis","front leg",0.0386066605555112,"haltere",TRUE
+"neck","hind leg",0.0403082017813055,"haltere",TRUE
+"proboscis","hemolymph",0.0443115260880938,"haltere",TRUE
+"pharynx","hemolymph",0.0502427505338436,"haltere",FALSE
+"thorax","front leg",0.0548722462655059,"haltere",FALSE
+"thoracic-abdominal","proboscis",0.0597931066790592,"haltere",FALSE
+"hemolymph","body chordotonal",0.0653974750177177,"haltere",FALSE
+"hemolymph","front leg",0.0664282835517549,"haltere",FALSE
+"thorax","enteric",0.0670921343131155,"haltere",FALSE
+"pharynx","front leg",0.0679849756445182,"haltere",FALSE
+"thorax","hemolymph",0.0679849756445182,"haltere",FALSE
+"thorax","proboscis",0.0923334218952965,"haltere",FALSE
+"reproductive","body chordotonal",0.102944785669414,"haltere",FALSE
+"thorax","pharynx",0.120921039496724,"haltere",FALSE
+"wing","thorax",0.151827483028927,"haltere",FALSE
+"reproductive","abdomen",0.220030993789646,"haltere",FALSE
+"thorax","eye",0.220030993789646,"haltere",FALSE
+"thorax","thoracic-abdominal",0.220030993789646,"haltere",FALSE
+"thorax","antenna",0.240512335450719,"haltere",FALSE
+"head","body chordotonal",0.256948722567033,"haltere",FALSE
+"pharynx","antenna",0.265957804218463,"haltere",FALSE
+"proboscis","antenna",0.279113320686106,"haltere",FALSE
+"thoracic-abdominal","abdomen",0.303196809120121,"haltere",FALSE
+"hemolymph","abdomen",0.393132375146898,"haltere",FALSE
+"thoracic-abdominal","enteric",0.393132375146898,"haltere",FALSE
+"proboscis","neck",0.404391913449331,"haltere",FALSE
+"neck","middle leg",0.4243012010312,"haltere",FALSE
+"pharynx","neck",0.458713818992753,"haltere",FALSE
+"wing","eye",0.551084059904408,"haltere",FALSE
+"enteric","body chordotonal",0.554016038167009,"haltere",FALSE
+"antenna","abdomen",0.593560690744012,"haltere",FALSE
+"neck","abdomen",1,"haltere",FALSE
+"pharynx","abdomen",1,"haltere",FALSE
+"proboscis","abdomen",1,"haltere",FALSE
+"front leg","antenna",1,"haltere",FALSE
+"neck","antenna",1,"haltere",FALSE
+"head","enteric",1,"haltere",FALSE
+"hemolymph","enteric",1,"haltere",FALSE
+"reproductive","enteric",1,"haltere",FALSE
+"haltere","eye",1,"haltere",FALSE
+"neck","front leg",1,"haltere",FALSE
+"hemolymph","head",1,"haltere",FALSE
+"reproductive","head",1,"haltere",FALSE
+"reproductive","hemolymph",1,"haltere",FALSE
+"thoracic-abdominal","hemolymph",1,"haltere",FALSE
+"middle leg","hind leg",1,"haltere",FALSE
+"thorax","hind leg",1,"haltere",FALSE
+"thorax","middle leg",1,"haltere",FALSE
+"thorax","neck",1,"haltere",FALSE
+"proboscis","pharynx",1,"haltere",FALSE
+"thoracic-abdominal","reproductive",1,"haltere",FALSE
+"head","front leg",0,"front leg",TRUE
+"hind leg","head",0,"front leg",TRUE
+"middle leg","head",0,"front leg",TRUE
+"proboscis","head",0,"front leg",TRUE
+"pharynx","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000391324597645776,"front leg",TRUE
+"hind leg","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000134229482859877,"front leg",TRUE
+"front leg","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000323425623056432,"front leg",TRUE
+"middle leg","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000154921500195293,"front leg",TRUE
+"thoracic-abdominal","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000223859992793503,"front leg",TRUE
+"proboscis","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000052342703581772,"front leg",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000262762731582928,"front leg",TRUE
+"reproductive","hind leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000662059604902915,"front leg",TRUE
+"wing","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000211709825956578,"front leg",TRUE
+"thoracic-abdominal","pharynx",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000493736607487146,"front leg",TRUE
+"hind leg","haltere",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000450994042288683,"front leg",TRUE
+"reproductive","proboscis",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000162545223085971,"front leg",TRUE
+"hind leg","front leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000035755152041239,"front leg",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000460749218330447,"front leg",TRUE
+"haltere","front leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000479834870120594,"front leg",TRUE
+"wing","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000273887303239075,"front leg",TRUE
+"proboscis","haltere",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000129328482397617,"front leg",TRUE
+"front leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000907831236468029,"front leg",TRUE
+"reproductive","middle leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400718622967997,"front leg",TRUE
+"middle leg","haltere",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000411778025322429,"front leg",TRUE
+"reproductive","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000594549549393406,"front leg",TRUE
+"proboscis","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000175586225632788,"front leg",TRUE
+"thoracic-abdominal","neck",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000761461752290709,"front leg",TRUE
+"hind leg","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000357936936781446,"front leg",TRUE
+"neck","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000812809138494791,"front leg",TRUE
+"thoracic-abdominal","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000627362952048906,"front leg",TRUE
+"proboscis","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000103485837669268,"front leg",TRUE
+"proboscis","hemolymph",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000023914580915761,"front leg",TRUE
+"reproductive","pharynx",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000863935858268458,"front leg",TRUE
+"hind leg","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000407887134183653,"front leg",TRUE
+"wing","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000906415667690642,"front leg",TRUE
+"front leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000247036167583006,"front leg",TRUE
+"pharynx","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000342840962079577,"front leg",TRUE
+"middle leg","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000891199392089761,"front leg",TRUE
+"middle leg","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000056854795875573,"front leg",TRUE
+"wing","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000951603800046695,"front leg",TRUE
+"wing","thoracic-abdominal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000110527977239495,"front leg",TRUE
+"hind leg","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000289727022812238,"front leg",TRUE
+"hind leg","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000158845322849297,"front leg",TRUE
+"pharynx","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000477116218651226,"front leg",TRUE
+"pharynx","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000324170820006741,"front leg",TRUE
+"middle leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000295944317962326,"front leg",TRUE
+"pharynx","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000109549731674884,"front leg",TRUE
+"pharynx","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000603846355967839,"front leg",TRUE
+"pharynx","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000558909811134211,"front leg",TRUE
+"proboscis","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000102522538840146,"front leg",TRUE
+"wing","proboscis",0.0000000000000000000000000000000000000000000000000000000000000000000000000000329951294871735,"front leg",TRUE
+"head","eye",0.0000000000000000000000000000000000000000000000000000000000000000000000000000439066532214378,"front leg",TRUE
+"thoracic-abdominal","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000000598929301969766,"front leg",TRUE
+"middle leg","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000000000927251194136003,"front leg",TRUE
+"middle leg","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000147032417849539,"front leg",TRUE
+"thorax","front leg",0.00000000000000000000000000000000000000000000000000000000000000000012295094737015,"front leg",TRUE
+"eye","antenna",0.0000000000000000000000000000000000000000000000000000000000000000232678803545354,"front leg",TRUE
+"hemolymph","front leg",0.000000000000000000000000000000000000000000000000000000000000000567523029025625,"front leg",TRUE
+"reproductive","eye",0.00000000000000000000000000000000000000000000000000000000000000700038013393242,"front leg",TRUE
+"thoracic-abdominal","eye",0.0000000000000000000000000000000000000000000000000000000000000352212646303778,"front leg",TRUE
+"front leg","enteric",0.00000000000000000000000000000000000000000000000000000000000195783583018831,"front leg",TRUE
+"haltere","eye",0.000000000000000000000000000000000000000000000000000000000128153982563393,"front leg",TRUE
+"proboscis","front leg",0.000000000000000000000000000000000000000000000000000000000183393125630336,"front leg",TRUE
+"eye","enteric",0.000000000000000000000000000000000000000000000000000000155354159307895,"front leg",TRUE
+"eye","body chordotonal",0.000000000000000000000000000000000000000000000000000000192205138566041,"front leg",TRUE
+"neck","front leg",0.000000000000000000000000000000000000000000000000000000280276842095142,"front leg",TRUE
+"head","antenna",0.00000000000000000000000000000000000000000000000000000486807520222931,"front leg",TRUE
+"hemolymph","eye",0.0000000000000000000000000000000000000000000000000000126307589654786,"front leg",TRUE
+"eye","abdomen",0.0000000000000000000000000000000000000000000000000000503666328442059,"front leg",TRUE
+"thorax","thoracic-abdominal",0.0000000000000000000000000000000000000000000000000855319646740855,"front leg",TRUE
+"reproductive","neck",0.000000000000000000000000000000000000000000000000972888086601927,"front leg",TRUE
+"thoracic-abdominal","abdomen",0.00000000000000000000000000000000000000000000000103360038149111,"front leg",TRUE
+"head","abdomen",0.0000000000000000000000000000000000000000000000168517623947046,"front leg",TRUE
+"neck","enteric",0.0000000000000000000000000000000000000000000000185523677517543,"front leg",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000000000000000000000000000000208103525297003,"front leg",TRUE
+"wing","eye",0.0000000000000000000000000000000000000000000000330280554070404,"front leg",TRUE
+"thorax","proboscis",0.00000000000000000000000000000000000000000000586498484662973,"front leg",TRUE
+"wing","body chordotonal",0.0000000000000000000000000000000000000000000224774274563329,"front leg",TRUE
+"thorax","head",0.000000000000000000000000000000000000000000295528540110768,"front leg",TRUE
+"thorax","middle leg",0.000000000000000000000000000000000000000000660713719617467,"front leg",TRUE
+"neck","body chordotonal",0.0000000000000000000000000000000000000000271606419238487,"front leg",TRUE
+"thoracic-abdominal","haltere",0.000000000000000000000000000000000000000183789659245183,"front leg",TRUE
+"thorax","hind leg",0.000000000000000000000000000000000000000684263566366467,"front leg",TRUE
+"neck","hemolymph",0.00000000000000000000000000000000000000228802899343327,"front leg",TRUE
+"pharynx","eye",0.00000000000000000000000000000000000000425655936254289,"front leg",TRUE
+"wing","reproductive",0.0000000000000000000000000000000000018103798784308,"front leg",TRUE
+"thorax","eye",0.00000000000000000000000000000000000186237347728769,"front leg",TRUE
+"proboscis","neck",0.000000000000000000000000000000000241345134956674,"front leg",TRUE
+"neck","eye",0.000000000000000000000000000000000467272594234339,"front leg",TRUE
+"neck","haltere",0.000000000000000000000000000000129639615847982,"front leg",TRUE
+"pharynx","abdomen",0.000000000000000000000000000000792002860411491,"front leg",TRUE
+"body chordotonal","antenna",0.00000000000000000000000000000369303141154287,"front leg",TRUE
+"neck","hind leg",0.000000000000000000000000000239865344164559,"front leg",TRUE
+"wing","pharynx",0.00000000000000000000000000153755336461236,"front leg",TRUE
+"neck","middle leg",0.00000000000000000000000000568415312056609,"front leg",TRUE
+"pharynx","hind leg",0.0000000000000000000000000253827002282317,"front leg",TRUE
+"wing","hemolymph",0.0000000000000000000000000302246888473365,"front leg",TRUE
+"pharynx","middle leg",0.00000000000000000000004327360432751,"front leg",TRUE
+"thorax","body chordotonal",0.0000000000000000000000510208106598167,"front leg",TRUE
+"thoracic-abdominal","reproductive",0.0000000000000000000000536736254659114,"front leg",TRUE
+"wing","haltere",0.000000000000000000000946519588328305,"front leg",TRUE
+"proboscis","pharynx",0.00000000000000000000163611772968858,"front leg",TRUE
+"thorax","pharynx",0.00000000000000000000275580332723024,"front leg",TRUE
+"head","enteric",0.0000000000000000000077008865685836,"front leg",TRUE
+"neck","antenna",0.0000000000000000000229787500140212,"front leg",TRUE
+"hind leg","eye",0.000000000000000000830454685775238,"front leg",TRUE
+"head","haltere",0.00000000000000000352784633601825,"front leg",TRUE
+"wing","enteric",0.00000000000000000365201126875263,"front leg",TRUE
+"wing","antenna",0.000000000000000217619223152885,"front leg",TRUE
+"body chordotonal","abdomen",0.000000000000000520339219189693,"front leg",TRUE
+"proboscis","eye",0.000000000000000760250561825256,"front leg",TRUE
+"haltere","body chordotonal",0.00000000000000290597849905512,"front leg",TRUE
+"hemolymph","abdomen",0.000000000000102341191007114,"front leg",TRUE
+"thorax","reproductive",0.000000000000225917614842014,"front leg",TRUE
+"reproductive","abdomen",0.00000000000023204962280609,"front leg",TRUE
+"enteric","abdomen",0.00000000000179721993906294,"front leg",TRUE
+"thoracic-abdominal","hemolymph",0.00000000000683401131645244,"front leg",TRUE
+"thorax","hemolymph",0.00000000000703394655069484,"front leg",TRUE
+"reproductive","antenna",0.0000000000480157866240796,"front leg",TRUE
+"pharynx","neck",0.000000000170473419674105,"front leg",TRUE
+"reproductive","body chordotonal",0.0000000025663615263085,"front leg",TRUE
+"hemolymph","antenna",0.000000119222597526079,"front leg",TRUE
+"thorax","neck",0.000000187560520234694,"front leg",TRUE
+"thoracic-abdominal","head",0.000000749053329775575,"front leg",TRUE
+"head","body chordotonal",0.000000953610445378975,"front leg",TRUE
+"middle leg","hind leg",0.00000124055296745063,"front leg",TRUE
+"haltere","abdomen",0.00000237178098110191,"front leg",TRUE
+"middle leg","eye",0.00000271558854241785,"front leg",TRUE
+"hemolymph","body chordotonal",0.00000602740221704061,"front leg",TRUE
+"enteric","antenna",0.0000189853705874839,"front leg",TRUE
+"thorax","haltere",0.000032545029923914,"front leg",TRUE
+"front leg","eye",0.0000329486968579995,"front leg",TRUE
+"haltere","antenna",0.000100656888933666,"front leg",TRUE
+"reproductive","enteric",0.000132203051955503,"front leg",TRUE
+"neck","abdomen",0.000233501635860537,"front leg",TRUE
+"enteric","body chordotonal",0.000320921587522352,"front leg",TRUE
+"thorax","enteric",0.000344484030201517,"front leg",TRUE
+"hemolymph","head",0.000570277232427858,"front leg",TRUE
+"wing","neck",0.00266051477514858,"front leg",TRUE
+"thorax","antenna",0.00319800297192791,"front leg",TRUE
+"reproductive","head",0.00361184498788939,"front leg",TRUE
+"antenna","abdomen",0.00766062449709764,"front leg",TRUE
+"hemolymph","enteric",0.01666770667026,"front leg",TRUE
+"hemolymph","haltere",0.01666770667026,"front leg",TRUE
+"reproductive","haltere",0.01666770667026,"front leg",TRUE
+"wing","abdomen",0.0396562901421511,"front leg",TRUE
+"proboscis","middle leg",0.21580276729904,"front leg",FALSE
+"wing","thorax",0.25870418761784,"front leg",FALSE
+"haltere","enteric",0.437936567328132,"front leg",FALSE
+"thorax","abdomen",1,"front leg",FALSE
+"thoracic-abdominal","body chordotonal",1,"front leg",FALSE
+"reproductive","hemolymph",1,"front leg",FALSE
+"proboscis","hind leg",1,"front leg",FALSE
+"hind leg","antenna",0,"middle leg",TRUE
+"middle leg","antenna",0,"middle leg",TRUE
+"hind leg","head",0,"middle leg",TRUE
+"middle leg","head",0,"middle leg",TRUE
+"wing","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000525366644901383,"middle leg",TRUE
+"head","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000017969145653652,"middle leg",TRUE
+"proboscis","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000195646077462374,"middle leg",TRUE
+"wing","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000710819106821265,"middle leg",TRUE
+"pharynx","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000467044193571887,"middle leg",TRUE
+"middle leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000635244436182936,"middle leg",TRUE
+"middle leg","haltere",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000712288601026819,"middle leg",TRUE
+"proboscis","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000086794021599726,"middle leg",TRUE
+"middle leg","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000175221902870517,"middle leg",TRUE
+"pharynx","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000152707659759087,"middle leg",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000224751664195344,"middle leg",TRUE
+"pharynx","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000163840517406279,"middle leg",TRUE
+"reproductive","middle leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000268179850790472,"middle leg",TRUE
+"hind leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000108907648425433,"middle leg",TRUE
+"hind leg","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186955945502618,"middle leg",TRUE
+"thoracic-abdominal","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000564251556146383,"middle leg",TRUE
+"middle leg","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000570864722577585,"middle leg",TRUE
+"reproductive","hind leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000248022396374343,"middle leg",TRUE
+"wing","hind leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000987009636954373,"middle leg",TRUE
+"neck","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000109272410864574,"middle leg",TRUE
+"wing","thoracic-abdominal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000648366635087725,"middle leg",TRUE
+"thoracic-abdominal","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000333636211988235,"middle leg",TRUE
+"thoracic-abdominal","pharynx",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000104356766686848,"middle leg",TRUE
+"proboscis","hind leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000915283599665715,"middle leg",TRUE
+"neck","middle leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000471273773644014,"middle leg",TRUE
+"middle leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016428911366723,"middle leg",TRUE
+"hind leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000947006866660895,"middle leg",TRUE
+"hind leg","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000202884220993822,"middle leg",TRUE
+"hind leg","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000047973480531375,"middle leg",TRUE
+"thoracic-abdominal","neck",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000306184535536572,"middle leg",TRUE
+"front leg","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001835140069028,"middle leg",TRUE
+"middle leg","hemolymph",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000510453068156197,"middle leg",TRUE
+"middle leg","enteric",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000870978835809683,"middle leg",TRUE
+"thorax","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000387678471772761,"middle leg",TRUE
+"head","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000873017528272563,"middle leg",TRUE
+"proboscis","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011765446665548,"middle leg",TRUE
+"thoracic-abdominal","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000106132904868915,"middle leg",TRUE
+"neck","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000459128493577078,"middle leg",TRUE
+"pharynx","enteric",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000292928895927972,"middle leg",TRUE
+"thorax","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000692594527934144,"middle leg",TRUE
+"head","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000342728503840598,"middle leg",TRUE
+"neck","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000835906018123523,"middle leg",TRUE
+"head","abdomen",0.0000000000000000000000000000000000000000000000000000000000000000000108893705489172,"middle leg",TRUE
+"head","eye",0.0000000000000000000000000000000000000000000000000000000000000000000288228686193638,"middle leg",TRUE
+"proboscis","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000394880779431866,"middle leg",TRUE
+"front leg","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000739290211481603,"middle leg",TRUE
+"wing","enteric",0.000000000000000000000000000000000000000000000000000000000000000009945791642856,"middle leg",TRUE
+"reproductive","front leg",0.0000000000000000000000000000000000000000000000000000000000000205982941899054,"middle leg",TRUE
+"thorax","thoracic-abdominal",0.000000000000000000000000000000000000000000000000000000000000694955219030555,"middle leg",TRUE
+"thoracic-abdominal","enteric",0.00000000000000000000000000000000000000000000000000000000026277604135078,"middle leg",TRUE
+"wing","hemolymph",0.000000000000000000000000000000000000000000000000000000000532089949671569,"middle leg",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000000000000000000000000000000000000000006659925908971,"middle leg",TRUE
+"thoracic-abdominal","eye",0.0000000000000000000000000000000000000000000000000000000021669771549296,"middle leg",TRUE
+"neck","hemolymph",0.0000000000000000000000000000000000000000000000000000000100266719466702,"middle leg",TRUE
+"pharynx","hemolymph",0.0000000000000000000000000000000000000000000000000000000202414446222254,"middle leg",TRUE
+"reproductive","proboscis",0.0000000000000000000000000000000000000000000000000000000269388802638291,"middle leg",TRUE
+"front leg","abdomen",0.000000000000000000000000000000000000000000000000000000207473782104491,"middle leg",TRUE
+"proboscis","antenna",0.0000000000000000000000000000000000000000000000000000379007283108017,"middle leg",TRUE
+"haltere","front leg",0.0000000000000000000000000000000000000000000000000000434390303137475,"middle leg",TRUE
+"front leg","enteric",0.000000000000000000000000000000000000000000000000000127135910759811,"middle leg",TRUE
+"pharynx","front leg",0.000000000000000000000000000000000000000000000000000507661000044653,"middle leg",TRUE
+"thoracic-abdominal","haltere",0.00000000000000000000000000000000000000000000000000513115157883676,"middle leg",TRUE
+"eye","enteric",0.000000000000000000000000000000000000000000000000466226541044864,"middle leg",TRUE
+"wing","body chordotonal",0.00000000000000000000000000000000000000000000000225444458534938,"middle leg",TRUE
+"wing","antenna",0.00000000000000000000000000000000000000000000000522129315751275,"middle leg",TRUE
+"thoracic-abdominal","abdomen",0.00000000000000000000000000000000000000000000000609030182358957,"middle leg",TRUE
+"proboscis","body chordotonal",0.00000000000000000000000000000000000000000000000609030182358957,"middle leg",TRUE
+"thorax","hind leg",0.0000000000000000000000000000000000000000000000114195462154034,"middle leg",TRUE
+"hemolymph","front leg",0.000000000000000000000000000000000000000000000021527207668901,"middle leg",TRUE
+"hemolymph","eye",0.0000000000000000000000000000000000000000000334808694985379,"middle leg",TRUE
+"wing","reproductive",0.000000000000000000000000000000000000000000176538498047816,"middle leg",TRUE
+"eye","body chordotonal",0.0000000000000000000000000000000000000000973370080479588,"middle leg",TRUE
+"middle leg","eye",0.000000000000000000000000000000000000000412768591362007,"middle leg",TRUE
+"neck","body chordotonal",0.00000000000000000000000000000000000000190877391048997,"middle leg",TRUE
+"eye","antenna",0.00000000000000000000000000000000000000580870029898773,"middle leg",TRUE
+"reproductive","neck",0.0000000000000000000000000000000000000166774463479882,"middle leg",TRUE
+"pharynx","eye",0.0000000000000000000000000000000000010908368575535,"middle leg",TRUE
+"thorax","body chordotonal",0.0000000000000000000000000000000000967630591994715,"middle leg",TRUE
+"reproductive","pharynx",0.00000000000000000000000000000000288760469247661,"middle leg",TRUE
+"thorax","hemolymph",0.00000000000000000000000000000000726530937627647,"middle leg",TRUE
+"reproductive","eye",0.0000000000000000000000000000000279681444767446,"middle leg",TRUE
+"hind leg","front leg",0.0000000000000000000000000000000429820882066334,"middle leg",TRUE
+"haltere","enteric",0.000000000000000000000000000000124249459845461,"middle leg",TRUE
+"pharynx","body chordotonal",0.00000000000000000000000000000198085576475255,"middle leg",TRUE
+"neck","antenna",0.0000000000000000000000000000026208916744672,"middle leg",TRUE
+"wing","front leg",0.00000000000000000000000000080772416351611,"middle leg",TRUE
+"thoracic-abdominal","reproductive",0.00000000000000000000000000159987781102686,"middle leg",TRUE
+"enteric","abdomen",0.00000000000000000000000000167744042277103,"middle leg",TRUE
+"eye","abdomen",0.000000000000000000000125066514778132,"middle leg",TRUE
+"haltere","eye",0.000000000000000000000160715792658374,"middle leg",TRUE
+"proboscis","front leg",0.000000000000000000000279145631358554,"middle leg",TRUE
+"haltere","body chordotonal",0.00000000000000000000233684480309369,"middle leg",TRUE
+"thorax","antenna",0.0000000000000000000444277455123938,"middle leg",TRUE
+"thorax","enteric",0.000000000000000000216806354746994,"middle leg",TRUE
+"thorax","reproductive",0.000000000000000000657536254811257,"middle leg",TRUE
+"body chordotonal","antenna",0.000000000000000000786451013674925,"middle leg",TRUE
+"hemolymph","haltere",0.0000000000000000011547959088176,"middle leg",TRUE
+"neck","front leg",0.0000000000000000622167237196501,"middle leg",TRUE
+"reproductive","head",0.0000000000000000819185224749165,"middle leg",TRUE
+"hind leg","eye",0.000000000000000110731721736953,"middle leg",TRUE
+"enteric","antenna",0.000000000000000280777342393493,"middle leg",TRUE
+"hemolymph","abdomen",0.00000000000000480530474908899,"middle leg",TRUE
+"proboscis","pharynx",0.0000000000000050353439114973,"middle leg",TRUE
+"neck","eye",0.0000000000000703729985493071,"middle leg",TRUE
+"pharynx","antenna",0.000000000000190751859681254,"middle leg",TRUE
+"hemolymph","antenna",0.000000000000497842334591278,"middle leg",TRUE
+"body chordotonal","abdomen",0.00000000000396615556895132,"middle leg",TRUE
+"proboscis","haltere",0.000000000004386862184903,"middle leg",TRUE
+"proboscis","abdomen",0.00000000000876075288328299,"middle leg",TRUE
+"proboscis","eye",0.0000000000133491402650698,"middle leg",TRUE
+"head","enteric",0.000000000025653065376921,"middle leg",TRUE
+"wing","pharynx",0.0000000000298447970042011,"middle leg",TRUE
+"pharynx","neck",0.0000000000558629450087331,"middle leg",TRUE
+"reproductive","haltere",0.000000000556454761204836,"middle leg",TRUE
+"wing","eye",0.000000000659366582991327,"middle leg",TRUE
+"wing","haltere",0.000000000878704833066355,"middle leg",TRUE
+"thoracic-abdominal","head",0.0000000105531954189043,"middle leg",TRUE
+"wing","abdomen",0.000000028572968230952,"middle leg",TRUE
+"thorax","haltere",0.0000000545635639594233,"middle leg",TRUE
+"thorax","abdomen",0.000000134227991361522,"middle leg",TRUE
+"thorax","front leg",0.000000207574688043537,"middle leg",TRUE
+"reproductive","abdomen",0.000000369474252406896,"middle leg",TRUE
+"reproductive","body chordotonal",0.00000043051210690595,"middle leg",TRUE
+"neck","haltere",0.000000736659015971553,"middle leg",TRUE
+"thorax","pharynx",0.00000221540518900318,"middle leg",TRUE
+"reproductive","enteric",0.0000122069964764005,"middle leg",TRUE
+"neck","abdomen",0.0000234870646341554,"middle leg",TRUE
+"reproductive","antenna",0.0000512051314095374,"middle leg",TRUE
+"haltere","antenna",0.000146296959362832,"middle leg",TRUE
+"antenna","abdomen",0.000331333858621748,"middle leg",TRUE
+"hemolymph","head",0.00335636194273511,"middle leg",TRUE
+"thoracic-abdominal","hemolymph",0.00426458834629904,"middle leg",TRUE
+"thorax","eye",0.00474193864387035,"middle leg",TRUE
+"hemolymph","body chordotonal",0.145963325232075,"middle leg",FALSE
+"head","body chordotonal",0.394481819174982,"middle leg",FALSE
+"haltere","abdomen",1,"middle leg",FALSE
+"pharynx","abdomen",1,"middle leg",FALSE
+"enteric","body chordotonal",1,"middle leg",FALSE
+"thoracic-abdominal","body chordotonal",1,"middle leg",FALSE
+"hemolymph","enteric",1,"middle leg",FALSE
+"front leg","eye",1,"middle leg",FALSE
+"pharynx","haltere",1,"middle leg",FALSE
+"reproductive","hemolymph",1,"middle leg",FALSE
+"proboscis","neck",1,"middle leg",FALSE
+"thorax","neck",1,"middle leg",FALSE
+"wing","neck",1,"middle leg",FALSE
+"thorax","proboscis",1,"middle leg",FALSE
+"wing","proboscis",1,"middle leg",FALSE
+"wing","thorax",1,"middle leg",FALSE
+"hind leg","antenna",0,"hind leg",TRUE
+"hind leg","front leg",0,"hind leg",TRUE
+"hind leg","head",0,"hind leg",TRUE
+"middle leg","head",0,"hind leg",TRUE
+"wing","head",0,"hind leg",TRUE
+"wing","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000233879023881755,"hind leg",TRUE
+"proboscis","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000205424449784200,"hind leg",TRUE
+"head","front leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000194449609957674,"hind leg",TRUE
+"proboscis","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000302703301143179,"hind leg",TRUE
+"middle leg","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014390231873891,"hind leg",TRUE
+"pharynx","hind leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000622339800913124,"hind leg",TRUE
+"middle leg","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000093304366175518,"hind leg",TRUE
+"hind leg","haltere",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000956240122723364,"hind leg",TRUE
+"pharynx","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000849394282402634,"hind leg",TRUE
+"hind leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000380779532581841,"hind leg",TRUE
+"reproductive","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000107234123755358,"hind leg",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000230507889916698,"hind leg",TRUE
+"neck","head",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000643898167089414,"hind leg",TRUE
+"neck","hind leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000176378563794847,"hind leg",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000273091195092223,"hind leg",TRUE
+"thoracic-abdominal","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000998780388085744,"hind leg",TRUE
+"wing","thoracic-abdominal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000013968452046382,"hind leg",TRUE
+"pharynx","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000105345006128965,"hind leg",TRUE
+"thoracic-abdominal","pharynx",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000222665488255827,"hind leg",TRUE
+"hind leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000143740145871297,"hind leg",TRUE
+"thorax","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000638752269110421,"hind leg",TRUE
+"hind leg","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000647904526628108,"hind leg",TRUE
+"hind leg","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011925465581149,"hind leg",TRUE
+"head","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000159116476284083,"hind leg",TRUE
+"thoracic-abdominal","neck",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000038404625601515,"hind leg",TRUE
+"head","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000789143886955034,"hind leg",TRUE
+"head","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000276798465296335,"hind leg",TRUE
+"proboscis","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100359359813422,"hind leg",TRUE
+"middle leg","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000109240849177513,"hind leg",TRUE
+"middle leg","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000119075523788639,"hind leg",TRUE
+"front leg","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000330125654907253,"hind leg",TRUE
+"middle leg","hemolymph",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000860052375760519,"hind leg",TRUE
+"thorax","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000183768738563295,"hind leg",TRUE
+"proboscis","middle leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000945091645589507,"hind leg",TRUE
+"pharynx","enteric",0.0000000000000000000000000000000000000000000000000000000000000000000000000000115302396081394,"hind leg",TRUE
+"middle leg","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000379283012603737,"hind leg",TRUE
+"wing","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000571166397780041,"hind leg",TRUE
+"neck","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000321176504648527,"hind leg",TRUE
+"thoracic-abdominal","front leg",0.00000000000000000000000000000000000000000000000000000000000000000000000363911237082733,"hind leg",TRUE
+"reproductive","middle leg",0.00000000000000000000000000000000000000000000000000000000000000000000000945445519440388,"hind leg",TRUE
+"head","eye",0.00000000000000000000000000000000000000000000000000000000000000000000166541528364523,"hind leg",TRUE
+"proboscis","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000000101580201808073,"hind leg",TRUE
+"wing","enteric",0.0000000000000000000000000000000000000000000000000000000000000000000180242011948149,"hind leg",TRUE
+"reproductive","head",0.000000000000000000000000000000000000000000000000000000000000000000835605148446297,"hind leg",TRUE
+"wing","hemolymph",0.0000000000000000000000000000000000000000000000000000000000000000944690678097665,"hind leg",TRUE
+"front leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000269294989245191,"hind leg",TRUE
+"wing","body chordotonal",0.000000000000000000000000000000000000000000000000000000747587380128899,"hind leg",TRUE
+"proboscis","antenna",0.00000000000000000000000000000000000000000000000000000076730973365979,"hind leg",TRUE
+"neck","middle leg",0.00000000000000000000000000000000000000000000000000000117669477414002,"hind leg",TRUE
+"thoracic-abdominal","eye",0.00000000000000000000000000000000000000000000000000000191314286255065,"hind leg",TRUE
+"neck","hemolymph",0.00000000000000000000000000000000000000000000000000000273074351497331,"hind leg",TRUE
+"thorax","thoracic-abdominal",0.0000000000000000000000000000000000000000000000000000478903471345664,"hind leg",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000000000000000000000000000000000227331749455177,"hind leg",TRUE
+"wing","middle leg",0.000000000000000000000000000000000000000000000000295423332128874,"hind leg",TRUE
+"eye","enteric",0.00000000000000000000000000000000000000000000000060125072854079,"hind leg",TRUE
+"thoracic-abdominal","haltere",0.00000000000000000000000000000000000000000000000101553323020058,"hind leg",TRUE
+"pharynx","hemolymph",0.00000000000000000000000000000000000000000000000580735796056754,"hind leg",TRUE
+"thoracic-abdominal","abdomen",0.00000000000000000000000000000000000000000000000786274409027618,"hind leg",TRUE
+"proboscis","body chordotonal",0.0000000000000000000000000000000000000000000000379566805489478,"hind leg",TRUE
+"middle leg","abdomen",0.0000000000000000000000000000000000000000000000639147269884114,"hind leg",TRUE
+"front leg","enteric",0.0000000000000000000000000000000000000000000000840198523571008,"hind leg",TRUE
+"hemolymph","eye",0.000000000000000000000000000000000000000000000958175469984473,"hind leg",TRUE
+"hind leg","eye",0.0000000000000000000000000000000000000000000371854599187217,"hind leg",TRUE
+"pharynx","front leg",0.000000000000000000000000000000000000000000293653806867003,"hind leg",TRUE
+"hemolymph","front leg",0.0000000000000000000000000000000000000000148321628367835,"hind leg",TRUE
+"eye","body chordotonal",0.00000000000000000000000000000000000000029815872257369,"hind leg",TRUE
+"eye","antenna",0.000000000000000000000000000000000000000519416715148559,"hind leg",TRUE
+"thorax","body chordotonal",0.0000000000000000000000000000000000000401311964086792,"hind leg",TRUE
+"pharynx","eye",0.000000000000000000000000000000000000355931103718739,"hind leg",TRUE
+"haltere","enteric",0.000000000000000000000000000000000000490945651461403,"hind leg",TRUE
+"enteric","abdomen",0.00000000000000000000000000000000000200554979719102,"hind leg",TRUE
+"thoracic-abdominal","reproductive",0.0000000000000000000000000000000000246579016163878,"hind leg",TRUE
+"thoracic-abdominal","enteric",0.0000000000000000000000000000000000284378375509381,"hind leg",TRUE
+"thorax","hemolymph",0.0000000000000000000000000000000000390563510877503,"hind leg",TRUE
+"antenna","abdomen",0.000000000000000000000000000000000055258217949576,"hind leg",TRUE
+"neck","body chordotonal",0.000000000000000000000000000000000720698180994859,"hind leg",TRUE
+"hemolymph","abdomen",0.000000000000000000000000000000195778349645475,"hind leg",TRUE
+"middle leg","front leg",0.00000000000000000000000000000037133158323306,"hind leg",TRUE
+"haltere","body chordotonal",0.000000000000000000000000000000942945275151107,"hind leg",TRUE
+"hemolymph","haltere",0.00000000000000000000000000000419523792527936,"hind leg",TRUE
+"wing","pharynx",0.00000000000000000000000000106265984115989,"hind leg",TRUE
+"neck","antenna",0.00000000000000000000000000522258992821395,"hind leg",TRUE
+"body chordotonal","abdomen",0.000000000000000000000000838228440260981,"hind leg",TRUE
+"thorax","antenna",0.00000000000000000000000106399238622912,"hind leg",TRUE
+"thorax","middle leg",0.00000000000000000000000128164409332612,"hind leg",TRUE
+"pharynx","abdomen",0.00000000000000000000000209783656156499,"hind leg",TRUE
+"wing","reproductive",0.000000000000000000000027765018907408,"hind leg",TRUE
+"haltere","front leg",0.0000000000000000000000580067439351041,"hind leg",TRUE
+"pharynx","body chordotonal",0.000000000000000000000118065361368237,"hind leg",TRUE
+"reproductive","front leg",0.000000000000000000000645511814025832,"hind leg",TRUE
+"proboscis","pharynx",0.0000000000000000000013886452923646,"hind leg",TRUE
+"reproductive","enteric",0.000000000000000000185773157697265,"hind leg",TRUE
+"thorax","enteric",0.00000000000000000103047886451407,"hind leg",TRUE
+"haltere","antenna",0.00000000000000000107859591407945,"hind leg",TRUE
+"reproductive","eye",0.00000000000000000427205957005975,"hind leg",TRUE
+"body chordotonal","antenna",0.000000000000000012934035677849,"hind leg",TRUE
+"reproductive","proboscis",0.0000000000000000441426217654842,"hind leg",TRUE
+"neck","eye",0.000000000000000116949663959781,"hind leg",TRUE
+"enteric","antenna",0.0000000000000002142101640726,"hind leg",TRUE
+"reproductive","body chordotonal",0.000000000000000524513806731981,"hind leg",TRUE
+"proboscis","front leg",0.0000000000000034796848953316,"hind leg",TRUE
+"proboscis","eye",0.0000000000000802327297203411,"hind leg",TRUE
+"head","enteric",0.000000000000104506306739083,"hind leg",TRUE
+"neck","front leg",0.000000000000790273921788653,"hind leg",TRUE
+"pharynx","haltere",0.000000000000790273921788653,"hind leg",TRUE
+"haltere","eye",0.0000000000012741588024243,"hind leg",TRUE
+"hemolymph","antenna",0.00000000000294048606157889,"hind leg",TRUE
+"reproductive","hemolymph",0.00000000000757148933276585,"hind leg",TRUE
+"front leg","abdomen",0.0000000000112470369848871,"hind leg",TRUE
+"pharynx","antenna",0.0000000000155415560818852,"hind leg",TRUE
+"reproductive","neck",0.000000000105405498948053,"hind leg",TRUE
+"pharynx","neck",0.000000000216094477505255,"hind leg",TRUE
+"thorax","pharynx",0.000000000216094477505255,"hind leg",TRUE
+"thorax","reproductive",0.0000000680943959789334,"hind leg",TRUE
+"reproductive","abdomen",0.0000000752482533647648,"hind leg",TRUE
+"wing","haltere",0.000000194040077708831,"hind leg",TRUE
+"hemolymph","head",0.0000303203581840925,"hind leg",TRUE
+"thorax","haltere",0.0000379469310189,"hind leg",TRUE
+"reproductive","haltere",0.0000480042658763024,"hind leg",TRUE
+"neck","abdomen",0.000127305244033506,"hind leg",TRUE
+"wing","neck",0.000206632489353125,"hind leg",TRUE
+"middle leg","eye",0.000697038936674576,"hind leg",TRUE
+"reproductive","pharynx",0.000746031621573064,"hind leg",TRUE
+"eye","abdomen",0.00286282022893747,"hind leg",TRUE
+"wing","eye",0.00356054352434932,"hind leg",TRUE
+"proboscis","abdomen",0.00369517928577199,"hind leg",TRUE
+"wing","proboscis",0.00543885829401019,"hind leg",TRUE
+"wing","front leg",0.00567853262684439,"hind leg",TRUE
+"thorax","eye",0.00610930595107032,"hind leg",TRUE
+"haltere","abdomen",0.0167848465572776,"hind leg",TRUE
+"reproductive","antenna",0.0314114000372225,"hind leg",TRUE
+"thorax","front leg",0.0583538453225922,"hind leg",FALSE
+"thorax","neck",0.0919393040956052,"hind leg",FALSE
+"hemolymph","body chordotonal",0.152216355666033,"hind leg",FALSE
+"thoracic-abdominal","hemolymph",0.455509511397127,"hind leg",FALSE
+"wing","abdomen",0.615943957798138,"hind leg",FALSE
+"proboscis","neck",0.739174894669727,"hind leg",FALSE
+"head","body chordotonal",0.752369761396344,"hind leg",FALSE
+"thorax","proboscis",0.752369761396344,"hind leg",FALSE
+"wing","thorax",0.903014481852422,"hind leg",FALSE
+"thorax","abdomen",1,"hind leg",FALSE
+"enteric","body chordotonal",1,"hind leg",FALSE
+"thoracic-abdominal","body chordotonal",1,"hind leg",FALSE
+"hemolymph","enteric",1,"hind leg",FALSE
+"front leg","eye",1,"hind leg",FALSE
+"neck","haltere",1,"hind leg",FALSE
+"proboscis","haltere",1,"hind leg",FALSE
+"thoracic-abdominal","head",1,"hind leg",FALSE
+"hind leg","head",0.000000000000000000000000000000000000000000000632597546671174,"thoracic-abdominal",TRUE
+"proboscis","head",0.000000000000000000000000000000000000000573959504450984,"thoracic-abdominal",TRUE
+"middle leg","head",0.000000000000000000000000000000000182340292290978,"thoracic-abdominal",TRUE
+"proboscis","antenna",0.00000000000000000000000000000576853057018022,"thoracic-abdominal",TRUE
+"pharynx","head",0.000000000000000000000000000278248487424227,"thoracic-abdominal",TRUE
+"wing","head",0.000000000000000000000000491043685937612,"thoracic-abdominal",TRUE
+"thoracic-abdominal","head",0.0000000000000000000000214321450684745,"thoracic-abdominal",TRUE
+"thoracic-abdominal","hind leg",0.000000000000000000000264414546770632,"thoracic-abdominal",TRUE
+"thorax","head",0.000000000000000000000400115938931162,"thoracic-abdominal",TRUE
+"reproductive","head",0.000000000000000000000521576582413857,"thoracic-abdominal",TRUE
+"proboscis","haltere",0.00000000000000000000317721282887825,"thoracic-abdominal",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000135782155186342,"thoracic-abdominal",TRUE
+"hind leg","antenna",0.0000000000000000000812185977877681,"thoracic-abdominal",TRUE
+"thoracic-abdominal","front leg",0.000000000000000000218458703568885,"thoracic-abdominal",TRUE
+"wing","thoracic-abdominal",0.000000000000000000219915358606958,"thoracic-abdominal",TRUE
+"pharynx","antenna",0.000000000000000000481122452937628,"thoracic-abdominal",TRUE
+"thoracic-abdominal","middle leg",0.00000000000000000211305202564703,"thoracic-abdominal",TRUE
+"proboscis","hind leg",0.00000000000000000475302202492701,"thoracic-abdominal",TRUE
+"thorax","antenna",0.000000000000000103594476199288,"thoracic-abdominal",TRUE
+"thoracic-abdominal","haltere",0.000000000000000137423145003079,"thoracic-abdominal",TRUE
+"head","enteric",0.000000000000000358497467160932,"thoracic-abdominal",TRUE
+"hemolymph","head",0.000000000000000358497467160932,"thoracic-abdominal",TRUE
+"proboscis","neck",0.000000000000000733253688837596,"thoracic-abdominal",TRUE
+"head","front leg",0.0000000000000013495229399209,"thoracic-abdominal",TRUE
+"enteric","antenna",0.00000000000000960326212075095,"thoracic-abdominal",TRUE
+"hemolymph","antenna",0.0000000000000118218067998107,"thoracic-abdominal",TRUE
+"thoracic-abdominal","reproductive",0.0000000000000121284951341809,"thoracic-abdominal",TRUE
+"middle leg","antenna",0.0000000000000149462489124584,"thoracic-abdominal",TRUE
+"hind leg","enteric",0.0000000000000206273294696855,"thoracic-abdominal",TRUE
+"thorax","haltere",0.000000000000174836643239357,"thoracic-abdominal",TRUE
+"thoracic-abdominal","neck",0.00000000000038051437482611,"thoracic-abdominal",TRUE
+"proboscis","front leg",0.000000000000482444787747048,"thoracic-abdominal",TRUE
+"front leg","enteric",0.000000000000763021291023515,"thoracic-abdominal",TRUE
+"head","abdomen",0.000000000000975680702370246,"thoracic-abdominal",TRUE
+"thorax","thoracic-abdominal",0.00000000000175522710120141,"thoracic-abdominal",TRUE
+"haltere","enteric",0.00000000000177142379513332,"thoracic-abdominal",TRUE
+"wing","enteric",0.00000000000223087005353769,"thoracic-abdominal",TRUE
+"proboscis","body chordotonal",0.00000000000271524472598202,"thoracic-abdominal",TRUE
+"wing","proboscis",0.0000000000028501051616159,"thoracic-abdominal",TRUE
+"reproductive","antenna",0.00000000000309859844298568,"thoracic-abdominal",TRUE
+"head","haltere",0.00000000000686686558967833,"thoracic-abdominal",TRUE
+"thoracic-abdominal","proboscis",0.00000000000732959341515432,"thoracic-abdominal",TRUE
+"hemolymph","haltere",0.00000000000759735816088625,"thoracic-abdominal",TRUE
+"wing","pharynx",0.00000000000766126867215184,"thoracic-abdominal",TRUE
+"pharynx","front leg",0.00000000000834916156972797,"thoracic-abdominal",TRUE
+"pharynx","hind leg",0.00000000000835365638282043,"thoracic-abdominal",TRUE
+"thorax","neck",0.0000000000227245202266482,"thoracic-abdominal",TRUE
+"middle leg","enteric",0.0000000000487402775605382,"thoracic-abdominal",TRUE
+"pharynx","haltere",0.0000000000760317945052923,"thoracic-abdominal",TRUE
+"reproductive","enteric",0.0000000000784293815715279,"thoracic-abdominal",TRUE
+"hind leg","hemolymph",0.000000000089343115021924,"thoracic-abdominal",TRUE
+"antenna","abdomen",0.000000000144557938436219,"thoracic-abdominal",TRUE
+"thoracic-abdominal","body chordotonal",0.000000000188676942240307,"thoracic-abdominal",TRUE
+"neck","enteric",0.000000000188676942240307,"thoracic-abdominal",TRUE
+"neck","hemolymph",0.000000000188676942240307,"thoracic-abdominal",TRUE
+"hind leg","abdomen",0.00000000024014237534351,"thoracic-abdominal",TRUE
+"neck","head",0.00000000202071347584175,"thoracic-abdominal",TRUE
+"wing","antenna",0.0000000022553240591335,"thoracic-abdominal",TRUE
+"hind leg","haltere",0.00000000674505851746053,"thoracic-abdominal",TRUE
+"pharynx","middle leg",0.00000000960276091639346,"thoracic-abdominal",TRUE
+"thorax","body chordotonal",0.0000000100177901273938,"thoracic-abdominal",TRUE
+"pharynx","body chordotonal",0.0000000106250510949864,"thoracic-abdominal",TRUE
+"enteric","body chordotonal",0.0000000127773226426005,"thoracic-abdominal",TRUE
+"hemolymph","body chordotonal",0.0000000127773226426005,"thoracic-abdominal",TRUE
+"wing","hemolymph",0.0000000244640151759164,"thoracic-abdominal",TRUE
+"wing","abdomen",0.0000000333713551814106,"thoracic-abdominal",TRUE
+"pharynx","neck",0.0000000718787706699833,"thoracic-abdominal",TRUE
+"thorax","enteric",0.0000000746232715552799,"thoracic-abdominal",TRUE
+"proboscis","middle leg",0.000000080109032961089,"thoracic-abdominal",TRUE
+"haltere","abdomen",0.0000000924319922043203,"thoracic-abdominal",TRUE
+"front leg","abdomen",0.000000116026901977937,"thoracic-abdominal",TRUE
+"hind leg","body chordotonal",0.000000251221025824831,"thoracic-abdominal",TRUE
+"reproductive","body chordotonal",0.0000003547098376108,"thoracic-abdominal",TRUE
+"hemolymph","front leg",0.0000003547098376108,"thoracic-abdominal",TRUE
+"reproductive","hemolymph",0.000000576980401329179,"thoracic-abdominal",TRUE
+"thoracic-abdominal","abdomen",0.000000677621356215571,"thoracic-abdominal",TRUE
+"reproductive","pharynx",0.000000856350199296614,"thoracic-abdominal",TRUE
+"thoracic-abdominal","eye",0.00000211100878766737,"thoracic-abdominal",TRUE
+"reproductive","abdomen",0.00000355149004074938,"thoracic-abdominal",TRUE
+"middle leg","abdomen",0.00000382085706817361,"thoracic-abdominal",TRUE
+"thoracic-abdominal","pharynx",0.00000438635919376092,"thoracic-abdominal",TRUE
+"reproductive","proboscis",0.00000457375498444649,"thoracic-abdominal",TRUE
+"middle leg","body chordotonal",0.00000514412688561355,"thoracic-abdominal",TRUE
+"proboscis","eye",0.00000532568296272846,"thoracic-abdominal",TRUE
+"reproductive","haltere",0.00000593157006540459,"thoracic-abdominal",TRUE
+"middle leg","hemolymph",0.00000594073615502819,"thoracic-abdominal",TRUE
+"proboscis","enteric",0.00000726348729922062,"thoracic-abdominal",TRUE
+"neck","abdomen",0.00000750489206977153,"thoracic-abdominal",TRUE
+"reproductive","neck",0.000008373643577657,"thoracic-abdominal",TRUE
+"eye","enteric",0.0000116839228746178,"thoracic-abdominal",TRUE
+"hemolymph","eye",0.0000116839228746178,"thoracic-abdominal",TRUE
+"middle leg","haltere",0.0000292145987379894,"thoracic-abdominal",TRUE
+"wing","body chordotonal",0.0000331952594554068,"thoracic-abdominal",TRUE
+"thorax","hind leg",0.0000378949028006259,"thoracic-abdominal",TRUE
+"head","eye",0.0000410349470722592,"thoracic-abdominal",TRUE
+"front leg","antenna",0.0000698806204082196,"thoracic-abdominal",TRUE
+"body chordotonal","abdomen",0.000211430777736297,"thoracic-abdominal",TRUE
+"thorax","eye",0.000327517047554623,"thoracic-abdominal",TRUE
+"neck","hind leg",0.000509102108157632,"thoracic-abdominal",TRUE
+"thorax","pharynx",0.000627503554390703,"thoracic-abdominal",TRUE
+"thorax","abdomen",0.00065646663355537,"thoracic-abdominal",TRUE
+"head","antenna",0.00161793921512855,"thoracic-abdominal",TRUE
+"front leg","body chordotonal",0.00177010182875541,"thoracic-abdominal",TRUE
+"wing","thorax",0.0030943936246805,"thoracic-abdominal",TRUE
+"thorax","front leg",0.00374945207567173,"thoracic-abdominal",TRUE
+"thorax","hemolymph",0.00457559888236556,"thoracic-abdominal",TRUE
+"neck","middle leg",0.00528250738611788,"thoracic-abdominal",TRUE
+"pharynx","eye",0.0112778168999419,"thoracic-abdominal",TRUE
+"eye","abdomen",0.0186227183820552,"thoracic-abdominal",TRUE
+"eye","antenna",0.0221679237811166,"thoracic-abdominal",TRUE
+"wing","haltere",0.0246469004047157,"thoracic-abdominal",TRUE
+"thorax","proboscis",0.0385129097920401,"thoracic-abdominal",TRUE
+"eye","body chordotonal",0.0480011460750047,"thoracic-abdominal",TRUE
+"proboscis","pharynx",0.0480011460750047,"thoracic-abdominal",TRUE
+"neck","antenna",0.0540487601043308,"thoracic-abdominal",FALSE
+"haltere","eye",0.0758453411627111,"thoracic-abdominal",FALSE
+"haltere","antenna",0.0784875876871264,"thoracic-abdominal",FALSE
+"haltere","body chordotonal",0.0898478755508917,"thoracic-abdominal",FALSE
+"proboscis","abdomen",0.0966930228310432,"thoracic-abdominal",FALSE
+"neck","body chordotonal",0.09817775591324,"thoracic-abdominal",FALSE
+"enteric","abdomen",0.116258375857559,"thoracic-abdominal",FALSE
+"hemolymph","enteric",0.142959196967307,"thoracic-abdominal",FALSE
+"reproductive","eye",0.142959196967307,"thoracic-abdominal",FALSE
+"middle leg","front leg",0.193183894823053,"thoracic-abdominal",FALSE
+"wing","neck",0.228273367013545,"thoracic-abdominal",FALSE
+"pharynx","enteric",0.280105757869579,"thoracic-abdominal",FALSE
+"body chordotonal","antenna",0.304053788209373,"thoracic-abdominal",FALSE
+"thorax","middle leg",0.415836622928322,"thoracic-abdominal",FALSE
+"proboscis","hemolymph",0.446217002722469,"thoracic-abdominal",FALSE
+"reproductive","front leg",0.817912636581298,"thoracic-abdominal",FALSE
+"wing","reproductive",0.934955088958385,"thoracic-abdominal",FALSE
+"thoracic-abdominal","hemolymph",0.95380291099548,"thoracic-abdominal",FALSE
+"hemolymph","abdomen",1,"thoracic-abdominal",FALSE
+"pharynx","abdomen",1,"thoracic-abdominal",FALSE
+"head","body chordotonal",1,"thoracic-abdominal",FALSE
+"thoracic-abdominal","enteric",1,"thoracic-abdominal",FALSE
+"front leg","eye",1,"thoracic-abdominal",FALSE
+"hind leg","eye",1,"thoracic-abdominal",FALSE
+"middle leg","eye",1,"thoracic-abdominal",FALSE
+"neck","eye",1,"thoracic-abdominal",FALSE
+"wing","eye",1,"thoracic-abdominal",FALSE
+"haltere","front leg",1,"thoracic-abdominal",FALSE
+"hind leg","front leg",1,"thoracic-abdominal",FALSE
+"neck","front leg",1,"thoracic-abdominal",FALSE
+"wing","front leg",1,"thoracic-abdominal",FALSE
+"neck","haltere",1,"thoracic-abdominal",FALSE
+"pharynx","hemolymph",1,"thoracic-abdominal",FALSE
+"middle leg","hind leg",1,"thoracic-abdominal",FALSE
+"reproductive","hind leg",1,"thoracic-abdominal",FALSE
+"wing","hind leg",1,"thoracic-abdominal",FALSE
+"reproductive","middle leg",1,"thoracic-abdominal",FALSE
+"wing","middle leg",1,"thoracic-abdominal",FALSE
+"thorax","reproductive",1,"thoracic-abdominal",FALSE
+"hind leg","head",0.000000000000000000000000773103136445041,"ureter",TRUE
+"proboscis","head",0.00000000000000000110795152787414,"ureter",TRUE
+"middle leg","head",0.00000000000000000189406247360172,"ureter",TRUE
+"proboscis","antenna",0.00000000000000868956286290411,"ureter",TRUE
+"hind leg","antenna",0.0000000000000107029063731822,"ureter",TRUE
+"reproductive","head",0.0000000000000109627619231742,"ureter",TRUE
+"reproductive","hind leg",0.0000000000000130167691043832,"ureter",TRUE
+"reproductive","middle leg",0.0000000000000612797667119465,"ureter",TRUE
+"reproductive","front leg",0.0000000000000623157903055928,"ureter",TRUE
+"pharynx","head",0.000000000000281608809162661,"ureter",TRUE
+"reproductive","antenna",0.00000000000189823807025102,"ureter",TRUE
+"wing","reproductive",0.0000000000068171348342512,"ureter",TRUE
+"thoracic-abdominal","head",0.0000000000228605501641117,"ureter",TRUE
+"thoracic-abdominal","hind leg",0.000000000042876864328136,"ureter",TRUE
+"wing","head",0.000000000127647906375405,"ureter",TRUE
+"thoracic-abdominal","front leg",0.000000000269231926006361,"ureter",TRUE
+"reproductive","proboscis",0.000000000359635822458606,"ureter",TRUE
+"thoracic-abdominal","middle leg",0.000000000435187959338764,"ureter",TRUE
+"thoracic-abdominal","antenna",0.000000000613298051422668,"ureter",TRUE
+"thorax","head",0.00000000110179860287106,"ureter",TRUE
+"middle leg","antenna",0.00000000123910562774153,"ureter",TRUE
+"reproductive","haltere",0.00000000167725133488636,"ureter",TRUE
+"pharynx","antenna",0.00000000287230250580102,"ureter",TRUE
+"head","haltere",0.00000000328049947739052,"ureter",TRUE
+"wing","thoracic-abdominal",0.0000000037104000084616,"ureter",TRUE
+"proboscis","haltere",0.00000000510494877888555,"ureter",TRUE
+"head","front leg",0.00000000725742374995744,"ureter",TRUE
+"reproductive","pharynx",0.0000000180032722012154,"ureter",TRUE
+"proboscis","neck",0.0000000220656092348624,"ureter",TRUE
+"thoracic-abdominal","haltere",0.0000000645865808639119,"ureter",TRUE
+"thorax","antenna",0.0000000767650197663178,"ureter",TRUE
+"wing","proboscis",0.000000105613284431524,"ureter",TRUE
+"hemolymph","head",0.000000123338432885276,"ureter",TRUE
+"head","enteric",0.000000188157363316276,"ureter",TRUE
+"reproductive","neck",0.000000356747690025326,"ureter",TRUE
+"thorax","reproductive",0.000000356747690025326,"ureter",TRUE
+"thoracic-abdominal","proboscis",0.000000391133939165102,"ureter",TRUE
+"hemolymph","antenna",0.000000753959924552332,"ureter",TRUE
+"enteric","antenna",0.000000862327369533939,"ureter",TRUE
+"neck","hind leg",0.0000010146075501643,"ureter",TRUE
+"thoracic-abdominal","neck",0.00000346895037882229,"ureter",TRUE
+"thorax","thoracic-abdominal",0.0000034692278702381,"ureter",TRUE
+"thorax","neck",0.0000039679168238221,"ureter",TRUE
+"proboscis","body chordotonal",0.00000422236409899878,"ureter",TRUE
+"head","abdomen",0.00000458031552852258,"ureter",TRUE
+"hind leg","abdomen",0.00000548140241090033,"ureter",TRUE
+"hind leg","hemolymph",0.00000754181014261405,"ureter",TRUE
+"proboscis","hind leg",0.00000754181014261405,"ureter",TRUE
+"hind leg","body chordotonal",0.0000112295190222559,"ureter",TRUE
+"hemolymph","haltere",0.0000134890623048436,"ureter",TRUE
+"front leg","abdomen",0.0000140999374749903,"ureter",TRUE
+"middle leg","abdomen",0.0000172547717216525,"ureter",TRUE
+"reproductive","body chordotonal",0.0000182920060248792,"ureter",TRUE
+"haltere","enteric",0.0000185951264518043,"ureter",TRUE
+"thoracic-abdominal","pharynx",0.0000343382779878063,"ureter",TRUE
+"wing","hemolymph",0.0000348402733307305,"ureter",TRUE
+"wing","enteric",0.0000424682779742388,"ureter",TRUE
+"hind leg","enteric",0.0000498427782903005,"ureter",TRUE
+"reproductive","hemolymph",0.000053279638129615,"ureter",TRUE
+"antenna","abdomen",0.000055670078639924,"ureter",TRUE
+"thoracic-abdominal","body chordotonal",0.0000744137172676815,"ureter",TRUE
+"neck","enteric",0.0000744137172676815,"ureter",TRUE
+"neck","hemolymph",0.0000744137172676815,"ureter",TRUE
+"thorax","body chordotonal",0.0000865873316410003,"ureter",TRUE
+"thorax","haltere",0.0000889746782216249,"ureter",TRUE
+"wing","abdomen",0.000121567198408098,"ureter",TRUE
+"haltere","antenna",0.000122993033457026,"ureter",TRUE
+"thorax","hemolymph",0.000162774710583791,"ureter",TRUE
+"wing","pharynx",0.000254525766661526,"ureter",TRUE
+"wing","antenna",0.000306785484838907,"ureter",TRUE
+"hemolymph","front leg",0.000351056815117728,"ureter",TRUE
+"thorax","enteric",0.000352827916021359,"ureter",TRUE
+"front leg","antenna",0.000421175579474926,"ureter",TRUE
+"pharynx","body chordotonal",0.000530144806922251,"ureter",TRUE
+"enteric","body chordotonal",0.000589959641940787,"ureter",TRUE
+"hemolymph","body chordotonal",0.000589959641940787,"ureter",TRUE
+"pharynx","neck",0.000603398060264084,"ureter",TRUE
+"neck","haltere",0.000699049300767752,"ureter",TRUE
+"hind leg","haltere",0.0007703406436062,"ureter",TRUE
+"proboscis","abdomen",0.000939008328235772,"ureter",TRUE
+"reproductive","enteric",0.000939008328235772,"ureter",TRUE
+"front leg","enteric",0.00104558742942187,"ureter",TRUE
+"haltere","abdomen",0.00114111651039678,"ureter",TRUE
+"proboscis","front leg",0.00131892774779661,"ureter",TRUE
+"middle leg","hemolymph",0.00134169377897682,"ureter",TRUE
+"pharynx","haltere",0.00167886739482868,"ureter",TRUE
+"middle leg","body chordotonal",0.00180541152124379,"ureter",TRUE
+"neck","middle leg",0.0023122643170276,"ureter",TRUE
+"middle leg","enteric",0.00231516916023002,"ureter",TRUE
+"thorax","proboscis",0.00231516916023002,"ureter",TRUE
+"thoracic-abdominal","hemolymph",0.00231729910082682,"ureter",TRUE
+"reproductive","eye",0.0035655696117554,"ureter",TRUE
+"proboscis","eye",0.00407937407889651,"ureter",TRUE
+"haltere","body chordotonal",0.00466661985876791,"ureter",TRUE
+"thoracic-abdominal","eye",0.00624479056382918,"ureter",TRUE
+"neck","head",0.00690460326445454,"ureter",TRUE
+"pharynx","hind leg",0.00690460326445454,"ureter",TRUE
+"pharynx","abdomen",0.00747165665973591,"ureter",TRUE
+"proboscis","middle leg",0.00866596276842182,"ureter",TRUE
+"neck","abdomen",0.0104306634498032,"ureter",TRUE
+"thorax","abdomen",0.0104306634498032,"ureter",TRUE
+"thorax","eye",0.0106123685189812,"ureter",TRUE
+"front leg","body chordotonal",0.0128425737199842,"ureter",TRUE
+"eye","enteric",0.0148255988965019,"ureter",TRUE
+"hemolymph","eye",0.0148255988965019,"ureter",TRUE
+"pharynx","front leg",0.0247435794314897,"ureter",TRUE
+"wing","body chordotonal",0.0286566850962596,"ureter",TRUE
+"head","eye",0.0302348326504025,"ureter",TRUE
+"neck","eye",0.0369308397210265,"ureter",TRUE
+"wing","hind leg",0.0467390236464881,"ureter",TRUE
+"body chordotonal","abdomen",0.0500685649040824,"ureter",FALSE
+"neck","front leg",0.0729832850767229,"ureter",FALSE
+"thorax","pharynx",0.0754665359982555,"ureter",FALSE
+"hemolymph","abdomen",0.123338373384264,"ureter",FALSE
+"thoracic-abdominal","enteric",0.124848039153079,"ureter",FALSE
+"pharynx","middle leg",0.127979855246859,"ureter",FALSE
+"proboscis","hemolymph",0.144235806411054,"ureter",FALSE
+"eye","body chordotonal",0.146707203294735,"ureter",FALSE
+"middle leg","haltere",0.192163876188274,"ureter",FALSE
+"wing","thorax",0.197661025514212,"ureter",FALSE
+"eye","antenna",0.266292325256627,"ureter",FALSE
+"wing","middle leg",0.281009971055036,"ureter",FALSE
+"proboscis","enteric",0.303229228426392,"ureter",FALSE
+"pharynx","eye",0.339578337546845,"ureter",FALSE
+"hind leg","eye",0.363040392902156,"ureter",FALSE
+"eye","abdomen",0.378252664099734,"ureter",FALSE
+"enteric","abdomen",0.587904372076538,"ureter",FALSE
+"thoracic-abdominal","reproductive",0.736339773872428,"ureter",FALSE
+"wing","neck",0.791413713808734,"ureter",FALSE
+"reproductive","abdomen",1,"ureter",FALSE
+"thoracic-abdominal","abdomen",1,"ureter",FALSE
+"body chordotonal","antenna",1,"ureter",FALSE
+"head","antenna",1,"ureter",FALSE
+"neck","antenna",1,"ureter",FALSE
+"head","body chordotonal",1,"ureter",FALSE
+"neck","body chordotonal",1,"ureter",FALSE
+"hemolymph","enteric",1,"ureter",FALSE
+"pharynx","enteric",1,"ureter",FALSE
+"front leg","eye",1,"ureter",FALSE
+"haltere","eye",1,"ureter",FALSE
+"middle leg","eye",1,"ureter",FALSE
+"wing","eye",1,"ureter",FALSE
+"haltere","front leg",1,"ureter",FALSE
+"hind leg","front leg",1,"ureter",FALSE
+"middle leg","front leg",1,"ureter",FALSE
+"thorax","front leg",1,"ureter",FALSE
+"wing","front leg",1,"ureter",FALSE
+"wing","haltere",1,"ureter",FALSE
+"pharynx","hemolymph",1,"ureter",FALSE
+"middle leg","hind leg",1,"ureter",FALSE
+"thorax","hind leg",1,"ureter",FALSE
+"thorax","middle leg",1,"ureter",FALSE
+"proboscis","pharynx",1,"ureter",FALSE
+"hind leg","antenna",0,"abdomen",TRUE
+"reproductive","antenna",0,"abdomen",TRUE
+"hind leg","head",0,"abdomen",TRUE
+"middle leg","head",0,"abdomen",TRUE
+"pharynx","head",0,"abdomen",TRUE
+"proboscis","head",0,"abdomen",TRUE
+"reproductive","head",0,"abdomen",TRUE
+"thoracic-abdominal","head",0,"abdomen",TRUE
+"wing","head",0,"abdomen",TRUE
+"thorax","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000117104559034724,"abdomen",TRUE
+"reproductive","front leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000863716079100061,"abdomen",TRUE
+"head","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000731289226330903,"abdomen",TRUE
+"thoracic-abdominal","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000377556255934648,"abdomen",TRUE
+"reproductive","middle leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000224121266151228,"abdomen",TRUE
+"head","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000625466434649116,"abdomen",TRUE
+"proboscis","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000837808057462031,"abdomen",TRUE
+"wing","reproductive",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000843991920288744,"abdomen",TRUE
+"head","abdomen",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000254402155430607,"abdomen",TRUE
+"reproductive","neck",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000155725282766877,"abdomen",TRUE
+"head","enteric",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000017669669767524,"abdomen",TRUE
+"reproductive","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000108883054164452,"abdomen",TRUE
+"reproductive","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000157875046590399,"abdomen",TRUE
+"middle leg","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000106208708605661,"abdomen",TRUE
+"hemolymph","head",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000527927161527923,"abdomen",TRUE
+"reproductive","haltere",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000401612630437667,"abdomen",TRUE
+"front leg","abdomen",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000781716705444649,"abdomen",TRUE
+"reproductive","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000118341209007611,"abdomen",TRUE
+"middle leg","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000315873428191691,"abdomen",TRUE
+"antenna","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000322478096189511,"abdomen",TRUE
+"reproductive","pharynx",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000246722080530048,"abdomen",TRUE
+"thoracic-abdominal","front leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000450289497665848,"abdomen",TRUE
+"thoracic-abdominal","neck",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000276200499381339,"abdomen",TRUE
+"hind leg","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000215857194700471,"abdomen",TRUE
+"wing","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000252762158504935,"abdomen",TRUE
+"thoracic-abdominal","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000535263665750707,"abdomen",TRUE
+"pharynx","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000152284929699766,"abdomen",TRUE
+"hind leg","body chordotonal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000458637507403108,"abdomen",TRUE
+"wing","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000604064467477987,"abdomen",TRUE
+"proboscis","body chordotonal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000251341678823528,"abdomen",TRUE
+"thorax","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000730923656136177,"abdomen",TRUE
+"thoracic-abdominal","middle leg",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000797316999133692,"abdomen",TRUE
+"wing","thoracic-abdominal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000883714810093108,"abdomen",TRUE
+"proboscis","abdomen",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000148223168932055,"abdomen",TRUE
+"thoracic-abdominal","haltere",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000187565891825994,"abdomen",TRUE
+"thorax","reproductive",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000316262343408885,"abdomen",TRUE
+"thoracic-abdominal","proboscis",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000637163192484167,"abdomen",TRUE
+"pharynx","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000017024101707998,"abdomen",TRUE
+"thorax","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000143320690858374,"abdomen",TRUE
+"thoracic-abdominal","pharynx",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000126274545665928,"abdomen",TRUE
+"thoracic-abdominal","hind leg",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000273634188913132,"abdomen",TRUE
+"enteric","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000602250967857315,"abdomen",TRUE
+"middle leg","body chordotonal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000216384265616586,"abdomen",TRUE
+"pharynx","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000506598091515703,"abdomen",TRUE
+"wing","body chordotonal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000806270555658021,"abdomen",TRUE
+"hemolymph","antenna",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000460385677782064,"abdomen",TRUE
+"haltere","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000276182277013225,"abdomen",TRUE
+"neck","hind leg",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000684186088868666,"abdomen",TRUE
+"proboscis","neck",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000508936074721743,"abdomen",TRUE
+"enteric","body chordotonal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000112784909003133,"abdomen",TRUE
+"neck","abdomen",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000152498263870132,"abdomen",TRUE
+"hemolymph","body chordotonal",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000673441463409628,"abdomen",TRUE
+"neck","head",0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000293700933288242,"abdomen",TRUE
+"thorax","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000524194296814148,"abdomen",TRUE
+"haltere","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000209213771006966,"abdomen",TRUE
+"thorax","neck",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000988213705067845,"abdomen",TRUE
+"thorax","thoracic-abdominal",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000194480682685608,"abdomen",TRUE
+"head","eye",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000297224594942882,"abdomen",TRUE
+"front leg","antenna",0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000758630947273805,"abdomen",TRUE
+"reproductive","eye",0.0000000000000000000000000000000000000000000000000000000000000000000000000000000530558551715699,"abdomen",TRUE
+"body chordotonal","abdomen",0.000000000000000000000000000000000000000000000000000000000000000000000000000000212220425962795,"abdomen",TRUE
+"front leg","body chordotonal",0.0000000000000000000000000000000000000000000000000000000000000000000000000000175487080199442,"abdomen",TRUE
+"haltere","antenna",0.0000000000000000000000000000000000000000000000000000000000000000000000000000389222451266514,"abdomen",TRUE
+"neck","enteric",0.000000000000000000000000000000000000000000000000000000000000000000000000129356826647939,"abdomen",TRUE
+"pharynx","neck",0.00000000000000000000000000000000000000000000000000000000000000000000003146834400971,"abdomen",TRUE
+"hind leg","front leg",0.000000000000000000000000000000000000000000000000000000000000000000000075341462373554,"abdomen",TRUE
+"neck","hemolymph",0.000000000000000000000000000000000000000000000000000000000000000000000131331543842035,"abdomen",TRUE
+"reproductive","hemolymph",0.000000000000000000000000000000000000000000000000000000000000000119376897193669,"abdomen",TRUE
+"thoracic-abdominal","eye",0.0000000000000000000000000000000000000000000000000000000000000707243583759852,"abdomen",TRUE
+"neck","middle leg",0.0000000000000000000000000000000000000000000000000000000202746050292209,"abdomen",TRUE
+"head","antenna",0.000000000000000000000000000000000000000000000000000000395920341446595,"abdomen",TRUE
+"hemolymph","abdomen",0.000000000000000000000000000000000000000000000000000178067684124589,"abdomen",TRUE
+"eye","body chordotonal",0.00000000000000000000000000000000000000000000000000788848536130399,"abdomen",TRUE
+"wing","neck",0.00000000000000000000000000000000000000000000000350517171436429,"abdomen",TRUE
+"reproductive","enteric",0.00000000000000000000000000000000000000000000000525332238375662,"abdomen",TRUE
+"neck","body chordotonal",0.0000000000000000000000000000000000000000000815680370487644,"abdomen",TRUE
+"eye","abdomen",0.00000000000000000000000000000000000000000144444344261188,"abdomen",TRUE
+"thoracic-abdominal","hemolymph",0.00000000000000000000000000000000000000000190530044374823,"abdomen",TRUE
+"enteric","abdomen",0.000000000000000000000000000000000000104527041669479,"abdomen",TRUE
+"hind leg","haltere",0.000000000000000000000000000000000000394460263119288,"abdomen",TRUE
+"body chordotonal","antenna",0.00000000000000000000000000000000000765031871578906,"abdomen",TRUE
+"eye","antenna",0.00000000000000000000000000000000711540169133099,"abdomen",TRUE
+"thoracic-abdominal","enteric",0.00000000000000000000000000000004846609959101,"abdomen",TRUE
+"front leg","enteric",0.000000000000000000000000000000636798803517319,"abdomen",TRUE
+"haltere","enteric",0.0000000000000000000000000000628333714047527,"abdomen",TRUE
+"hemolymph","haltere",0.000000000000000000000000103658401847602,"abdomen",TRUE
+"proboscis","haltere",0.000000000000000000000000451240788142088,"abdomen",TRUE
+"hemolymph","front leg",0.000000000000000000000000531023820706494,"abdomen",TRUE
+"wing","hind leg",0.0000000000000000000000591836532840235,"abdomen",TRUE
+"thorax","haltere",0.00000000000000000000099419843035401,"abdomen",TRUE
+"middle leg","front leg",0.00000000000000000000335494175556122,"abdomen",TRUE
+"neck","haltere",0.0000000000000000000159951740811463,"abdomen",TRUE
+"wing","enteric",0.000000000000000000242036235225457,"abdomen",TRUE
+"neck","front leg",0.000000000000000000287594827965262,"abdomen",TRUE
+"neck","eye",0.0000000000000000023332435705247,"abdomen",TRUE
+"middle leg","hind leg",0.000000000000000104536512820491,"abdomen",TRUE
+"proboscis","front leg",0.000000000000000129363976819862,"abdomen",TRUE
+"thorax","front leg",0.000000000000000440010248280665,"abdomen",TRUE
+"wing","hemolymph",0.000000000000000867713943024691,"abdomen",TRUE
+"middle leg","enteric",0.0000000000000159533839125811,"abdomen",TRUE
+"head","body chordotonal",0.0000000000000517622243723166,"abdomen",TRUE
+"eye","enteric",0.000000000000456562006751345,"abdomen",TRUE
+"hemolymph","eye",0.00000000000047683220154393,"abdomen",TRUE
+"pharynx","enteric",0.0000000000018216360306852,"abdomen",TRUE
+"pharynx","hemolymph",0.00000000000898410589392102,"abdomen",TRUE
+"pharynx","haltere",0.00000000000905756300784987,"abdomen",TRUE
+"neck","antenna",0.0000000000287028910709152,"abdomen",TRUE
+"pharynx","hind leg",0.000000000151774112206106,"abdomen",TRUE
+"middle leg","hemolymph",0.000000000346129314780459,"abdomen",TRUE
+"reproductive","abdomen",0.000000000459911143945934,"abdomen",TRUE
+"hind leg","eye",0.00000000182862013986453,"abdomen",TRUE
+"wing","front leg",0.00000000247499544468628,"abdomen",TRUE
+"pharynx","front leg",0.00000000379268428627012,"abdomen",TRUE
+"middle leg","haltere",0.00000000514516152673649,"abdomen",TRUE
+"proboscis","enteric",0.0000000111993380649411,"abdomen",TRUE
+"thorax","eye",0.0000000181779287703456,"abdomen",TRUE
+"wing","thorax",0.0000000290664481215233,"abdomen",TRUE
+"proboscis","hemolymph",0.0000000295322382441978,"abdomen",TRUE
+"proboscis","eye",0.0000000738484945939831,"abdomen",TRUE
+"wing","proboscis",0.000000205795993542822,"abdomen",TRUE
+"proboscis","hind leg",0.0000134295952917875,"abdomen",TRUE
+"wing","haltere",0.0000929280283636589,"abdomen",TRUE
+"thoracic-abdominal","abdomen",0.000157330448231352,"abdomen",TRUE
+"thorax","enteric",0.000164943496498259,"abdomen",TRUE
+"hind leg","enteric",0.000230259349451851,"abdomen",TRUE
+"thorax","pharynx",0.000447796427812276,"abdomen",TRUE
+"thorax","hemolymph",0.000598942232818693,"abdomen",TRUE
+"proboscis","pharynx",0.00641718478361215,"abdomen",TRUE
+"pharynx","eye",0.0108315205092466,"abdomen",TRUE
+"hind leg","hemolymph",0.0137800826032116,"abdomen",TRUE
+"thorax","middle leg",0.0137800826032116,"abdomen",TRUE
+"middle leg","eye",0.033471473385067,"abdomen",TRUE
+"wing","pharynx",0.0798622262462817,"abdomen",FALSE
+"wing","middle leg",0.347125200525537,"abdomen",FALSE
+"thorax","hind leg",0.637051677516559,"abdomen",FALSE
+"proboscis","middle leg",0.774847558882861,"abdomen",FALSE
+"thorax","proboscis",0.774847558882861,"abdomen",FALSE
+"haltere","eye",0.836634471932863,"abdomen",FALSE
+"wing","eye",0.836634471932863,"abdomen",FALSE
+"hemolymph","enteric",1,"abdomen",FALSE
+"front leg","eye",1,"abdomen",FALSE
+"haltere","front leg",1,"abdomen",FALSE
+"pharynx","middle leg",1,"abdomen",FALSE
+"thoracic-abdominal","reproductive",1,"abdomen",FALSE
+"hind leg","head",0.00000000000000000000000000000000000000000000000000118781007916736,"reproductive",TRUE
+"proboscis","head",0.00000000000000000000000000000000000198211602405072,"reproductive",TRUE
+"middle leg","head",0.000000000000000000000000000000000079103333491344,"reproductive",TRUE
+"reproductive","head",0.00000000000000000000000000000000029224466492687,"reproductive",TRUE
+"hind leg","antenna",0.000000000000000000000000000000000412922208946718,"reproductive",TRUE
+"proboscis","antenna",0.00000000000000000000000000000975516623506047,"reproductive",TRUE
+"reproductive","antenna",0.0000000000000000000000000000239509173291196,"reproductive",TRUE
+"pharynx","head",0.000000000000000000000000000123934740639921,"reproductive",TRUE
+"wing","head",0.00000000000000000000000000784537048551502,"reproductive",TRUE
+"reproductive","hind leg",0.0000000000000000000000000412129992778992,"reproductive",TRUE
+"thoracic-abdominal","head",0.0000000000000000000000000917441890800033,"reproductive",TRUE
+"reproductive","front leg",0.000000000000000000000000843500902446207,"reproductive",TRUE
+"wing","reproductive",0.00000000000000000000006071754829153,"reproductive",TRUE
+"reproductive","middle leg",0.0000000000000000000000973177904222817,"reproductive",TRUE
+"thoracic-abdominal","antenna",0.000000000000000000000111299396356663,"reproductive",TRUE
+"pharynx","antenna",0.000000000000000000000410588183644972,"reproductive",TRUE
+"thorax","head",0.000000000000000000000639583335052061,"reproductive",TRUE
+"middle leg","antenna",0.0000000000000000000012134863375929,"reproductive",TRUE
+"reproductive","haltere",0.00000000000000000000135426093140487,"reproductive",TRUE
+"thorax","antenna",0.000000000000000000259508484234989,"reproductive",TRUE
+"reproductive","proboscis",0.00000000000000000504939972423892,"reproductive",TRUE
+"head","front leg",0.00000000000000000810806633725381,"reproductive",TRUE
+"head","haltere",0.0000000000000000156470932331113,"reproductive",TRUE
+"reproductive","neck",0.0000000000000000226051601298433,"reproductive",TRUE
+"hemolymph","head",0.0000000000000000809351019048494,"reproductive",TRUE
+"head","enteric",0.00000000000000009459740895306,"reproductive",TRUE
+"wing","antenna",0.000000000000000185556866907923,"reproductive",TRUE
+"proboscis","neck",0.000000000000000686263842150018,"reproductive",TRUE
+"thorax","reproductive",0.00000000000000205108323944038,"reproductive",TRUE
+"hemolymph","antenna",0.00000000000000410696021762914,"reproductive",TRUE
+"enteric","antenna",0.00000000000000445453228778228,"reproductive",TRUE
+"thoracic-abdominal","haltere",0.0000000000000046228263192348,"reproductive",TRUE
+"head","abdomen",0.0000000000000122515676013743,"reproductive",TRUE
+"thoracic-abdominal","neck",0.00000000000001510013557859,"reproductive",TRUE
+"reproductive","pharynx",0.0000000000000883390604249881,"reproductive",TRUE
+"hind leg","abdomen",0.000000000000152673222617422,"reproductive",TRUE
+"front leg","abdomen",0.000000000000478822840285079,"reproductive",TRUE
+"reproductive","body chordotonal",0.000000000000496709281719925,"reproductive",TRUE
+"middle leg","abdomen",0.00000000000110603513947889,"reproductive",TRUE
+"haltere","antenna",0.00000000000247960012912707,"reproductive",TRUE
+"thorax","neck",0.00000000000247960012912707,"reproductive",TRUE
+"neck","hind leg",0.00000000000333650433103286,"reproductive",TRUE
+"antenna","abdomen",0.00000000000402059146059762,"reproductive",TRUE
+"wing","thoracic-abdominal",0.0000000000149064840714721,"reproductive",TRUE
+"pharynx","neck",0.0000000000153419987254646,"reproductive",TRUE
+"proboscis","body chordotonal",0.0000000000167937893654289,"reproductive",TRUE
+"thoracic-abdominal","front leg",0.0000000000381239485630059,"reproductive",TRUE
+"thoracic-abdominal","body chordotonal",0.0000000000463099204743573,"reproductive",TRUE
+"thoracic-abdominal","hind leg",0.00000000005139881877856,"reproductive",TRUE
+"hind leg","body chordotonal",0.0000000000533773566844192,"reproductive",TRUE
+"wing","abdomen",0.0000000000539122306084552,"reproductive",TRUE
+"neck","enteric",0.0000000000983125299811396,"reproductive",TRUE
+"neck","hemolymph",0.000000000112272931638499,"reproductive",TRUE
+"front leg","antenna",0.000000000128663317267231,"reproductive",TRUE
+"pharynx","body chordotonal",0.00000000242737950763877,"reproductive",TRUE
+"thorax","body chordotonal",0.00000000445992056559186,"reproductive",TRUE
+"proboscis","abdomen",0.00000000458615636043316,"reproductive",TRUE
+"haltere","abdomen",0.00000000589469139236895,"reproductive",TRUE
+"haltere","enteric",0.00000000819774359494028,"reproductive",TRUE
+"thoracic-abdominal","middle leg",0.00000000942203299088474,"reproductive",TRUE
+"proboscis","haltere",0.0000000117733528218028,"reproductive",TRUE
+"enteric","body chordotonal",0.0000000121405214127434,"reproductive",TRUE
+"hemolymph","haltere",0.0000000130772654283548,"reproductive",TRUE
+"hemolymph","body chordotonal",0.0000000141646744449373,"reproductive",TRUE
+"reproductive","eye",0.0000000730123722282676,"reproductive",TRUE
+"pharynx","abdomen",0.0000000914266158032259,"reproductive",TRUE
+"middle leg","body chordotonal",0.00000012118327074519,"reproductive",TRUE
+"wing","enteric",0.000000470364095590061,"reproductive",TRUE
+"wing","body chordotonal",0.000000640551319399548,"reproductive",TRUE
+"thorax","thoracic-abdominal",0.000000640551319399548,"reproductive",TRUE
+"thorax","haltere",0.000000693277752804994,"reproductive",TRUE
+"neck","middle leg",0.000000735612900662649,"reproductive",TRUE
+"haltere","body chordotonal",0.000000881861431035998,"reproductive",TRUE
+"neck","abdomen",0.00000112048120768226,"reproductive",TRUE
+"thorax","abdomen",0.00000117284901360073,"reproductive",TRUE
+"front leg","enteric",0.00000133695753599244,"reproductive",TRUE
+"thoracic-abdominal","eye",0.00000190782007748964,"reproductive",TRUE
+"thoracic-abdominal","proboscis",0.00000290387516333605,"reproductive",TRUE
+"wing","hemolymph",0.00000300013130124512,"reproductive",TRUE
+"front leg","body chordotonal",0.000011307931548873,"reproductive",TRUE
+"hind leg","enteric",0.000011998508294758,"reproductive",TRUE
+"neck","haltere",0.0000143338106140588,"reproductive",TRUE
+"hemolymph","front leg",0.0000163915411074953,"reproductive",TRUE
+"body chordotonal","abdomen",0.0000535387690840892,"reproductive",TRUE
+"middle leg","enteric",0.0000607342598480424,"reproductive",TRUE
+"hind leg","hemolymph",0.0000668575570823901,"reproductive",TRUE
+"wing","neck",0.0000684991346805344,"reproductive",TRUE
+"hind leg","haltere",0.000106437773703603,"reproductive",TRUE
+"thoracic-abdominal","pharynx",0.000107455796838758,"reproductive",TRUE
+"pharynx","haltere",0.000120334667703874,"reproductive",TRUE
+"head","eye",0.000301027933307033,"reproductive",TRUE
+"hemolymph","eye",0.000317171174657804,"reproductive",TRUE
+"eye","enteric",0.000346228228769638,"reproductive",TRUE
+"reproductive","hemolymph",0.000515742474294319,"reproductive",TRUE
+"thorax","hemolymph",0.000545377002857287,"reproductive",TRUE
+"middle leg","hemolymph",0.000547051396645814,"reproductive",TRUE
+"thorax","enteric",0.00062179060671217,"reproductive",TRUE
+"wing","proboscis",0.00062179060671217,"reproductive",TRUE
+"eye","antenna",0.000727636492197978,"reproductive",TRUE
+"neck","head",0.000878791360450126,"reproductive",TRUE
+"thorax","eye",0.00155576759026681,"reproductive",TRUE
+"eye","body chordotonal",0.00194820348697401,"reproductive",TRUE
+"hemolymph","abdomen",0.00286656117699782,"reproductive",TRUE
+"neck","eye",0.00286656117699782,"reproductive",TRUE
+"proboscis","enteric",0.00313037641560282,"reproductive",TRUE
+"proboscis","eye",0.00368915375805721,"reproductive",TRUE
+"neck","front leg",0.00369930665466726,"reproductive",TRUE
+"proboscis","front leg",0.00369930665466726,"reproductive",TRUE
+"eye","abdomen",0.00708178023618165,"reproductive",TRUE
+"proboscis","hemolymph",0.0119829952387084,"reproductive",TRUE
+"pharynx","enteric",0.0141689411420951,"reproductive",TRUE
+"wing","pharynx",0.0141689411420951,"reproductive",TRUE
+"reproductive","enteric",0.0239074528974745,"reproductive",TRUE
+"thoracic-abdominal","reproductive",0.0256738030473196,"reproductive",TRUE
+"pharynx","front leg",0.0389918153476514,"reproductive",TRUE
+"pharynx","hemolymph",0.0491668308828508,"reproductive",TRUE
+"wing","thorax",0.0724026943239003,"reproductive",FALSE
+"pharynx","eye",0.109184821482645,"reproductive",FALSE
+"middle leg","haltere",0.109727391004648,"reproductive",FALSE
+"hind leg","front leg",0.116296972727666,"reproductive",FALSE
+"neck","body chordotonal",0.138454601901867,"reproductive",FALSE
+"wing","hind leg",0.139839791403012,"reproductive",FALSE
+"enteric","abdomen",0.160296907717204,"reproductive",FALSE
+"hind leg","eye",0.179146758782827,"reproductive",FALSE
+"body chordotonal","antenna",0.23570341545053,"reproductive",FALSE
+"thorax","front leg",0.359780260556538,"reproductive",FALSE
+"proboscis","hind leg",0.359780260556538,"reproductive",FALSE
+"thoracic-abdominal","abdomen",0.459623338018759,"reproductive",FALSE
+"neck","antenna",0.527266887509331,"reproductive",FALSE
+"proboscis","middle leg",0.527266887509331,"reproductive",FALSE
+"head","body chordotonal",0.704452214368453,"reproductive",FALSE
+"middle leg","front leg",0.742623009467112,"reproductive",FALSE
+"pharynx","middle leg",0.909984333098294,"reproductive",FALSE
+"reproductive","abdomen",1,"reproductive",FALSE
+"head","antenna",1,"reproductive",FALSE
+"hemolymph","enteric",1,"reproductive",FALSE
+"thoracic-abdominal","enteric",1,"reproductive",FALSE
+"front leg","eye",1,"reproductive",FALSE
+"haltere","eye",1,"reproductive",FALSE
+"middle leg","eye",1,"reproductive",FALSE
+"wing","eye",1,"reproductive",FALSE
+"haltere","front leg",1,"reproductive",FALSE
+"wing","front leg",1,"reproductive",FALSE
+"wing","haltere",1,"reproductive",FALSE
+"thoracic-abdominal","hemolymph",1,"reproductive",FALSE
+"middle leg","hind leg",1,"reproductive",FALSE
+"pharynx","hind leg",1,"reproductive",FALSE
+"thorax","hind leg",1,"reproductive",FALSE
+"thorax","middle leg",1,"reproductive",FALSE
+"wing","middle leg",1,"reproductive",FALSE
+"proboscis","pharynx",1,"reproductive",FALSE
+"thorax","pharynx",1,"reproductive",FALSE
+"thorax","proboscis",1,"reproductive",FALSE

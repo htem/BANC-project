@@ -13,25 +13,6 @@ calculate_influence_norms <- function(influence.df,
   }else{
     orig.target = TRUE
   }
-  # check <- influence.df %>%
-  #   dplyr::ungroup() %>%
-  #   dplyr::mutate(no_seeds = influence_original/influence_norm_original,
-  #                 no_seeds = ifelse(is.na(no_seeds),1,no_seeds),
-  #                 no_synapses = influence_original/influence_syn_norm) %>%
-  #   dplyr::group_by(target) %>%
-  #   dplyr::mutate(no_targets = length(unique(id))) %>%
-  #   dplyr::ungroup() %>%
-  #   dplyr::mutate(
-  #     no_seeds = as.numeric(no_seeds),
-  #     no_targets = as.numeric(no_targets)
-  #   ) %>%
-  #   dplyr::group_by(seed) %>%
-  #   dplyr::mutate(influence_per_seed = influence_original*no_seeds,
-  #                 influence_per_synapse = influence_original*no_synapses) %>%
-  #   dplyr::ungroup() %>%
-  #   dplyr::distinct(seed, seed_original, target, no_seeds, no_targets, .keep_all = TRUE) %>%
-  #   dplyr::arrange(seed, seed_original, target) %>%
-  #   as.data.frame()
   inf.threshold <- exp(const)
   if(!"influence_syn_norm"%in%colnames(influence.df)){
     influence.df$influence_syn_norm <- 1
@@ -58,17 +39,15 @@ calculate_influence_norms <- function(influence.df,
       no_targets = as.numeric(no_targets)
     ) %>%
     dplyr::group_by(seed) %>%
-    dplyr::mutate(influence_per_seed = influence_original*no_seeds,
+    dplyr::mutate(influence_per_seed = influence_original,#*no_seeds,
                   influence_per_synapse = influence_original*no_synapses) %>%
     dplyr::group_by(target, seed) %>%
     dplyr::mutate(influence = sum(influence_original,na.rm = TRUE),
-                  total_seeds = sum(no_seeds,na.rm=TRUE),
-                  total_synapses = sum(no_synapses,na.rm=TRUE),
-                  influence_norm = sum(influence_per_seed,na.rm = TRUE)/(total_seeds*no_targets),
+                  influence_norm = sum(influence_per_seed,na.rm = TRUE)/(no_seeds*no_targets),
                   influence = ifelse(influence<inf.threshold,inf.threshold,influence),
                   influence_norm = ifelse(influence_norm<inf.threshold,inf.threshold,influence_norm),
-                  influence_norm = sum(influence_norm,na.rm = TRUE),
-                  influence_syn_norm =  sum(influence_per_synapse,na.rm = TRUE)/(no_targets*total_synapses),
+                  #influence_norm = sum(influence_norm,na.rm = TRUE),
+                  influence_syn_norm =  sum(influence_per_synapse,na.rm = TRUE)/(no_targets*no_synapses),
                   influence_syn_norm = ifelse(influence_syn_norm<inf.threshold,inf.threshold,influence_syn_norm),
                   influence_syn_norm = sum(influence_syn_norm,na.rm = TRUE),
                   influence_norm_log = log(influence_norm),
@@ -127,6 +106,1446 @@ calculate_influence_norms <- function(influence.df,
   influence.df
 }
 
+############################################################
+## FUNCTION: write_anova_summary (UPDATED)
+## Purpose:
+##   Run a two-way ANOVA (source × target) on raw replicates
+##   and write a concise, conditional figure-legend–style
+##   summary + supporting stats to a .txt file.
+##
+## Inputs:
+##   - df_raw  : data.frame/tibble with columns:
+##               source (factor/character), target (factor/character), value (numeric)
+##               Must contain REPLICATES per (source, target) for classical ANOVA.
+##               If no replication, a permutation-based test is used instead.
+##   - out_path: file path for the .txt output
+##
+## Optional:
+##   - perms           : permutations for the no-replication test (default 5000)
+##   - seed            : RNG seed for permutations (default 123)
+##   - alpha           : significance threshold for language (default 0.05)
+##   - use_sum_to_zero : if TRUE, set contrasts to c("contr.sum","contr.poly")
+##   - force_treatment : if TRUE, set contrasts to c("contr.treatment","contr.poly")
+##                        (takes precedence over use_sum_to_zero if both set)
+##
+## Requires: dplyr, car, effectsize
+############################################################
+
+#' Format a data frame / tibble as a plain-text table (no truncation)
+#'
+#' Uses knitr::kable with "pipe" format to produce a Markdown-style table
+#' that shows ALL columns and ALL rows without tibble's truncation.
+#'
+#' @param x A data.frame or tibble
+#' @param digits Number of significant digits for numeric columns (default 4)
+#' @return Character vector of lines suitable for writeLines / cat
+format_table_txt <- function(x, digits = 4) {
+  knitr::kable(x, format = "pipe", digits = digits)
+}
+
+#' Format a p-value for human-readable statistical prose
+#'
+#' Produces concise p-value strings: values >= 0.001 shown to 3 significant
+#' figures; smaller values use coefficient × 10^exponent notation.
+#'
+#' @param p Numeric p-value
+#' @param digits Significant figures (default 3)
+#' @return Character string, e.g. "0.929", "3.83\u00d710^-24", "< 2.2\u00d710^-16"
+fmt_p_value <- function(p, digits = 3) {
+  vapply(p, function(x) {
+    if (is.na(x)) return("NA")
+    if (!is.finite(x) || x < 2.2e-16) return("< 2.2\u00d710^-16")
+    if (x >= 0.001) return(as.character(signif(x, digits)))
+    expo <- floor(log10(x))
+    coef <- signif(x / 10^expo, digits)
+    sprintf("%s\u00d710^%d", coef, expo)
+  }, character(1))
+}
+
+#' Humanise a group name for statistical prose
+#'
+#' Replaces underscores with spaces for readability in figure legends.
+#'
+#' @param x Character vector of group names
+#' @return Character vector with underscores replaced by spaces
+humanise_group <- function(x) gsub("_", " ", x)
+
+write_anova_summary <- function(df_raw,
+                                out_path,
+                                perms = 5000,
+                                seed = 123,
+                                alpha = 0.05,
+                                use_sum_to_zero = FALSE,
+                                force_treatment = FALSE) {
+  # ---- Package checks ----
+  for (pkg in c("dplyr", "car", "effectsize")) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop("Package '", pkg, "' is required but not installed.")
+    }
+  }
+  
+  # ---- Validate inputs ----
+  if (!all(c("source","target","value") %in% base::names(df_raw))) {
+    stop("df_raw must have columns: source, target, value")
+  }
+  
+  # ---- Coerce & basic counts ----
+  df_raw <- df_raw |>
+    dplyr::mutate(
+      source = base::as.factor(source),
+      target = base::as.factor(target),
+      value  = base::as.numeric(value)
+    )
+  
+  n_obs <- base::nrow(df_raw)
+  n_src <- base::nlevels(df_raw$source)
+  n_tgt <- base::nlevels(df_raw$target)
+  
+  # ---- Replication check ----
+  cell_counts <- df_raw |>
+    dplyr::count(source, target, name = "n")
+  has_replication <- base::any(cell_counts$n > 1)
+  
+  # ---- Helpers ----
+  .fmt_p <- function(p) {
+    val <- fmt_p_value(p)
+    if (startsWith(val, "<")) paste("p", val) else paste("p =", val)
+  }
+  .sig_word <- function(p, alpha) if (base::is.finite(p) && p < alpha) "significant" else "not significant"
+  .es_label <- function(eta) {
+    if (is.na(eta)) return("—")
+    if (eta < 0.01) "negligible"
+    else if (eta < 0.06) "small"
+    else if (eta < 0.14) "moderate"
+    else "large"
+  }
+  add_section <- function(title, obj = NULL) {
+    hdr <- paste0("\n", title, "\n", strrep("-", max(3, nchar(title))), "\n")
+    out_lines <<- c(out_lines, hdr)
+    if (!is.null(obj)) {
+      tbl <- if (inherits(obj, "data.frame")) format_table_txt(obj)
+             else utils::capture.output(obj)
+      out_lines <<- c(out_lines, tbl)
+    }
+  }
+  
+  # ---- Collect output lines ----
+  out_lines <- character()
+  add_section("Two-way ANOVA (source × target) Summary")
+  out_lines <- c(
+    out_lines,
+    paste0("Date: ", base::format(base::Sys.time(), "%Y-%m-%d %H:%M:%S")),
+    paste0("Observations: ", n_obs),
+    paste0("Unique sources: ", n_src, " | Unique targets: ", n_tgt),
+    paste0("Replication present: ", has_replication)
+  )
+  
+  if (has_replication) {
+    # ---------- Classical Type-III ANOVA ----------
+    old_contr <- base::options("contrasts")
+    changed_contr <- FALSE
+    
+    # Choose contrast coding (treatment overrides sum-to-zero if both requested)
+    if (isTRUE(force_treatment)) {
+      base::options(contrasts = c("contr.treatment","contr.poly"))
+      changed_contr <- TRUE
+      contrast_label <- "treatment contrasts"
+    } else if (isTRUE(use_sum_to_zero)) {
+      base::options(contrasts = c("contr.sum","contr.poly"))
+      changed_contr <- TRUE
+      contrast_label <- "sum-to-zero contrasts"
+    } else {
+      contrast_label <- "session contrasts"
+    }
+    
+    fit_lm  <- stats::lm(value ~ source * target, data = df_raw)
+    anova_3 <- car::Anova(fit_lm, type = "III")
+    es_tbl  <- effectsize::eta_squared(anova_3, partial = TRUE, ci = 0.95) |>
+      base::as.data.frame()
+    
+    add_section("Type-III ANOVA table", anova_3)
+    add_section("Partial eta^2 (95% CI)", es_tbl)
+    
+    # Extract rows
+    pick_row <- function(tab, pattern) {
+      r <- base::grep(pattern, base::rownames(tab), perl = TRUE)
+      if (length(r) != 1L) stop("Could not uniquely find row matching: ", pattern)
+      tab[r, , drop = FALSE]
+    }
+    pick_es <- function(param_regex, es_df) {
+      r <- base::grep(param_regex, es_df$Parameter, perl = TRUE)
+      if (length(r) != 1L) return(c(eta = NA_real_, lo = NA_real_, hi = NA_real_))
+      c(
+        eta = es_df[r, grep("Eta2",   names(es_df))][[1]],
+        lo  = es_df[r, grep("CI_low", names(es_df))][[1]],
+        hi  = es_df[r, grep("CI_high",names(es_df))][[1]]
+      )
+    }
+    
+    row_int <- pick_row(anova_3, "source:\\s*target")
+    row_src <- pick_row(anova_3, "^source$")
+    row_tgt <- pick_row(anova_3, "^target$")
+    df_res  <- as.numeric(anova_3["Residuals","Df"])
+    
+    df1_int <- as.numeric(row_int[,"Df"]); F_int <- as.numeric(row_int[,"F value"]); p_int <- as.numeric(row_int[,"Pr(>F)"])
+    df1_src <- as.numeric(row_src[,"Df"]); F_src <- as.numeric(row_src[,"F value"]); p_src <- as.numeric(row_src[,"Pr(>F)"])
+    df1_tgt <- as.numeric(row_tgt[,"Df"]); F_tgt <- as.numeric(row_tgt[,"F value"]); p_tgt <- as.numeric(row_tgt[,"Pr(>F)"])
+    
+    es_int <- pick_es("source:\\s*target", es_tbl)
+    es_src <- pick_es("^source$",         es_tbl)
+    es_tgt <- pick_es("^target$",         es_tbl)
+    
+    # Dynamic phrasing
+    phr_int_sig <- .sig_word(p_int, alpha)
+    phr_src_sig <- .sig_word(p_src, alpha)
+    phr_tgt_sig <- .sig_word(p_tgt, alpha)
+    
+    lab_int <- .es_label(es_int["eta"])
+    lab_src <- .es_label(es_src["eta"])
+    lab_tgt <- .es_label(es_tgt["eta"])
+    
+    # Optional note if interaction is largest effect
+    largest_term <- c(interaction = es_int["eta"], source = es_src["eta"], target = es_tgt["eta"])
+    dominant_note <- if (!any(is.na(largest_term)) && which.max(largest_term) == 1L)
+      " The interaction carried the largest effect size among tested terms." else ""
+    
+    # Legend sentence (conditional, concise)
+    legend_text <- sprintf(
+      paste0("Two-way ANOVA (Type-III SS; %s) on %d observations ",
+             "with %d sources and %d targets found a %s source×target interaction, ",
+             "F(%d, %d) = %.2f, %s, partial η² = %.2f [%.2f–%.2f, %s]. ",
+             "Source main effect was %s, F(%d, %d) = %.2f, %s, partial η² = %.2f (%s); ",
+             "target main effect was %s, F(%d, %d) = %.2f, %s, partial η² = %.2f (%s).%s"),
+      contrast_label, n_obs, n_src, n_tgt,
+      phr_int_sig,
+      df1_int, df_res, F_int, .fmt_p(p_int), es_int["eta"], es_int["lo"], es_int["hi"], lab_int,
+      phr_src_sig, df1_src, df_res, F_src, .fmt_p(p_src), es_src["eta"], lab_src,
+      phr_tgt_sig, df1_tgt, df_res, F_tgt, .fmt_p(p_tgt), es_tgt["eta"], lab_tgt,
+      dominant_note
+    )
+    
+    add_section("Concise figure-legend statement", legend_text)
+    
+    # Add additive vs interaction comparison
+    fit_add   <- stats::lm(value ~ source + target, data = df_raw)
+    delta_tbl <- stats::anova(fit_add, fit_lm)
+    add_section("Model comparison: additive vs interaction", delta_tbl)
+    
+    # Restore contrasts only if changed
+    if (changed_contr) base::options(contrasts = old_contr$contrasts)
+    
+  } else {
+    # ---------- No replication: permutation-based interaction test ----------
+    add_section("No replication detected — running permutation-based interaction test")
+    
+    fit_add   <- stats::lm(value ~ source + target, data = df_raw)
+    ss_obs    <- base::sum(stats::residuals(fit_add)^2)
+    df_int    <- (base::nlevels(df_raw$source) - 1L) * (base::nlevels(df_raw$target) - 1L)
+    
+    base::set.seed(seed)
+    perm_stats <- base::rep(NA_real_, perms)
+    for (b in base::seq_len(perms)) {
+      dfp <- df_raw |>
+        dplyr::group_by(target) |>
+        dplyr::mutate(value = base::sample(value)) |>
+        dplyr::ungroup()
+      perm_stats[b] <- base::sum(stats::residuals(stats::lm(value ~ source + target, data = dfp))^2)
+    }
+    p_perm <- (1 + base::sum(perm_stats >= ss_obs)) / (perms + 1)
+    
+    add_section("Permutation test for interaction (no replication)")
+    out_lines <- c(
+      out_lines,
+      paste0("Observed SS_interaction_like = ", base::format(ss_obs, digits = 5)),
+      paste0("Interaction df = ", df_int),
+      paste0("Permutations = ", perms, ", p_perm = ", base::format(p_perm, digits = 3, scientific = TRUE))
+    )
+    
+    # Concise statement
+    phr_perm <- .sig_word(p_perm, alpha)
+    legend_text <- paste0(
+      "Two-way structure without replication: a permutation test of nonadditivity (",
+      n_obs, " observations; ", n_src, " sources; ", n_tgt, " targets) was ",
+      phr_perm, " (p_perm = ", base::format(p_perm, digits = 3, scientific = TRUE), ")."
+    )
+    add_section("Concise figure-legend statement", legend_text)
+  }
+  
+  # ---- Write to file ----
+  base::dir.create(base::dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+  base::writeLines(out_lines, con = out_path)
+  
+  # ---- Return legend text invisibly ----
+  invisible(tail(out_lines, n = 1))
+}
+
+############################################################
+## FUNCTION: write_ks_summary
+## Purpose:
+##   Run two-sample Kolmogorov–Smirnov tests comparing each
+##   group (type) vs a reference group (default "other"),
+##   Holm-adjust p-values, and write a concise, conditional
+##   figure-legend–style summary + supporting tables to .txt.
+##
+## Inputs:
+##   - df         : data.frame/tibble with columns:
+##                  type (factor/character), prop (numeric)
+##   - out_path   : file path for the .txt output
+##   - type_col   : name of the type column (default "type")
+##   - value_col  : name of the numeric column (default "prop")
+##   - ref_type   : name of the reference group (default "other")
+##   - adjust_method : p-value adjustment (default "holm")
+##   - alpha      : significance threshold for language (default 0.05)
+##   - p_floor    : floor for p-value display to avoid zeros (default 1e-300)
+##
+## Requires: dplyr, forcats
+############################################################
+write_ks_summary <- function(df,
+                             out_path,
+                             type_col   = "type",
+                             value_col  = "prop",
+                             ref_type   = "other",
+                             adjust_method = "holm",
+                             alpha      = 0.05,
+                             p_floor    = 1e-300) {
+  # ---- checks ----
+  for (pkg in c("dplyr","forcats")) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop("Package '", pkg, "' is required but not installed.")
+    }
+  }
+  if (!all(c(type_col, value_col) %in% names(df))) {
+    stop("df must contain columns: '", type_col, "' and '", value_col, "'.")
+  }
+  
+  # ---- prep ----
+  df <- df |>
+    dplyr::rename(type = !!type_col, value = !!value_col) |>
+    dplyr::mutate(
+      type  = base::as.character(type),
+      value = base::as.numeric(value)
+    ) |>
+    dplyr::filter(!is.na(type), is.finite(value))
+  
+  n_total <- nrow(df)
+  n_types <- dplyr::n_distinct(df$type)
+  
+  if (!ref_type %in% df$type) {
+    stop("Reference group '", ref_type, "' not found in 'type' column.")
+  }
+  
+  # Reorder types by median(value), ref_type last (purely cosmetic for tables)
+  type_order <- df |>
+    dplyr::filter(type != ref_type) |>
+    dplyr::group_by(type) |>
+    dplyr::summarise(median_value = stats::median(value, na.rm = TRUE), .groups = "drop") |>
+    dplyr::arrange(dplyr::desc(median_value)) |>
+    dplyr::pull(type)
+  type_order <- c(type_order, ref_type)
+  df <- df |>
+    dplyr::mutate(type = forcats::fct_relevel(type, type_order))
+  
+  # Reference vector
+  ref_vec <- df |>
+    dplyr::filter(type == ref_type) |>
+    dplyr::pull(value)
+  
+  if (length(ref_vec) < 2) {
+    stop("Reference group '", ref_type, "' has fewer than 2 observations, KS test not meaningful.")
+  }
+  
+  # KS per type vs ref
+  ks_results <- df |>
+    dplyr::filter(type != ref_type) |>
+    dplyr::group_by(type) |>
+    dplyr::summarise(
+      n_group     = dplyr::n(),
+      median_val  = stats::median(value, na.rm = TRUE),
+      ks_D        = suppressWarnings(stats::ks.test(value, ref_vec)$statistic[[1]]),
+      p_value     = suppressWarnings(stats::ks.test(value, ref_vec)$p.value),
+      .groups = "drop"
+    ) |>
+    dplyr::mutate(
+      p_adj   = stats::p.adjust(p_value, method = adjust_method),
+      signif  = dplyr::case_when(
+        p_adj <= 1e-4 ~ "****",
+        p_adj <= 1e-3 ~ "***",
+        p_adj <= 1e-2 ~ "**",
+        p_adj <= 5e-2 ~ "*",
+        TRUE          ~ "ns"
+      ),
+      # display helper to avoid zeros from underflow
+      p_adj_disp = vapply(p_adj, fmt_p_value, character(1))
+    ) |>
+    dplyr::arrange(p_adj)
+  
+  # Summary medians (ordered)
+  med_table <- df |>
+    dplyr::group_by(type) |>
+    dplyr::summarise(
+      n = dplyr::n(),
+      median_value = stats::median(value, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    dplyr::arrange(dplyr::desc(median_value))
+  
+  # Helper: conditional prose
+  sig_types <- ks_results |>
+    dplyr::filter(p_adj < alpha) |>
+    dplyr::pull(type) |> as.character()
+  ns_types  <- ks_results |>
+    dplyr::filter(p_adj >= alpha) |>
+    dplyr::pull(type) |> as.character()
+  
+  fmt_list <- function(x) {
+    if (length(x) == 0) return("none")
+    if (length(x) == 1) return(x)
+    paste0(paste(x[-length(x)], collapse = ", "), " and ", x[length(x)])
+  }
+  
+  # Compact roll-up lines
+  line_sig <- if (length(sig_types)) {
+    paste0("Significant (Holm-adjusted α=", alpha, "): ", fmt_list(sig_types), ".")
+  } else {
+    paste0("No groups differed from '", ref_type, "' at Holm-adjusted α=", alpha, ".")
+  }
+  line_ns <- if (length(ns_types)) {
+    paste0("Not significant: ", fmt_list(ns_types), ".")
+  } else {
+    NULL
+  }
+  
+  # Compose figure-legend style statement
+  # Example: "Two-sample KS tests (Holm-adjusted) comparing each type to 'other' on prop (N=..., K=...) ..."
+  legend_text <- paste0(
+    "Two-sample Kolmogorov–Smirnov tests (", adjust_method,
+    "-adjusted) comparing each group to '", ref_type, "' (N=",
+    n_total, " observations; K=", n_types, " groups) on '", value_col, "'. ",
+    line_sig, if (!is.null(line_ns)) paste0(" ", line_ns) else ""
+  )
+  
+  # ---- write to file ----
+  out_lines <- c(
+    paste0("KS Summary (vs '", ref_type, "')"),
+    strrep("-", 60),
+    paste0("Date: ", base::format(base::Sys.time(), "%Y-%m-%d %H:%M:%S")),
+    paste0("Observations: ", n_total),
+    paste0("Groups (types): ", n_types),
+    paste0("Reference group: '", ref_type, "'"),
+    paste0("Adjustment: ", adjust_method, " | alpha = ", alpha),
+    "",
+    "Legend-style statement",
+    "----------------------",
+    legend_text,
+    "",
+    "Medians by group (descending)",
+    "-----------------------------",
+    format_table_txt(med_table),
+    "",
+    "KS results vs reference (sorted by adjusted p-value)",
+    "----------------------------------------------------",
+    format_table_txt(
+      ks_results |>
+        dplyr::select(type, n_group, median_val, ks_D, p_value, p_adj, signif, p_adj_disp)
+    )
+  )
+
+  base::dir.create(base::dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+  base::writeLines(out_lines, con = out_path)
+  
+  invisible(list(
+    legend = legend_text,
+    medians = med_table,
+    results = ks_results
+  ))
+}
+
+############################################################
+## FUNCTION: write_nonparam_summary
+## Purpose:
+##   Run BOTH Kolmogorov–Smirnov tests (distribution) AND
+##   Wilcoxon rank-sum tests (median) comparing each group
+##   vs a reference group, with Holm adjustment. Write a
+##   concise figure-legend–style summary to .txt.
+##
+## Inputs:
+##   - df         : data.frame/tibble with columns:
+##                  type (factor/character), value (numeric)
+##   - out_path   : file path for the .txt output
+##   - type_col   : name of the type column (default "type")
+##   - value_col  : name of the numeric column (default "prop")
+##   - ref_type   : name of the reference group (default "other")
+##   - adjust_method : p-value adjustment (default "holm")
+##   - alpha      : significance threshold for language (default 0.05)
+##   - p_floor    : floor for p-value display to avoid zeros (default 1e-300)
+##
+## Requires: dplyr, forcats
+############################################################
+write_nonparam_summary <- function(df,
+                                   out_path,
+                                   type_col   = "type",
+                                   value_col  = "prop",
+                                   ref_type   = "other",
+                                   adjust_method = "holm",
+                                   alpha      = 0.05,
+                                   p_floor    = 1e-300,
+                                   calculate_effect_size = TRUE) {
+  # ---- checks ----
+  for (pkg in c("dplyr","forcats")) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop("Package '", pkg, "' is required but not installed.")
+    }
+  }
+  if (!all(c(type_col, value_col) %in% names(df))) {
+    stop("df must contain columns: '", type_col, "' and '", value_col, "'.")
+  }
+
+  # ---- prep ----
+  df <- df |>
+    dplyr::rename(type = !!type_col, value = !!value_col) |>
+    dplyr::mutate(
+      type  = base::as.character(type),
+      value = base::as.numeric(value)
+    ) |>
+    dplyr::filter(!is.na(type), is.finite(value))
+
+  n_total <- nrow(df)
+  n_types <- dplyr::n_distinct(df$type)
+
+  if (!ref_type %in% df$type) {
+    stop("Reference group '", ref_type, "' not found in 'type' column.")
+  }
+
+  # Reorder types by median(value), ref_type last
+  type_order <- df |>
+    dplyr::filter(type != ref_type) |>
+    dplyr::group_by(type) |>
+    dplyr::summarise(median_value = stats::median(value, na.rm = TRUE), .groups = "drop") |>
+    dplyr::arrange(dplyr::desc(median_value)) |>
+    dplyr::pull(type)
+  type_order <- c(type_order, ref_type)
+  df <- df |>
+    dplyr::mutate(type = forcats::fct_relevel(type, type_order))
+
+  # Reference vector
+  ref_vec <- df |>
+    dplyr::filter(type == ref_type) |>
+    dplyr::pull(value)
+
+  if (length(ref_vec) < 2) {
+    stop("Reference group '", ref_type, "' has fewer than 2 observations, tests not meaningful.")
+  }
+
+  # Reference median for reporting
+  ref_median <- stats::median(ref_vec, na.rm = TRUE)
+
+  # Run both tests per type vs ref
+  if (calculate_effect_size) {
+    test_results <- df |>
+      dplyr::filter(type != ref_type) |>
+      dplyr::group_by(type) |>
+      dplyr::summarise(
+        n_group     = dplyr::n(),
+        median_val  = stats::median(value, na.rm = TRUE),
+
+        # KS test (distribution)
+        ks_D        = suppressWarnings(stats::ks.test(value, ref_vec)$statistic[[1]]),
+        ks_p        = suppressWarnings(stats::ks.test(value, ref_vec)$p.value),
+
+        # Wilcoxon rank-sum test (median)
+        wilcox_W    = suppressWarnings(stats::wilcox.test(value, ref_vec, exact = FALSE)$statistic[[1]]),
+        wilcox_p    = suppressWarnings(stats::wilcox.test(value, ref_vec, exact = FALSE)$p.value),
+
+        # Effect size (rank-biserial correlation)
+        rank_biserial = {
+          n1 <- dplyr::n()
+          n2 <- length(ref_vec)
+          U <- suppressWarnings(stats::wilcox.test(value, ref_vec, exact = FALSE)$statistic[[1]])
+          (2 * U) / (n1 * n2) - 1
+        },
+
+        .groups = "drop"
+      )
+  } else {
+    test_results <- df |>
+      dplyr::filter(type != ref_type) |>
+      dplyr::group_by(type) |>
+      dplyr::summarise(
+        n_group     = dplyr::n(),
+        median_val  = stats::median(value, na.rm = TRUE),
+
+        # KS test (distribution)
+        ks_D        = suppressWarnings(stats::ks.test(value, ref_vec)$statistic[[1]]),
+        ks_p        = suppressWarnings(stats::ks.test(value, ref_vec)$p.value),
+
+        # Wilcoxon rank-sum test (median)
+        wilcox_W    = suppressWarnings(stats::wilcox.test(value, ref_vec, exact = FALSE)$statistic[[1]]),
+        wilcox_p    = suppressWarnings(stats::wilcox.test(value, ref_vec, exact = FALSE)$p.value),
+
+        .groups = "drop"
+      )
+  }
+
+  # Apply Holm correction to BOTH sets of p-values
+  if (calculate_effect_size) {
+    test_results <- test_results |>
+      dplyr::mutate(
+        ks_p_adj     = stats::p.adjust(ks_p, method = adjust_method),
+        wilcox_p_adj = stats::p.adjust(wilcox_p, method = adjust_method),
+
+        # Effect size magnitude
+        effect_size = dplyr::case_when(
+          abs(rank_biserial) < 0.1 ~ "negligible",
+          abs(rank_biserial) < 0.3 ~ "small",
+          abs(rank_biserial) < 0.5 ~ "medium",
+          TRUE ~ "large"
+        ),
+
+        # Significance stars for KS test
+        ks_signif = dplyr::case_when(
+          ks_p_adj <= 1e-4 ~ "****",
+          ks_p_adj <= 1e-3 ~ "***",
+          ks_p_adj <= 1e-2 ~ "**",
+          ks_p_adj <= 5e-2 ~ "*",
+          TRUE             ~ "ns"
+        ),
+
+        # Significance stars for Wilcoxon test
+        wilcox_signif = dplyr::case_when(
+          wilcox_p_adj <= 1e-4 ~ "****",
+          wilcox_p_adj <= 1e-3 ~ "***",
+          wilcox_p_adj <= 1e-2 ~ "**",
+          wilcox_p_adj <= 5e-2 ~ "*",
+          TRUE                 ~ "ns"
+        ),
+
+        # Display helpers
+        ks_p_adj_disp = vapply(ks_p_adj, fmt_p_value, character(1)),
+        wilcox_p_adj_disp = vapply(wilcox_p_adj, fmt_p_value, character(1))
+      ) |>
+      dplyr::arrange(ks_p_adj)
+  } else {
+    test_results <- test_results |>
+      dplyr::mutate(
+        ks_p_adj     = stats::p.adjust(ks_p, method = adjust_method),
+        wilcox_p_adj = stats::p.adjust(wilcox_p, method = adjust_method),
+
+        # Significance stars for KS test
+        ks_signif = dplyr::case_when(
+          ks_p_adj <= 1e-4 ~ "****",
+          ks_p_adj <= 1e-3 ~ "***",
+          ks_p_adj <= 1e-2 ~ "**",
+          ks_p_adj <= 5e-2 ~ "*",
+          TRUE             ~ "ns"
+        ),
+
+        # Significance stars for Wilcoxon test
+        wilcox_signif = dplyr::case_when(
+          wilcox_p_adj <= 1e-4 ~ "****",
+          wilcox_p_adj <= 1e-3 ~ "***",
+          wilcox_p_adj <= 1e-2 ~ "**",
+          wilcox_p_adj <= 5e-2 ~ "*",
+          TRUE                 ~ "ns"
+        ),
+
+        # Display helpers
+        ks_p_adj_disp = vapply(ks_p_adj, fmt_p_value, character(1)),
+        wilcox_p_adj_disp = vapply(wilcox_p_adj, fmt_p_value, character(1))
+      ) |>
+      dplyr::arrange(ks_p_adj)
+  }
+
+  # Summary medians (ordered)
+  med_table <- df |>
+    dplyr::group_by(type) |>
+    dplyr::summarise(
+      n = dplyr::n(),
+      median_value = stats::median(value, na.rm = TRUE),
+      iqr = stats::IQR(value, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    dplyr::arrange(dplyr::desc(median_value))
+
+  # Helper: format p-value to 3 significant figures
+  fmt_p <- function(p) {
+    fmt_p_value(p)
+  }
+
+  # Identify significant types with details
+  if (calculate_effect_size) {
+    wilcox_sig_df <- test_results |>
+      dplyr::filter(wilcox_p_adj < alpha) |>
+      dplyr::select(type, wilcox_p_adj, rank_biserial, effect_size)
+
+    # Helper: format list with p-values and effect sizes
+    fmt_wilcox_list <- function(df) {
+      if (nrow(df) == 0) return("none")
+      items <- purrr::pmap_chr(df, function(type, wilcox_p_adj, rank_biserial, effect_size) {
+        sprintf("%s (p=%s, r=%.3f, %s effect)",
+                type, fmt_p(wilcox_p_adj), rank_biserial, effect_size)
+      })
+      if (length(items) == 1) return(items)
+      paste0(paste(items[-length(items)], collapse = "; "), "; and ", items[length(items)])
+    }
+
+    # Compose concise legend-style statement
+    legend_text <- paste0(
+      "Non-parametric comparisons of each group to '", ref_type, "' ",
+      "(N=", n_total, "; K=", n_types, " groups; ", adjust_method, "-adjusted α=", alpha, "): ",
+      "Wilcoxon rank-sum tests showed significant differences for ",
+      if (nrow(wilcox_sig_df) > 0) fmt_wilcox_list(wilcox_sig_df) else "none",
+      ". Effect sizes reported as rank-biserial correlation (r)."
+    )
+  } else {
+    wilcox_sig_df <- test_results |>
+      dplyr::filter(wilcox_p_adj < alpha) |>
+      dplyr::select(type, wilcox_p_adj)
+
+    # Helper: format list with just p-values
+    fmt_wilcox_list <- function(df) {
+      if (nrow(df) == 0) return("none")
+      items <- purrr::pmap_chr(df, function(type, wilcox_p_adj) {
+        sprintf("%s (p=%s)", type, fmt_p(wilcox_p_adj))
+      })
+      if (length(items) == 1) return(items)
+      paste0(paste(items[-length(items)], collapse = "; "), "; and ", items[length(items)])
+    }
+
+    # Compose concise legend-style statement
+    legend_text <- paste0(
+      "Non-parametric comparisons of each group to '", ref_type, "' ",
+      "(N=", n_total, "; K=", n_types, " groups; ", adjust_method, "-adjusted α=", alpha, "): ",
+      "Wilcoxon rank-sum tests showed significant differences for ",
+      if (nrow(wilcox_sig_df) > 0) fmt_wilcox_list(wilcox_sig_df) else "none", "."
+    )
+  }
+
+  # ---- write to file ----
+  if (calculate_effect_size) {
+    wilcox_cols <- c("type", "n_group", "median_val", "wilcox_W", "wilcox_p", "wilcox_p_adj",
+                     "wilcox_signif", "wilcox_p_adj_disp", "rank_biserial", "effect_size")
+  } else {
+    wilcox_cols <- c("type", "n_group", "median_val", "wilcox_W", "wilcox_p", "wilcox_p_adj",
+                     "wilcox_signif", "wilcox_p_adj_disp")
+  }
+
+  out_lines <- c(
+    paste0("Non-parametric Summary (vs '", ref_type, "')"),
+    strrep("=", 70),
+    paste0("Date: ", base::format(base::Sys.time(), "%Y-%m-%d %H:%M:%S")),
+    paste0("Observations: ", n_total),
+    paste0("Groups (types): ", n_types),
+    paste0("Reference group: '", ref_type, "' (median = ", signif(ref_median, 4), ")"),
+    paste0("Adjustment: ", adjust_method, " | alpha = ", alpha),
+    "",
+    "Medians by group (descending)",
+    strrep("-", 70),
+    format_table_txt(med_table),
+    "",
+    "Kolmogorov-Smirnov tests (distribution differences)",
+    strrep("-", 70),
+    format_table_txt(
+      test_results |>
+        dplyr::select(type, n_group, median_val, ks_D, ks_p, ks_p_adj, ks_signif, ks_p_adj_disp)
+    ),
+    "",
+    "Wilcoxon rank-sum tests (median differences)",
+    strrep("-", 70),
+    format_table_txt(
+      test_results |>
+        dplyr::select(dplyr::all_of(wilcox_cols))
+    ),
+    "",
+    strrep("=", 70),
+    "FIGURE LEGEND (copy-paste ready)",
+    strrep("=", 70),
+    legend_text,
+    strrep("=", 70)
+  )
+
+  base::dir.create(base::dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+  base::writeLines(out_lines, con = out_path)
+
+  invisible(list(
+    legend = legend_text,
+    medians = med_table,
+    results = test_results
+  ))
+}
+
+#' Perform pairwise Wilcoxon rank-sum tests for specific group comparisons
+#'
+#' @param data Data frame containing the data
+#' @param value_col Name of the column containing values (unquoted)
+#' @param group_col Name of the column containing groups (unquoted, default = super_class)
+#' @param comparisons List of character vectors, each with two group names to compare
+#' @param out_path Path for output .txt file
+#' @param adjust_method P-value adjustment method (default = "holm")
+#' @param alpha Significance level (default = 0.05)
+write_pairwise_wilcox <- function(data, value_col, group_col = super_class,
+                                   comparisons, out_path,
+                                   adjust_method = "holm", alpha = 0.05) {
+
+  gsym <- rlang::ensym(group_col)
+  vsym <- rlang::ensym(value_col)
+
+  # Prepare data
+  df <- data %>%
+    dplyr::select(!!gsym, !!vsym) %>%
+    dplyr::filter(is.finite(!!vsym)) %>%
+    dplyr::mutate(!!gsym := droplevels(as.factor(!!gsym)))
+
+  # Calculate medians for all groups
+  meds <- df %>%
+    dplyr::group_by(!!gsym) %>%
+    dplyr::summarise(
+      n = dplyr::n(),
+      median_value = stats::median(!!vsym, na.rm = TRUE),
+      iqr = stats::IQR(!!vsym, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    dplyr::rename(group = !!gsym)
+
+  # Perform Wilcoxon tests for each comparison
+  test_results <- purrr::map_dfr(comparisons, function(pair) {
+    group1_data <- df %>% dplyr::filter(!!gsym == pair[1]) %>% dplyr::pull(!!vsym)
+    group2_data <- df %>% dplyr::filter(!!gsym == pair[2]) %>% dplyr::pull(!!vsym)
+
+    wtest <- stats::wilcox.test(group1_data, group2_data, exact = FALSE)
+
+    # Calculate effect size using rank-biserial correlation
+    # The rank-biserial correlation is a standardized measure of effect size for Wilcoxon test
+    # Formula: r = (2*U)/(n1*n2) - 1, where U is the Mann-Whitney U statistic
+    # This gives: r = +1 when group1 > group2 always, r = -1 when group1 < group2 always
+    n1 <- length(group1_data)
+    n2 <- length(group2_data)
+
+    U <- wtest$statistic[[1]]
+    rank_biserial <- (2 * U) / (n1 * n2) - 1
+
+    # Effect size interpretation
+    effect_magnitude <- dplyr::case_when(
+      abs(rank_biserial) < 0.1 ~ "negligible",
+      abs(rank_biserial) < 0.3 ~ "small",
+      abs(rank_biserial) < 0.5 ~ "medium",
+      TRUE ~ "large"
+    )
+
+    tibble::tibble(
+      group1 = pair[1],
+      group2 = pair[2],
+      n1 = n1,
+      n2 = n2,
+      median1 = stats::median(group1_data, na.rm = TRUE),
+      median2 = stats::median(group2_data, na.rm = TRUE),
+      W = wtest$statistic[[1]],
+      p_value = wtest$p.value,
+      rank_biserial = rank_biserial,
+      effect_size = effect_magnitude
+    )
+  })
+
+  # Apply Holm correction
+  test_results <- test_results %>%
+    dplyr::mutate(
+      p_adj = stats::p.adjust(p_value, method = adjust_method),
+      signif = dplyr::case_when(
+        p_adj <= 0.0001 ~ "****",
+        p_adj <= 0.001  ~ "***",
+        p_adj <= 0.01   ~ "**",
+        p_adj <= alpha  ~ "*",
+        TRUE            ~ "ns"
+      ),
+      p_adj_disp = vapply(p_adj, fmt_p_value, character(1))
+    )
+
+  # Generate legend text
+  sig_comparisons <- test_results %>% dplyr::filter(p_adj <= alpha)
+  adj_label <- paste0(toupper(substring(adjust_method, 1, 1)),
+                      substring(adjust_method, 2))
+
+  if (nrow(sig_comparisons) > 0) {
+    comp_items <- sig_comparisons %>%
+      dplyr::mutate(
+        comp_text = sprintf("%s vs %s (p=%s, r=%.3f, %s effect)",
+                           humanise_group(group1), humanise_group(group2),
+                           p_adj_disp, rank_biserial, effect_size)
+      ) %>%
+      dplyr::pull(comp_text)
+
+    if (length(comp_items) == 1) {
+      sig_text <- comp_items
+    } else {
+      sig_text <- paste0(paste(comp_items[-length(comp_items)], collapse = "; "),
+                         " and ", comp_items[length(comp_items)])
+    }
+
+    legend <- sprintf(
+      "Pairwise Wilcoxon rank-sum tests with %s correction for multiple comparisons (\u03b1=%.2f) showed significant differences between the medians for %s. Effect sizes reported as rank-biserial correlation (r).",
+      adj_label, alpha, sig_text
+    )
+  } else {
+    legend <- sprintf(
+      "Pairwise Wilcoxon rank-sum tests with %s correction for multiple comparisons (\u03b1=%.2f) showed no significant differences between any group medians.",
+      adj_label, alpha
+    )
+  }
+
+  # Write output file
+  cat(file = out_path,
+      "Pairwise Wilcoxon Rank-Sum Tests\n",
+      "======================================================================\n",
+      sprintf("Date: %s\n", Sys.time()),
+      sprintf("Total observations: %d\n", nrow(df)),
+      sprintf("Number of groups: %d\n", length(unique(df[[rlang::as_string(gsym)]]))),
+      sprintf("Number of comparisons: %d\n", length(comparisons)),
+      sprintf("Adjustment method: %s | alpha = %.2f\n\n", adjust_method, alpha),
+
+      "Medians by group\n",
+      "----------------------------------------------------------------------\n",
+      sep = ""
+  )
+
+  # Write medians table
+  med_output <- format_table_txt(meds)
+  cat(file = out_path, append = TRUE, paste(med_output, collapse = "\n"), "\n")
+
+  cat(file = out_path, append = TRUE,
+      "\n\nPairwise comparisons (Wilcoxon rank-sum tests)\n",
+      "----------------------------------------------------------------------\n"
+  )
+
+  # Write test results
+  test_output <- format_table_txt(test_results %>%
+    dplyr::select(group1, group2, n1, n2, median1, median2, W, p_value, p_adj, signif, p_adj_disp, rank_biserial, effect_size))
+  cat(file = out_path, append = TRUE, paste(test_output, collapse = "\n"), "\n")
+
+  cat(file = out_path, append = TRUE,
+      "\n\n======================================================================\n",
+      "FIGURE LEGEND (copy-paste ready)\n",
+      "======================================================================\n",
+      legend, "\n",
+      "======================================================================\n"
+  )
+
+  list(
+    test_results = test_results,
+    medians = meds,
+    legend = legend
+  )
+}
+
+############################################################
+## FUNCTION: write_dunn_posthoc
+## Purpose:
+##   Kruskal-Wallis omnibus test followed by Dunn pairwise
+##   post-hoc tests (via rstatix::dunn_test). Reports results
+##   for highlighted groups and optionally appends formatted
+##   output to an existing .txt file.
+##
+## Inputs:
+##   - data          : data.frame/tibble
+##   - value_col     : name of numeric column (unquoted)
+##   - group_col     : name of grouping column (unquoted, default super_class)
+##   - highlights    : character vector of groups to highlight (default c("ascending","descending"))
+##   - adjust_method : p.adjust method (default "holm")
+##   - alpha         : significance threshold (default 0.05)
+##   - append_to     : optional file path to append results to
+##
+## Requires: dplyr, rstatix, rlang
+############################################################
+
+write_dunn_posthoc <- function(data, value_col, group_col = super_class,
+                               highlights = c("ascending", "descending"),
+                               group_labels = NULL,
+                               adjust_method = "holm", alpha = 0.05,
+                               append_to = NULL) {
+
+  gsym <- rlang::ensym(group_col)
+  vsym <- rlang::ensym(value_col)
+
+  # Prepare data
+  df <- data %>%
+    dplyr::select(!!gsym, !!vsym) %>%
+    dplyr::filter(is.finite(!!vsym)) %>%
+    dplyr::mutate(!!gsym := droplevels(as.factor(!!gsym)))
+
+  # Kruskal-Wallis omnibus test
+  fml <- stats::as.formula(paste(rlang::as_string(vsym), "~", rlang::as_string(gsym)))
+  kw <- rstatix::kruskal_test(df, formula = fml)
+
+  # Medians by group
+  meds <- df %>%
+    dplyr::group_by(!!gsym) %>%
+    dplyr::summarise(
+      n = dplyr::n(),
+      median_value = stats::median(!!vsym, na.rm = TRUE),
+      iqr = stats::IQR(!!vsym, na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    dplyr::rename(group = !!gsym)
+
+  # Dunn pairwise post-hoc
+  dunn <- rstatix::dunn_test(df, formula = fml, p.adjust.method = adjust_method)
+
+  # Annotate with medians
+  dunn_annotated <- dunn %>%
+    dplyr::left_join(meds %>% dplyr::select(group, median_value) %>%
+                       dplyr::rename(group1 = group, median1 = median_value), by = "group1") %>%
+    dplyr::left_join(meds %>% dplyr::select(group, median_value) %>%
+                       dplyr::rename(group2 = group, median2 = median_value), by = "group2")
+
+  # Highlighted pairs (involving highlight groups)
+  dunn_hl <- dunn_annotated %>%
+    dplyr::filter(group1 %in% highlights | group2 %in% highlights) %>%
+    dplyr::mutate(
+      hl       = ifelse(group1 %in% highlights, group1, group2),
+      hl_med   = ifelse(group1 %in% highlights, median1, median2),
+      other_med = ifelse(group1 %in% highlights, median2, median1),
+      hl_higher = hl_med > other_med,
+      comparison_type = ifelse(group1 %in% highlights & group2 %in% highlights,
+                               "within_highlights", "vs_other")
+    )
+
+  # --- Statement construction ---
+  adj_label <- paste0(toupper(substring(adjust_method, 1, 1)),
+                      substring(adjust_method, 2))
+
+  # Helper: format group name with optional parenthetical label
+  .label_group <- function(g) {
+    nm <- humanise_group(g)
+    if (!is.null(group_labels) && g %in% names(group_labels))
+      paste0(nm, " (", group_labels[g], ")")
+    else nm
+  }
+  .join_items <- function(items) {
+    if (length(items) == 1) return(items)
+    if (length(items) == 2) return(paste(items, collapse = " and "))
+    paste0(paste(items[-length(items)], collapse = ", "), " and ", items[length(items)])
+  }
+
+  # Split into cross (highlighted vs non-highlighted) and within (both highlighted)
+  cross_hl  <- dunn_hl %>% dplyr::filter(comparison_type == "vs_other")
+  within_hl <- dunn_hl %>% dplyr::filter(comparison_type == "within_highlights")
+
+  # Cross-comparisons: do ALL show highlighted group significantly higher?
+  cross_sig <- cross_hl %>% dplyr::filter(hl_higher, p.adj <= alpha)
+  all_cross_sig <- nrow(cross_sig) == nrow(cross_hl) & nrow(cross_hl) > 0
+
+  hl_text <- .join_items(vapply(highlights, .label_group, character(1)))
+
+  if (all_cross_sig) {
+    max_p <- max(cross_sig$p.adj)
+    p_fmt <- fmt_p_value(max_p)
+    p_clause <- if (startsWith(p_fmt, "<")) sprintf("all p %s", p_fmt)
+                else sprintf("all p \u2264 %s", p_fmt)
+    cross_stmt <- sprintf(
+      "%s had significantly higher medians than all other groups (%s)",
+      hl_text, p_clause)
+  } else if (nrow(cross_sig) > 0) {
+    # Fallback: list significant cross-comparisons individually
+    pair_items <- cross_sig %>%
+      dplyr::mutate(
+        other = ifelse(group1 %in% highlights, group2, group1),
+        item  = sprintf("%s vs %s (p=%s)",
+                        .label_group(hl), humanise_group(other),
+                        fmt_p_value(p.adj))) %>%
+      dplyr::pull(item)
+    cross_stmt <- sprintf("%s had significantly higher medians: %s",
+                          hl_text, .join_items(pair_items))
+  } else {
+    cross_stmt <- NULL
+  }
+
+  # Within-highlights summary
+  within_stmt <- NULL
+  if (nrow(within_hl) > 0) {
+    ns_rows  <- within_hl %>% dplyr::filter(p.adj > alpha)
+    sig_rows <- within_hl %>% dplyr::filter(p.adj <= alpha)
+    parts <- c()
+    if (nrow(ns_rows) > 0) {
+      ns_items <- ns_rows %>%
+        dplyr::mutate(item = sprintf("%s vs %s (p=%s)",
+                                     humanise_group(group1), humanise_group(group2),
+                                     fmt_p_value(p.adj))) %>%
+        dplyr::pull(item)
+      parts <- c(parts, sprintf("no significant difference between %s",
+                                .join_items(ns_items)))
+    }
+    if (nrow(sig_rows) > 0) {
+      sig_items <- sig_rows %>%
+        dplyr::mutate(item = sprintf("%s vs %s (p=%s)",
+                                     humanise_group(group1), humanise_group(group2),
+                                     fmt_p_value(p.adj))) %>%
+        dplyr::pull(item)
+      parts <- c(parts, sprintf("significant differences between %s",
+                                .join_items(sig_items)))
+    }
+    within_stmt <- paste("Among highlighted groups:", paste(parts, collapse = "; "))
+  }
+
+  # Combine
+  kw_stmt <- sprintf(
+    "Kruskal\u2013Wallis test showed significant variation across groups (\u03c7\u00b2(%d) = %.2f, p = %s).",
+    kw$df, kw$statistic, fmt_p_value(kw$p))
+
+  statement <- paste(kw_stmt,
+    sprintf("Post-hoc Dunn tests with %s correction for multiple comparisons (\u03b1=%.2g) showed %s.",
+            adj_label, alpha,
+            cross_stmt %||% "no significant differences among highlighted groups"))
+  if (!is.null(within_stmt)) statement <- paste(statement, within_stmt)
+
+  # Optionally append to existing file
+  if (!is.null(append_to)) {
+    dunn_display <- dunn_hl %>%
+      dplyr::select(group1, group2, statistic, p, p.adj, p.adj.signif,
+                    median1, median2, hl, hl_higher, comparison_type)
+
+    section_lines <- c(
+      "\n\nDunn Post-Hoc Tests (Kruskal-Wallis + pairwise)",
+      "----------------------------------------------------------------------",
+      sprintf("Omnibus: Kruskal\u2013Wallis \u03c7\u00b2(%d) = %.4f, p = %s",
+              kw$df, kw$statistic, fmt_p_value(kw$p)),
+      sprintf("Post-hoc: Dunn test with %s correction for multiple comparisons", adj_label),
+      sprintf("Highlighted groups: %s\n", paste(highlights, collapse = ", ")),
+      "Dunn pairwise results (highlighted groups):",
+      "----------------------------------------------------------------------",
+      format_table_txt(dunn_display),
+      "",
+      "----------------------------------------------------------------------",
+      "STATEMENT (copy-paste ready)",
+      "----------------------------------------------------------------------",
+      statement,
+      "----------------------------------------------------------------------"
+    )
+    cat(file = append_to, append = TRUE, paste(section_lines, collapse = "\n"), "\n")
+  }
+
+  invisible(list(
+    kw_result = kw,
+    dunn_full = dunn_annotated,
+    dunn_highlighted = dunn_hl,
+    medians = meds,
+    statement = statement
+  ))
+}
+
+############################################################
+## FUNCTION: write_diversity_nonparam_summary
+## Purpose:
+##   For a numeric variable by CATEGORY (and optional GROUP facet):
+##   - Summarise n / median / IQR per (group, category)
+##   - Within each GROUP: Kruskal–Wallis across CATEGORY
+##       + pairwise Wilcoxon (Holm) with rank–biserial r
+##   - Between GROUPS for each CATEGORY: pairwise Wilcoxon (Holm)
+##       with rank–biserial r (works with 2+ groups)
+##   - Write all results + concise statements to a .txt beside your plot
+##
+## Inputs:
+##   df           : data.frame
+##   group_col    : name of grouping column (e.g. "group") OR NULL for single-group data
+##   category_col : name of category column (e.g. "category")
+##   value_col    : name of numeric column (e.g. "cos_sim")
+##   plot_path    : path to the saved figure (to derive .txt basename)
+##   out_path     : optional explicit .txt path (overrides plot_path)
+##   adjust_method: p.adjust method for pairwise tests (default "holm")
+##   alpha        : significance threshold for legend prose (default 0.05)
+##
+## Requires: dplyr, effectsize
+############################################################
+write_diversity_nonparam_summary <- function(
+    df,
+    group_col    = "group",
+    category_col = "category",
+    value_col    = "cos_sim",
+    plot_path    = NULL,
+    out_path     = NULL,
+    adjust_method = "holm",
+    alpha         = 0.05,
+    calculate_effect_size = FALSE  # Default FALSE to avoid integer overflow with large datasets
+) {
+  for (pkg in c("dplyr","effectsize")) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop("Package '", pkg, "' is required but not installed.")
+    }
+  }
+  if (is.null(out_path)) {
+    if (is.null(plot_path)) stop("Provide either plot_path (to derive .txt) or out_path.")
+    out_path <- paste0(tools::file_path_sans_ext(plot_path), ".txt")
+  }
+  
+  # ---- prep data ----
+  has_group <- !is.null(group_col) && group_col %in% names(df)
+  if (!all(c(category_col, value_col) %in% names(df))) {
+    stop("df is missing required columns: '", category_col, "' and/or '", value_col, "'.")
+  }
+  df0 <- df |>
+    dplyr::mutate(
+      !!category_col := as.factor(.data[[category_col]]),
+      !!value_col    := as.numeric(.data[[value_col]])
+    ) |>
+    dplyr::filter(!is.na(.data[[category_col]]), is.finite(.data[[value_col]]))
+  
+  if (has_group) {
+    df0 <- df0 |>
+      dplyr::mutate(!!group_col := as.factor(.data[[group_col]])) |>
+      dplyr::filter(!is.na(.data[[group_col]]))
+  }
+  
+  n_obs <- nrow(df0)
+  k_cat <- base::nlevels(df0[[category_col]])
+  k_grp <- if (has_group) base::nlevels(df0[[group_col]]) else 1L
+  
+  # ---- helpers ----
+  .fmt_p <- function(p) {
+    val <- fmt_p_value(p)
+    if (startsWith(val, "<")) paste("p", val) else paste0("p=", val)
+  }
+  .stars <- function(p) {
+    if (!is.finite(p)) return("****")
+    if (p <= 1e-4) "****" else if (p <= 1e-3) "***" else if (p <= 1e-2) "**"
+    else if (p <= 5e-2) "*" else "ns"
+  }
+  add_sec <- function(lines, ttl, obj = NULL) {
+    hdr <- c("", ttl, strrep("-", max(3, nchar(ttl))))
+    if (is.null(obj)) {
+      c(lines, hdr)
+    } else if (inherits(obj, "data.frame")) {
+      c(lines, hdr, format_table_txt(obj))
+    } else {
+      c(lines, hdr, utils::capture.output(obj))
+    }
+  }
+  
+  # ---- group/category summaries ----
+  if (has_group) {
+    med_tbl <- df0 |>
+      dplyr::group_by(.data[[group_col]], .data[[category_col]]) |>
+      dplyr::summarise(
+        n = dplyr::n(),
+        median = stats::median(.data[[value_col]]),
+        iqr = stats::IQR(.data[[value_col]]),
+        .groups = "drop"
+      ) |>
+      dplyr::arrange(dplyr::desc(median))
+    names(med_tbl)[1:2] <- c("group","category")
+  } else {
+    med_tbl <- df0 |>
+      dplyr::group_by(.data[[category_col]]) |>
+      dplyr::summarise(
+        n = dplyr::n(),
+        median = stats::median(.data[[value_col]]),
+        iqr = stats::IQR(.data[[value_col]]),
+        .groups = "drop"
+      ) |>
+      dplyr::arrange(dplyr::desc(median))
+    names(med_tbl)[1] <- "category"
+  }
+  
+  out <- character()
+  out <- add_sec(out, "Diversity: non-parametric summary")
+  out <- c(out,
+           paste0("Date: ", format(Sys.time(), "%Y-%m-%d %H:%M:%S")),
+           paste0("Observations: ", n_obs),
+           paste0("Categories (K): ", k_cat),
+           paste0("Groups (G): ", k_grp),
+           paste0("Category column: '", category_col, "' | Value column: '", value_col, "'"),
+           if (has_group) paste0("Group column: '", group_col, "'") else "Group column: <none>",
+           paste0("Adjustment: ", adjust_method, " | alpha = ", alpha))
+  out <- add_sec(out, "Group/category medians (descending)", med_tbl)
+  
+  # ---- within-group: KW + pairwise Wilcoxon ----
+  within_list <- list()
+  within_text <- character()
+  if (k_cat >= 2) {
+    if (!has_group) {
+      df_g <- df0
+      kw <- stats::kruskal.test(df_g[[value_col]] ~ df_g[[category_col]])
+      out <- add_sec(out, "Kruskal–Wallis (overall)", kw)
+      if (kw$p.value < alpha) {
+        pw <- stats::pairwise.wilcox.test(df_g[[value_col]], df_g[[category_col]],
+                                          p.adjust.method = adjust_method, exact = FALSE)
+        pmat <- pw$p.value
+        pw_long <- if (is.null(pmat)) {
+          data.frame(category1=character(), category2=character(), p_adj=numeric())
+        } else {
+          as.data.frame(as.table(pmat), stringsAsFactors = FALSE)
+        }
+        if (nrow(pw_long)) {
+          names(pw_long) <- c("category1","category2","p_adj")
+          pw_long <- pw_long[!is.na(pw_long$p_adj), , drop = FALSE]
+
+          # Calculate effect sizes if requested
+          if (calculate_effect_size) {
+            ef_rows <- lapply(seq_len(nrow(pw_long)), function(i) {
+              c1 <- pw_long$category1[i]; c2 <- pw_long$category2[i]
+              x <- df_g[[value_col]][df_g[[category_col]] == c1]
+              y <- df_g[[value_col]][df_g[[category_col]] == c2]
+              ef <- tryCatch(effectsize::rank_biserial(x, y, paired = FALSE), error = function(e) NULL)
+              if (is.null(ef)) data.frame(category1=c1, category2=c2, r_rb=NA_real_, CI_low=NA_real_, CI_high=NA_real_)
+              else data.frame(category1=c1, category2=c2, r_rb=ef$Rank_biserial, CI_low=ef$CI_low, CI_high=ef$CI_high)
+            })
+            pw_long <- merge(pw_long, do.call(rbind, ef_rows), by=c("category1","category2"), all.x=TRUE)
+          }
+
+          pw_long$stars <- sapply(pw_long$p_adj, .stars)
+        }
+        out <- add_sec(out, "Pairwise Wilcoxon across categories (adjusted p)", pw_long)
+        if (kw$p.value < alpha) {
+          sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
+          within_text <- c(within_text,
+                           if (nrow(sig_pairs))
+                             paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
+                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                    ". Significant pairs (", adjust_method, "): ",
+                                    paste0(sig_pairs$category1, "–", sig_pairs$category2,
+                                           " (", .fmt_p(sig_pairs$p_adj), ")", collapse = "; "), ".")
+                           else
+                             paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
+                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                    ". No significant pairs after ", adjust_method, ".")
+          )
+        }
+      } else {
+        within_text <- c(within_text,
+                         paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
+                                round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                ". No evidence of category differences."))
+      }
+    } else {
+      for (g in levels(df0[[group_col]])) {
+        df_g <- df0[df0[[group_col]] == g, , drop = FALSE]
+        if (nrow(df_g) < 2 || nlevels(df_g[[category_col]]) < 2) next
+        kw <- stats::kruskal.test(df_g[[value_col]] ~ df_g[[category_col]])
+        out <- add_sec(out, paste0("Kruskal–Wallis within group: ", g), kw)
+        pw <- NULL; pw_long <- data.frame()
+        if (kw$p.value < alpha) {
+          pw <- stats::pairwise.wilcox.test(df_g[[value_col]], df_g[[category_col]],
+                                            p.adjust.method = adjust_method, exact = FALSE)
+          pmat <- pw$p.value
+          pw_long <- if (is.null(pmat)) {
+            data.frame(category1=character(), category2=character(), p_adj=numeric())
+          } else {
+            as.data.frame(as.table(pmat), stringsAsFactors = FALSE)
+          }
+          if (nrow(pw_long)) {
+            names(pw_long) <- c("category1","category2","p_adj")
+            pw_long <- pw_long[!is.na(pw_long$p_adj), , drop = FALSE]
+
+            # Calculate effect sizes if requested
+            if (calculate_effect_size) {
+              ef_rows <- lapply(seq_len(nrow(pw_long)), function(i) {
+                c1 <- pw_long$category1[i]; c2 <- pw_long$category2[i]
+                x <- df_g[[value_col]][df_g[[category_col]] == c1]
+                y <- df_g[[value_col]][df_g[[category_col]] == c2]
+                ef <- tryCatch(effectsize::rank_biserial(x, y, paired = FALSE), error = function(e) NULL)
+                if (is.null(ef)) data.frame(category1=c1, category2=c2, r_rb=NA_real_, CI_low=NA_real_, CI_high=NA_real_)
+                else data.frame(category1=c1, category2=c2, r_rb=ef$Rank_biserial, CI_low=ef$CI_low, CI_high=ef$CI_high)
+              })
+              pw_long <- merge(pw_long, do.call(rbind, ef_rows), by=c("category1","category2"), all.x=TRUE)
+            }
+
+            pw_long$group <- g
+            pw_long$stars <- sapply(pw_long$p_adj, .stars)
+          }
+        }
+        within_list[[g]] <- pw_long
+        if (kw$p.value < alpha) {
+          sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
+          within_text <- c(within_text,
+                           if (nrow(sig_pairs))
+                             paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
+                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                    ". Significant pairs (", adjust_method, "): ",
+                                    paste0(sig_pairs$category1, "–", sig_pairs$category2,
+                                           " (", .fmt_p(sig_pairs$p_adj), ")", collapse = "; "), ".")
+                           else
+                             paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
+                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                    ". No significant pairs after ", adjust_method, ".")
+          )
+        } else {
+          within_text <- c(within_text,
+                           paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
+                                  round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                  ". No evidence of category differences."))
+        }
+        if (nrow(pw_long)) {
+          out <- add_sec(out, paste0("Pairwise Wilcoxon across categories (", g, ")"), pw_long)
+        }
+      }
+    }
+  }
+  
+  if (length(within_text)) {
+    out <- add_sec(out, "Within-group legend statements", paste(within_text, collapse = "\n"))
+  }
+  
+  # ---- between-groups: per category ----
+  between_text <- character()
+  if (has_group && k_grp >= 2) {
+    cat_levels <- levels(df0[[category_col]])
+    between_all <- data.frame()
+    for (cname in cat_levels) {
+      df_c <- df0[df0[[category_col]] == cname, , drop = FALSE]
+      if (nrow(df_c) < 2 || nlevels(df_c[[group_col]]) < 2) next
+      pwg <- stats::pairwise.wilcox.test(df_c[[value_col]], df_c[[group_col]],
+                                         p.adjust.method = adjust_method, exact = FALSE)
+      pmat <- pwg$p.value
+      tmp <- if (is.null(pmat)) {
+        data.frame(group1=character(), group2=character(), p_adj=numeric())
+      } else {
+        as.data.frame(as.table(pmat), stringsAsFactors = FALSE)
+      }
+      if (nrow(tmp)) {
+        names(tmp) <- c("group1","group2","p_adj")
+        tmp <- tmp[!is.na(tmp$p_adj), , drop = FALSE]
+
+        # Calculate effect sizes if requested
+        if (calculate_effect_size) {
+          ef_rows <- lapply(seq_len(nrow(tmp)), function(i) {
+            g1 <- tmp$group1[i]; g2 <- tmp$group2[i]
+            x  <- df_c[[value_col]][df_c[[group_col]] == g1]
+            y  <- df_c[[value_col]][df_c[[group_col]] == g2]
+            ef <- tryCatch(effectsize::rank_biserial(x, y, paired = FALSE), error = function(e) NULL)
+            if (is.null(ef)) data.frame(group1=g1, group2=g2, r_rb=NA_real_, CI_low=NA_real_, CI_high=NA_real_)
+            else data.frame(group1=g1, group2=g2, r_rb=ef$Rank_biserial, CI_low=ef$CI_low, CI_high=ef$CI_high)
+          })
+          tmp <- merge(tmp, do.call(rbind, ef_rows), by=c("group1","group2"), all.x=TRUE)
+        }
+
+        tmp$category <- cname
+        tmp$stars <- sapply(tmp$p_adj, .stars)
+        between_all <- rbind(between_all, tmp)
+      }
+    }
+    if (nrow(between_all)) {
+      out <- add_sec(out, "Between-group Wilcoxon per category (adjusted p)", between_all)
+      sig_bt <- between_all[between_all$p_adj < alpha, , drop = FALSE]
+      if (nrow(sig_bt)) {
+        between_text <- paste0(
+          "Between groups (pairwise Wilcoxon, ", adjust_method, "): significant differences for ",
+          paste0(sig_bt$category, " [", sig_bt$group1, "–", sig_bt$group2, ", ",
+                 .fmt_p(sig_bt$p_adj), "]", collapse = "; "), "."
+        )
+      } else {
+        between_text <- paste0("Between groups (pairwise Wilcoxon, ", adjust_method,
+                               "): no significant differences across categories.")
+      }
+      out <- add_sec(out, "Between-group legend statement", between_text)
+    }
+  }
+  
+  # ---- write file ----
+  dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
+  writeLines(out, con = out_path)
+  
+  invisible(list(
+    medians = med_tbl,
+    within_pairs = within_list,
+    out_path = out_path
+  ))
+}
 extract_three_letters <- function(text) {
   sapply(text, function(t) {
     three_letters <- stringr::str_extract(t, "^[A-Za-z]{3}")
@@ -864,6 +2283,7 @@ banc_plot_key_features <- function(
     influence.meta,
     save.path,
     inf.metric = "influence_norm_log",
+    numbers = FALSE,
     col.annotation = NULL,
     row.annotation = NULL,
     show.annotation = TRUE,
@@ -1174,8 +2594,10 @@ banc_plot_key_features <- function(
   }
   if(rev){
     ph.influence <- pheatmap(
-      targeting_method = "ward.D2",
+      clustering_method = "ward.D2",
       t(influence_matrix),
+      display_numbers = numbers,
+      number_format = "%.2f",
       cluster_rows = col.dend,
       cluster_cols = row.dend,
       color = scaled_heatmap_palette,
@@ -1204,8 +2626,10 @@ banc_plot_key_features <- function(
     )
   }else{
     ph.influence <- pheatmap(
-      targeting_method = "ward.D2",
+      clustering_method = "ward.D2",
       influence_matrix,
+      display_numbers = numbers,
+      number_format = "%.2f",
       cluster_rows = row.dend,
       cluster_cols = col.dend,
       color = scaled_heatmap_palette,

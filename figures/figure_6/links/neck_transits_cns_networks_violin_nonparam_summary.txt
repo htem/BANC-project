@@ -1,0 +1,38 @@
+Non-parametric Summary (vs 'other')
+======================================================================
+Date: 2026-02-02 15:56:42
+Observations: 20546
+Groups (types): 3
+Reference group: 'other' (median = 0.2391)
+Adjustment: holm | alpha = 0.05
+
+Medians by group (descending)
+----------------------------------------------------------------------
+# A tibble: 3 × 4
+  type           n        median_value                 iqr
+  <fct>      <int>               <dbl>               <dbl>
+1 descending  1052 3.75            e-1 2.86490091463415e-1
+2 ascending   1288 2.46790123456790e-1 2.80905905905906e-1
+3 other      18206 2.39130434782609e-1 3               e-1
+
+Kolmogorov-Smirnov tests (distribution differences)
+----------------------------------------------------------------------
+# A tibble: 2 × 8
+  type       n_group          median_val                ks_D                ks_p            ks_p_adj ks_signif ks_p_adj_disp
+  <fct>        <int>               <dbl>               <dbl>               <dbl>               <dbl> <chr>     <chr>        
+1 descending    1052 3.75            e-1 2.85454822272689e-1 0                   0                   ****      < 1e-300     
+2 ascending     1288 2.46790123456790e-1 7.27266043615408e-2 5.95363260957882e-6 5.95363260957882e-6 ****      5.95e-06     
+
+Wilcoxon rank-sum tests (median differences)
+----------------------------------------------------------------------
+# A tibble: 2 × 10
+  type       n_group          median_val wilcox_W             wilcox_p         wilcox_p_adj wilcox_signif wilcox_p_adj_disp       rank_biserial effect_size
+  <fct>        <int>               <dbl>    <dbl>                <dbl>                <dbl> <chr>         <chr>                           <dbl> <chr>      
+1 descending    1052 3.75            e-1 13097562 9.19843000802439e-90 1.83968600160488e-89 ****          1.84e-89          3.67697900955228e-1 medium     
+2 ascending     1288 2.46790123456790e-1 12398982 5.48865333385878e- 4 5.48865333385878e- 4 ***           5.49e-04          5.75127781913409e-2 negligible 
+
+======================================================================
+FIGURE LEGEND (copy-paste ready)
+======================================================================
+Non-parametric comparisons of each group to 'other' (N=20546; K=3 groups; holm-adjusted α=0.05): Wilcoxon rank-sum tests showed significant differences for descending (p=1.84e-89, r=0.368, medium effect); and ascending (p=5.49e-04, r=0.058, negligible effect). Effect sizes reported as rank-biserial correlation (r).
+======================================================================

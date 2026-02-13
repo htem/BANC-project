@@ -301,8 +301,7 @@ elbow_main_plot <- ggplot(elbow_df_with_direct,
     plot.title = element_text(face = "bold", size = 12),
     plot.subtitle = element_text(size = 12),
     legend.text = element_text(size = 8),
-    legend.title = element_text(size = 8),
-    panel.border = element_rect(color = "gray80", fill = NA)
+    legend.title = element_text(size = 8)
   ) +
   
   # Add labels
@@ -338,12 +337,11 @@ density_plot <- ggplot(elbow_df_with_direct,
   theme_minimal(base_size = 12) +
   theme(
     panel.grid.minor = element_blank(),
-    panel.grid.major = element_line(color = "gray95"),
-    legend.position = "bottom",
-    panel.border = element_rect(color = "gray80", fill = NA)
+    panel.grid.major = element_line(color = "lightgrey"),
+    legend.position = "bottom"
   ) +
   labs(
-    x = "rank (sorted influence values)",
+    x = "rank (sorted adjusted influence)",
     y = "density"
   )
 
@@ -390,7 +388,7 @@ final_plot <- plot_grid(
 # Print and save the plot
 print(final_plot)
 ggsave(file.path(banc.fig2.supp.path, sprintf("%s_dn_to_effector_influence_elbow_maximum_curvature.pdf",inf.metric)), 
-       final_plot, width = 8, height = 8, dpi = 300)
+       final_plot, width = 9, height = 9, dpi = 300)
 
 # Get the order of targets from the heatmap clustering
 target_order <- rownames(heatmap_matrix_normalized)[clustering_result$hclust$order]
@@ -598,9 +596,7 @@ ggsave(file.path(banc.fig2.supp.path, sprintf("%s_select_dn_to_effector_influenc
        g.jitter, width = 4, height = 14, dpi = 300)
 
 ###########################
-###########################
 ### ASSESS TRIAGED POOL ###
-###########################
 ###########################
 
 # Get all neuron seeds
@@ -977,6 +973,10 @@ ggsave(file.path(banc.fig2.supp.path, sprintf("%s_body_part_combination_super_cl
        g.combo2, 
        width = 8, height = 4, dpi = 300)
 
+###############################
+## SINGLES AND COMBINATIONS ###
+###############################
+
 # 1. Count by combination and seed_type
 combo_freq <- effector_combinations %>%
   dplyr::filter(combination != "") %>%
@@ -987,18 +987,34 @@ top_singles <- combo_freq %>%
   dplyr::filter(!grepl("\\+",combination)) %>%
   dplyr::group_by(combination) %>%
   dplyr::summarize(total = sum(freq), .groups = "drop") %>%
-  dplyr::slice_max(order_by = total, n = 20) %>%
+  dplyr::slice_max(order_by = total, n = 200) %>%
   dplyr::pull(combination)
 
-# 3. Restrict to top combinations and set order
+# Helper to format combo names for multi-line labels
+fmt_combo <- function(x) {
+  x <- gsub("_", " ", x)
+  x <- gsub("\\+", " + ", x)  # line break BEFORE each '+'
+  x
+}
+
+# Rebuild combo_top (safe if already built)
 combo_top <- combo_freq %>%
   dplyr::filter(combination %in% top_singles) %>%
+  dplyr::mutate(combination = stats::relevel(factor(combination), ref = rev(top_singles)[1])) %>%  
   dplyr::mutate(combination = factor(combination, levels = rev(top_singles)))
 
-# 4. Make the dodged barplot
+# Prepare one label per combination at the end of the taller bar
+ymax1 <- max(combo_top$freq, na.rm = TRUE)
+labels_unique <- combo_top %>%
+  dplyr::group_by(combination) %>%
+  dplyr::summarise(y_pos = max(freq, na.rm = TRUE), .groups = "drop") %>%
+  dplyr::mutate(
+    label = fmt_combo(as.character(combination)),
+    y_pos = y_pos + 0.03 * ymax1  # small nudge to the right
+  )
 g.bp.unique.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y = freq, fill = seed_type)) +
   ggplot2::geom_col(position = ggplot2::position_dodge(width = 0.8)) +
-  ggplot2::coord_flip() +
+  ggplot2::coord_flip(clip = "off") +
   ggplot2::theme_minimal() +
   ggplot2::labs(
     x = "",
@@ -1007,39 +1023,57 @@ g.bp.unique.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y =
     title = ""
   ) +
   ggplot2::theme(
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
     legend.position = "none",
-    axis.text.y = ggplot2::element_text(size = 7)
+    axis.text.y = ggplot2::element_blank(),   # <-- remove Y-axis labels
+    axis.ticks.y = ggplot2::element_blank(),  # <-- remove Y-axis ticks
+    plot.margin = ggplot2::margin(t = 5, r = 24, b = 5, l = 5, unit = "pt")
   ) +
-  ylim(c(0,35)) +
-  scale_fill_manual(values = paper.cols)
+  ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = c(0, 0.15))) +
+  ggplot2::scale_fill_manual(values = paper.cols) +
+  ggplot2::geom_text(
+    data = labels_unique,
+    mapping = ggplot2::aes(x = combination, y = y_pos, label = label),
+    inherit.aes = FALSE,
+    hjust = 0,
+    color = "black",
+    lineheight = 0.95,
+    size = 3.5
+  ) +
+  ylim(c(0,35))
 
 # Save
 print(g.bp.unique.freq)
-ggsave(file.path(banc.fig2.supp.path, sprintf("%s_body_part_unique_frequencies.pdf",inf.metric)), 
-       g.bp.unique.freq, 
-       width =  8, 
-       height = 8, 
-       dpi = 300)
+ggplot2::ggsave(file.path(banc.fig2.supp.path, sprintf("%s_body_part_unique_frequencies.pdf", inf.metric)),
+                g.bp.unique.freq, width = 4, height = 4, dpi = 300)
 
-# 2. Find total counts per combination, pick top 
+# Rebuild combo_top 
 top_combos <- combo_freq %>%
   dplyr::filter(grepl("\\+",combination)) %>%
   dplyr::group_by(combination) %>%
   dplyr::summarize(total = sum(freq), .groups = "drop") %>%
-  dplyr::slice_max(order_by = total, n = length(top_singles)) %>%
+  dplyr::slice_max(order_by = total, n = 10) %>%
   dplyr::pull(combination)
-
-# 3. Restrict to top combinations and set order
 combo_top <- combo_freq %>%
   dplyr::filter(combination %in% top_combos) %>%
+  dplyr::mutate(combination = stats::relevel(factor(combination), ref = rev(top_combos)[1])) %>%  # ensure factor exists
   dplyr::mutate(combination = factor(combination, levels = rev(top_combos)))
 
-# 4. Make the dodged barplot
+# Prepare one label per combination at the end of the taller bar
+ymax2 <- max(combo_top$freq, na.rm = TRUE)
+labels_combos <- combo_top %>%
+  dplyr::group_by(combination) %>%
+  dplyr::summarise(y_pos = max(freq, na.rm = TRUE), .groups = "drop") %>%
+  dplyr::mutate(
+    label = fmt_combo(as.character(combination)),
+    y_pos = y_pos + 0.03 * ymax2
+  )
+
+# And now in combination
 g.bp.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y = freq, fill = seed_type)) +
   ggplot2::geom_col(position = ggplot2::position_dodge(width = 0.8)) +
-  ggplot2::coord_flip() +
+  ggplot2::coord_flip(clip = "off") +
   ggplot2::theme_minimal() +
   ggplot2::labs(
     x = "",
@@ -1048,74 +1082,29 @@ g.bp.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y = freq, 
     title = ""
   ) +
   ggplot2::theme(
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
     legend.position = "none",
-    axis.text.y = ggplot2::element_text(size = 7)
+    axis.text.y = ggplot2::element_blank(),  
+    axis.ticks.y = ggplot2::element_blank(),  
+    plot.margin = ggplot2::margin(t = 5, r = 24, b = 5, l = 5, unit = "pt")
   ) +
-  ylim(c(0,35)) +
-  scale_fill_manual(values = paper.cols)
+  ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = c(0, 0.15))) +
+  ggplot2::scale_fill_manual(values = paper.cols) +
+  ggplot2::geom_text(
+    data = labels_combos,
+    mapping = ggplot2::aes(x = combination, y = y_pos, label = label),
+    inherit.aes = FALSE,
+    hjust = 0,
+    color = "black",
+    lineheight = 0.95,
+    size = 3.5
+  ) +
+  ylim(c(0,35))
 
 # Save
 print(g.bp.freq)
-ggsave(file.path(banc.fig2.supp.path, sprintf("%s_body_part_combination_frequencies.pdf",inf.metric)), 
-       g.bp.freq, 
-       width =  8, 
-       height = 8, 
-       dpi = 300)
-
-# 1. For each seed_type, flag combinations as unique (singleton)
-singletons <- effector_combinations %>%
-  dplyr::filter(combination != "") %>%
-  dplyr::group_by(seed_type, combination) %>%
-  dplyr::summarise(ct = dplyr::n_distinct(seed_cell_type), .groups = "drop") %>%
-  dplyr::mutate(is_singleton = ct == 1)
-
-# 1. For each seed_type, flag combinations as unique (singleton)
-singletons <- effector_combinations %>%
-  dplyr::filter(combination != "") %>%
-  dplyr::group_by(seed_type, combination) %>%
-  dplyr::summarise(ct = dplyr::n_distinct(seed_cell_type), .groups = "drop") %>%
-  dplyr::mutate(is_singleton = ct == 1)
-
-# 2. For each seed_cell_type, flag if their combination is unique
-singleton_flag <- effector_combinations %>%
-  dplyr::filter(combination != "") %>%
-  dplyr::left_join(
-    singletons %>% dplyr::select(seed_type, combination, is_singleton), 
-    by = c("seed_type", "combination")
-  ) %>%
-  dplyr::distinct(seed_type, seed_cell_type, is_singleton)
-
-# 3. Count number of unique/shared per seed_type
-count_df <- singleton_flag %>%
-  dplyr::group_by(seed_type, is_singleton) %>%
-  dplyr::summarise(n = n(), .groups = "drop")
-
-# 4. Clean up labels for plot legend
-count_df <- count_df %>%
-  dplyr::mutate(singleton_label = dplyr::if_else(is_singleton, "unique", "shared"))
-
-# 5. Plot raw counts as a stacked bar plot by seed_type
-g.unique <- ggplot2::ggplot(count_df, ggplot2::aes(x = seed_type, y = n, fill = singleton_label)) +
-  ggplot2::geom_col(position = "stack") +   # <--- STACKED!
-  ggplot2::labs(
-    x = "seed type",
-    y = "count of seed_cell_type",
-    fill = "combination status",
-    title = ""
-  ) +
-  ggplot2::theme_minimal() +
-  scale_fill_manual(values = c(shared = "lightgrey", unique = highlight.col))
-
-# SHow
-print(g.unique)
-
-# Save
-ggsave(file.path(banc.fig2.extra.path, sprintf("%s_body_part_unique_versus_shared_combinations.pdf",inf.metric)), 
-       g.unique, 
-       width = 4, 
-       height = 4, 
-       dpi = 300)
+ggplot2::ggsave(file.path(banc.fig2.supp.path, sprintf("%s_body_part_combination_frequencies.pdf", inf.metric)),
+                g.bp.freq, width = 4, height = 6, dpi = 300)
 
 

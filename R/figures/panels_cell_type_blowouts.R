@@ -11,7 +11,9 @@ source("R/startup/banc-startup.R")
 source("R/startup/franken-meta.R")
 source("R/startup/banc-meta.R")
 source("R/startup/banc-edgelist.R")
-source("R/startup/banc-functions.R")
+banc.version <- NULL
+source("R/startup/banc-meta.R")
+banc.meta$root_id <- banc.meta$root_626
 source("R/startup/banc_an_dn_data.R")
 
 # new meta
@@ -47,19 +49,129 @@ recalculate <- FALSE
 ########################
 ### INFLUENCE SCORES ###
 ########################
+ic_banc <- influence_calculator_py(edgelist_simple = banc.edgelist.simple %>%
+                                     dplyr::filter(count > 0), 
+                                   meta = banc.meta)
 
-# Connect to .sql file
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path,influence.sqlite))
-chosen.seeds <- na.omit(unique(banc.an.dn.meta$seed_12))
-chosen.ids <- unique(c(banc.eff2.meta$root_id,banc.an.dn.meta$root_id))
-influence.nn.df <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(level %in% c("seed_12"),
-                seed %in% !!chosen.seeds,
-                id %in% chosen.ids) %>%
-  dplyr::select(seed, level, id, influence_original, influence_norm_original, influence_syn_norm) %>%
-  dplyr::collect()
-dbDisconnect(con)
+# DN/AN
+seed <- "seed_12"
+cts <- banc.meta %>%
+  dplyr::filter(!is.na(seed_12)) %>%
+  dplyr::distinct(seed_12) %>%
+  dplyr::pull(seed_12)
+cts <- na.omit(cts)
+influence.list <- list()
+pb <- progress::progress_bar$new(
+  format = "Influence [:bar] :current/:total (:percent) eta: :eta",
+  total  = length(cts), clear = FALSE, width = 70
+)
+banc.target.ids <- unique(c(banc.eff2.meta$root_id,banc.an.dn.meta$root_id))
+for (ct in cts) {
+  try({
+    banc.ct.ids <- unique(bc.meta$root_id[bc.meta[[seed]] == ct])
+    control_influence.id <- calculate_influence_py(ic_banc, banc.ct.ids) %>%
+      dplyr::filter(id %in% banc.target.ids)
+    control_influence.id$seed <- ct
+    control_influence.id$level <- seed
+    control_influence.id$influence_norm_original <-
+      control_influence.id$`Influence_score_(unsigned)` / length(banc.ct.ids)
+    influence.list <- append(influence.list, list(control_influence.id))
+  }, silent = TRUE)
+  pb$tick()
+}
+influence.nn.df <- do.call(rbind, influence.list) %>%
+  dplyr::mutate(influence_original = `Influence_score_(unsigned)`)
+influence.list <- NULL
+
+# Sensory
+seed <- "seed_02"
+cts <- banc.meta %>%
+  dplyr::filter(!is.na(seed_02)) %>%
+  dplyr::distinct(seed_02) %>%
+  dplyr::pull(seed_02)
+cts <- na.omit(cts)
+influence.list <- list()
+pb <- progress::progress_bar$new(
+  format = "Influence [:bar] :current/:total (:percent) eta: :eta",
+  total  = length(cts), clear = FALSE, width = 70
+)
+for (ct in cts) {
+  try({
+    banc.ct.ids <- unique(bc.meta$root_id[bc.meta[[seed]] == ct])
+    control_influence.id <- calculate_influence_py(ic_banc, banc.ct.ids) %>%
+      dplyr::filter(id %in% !!banc.an.dn.meta$id)
+    control_influence.id$seed <- ct
+    control_influence.id$level <- seed
+    control_influence.id$influence_norm_original <-
+      control_influence.id$`Influence_score_(unsigned)` / length(banc.ct.ids)
+    influence.list <- append(influence.list, list(control_influence.id))
+  }, silent = TRUE)
+  pb$tick()
+}
+influence.sens.df <- do.call(rbind, influence.list) %>%
+  dplyr::mutate(influence_original = `Influence_score_(unsigned)`)
+
+# Visual projection influence
+seed <- "seed_07"
+cts <- banc.meta %>%
+  dplyr::filter(!is.na(seed_07)) %>%
+  dplyr::distinct(seed_07) %>%
+  dplyr::pull(seed_07)
+cts <- na.omit(cts)
+influence.list <- list()
+pb <- progress::progress_bar$new(
+  format = "Influence [:bar] :current/:total (:percent) eta: :eta",
+  total  = length(cts), clear = FALSE, width = 70
+)
+for (ct in cts) {
+  try({
+    banc.ct.ids <- unique(bc.meta$root_id[bc.meta[[seed]] == ct])
+    control_influence.id <- calculate_influence_py(ic_banc, banc.ct.ids) %>%
+      dplyr::filter(id %in% !!banc.an.dn.meta$id)
+    control_influence.id$seed <- ct
+    control_influence.id$level <- seed
+    control_influence.id$influence_norm_original <-
+      control_influence.id$`Influence_score_(unsigned)` / length(banc.ct.ids)
+    influence.list <- append(influence.list, list(control_influence.id))
+  }, silent = TRUE)
+  pb$tick()
+}
+influence.vpn.df <- do.call(rbind, influence.list) %>%
+  dplyr::mutate(influence_original = `Influence_score_(unsigned)`)
+
+# # Connect to .sql file
+# con <- DBI::dbConnect(RSQLite::SQLite(),
+#                       file.path(banc.dropbox.influence.save.path,influence.sqlite))
+# chosen.seeds <- na.omit(unique(banc.an.dn.meta$seed_12))
+# chosen.ids <- unique(c(banc.eff2.meta$root_id,banc.an.dn.meta$root_id))
+# influence.nn.df <- dplyr::tbl(con, influence.table) %>%
+#   dplyr::filter(level %in% c("seed_12"),
+#                 seed %in% !!chosen.seeds,
+#                 id %in% chosen.ids) %>%
+#   dplyr::select(seed, level, id, influence_original, influence_norm_original, influence_syn_norm) %>%
+#   dplyr::collect()
+# dbDisconnect(con)
+# # Get alternative dataset for validation (seed_02)
+# con <- DBI::dbConnect(RSQLite::SQLite(),
+#                       file.path(banc.dropbox.influence.save.path,influence.sqlite))
+# influence.sens.df <- dplyr::tbl(con, influence.table) %>%
+#   dplyr::filter(!is_seed,
+#                 level %in% c("seed_02"),
+#                 id %in% !!banc.an.dn.meta$id) %>%
+#   dplyr::collect() %>%
+#   dplyr::filter(!grepl("unknown",seed))
+# dbDisconnect(con)
+# # Connect to .sql file
+# con <- DBI::dbConnect(RSQLite::SQLite(),
+#                       file.path(banc.dropbox.influence.save.path,influence.sqlite))
+# chosen.cts <- unique(c(banc.sources$seed_07))
+# influence.vpn.df <- dplyr::tbl(con, influence.table) %>%
+#   dplyr::filter(!is_seed,
+#                 level %in% c("seed_07"),
+#                 seed %in% !!chosen.cts,
+#                 id %in% !!banc.an.dn.meta$id) %>%
+#   dplyr::collect()
+# dbDisconnect(con)
 
 # Format
 influence.nn.df <- influence.nn.df %>%
@@ -68,29 +180,6 @@ influence.nn.df <- influence.nn.df %>%
                    by = c("id"="root_id")) %>%
   dplyr::ungroup() %>%
   calculate_influence_norms()
-
-# Get alternative dataset for validation (seed_02)
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path,influence.sqlite))
-influence.sens.df <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(!is_seed,
-                level %in% c("seed_02"),
-                id %in% !!banc.an.dn.meta$id) %>%
-  dplyr::collect() %>%
-  dplyr::filter(!grepl("unknown",seed))
-dbDisconnect(con)
-
-# Connect to .sql file
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path,influence.sqlite))
-chosen.cts <- unique(c(banc.sources$seed_07))
-influence.vpn.df <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(!is_seed,
-                level %in% c("seed_07"),
-                seed %in% !!chosen.cts,
-                id %in% !!banc.an.dn.meta$id) %>%
-  dplyr::collect()
-dbDisconnect(con)
 
 # Format 
 influence.sensor.df <- plyr::rbind.fill(influence.sens.df,
@@ -105,7 +194,7 @@ influence.sensor.df <- calculate_influence_norms(influence.sensor.df)
 #############################
 
 super.cluster <- "head and eye orienting"
-inf.metric <- "influence_norm_log"
+inf.metric <- "influence_log"
 umap.super.clust.df <- umap.dn.df %>%
   dplyr::filter(super_cluster == super.cluster)
 
@@ -183,8 +272,8 @@ qtile_df <- influence_df %>%
   dplyr::reframe(
     thresh = ifelse(
       seed_type == "sensors",
-      stats::quantile(influence_norm_log, 0.95, na.rm = TRUE),
-      stats::quantile(influence_norm_log, 0.85, na.rm = TRUE)
+      stats::quantile(influence_log, 0.95, na.rm = TRUE),
+      stats::quantile(influence_log, 0.85, na.rm = TRUE)
     )
   ) %>%
   dplyr::distinct()
@@ -193,7 +282,7 @@ qtile_df <- influence_df %>%
 keepers <- influence_df %>%
   dplyr::left_join(qtile_df, by = "seed_type") %>%
   dplyr::group_by(seed_type, seed) %>%
-  dplyr::summarize(any_above_thresh = any(influence_norm_log > thresh, na.rm = TRUE), .groups = "drop") %>%
+  dplyr::summarize(any_above_thresh = any(influence_log > thresh, na.rm = TRUE), .groups = "drop") %>%
   dplyr::filter(any_above_thresh)
 
 # 3. Filter original data for these seeds, and recalculate norms if needed
@@ -208,7 +297,7 @@ influence_matrix <- influence_df  %>%
   dplyr::distinct(seed, target, .keep_all = TRUE) %>%
   reshape2::dcast(seed ~ target, 
                   fun.aggregate = mean, 
-                  value.var = "influence_norm_log", 
+                  value.var = inf.metric, 
                   fill = 0)
 
 # Set row names and remove the seed column
@@ -357,7 +446,7 @@ ph.influence <- pheatmap(
   annotation_names_col = FALSE,
   legend = TRUE,
   filename = file.path(banc.fig4.path,
-                       sprintf("concise_sensors_to_%s_cell_types_%s.pdf",gsub(" ","",super.clust),"influence_norm_log")),
+                       sprintf("concise_sensors_to_%s_cell_types_%s.pdf",gsub(" ","",super.clust),"influence_log")),
   main = paste0(inf.metric, "\n(row: source, col: target)"),
   na_col = "lightgrey"
 )
@@ -389,7 +478,7 @@ ph.influence <- pheatmap(
   annotation_names_col = FALSE,
   legend = TRUE,
   filename = file.path(banc.fig4.path,
-                       sprintf("concise_%s_cell_types_to_effector_cell_sub_class_%s.pdf",gsub(" ","",super.clust),"influence_norm_log")),
+                       sprintf("concise_%s_cell_types_to_effector_cell_sub_class_%s.pdf",gsub(" ","",super.clust),"influence_log")),
   main = paste0(inf.metric, "\n(row: target, col: source)"),
   na_col = "lightgrey"
 )
@@ -687,7 +776,7 @@ for(super.cluster in super.clusters){
     dplyr::reframe(
       thresh = ifelse(
         seed_type == "sensors",
-        stats::quantile(influence_norm_log, 0.95, na.rm = TRUE),
+        stats::quantile(influence_norm_log, 0.9, na.rm = TRUE),
         stats::quantile(influence_norm_log, 0.85, na.rm = TRUE)
       )
     ) %>%

@@ -328,8 +328,30 @@ g.super.clusters <- ggplot() +
   geom_text(data = cluster_centroids, 
             aes(x = UMAP1, y = UMAP2, label = cluster),
             colour = "black",
-            size = 8, 
+            size = 9, 
             fontface = "bold") +
+  theme_void() +
+  theme(legend.position = "bottom",
+        legend.key.size = unit(0.75, "lines"),
+        legend.text = element_text(size = rel(0.75)),
+        legend.title = element_text(size = rel(0.75)),
+        legend.spacing.x = unit(0.75, "lines"),
+        legend.spacing.y = unit(0.75, "lines"),
+        legend.margin = margin(t = 3, r = 3, b = 3, l = 3, unit = "pt")
+  ) +
+  ggplot2::coord_fixed()
+g.super.clusters.no.labels <- ggplot() +
+  geom_polygon(data = hulls, 
+               aes(x = V1, y = V2, group = factor(cluster)), 
+               alpha = 0.2, fill = "grey90", color = "black", linetype = "dotted") +
+  geom_point(data = umap.dn.df %>%
+               dplyr::filter(!is.na(super_cluster)), 
+             aes(x = UMAP1, y = UMAP2, color = super_cluster),
+             fill = "white",
+             size = 2,
+             shape = 19,
+             alpha = 1) +
+  scale_color_manual(values = paper.cols) +
   theme_void() +
   theme(legend.position = "bottom",
         legend.key.size = unit(0.75, "lines"),
@@ -348,6 +370,12 @@ ggsave(plot = g.super.clusters,
        width = 8, height = 8, dpi = 300)
 ggsave(plot = convert_to_dark_mode(g.dn.clusters),
        filename = file.path(banc.fig3.extra.path,"dark_mode_neck_inout_connectivity_cosine_umap_super_clusters.pdf"),
+       width = 8, height = 8, dpi = 300)
+ggsave(plot = g.super.clusters.no.labels,
+       filename = file.path(banc.fig3.path,"neck_inout_connectivity_cosine_umap_super_clusters_no_cluster_label.pdf"),
+       width = 8, height = 8, dpi = 300)
+ggsave(plot = convert_to_dark_mode(g.super.clusters.no.labels),
+       filename = file.path(banc.fig3.extra.path,"dark_mode_neck_inout_connectivity_cosine_umap_super_clusters_no_cluster_label.pdf"),
        width = 8, height = 8, dpi = 300)
 
 #####################

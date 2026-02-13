@@ -40,8 +40,8 @@ if(is.null(banc.version)){
      dplyr::select(id, root_id, supervoxel_id, contains("seed")) %>%
      dplyr::left_join(bc.orig %>%
                         dplyr::select(-root_id,-contains("seed")) %>%
-                        dplyr::distinct(root_626, cell_type, neurotransmitter_predicted, neurotransmitter_score,
-                                        status, proofread, position, root_region,
+                        dplyr::distinct(root_626, cell_type, nucleus_id, neurotransmitter_predicted, neurotransmitter_score,
+                                        status, proofread, roughly_proofread, position, root_region,
                                         fafb_match, manc_match, hemibrain_match, fanc_match,
                                         fafb_nblast_match, manc_nblast_match, hemibrain_nblast_match, fanc_nblast_match,
                                         side, region, nerve, cluster, manual_cluster, super_cluster, cns_network,
@@ -81,7 +81,7 @@ if(is.null(banc.version)){
      ))
 }else{
   con <- DBI::dbConnect(RSQLite::SQLite(),
-                        file.path(banc.dropbox.connectivity.save.path,banc.connectivity.version))
+                        file.path(banc.dropbox.influence.save.path,influence.sqlite))
   banc.meta <- dplyr::tbl(con, "meta") %>%
     dplyr::collect()
   banc.meta$id <- banc.meta$root_id
@@ -295,9 +295,19 @@ banc.meta$cluster <- banc.meta$manual_cluster
 banc.meta$body_part_effector <- gsub(",.*| .*","",banc.meta$body_part_effector)
 banc.meta$body_part_sensory <- gsub(",.*| .*","",banc.meta$body_part_sensory)
 
-# CNS clusters switch
-cns.network.umap <- readr::read_csv("data/cns_network/spectral_clustering_min_connection_strength_1_banc_version_626_cluster_count_13_cluster_seed_10_embedding_seed_3.csv", 
-                             col_types = banc.col.types)
+# CNS network switch
+cns.network.umap <- list()
+i <- 1
+callback <- function(x, pos) {
+  cns.network.umap[[i <<- i + 1]] <<- x
+}
+x <- readr::read_csv_chunked(
+  "data/cns_network/spectral_clustering_min_connection_strength_1_banc_version_626_cluster_count_13_cluster_seed_10_embedding_seed_3.csv",
+  callback = readr::SideEffectChunkCallback$new(callback),
+  chunk_size = 10000,
+  col_types = banc.col.types
+)
+cns.network.umap <- dplyr::bind_rows(cns.network.umap)
 cns.cluster.mapping <-cns.network.umap %>%
   dplyr::mutate(cns_network = paste0("CNS_",str_pad(spectral_cluster,width = 2,pad =0))) %>%
   dplyr::distinct(unofficial_cluster_name,cns_network)
@@ -312,6 +322,9 @@ banc.meta.post <- banc.meta
 colnames(banc.meta.post) <- paste0("post_",colnames(banc.meta.post))
 
 # Meta data summaries
+if(!is.null(banc.version)&&banc.version=="banc_626"){
+  banc.meta$root_id <- banc.meta$root_626
+}
 banc.meta$id <- banc.meta$root_id
 banc.neck.meta <- banc.meta %>%
   dplyr::filter(grepl("descending|ascending",super_class),
@@ -321,6 +334,11 @@ banc.an.meta <- subset(banc.meta, grepl("ascending",super_class))
 banc.eff.meta <- subset(banc.meta, grepl("efferent|motor|endocrine|visceral",super_class)) 
 banc.vpn.meta <- subset(banc.meta, grepl("visual_projection",super_class))
 banc.sens.meta <- subset(banc.meta, grepl("sensory",super_class))
+banc.sens.meta  <- banc.sens.meta %>%
+  dplyr::mutate(body_part_sensory = dplyr::case_when(
+    grepl("pharynx",body_part_sensory) ~ "pharynx",
+    TRUE ~ body_part_sensory
+  ))
 banc.sez.meta <- subset(banc.meta, !is.na(sez_class)&sez_class!="")
 an.ids <- unique(banc.an.meta$id)
 dn.ids <- unique(banc.dn.meta$id)
@@ -432,6 +450,37 @@ efferent.target.map <- c(abdomen_neurosecretory_cell = "abdomen neurosecretory",
 
 # Get sensory seed map
 sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine", 
+  frontoorbital_bristle_neuron = "head bristle",
+  ocellar_bristle_neuron = "head bristle",
+  orbital_bristle_neuron = "head bristle",
+  abdomen_oxygenation_neuron = "abdomen oxygenation",
+  wing_base_orphan_neuron = "wing base orphan",
+  wing_campaniform_sensillum_neuron = "wing campaniform",
+  thorax_orphan_neuron = "thorax orphan",
+  thorax_thoracic_abdominal_segmental_sensory_neuron = "thoracic-abdominal",
+  # haltere_thoracic_abdominal_segmental_sensory_neuron
+  hind_leg_hook_chordotonal_organ_neuron = "hind leg chordotonal",
+  middle_leg_hook_chordotonal_organ_neuron = "middle leg chordotonal",
+  front_leg_hook_chordotonal_organ_neuron = "front leg chordotonal",
+  wing_tegula_orphan_neuron = "wing tegula orphan",
+  pharynx_orphan_neuron = "pharynx orphan neuron",
+  anterior_digestive_tract_internal_taste_sensillum_neuron = "enteric internal taste",
+  anterior_digestive_tract_multidendritic_neuron = "enteric multidendritic",
+  posterior_uterine_sensory_neuron = "uterine",
+  pharynx_fishtrap_bristle_neuron = "pharynx fishtrap",
+  middle_leg_orphan_neuron = "middle leg orphan",
+  haltere_chordotonal_organ_neuron = "haltere chordotonal",
+  putative_hind_leg_club_chordotonal_organ_neuron = "hind leg chordotonal",
+  neck_chordotonal_organ_neuron = "neck chordotonal",
+  putative_front_leg_claw_chordotonal_organ_neuron = "front leg chordotonal",
+  putative_front_leg_hair_plate_neuron = "front leg hair plate",
+  hind_leg_bilateral_campaniform_sensillum_neuron = "hind leg campaniform",
+  middle_leg_bilateral_campaniform_sensillum_neuron = "middle leg campaniform",
+  front_leg_chordotonal_organ_neuorn = "front leg chordotonal",
+  sex_peptide_sensory_neuron = "sex peptide",
+  abdominal_ppk_neuron = "abdominal ppk",
+  front_leg_bilateral_campaniform_sensillum_neuron = "front leg campaniform",
+  
   #abdomen_endocrine_right = "abdomen_endocrine", 
   abdomen_multidendritic_neuron = "abdomen multidendritic", 
   abdomen_orphan_neuron = "abdomen orphan", 
@@ -458,7 +507,8 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   front_leg_hook_chordotonal = "front leg chordotonal", 
   front_leg_multidendritic_neuron = "multidendritic", 
   front_leg_orphan_neuron = "front leg orphan",  
-  front_leg_taste_peg_neuron = "front leg taste peg", 
+  front_leg_taste_peg_neuron = "front leg taste bristle", 
+  front_leg_taste_bristle_neuron = "front leg taste bristle", 
   frontal_bristle_neuron = "head bristle",   
   haustellum_bristle_neuron  = "head bristle",  
   interocellar_bristle_neuron  = "head bristle",   
@@ -483,7 +533,8 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   hind_leg_hook_chordotonal  = "hind leg chordotonal",  
   hind_leg_multidendritic_neuron = "multidendritic",  
   hind_leg_orphan_neuron = "hind leg orphan",  
-  hind_leg_taste_peg_neuron = "hind leg taste peg",   
+  hind_leg_taste_peg_neuron = "hind leg taste bristle", 
+  hind_leg_taste_bristle_neuron = "hind leg taste bristle",   
   internal_thermosensory_receptor_neuron = "antenna thermosensory receptor", 
   johnstons_organ_A_neuron = "johnstons organ A", 
   johnstons_organ_B_neuron = "johnstons organ B", 
@@ -508,7 +559,8 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   middle_leg_hook_chordotonal = "middle leg chordotonal", 
   middle_leg_multidendritic_neuron = "leg multidendritic", 
   #middle_leg_orphan_neuron = "middle leg orphan", 
-  middle_leg_taste_peg_neuron = "middle leg taste peg",
+  middle_leg_taste_peg_neuron = "middle leg taste bristle",
+  middle_leg_taste_bristle_neuron = "middle leg taste bristle",
   #pars_intercerebralis_endocrine_enteric_left = "pars_intercerebralis_enteric", 
   #pars_intercerebralis_endocrine_enteric_right = "pars_intercerebralis_enteric", 
   #pars_lateralis_endocrine_corpus_allatum_left = "pars_lateralis_endocrine_retrocerebral_complex", 
@@ -519,7 +571,7 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   #pharynx_orphan_neuron = "pharynx orphan", 
   prosternal_hair_plate_neuron = "prosternal hair plate", 
   prothoracic_chordotonal_organ_neuron = "prothoracic chordotonal", 
-  #retina_photoreceptor_neuron = "retina_photoreceptor", 
+  retina_photoreceptor_neuron = "retina photoreceptor", 
   #subesophageal_zone_endocrine_left = "subesophageal zone endocrine", 
   #subesophageal_zone_endocrine_right = "subesophageal zone endocrine", 
   thorax_bristle_neuron = "thorax bristle", 
@@ -535,7 +587,8 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   #wing_endocrine_left = "wing_non_motor", 
   #wing_endocrine_right = "wing_non_motor", 
   wing_margin_bristle_neuron = "wing margin bristle",
-  wing_margin_taste_peg_neuron = "wing margin taste", 
+  wing_margin_taste_peg_neuron = "wing margin taste bristle", 
+  wing_margin_taste_bristle_neuron = "wing margin taste bristle", 
   wing_multidendritic_neuron = "multidendritic", 
   wing_tegula_campaniform_sensillum_neuron = "wing tegula campaniform", 
   wing_tegula_chordotonal_organ_neuron = "wing tegula chordotonal", 
@@ -551,11 +604,44 @@ sensory.seed.map.detailed <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   `visual_small_object,visual_loom` = "visual loom",  
   visual_thin_vertical_bar = "visual thin vertical bar", 
   visual_vertical_widefieldmotion = "visual vertical widefield motion",
-  visual_ocellar = "visual ocellar"
+  visual_ocellar = "visual ocellar",
+  visual_achromatic_lamina_projection = "visual achromatic lamina projection",
+  visual_chromatic_lamina_projection = "visual chromatic lamina projection"
 )
 
 # Get sensory seed map
 sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine", 
+  frontoorbital_bristle_neuron = "head bristle",
+  ocellar_bristle_neuron = "head bristle",
+  orbital_bristle_neuron = "head bristle",
+  abdomen_oxygenation_neuron = "abdomen oxygenation",
+  wing_base_orphan_neuron = "wing base orphan",
+  wing_campaniform_sensillum_neuron = "wing campaniform",
+  #thorax_orphan_neuron = "thorax orphan",
+  thorax_thoracic_abdominal_segmental_sensory_neuron = "thoracic-abdominal",
+  # haltere_thoracic_abdominal_segmental_sensory_neuron
+  hind_leg_hook_chordotonal_organ_neuron = "hind leg chordotonal",
+  middle_leg_hook_chordotonal_organ_neuron = "middle leg chordotonal",
+  front_leg_hook_chordotonal_organ_neuron = "front leg chordotonal",
+  #wing_tegula_orphan_neuron = "wing tegula orphan",
+  #pharynx_orphan_neuron = "pharynx orphan neuron",
+  anterior_digestive_tract_internal_taste_sensillum_neuron = "enteric internal taste",
+  anterior_digestive_tract_multidendritic_neuron = "enteric multidendritic",
+  posterior_uterine_sensory_neuron = "uterine",
+  pharynx_fishtrap_bristle_neuron = "pharynx fishtrap",
+  #middle_leg_orphan_neuron = "middle leg orphan",
+  haltere_chordotonal_organ_neuron = "haltere chordotonal",
+  putative_hind_leg_club_chordotonal_organ_neuron = "hind leg chordotonal",
+  neck_chordotonal_organ_neuron = "neck chordotonal",
+  putative_front_leg_claw_chordotonal_organ_neuron = "front leg chordotonal",
+  putative_front_leg_hair_plate_neuron = "front leg hair plate",
+  hind_leg_bilateral_campaniform_sensillum_neuron = "hind leg campaniform",
+  middle_leg_bilateral_campaniform_sensillum_neuron = "middle leg campaniform",
+  front_leg_chordotonal_organ_neuorn = "front leg chordotonal",
+  sex_peptide_sensory_neuron = "sex peptide",
+  abdominal_ppk_neuron = "abdominal ppk",
+  front_leg_bilateral_campaniform_sensillum_neuron = "front leg campaniform",
+  
   #abdomen_endocrine_right = "abdomen_endocrine", 
   abdomen_multidendritic_neuron = "abdomen multidendritic", 
   abdomen_orphan_neuron = "abdomen orphan", 
@@ -582,7 +668,8 @@ sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   front_leg_hook_chordotonal = "leg chordotonal", 
   front_leg_multidendritic_neuron = "leg multidendritic", 
   #front_leg_orphan_neuron = "leg orphan",  
-  front_leg_taste_peg_neuron = "leg taste peg", 
+  front_leg_taste_peg_neuron = "leg taste bristle", 
+  front_leg_taste_bristle_neuron = "leg taste bristle", 
   frontal_bristle_neuron = "head bristle",   
   haustellum_bristle_neuron  = "head bristle",  
   interocellar_bristle_neuron  = "head bristle",   
@@ -607,7 +694,8 @@ sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   hind_leg_hook_chordotonal  = "leg chordotonal",  
   hind_leg_multidendritic_neuron = "leg multidendritic",  
   #hind_leg_orphan_neuron = "leg orphan",  
-  hind_leg_taste_peg_neuron = "leg taste peg",   
+  hind_leg_taste_peg_neuron = "leg taste bristle",   
+  hind_leg_taste_bristle_neuron = "leg taste bristle",   
   internal_thermosensory_receptor_neuron = "internal thermosensory receptor", 
   johnstons_organ_A_neuron = "johnstons organ A", 
   johnstons_organ_B_neuron = "johnstons organ B", 
@@ -632,7 +720,8 @@ sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   middle_leg_hook_chordotonal = "leg chordotonal", 
   middle_leg_multidendritic_neuron = "leg multidendritic", 
   #middle_leg_orphan_neuron = "leg orphan", 
-  middle_leg_taste_peg_neuron = "leg taste peg",
+  middle_leg_taste_peg_neuron = "leg taste bristle",
+  middle_leg_taste_bristle_neuron = "leg taste bristle",
   #pars_intercerebralis_endocrine_enteric_left = "pars_intercerebralis_enteric", 
   #pars_intercerebralis_endocrine_enteric_right = "pars_intercerebralis_enteric", 
   #pars_lateralis_endocrine_corpus_allatum_left = "pars_lateralis_endocrine_retrocerebral_complex", 
@@ -643,7 +732,7 @@ sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   pharynx_orphan_neuron = "pharynx internal", 
   prosternal_hair_plate_neuron = "prosternal hair plate", 
   prothoracic_chordotonal_organ_neuron = "prothoracic chordotonal", 
-  #retina_photoreceptor_neuron = "retina_photoreceptor", 
+  #retina_photoreceptor_neuron = "retina photoreceptor", 
   #subesophageal_zone_endocrine_left = "subesophageal zone endocrine", 
   #subesophageal_zone_endocrine_right = "subesophageal zone endocrine", 
   thorax_bristle_neuron = "thorax bristle", 
@@ -659,7 +748,8 @@ sensory.seed.map <- c(#abdomen_endocrine_left = "abdomen_endocrine",
   #wing_endocrine_right = "wing_non_motor", 
   wing_margin_bristle_neuron = "thorax bristle",
   abdominal_terminalia_bristle = "terminalia bristle",
-  wing_margin_taste_peg_neuron = "wing taste", 
+  wing_margin_taste_peg_neuron = "wing taste bristle", 
+  wing_margin_taste_bristle_neuron = "wing taste bristle", 
   wing_multidendritic_neuron = "wing multidendritic", 
   wing_tegula_campaniform_sensillum_neuron = "wing campaniform", 
   wing_tegula_chordotonal_organ_neuron = "wing chordotonal", 
@@ -687,15 +777,17 @@ super.clust.order <- c("flight steering 1",
                        "probing",
                        "feeding",
                        "reproduction",
-                       "tactile perception",
-                       "proprioceptive perception",
+                       #"tactile perception",
+                       "tactile",
+                       #"proprioceptive perception",
+                       "proprioceptive",
                        "threat response",
                        "landing",
                        "walking",
                        "walking steering",
                        "visceral control")
 cns.network.order = c("abdominal VNC",
-  "ventral VNC",
+  "leg VNC",
   "dorsal VNC",
   "lateral brain",
   "inferior brain",

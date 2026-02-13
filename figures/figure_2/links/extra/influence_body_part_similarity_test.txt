@@ -1,0 +1,13 @@
+Body-part relatedness analysis: Influence vs effector body part similarity
+
+Metric: influence
+Number of body parts: 14
+Total values analyzed: 196
+  Same body part (diagonal): 14
+  Different body parts (off-diagonal): 182
+
+Pearson correlation test:
+  Correlation coefficient (r): 0.5318
+  R²: 0.2828
+  p-value: 1.125e-14
+  95% CI: [0.4187, 0.6286]

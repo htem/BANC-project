@@ -1,0 +1,197 @@
+"source_bp","target_bp","cosine_similarity","influence","is_same_bp"
+"hemolymph","hemolymph",1,1.273,TRUE
+"enteric","hemolymph",0.38662257873951,0.4323,FALSE
+"pharynx","hemolymph",0.195899041426773,0.1091,FALSE
+"proboscis","hemolymph",0.0675456924137041,0.02581,FALSE
+"antenna","hemolymph",0.0704481545781949,0.001129,FALSE
+"eye","hemolymph",0.0813468553712672,0.0005118,FALSE
+"neck","hemolymph",0.0813117100254879,0.0004448,FALSE
+"wing","hemolymph",0.102618830727514,0.04502,FALSE
+"haltere","hemolymph",0.138185396987841,0.185,FALSE
+"front leg","hemolymph",0.0424020155714626,0.03905,FALSE
+"middle leg","hemolymph",0.0490896076094389,0.05054,FALSE
+"hind leg","hemolymph",0.0379756319109247,0.02792,FALSE
+"abdomen","hemolymph",0.1220549647157,0.06852,FALSE
+"reproductive","hemolymph",0.0824553462694042,0.006997,FALSE
+"hemolymph","enteric",0.38662257873951,0.1133,FALSE
+"enteric","enteric",1,1.77,TRUE
+"pharynx","enteric",0.474110474692873,0.2895,FALSE
+"proboscis","enteric",0.142834062605767,0.1003,FALSE
+"antenna","enteric",0.0384145370422475,0.0001471,FALSE
+"eye","enteric",0.0452652723349886,0.00006883,FALSE
+"neck","enteric",0.0249586017091311,0.00006109,FALSE
+"wing","enteric",0.0170776756827249,0.004728,FALSE
+"haltere","enteric",0.0136328759728103,0.01391,FALSE
+"front leg","enteric",0.0186848189957697,0.01646,FALSE
+"middle leg","enteric",0.0108369137411875,0.009448,FALSE
+"hind leg","enteric",0.00964921639305732,0.008319,FALSE
+"abdomen","enteric",0.152631517262339,0.04719,FALSE
+"reproductive","enteric",0.0821726051152528,0.00202,FALSE
+"hemolymph","pharynx",0.195899041426773,0.02682,FALSE
+"enteric","pharynx",0.474110474692873,0.7173,FALSE
+"pharynx","pharynx",1,2.074,TRUE
+"proboscis","pharynx",0.529197190841197,0.5261,FALSE
+"antenna","pharynx",0.105484563919239,0.001184,FALSE
+"eye","pharynx",0.150618903573377,0.001095,FALSE
+"neck","pharynx",0.0930321671426005,0.001262,FALSE
+"wing","pharynx",0.0284656555163514,0.009341,FALSE
+"haltere","pharynx",0.0416590310345944,0.08788,FALSE
+"front leg","pharynx",0.0482162637151481,0.04121,FALSE
+"middle leg","pharynx",0.0230470392727174,0.0191,FALSE
+"hind leg","pharynx",0.0170522280297439,0.009952,FALSE
+"abdomen","pharynx",0.0589737898346003,0.01291,FALSE
+"reproductive","pharynx",0.0315313553853077,0.002546,FALSE
+"hemolymph","proboscis",0.0675456924137041,0.009502,FALSE
+"enteric","proboscis",0.142834062605767,0.06294,FALSE
+"pharynx","proboscis",0.529197190841197,0.5492,FALSE
+"proboscis","proboscis",1,1.59,TRUE
+"antenna","proboscis",0.251243078490771,0.009751,FALSE
+"eye","proboscis",0.362618137963006,0.07889,FALSE
+"neck","proboscis",0.222635472875982,0.0351,FALSE
+"wing","proboscis",0.0356474827932594,0.02352,FALSE
+"haltere","proboscis",0.0163442512392835,0.001123,FALSE
+"front leg","proboscis",0.184379852793689,0.1923,FALSE
+"middle leg","proboscis",0.0862935802318811,0.08159,FALSE
+"hind leg","proboscis",0.0498553839257449,0.03345,FALSE
+"abdomen","proboscis",0.0422102364480845,0.03774,FALSE
+"reproductive","proboscis",0.0345756333054065,0.00734,FALSE
+"hemolymph","antenna",0.0704481545781949,0.0006605,FALSE
+"enteric","antenna",0.0384145370422475,0.00075,FALSE
+"pharynx","antenna",0.105484563919239,0.005648,FALSE
+"proboscis","antenna",0.251243078490771,0.01515,FALSE
+"antenna","antenna",1,0.05766,TRUE
+"eye","antenna",0.806450131030068,0.02187,FALSE
+"neck","antenna",0.524668329624968,0.03344,FALSE
+"wing","antenna",0.520901034033921,0.04309,FALSE
+"haltere","antenna",0.194071313947109,0.003546,FALSE
+"front leg","antenna",0.459056984011558,0.03643,FALSE
+"middle leg","antenna",0.352564088697004,0.02465,FALSE
+"hind leg","antenna",0.255802567748646,0.0162,FALSE
+"abdomen","antenna",0.258454459471476,0.02182,FALSE
+"reproductive","antenna",0.234711351982531,0.002654,FALSE
+"hemolymph","eye",0.0813468553712672,0.0001572,FALSE
+"enteric","eye",0.0452652723349886,0.000151,FALSE
+"pharynx","eye",0.150618903573377,0.001281,FALSE
+"proboscis","eye",0.362618137963006,0.004119,FALSE
+"antenna","eye",0.806450131030068,0.003911,FALSE
+"eye","eye",1,0.01028,TRUE
+"neck","eye",0.77783941675582,0.004641,FALSE
+"wing","eye",0.403606671124393,0.004334,FALSE
+"haltere","eye",0.307688748156057,0.002344,FALSE
+"front leg","eye",0.473051598851149,0.006091,FALSE
+"middle leg","eye",0.425215500043066,0.005261,FALSE
+"hind leg","eye",0.367967753344073,0.004598,FALSE
+"abdomen","eye",0.0945602294064313,0.0006665,FALSE
+"reproductive","eye",0.067886367265006,0.0003835,FALSE
+"hemolymph","neck",0.0813117100254879,0.007077,FALSE
+"enteric","neck",0.0249586017091311,0.009932,FALSE
+"pharynx","neck",0.0930321671426005,0.07459,FALSE
+"proboscis","neck",0.222635472875982,0.3448,FALSE
+"antenna","neck",0.524668329624968,0.1178,FALSE
+"eye","neck",0.77783941675582,1.348,FALSE
+"neck","neck",1,1.211,TRUE
+"wing","neck",0.332694378502344,0.2737,FALSE
+"haltere","neck",0.64573526701906,0.935,FALSE
+"front leg","neck",0.144645109117401,0.1834,FALSE
+"middle leg","neck",0.0981420998941925,0.1252,FALSE
+"hind leg","neck",0.0883417744174909,0.08006,FALSE
+"abdomen","neck",0.0405996527620282,0.01356,FALSE
+"reproductive","neck",0.0137020424689626,0.006482,FALSE
+"hemolymph","wing",0.102618830727514,0.06523,FALSE
+"enteric","wing",0.0170776756827249,0.02279,FALSE
+"pharynx","wing",0.0284656555163514,0.02034,FALSE
+"proboscis","wing",0.0356474827932594,0.01934,FALSE
+"antenna","wing",0.520901034033921,0.1265,FALSE
+"eye","wing",0.403606671124393,0.1742,FALSE
+"neck","wing",0.332694378502344,0.1062,FALSE
+"wing","wing",1,2.692,TRUE
+"haltere","wing",0.386957389091254,0.8724,FALSE
+"front leg","wing",0.0956100946407587,0.1266,FALSE
+"middle leg","wing",0.128161742633833,0.1874,FALSE
+"hind leg","wing",0.121568484176387,0.1273,FALSE
+"abdomen","wing",0.067917813593187,0.04961,FALSE
+"reproductive","wing",0.0304362068136939,0.01548,FALSE
+"hemolymph","haltere",0.138185396987841,0.004162,FALSE
+"enteric","haltere",0.0136328759728103,0.01287,FALSE
+"pharynx","haltere",0.0416590310345944,0.003528,FALSE
+"proboscis","haltere",0.0163442512392835,0.004402,FALSE
+"antenna","haltere",0.194071313947109,0.02559,FALSE
+"eye","haltere",0.307688748156057,0.2641,FALSE
+"neck","haltere",0.64573526701906,0.6194,FALSE
+"wing","haltere",0.386957389091254,0.2029,FALSE
+"haltere","haltere",1,2.468,TRUE
+"front leg","haltere",0.0305912364857488,0.02258,FALSE
+"middle leg","haltere",0.0368027910881393,0.04354,FALSE
+"hind leg","haltere",0.0743277385619981,0.05603,FALSE
+"abdomen","haltere",0.0594968280606658,0.03634,FALSE
+"reproductive","haltere",0.017232035406017,0.003618,FALSE
+"hemolymph","front leg",0.0424020155714626,0.0179,FALSE
+"enteric","front leg",0.0186848189957697,0.01363,FALSE
+"pharynx","front leg",0.0482162637151481,0.08188,FALSE
+"proboscis","front leg",0.184379852793689,0.3631,FALSE
+"antenna","front leg",0.459056984011558,0.1219,FALSE
+"eye","front leg",0.473051598851149,0.132,FALSE
+"neck","front leg",0.144645109117401,0.1492,FALSE
+"wing","front leg",0.0956100946407587,0.2169,FALSE
+"haltere","front leg",0.0305912364857488,0.03913,FALSE
+"front leg","front leg",1,5.705,TRUE
+"middle leg","front leg",0.226002926435512,0.6243,FALSE
+"hind leg","front leg",0.140058365007283,0.3888,FALSE
+"abdomen","front leg",0.0394517686713406,0.0696,FALSE
+"reproductive","front leg",0.0316756709802179,0.02766,FALSE
+"hemolymph","middle leg",0.0490896076094389,0.01196,FALSE
+"enteric","middle leg",0.0108369137411875,0.006728,FALSE
+"pharynx","middle leg",0.0230470392727174,0.03807,FALSE
+"proboscis","middle leg",0.0862935802318811,0.127,FALSE
+"antenna","middle leg",0.352564088697004,0.108,FALSE
+"eye","middle leg",0.425215500043066,0.03921,FALSE
+"neck","middle leg",0.0981420998941925,0.04978,FALSE
+"wing","middle leg",0.128161742633833,0.2932,FALSE
+"haltere","middle leg",0.0368027910881393,0.05386,FALSE
+"front leg","middle leg",0.226002926435512,0.6218,FALSE
+"middle leg","middle leg",1,5.704,TRUE
+"hind leg","middle leg",0.262180056100575,0.8376,FALSE
+"abdomen","middle leg",0.0464319334873114,0.06318,FALSE
+"reproductive","middle leg",0.0370323090526822,0.05723,FALSE
+"hemolymph","hind leg",0.0379756319109247,0.01288,FALSE
+"enteric","hind leg",0.00964921639305732,0.007017,FALSE
+"pharynx","hind leg",0.0170522280297439,0.02764,FALSE
+"proboscis","hind leg",0.0498553839257449,0.09316,FALSE
+"antenna","hind leg",0.255802567748646,0.07683,FALSE
+"eye","hind leg",0.367967753344073,0.03519,FALSE
+"neck","hind leg",0.0883417744174909,0.04277,FALSE
+"wing","hind leg",0.121568484176387,0.3171,FALSE
+"haltere","hind leg",0.0743277385619981,0.258,FALSE
+"front leg","hind leg",0.140058365007283,0.3321,FALSE
+"middle leg","hind leg",0.262180056100575,0.6391,FALSE
+"hind leg","hind leg",1,5.686,TRUE
+"abdomen","hind leg",0.0746730342286048,0.09744,FALSE
+"reproductive","hind leg",0.0431296648628036,0.07694,FALSE
+"hemolymph","abdomen",0.1220549647157,0.2201,FALSE
+"enteric","abdomen",0.152631517262339,1.08,FALSE
+"pharynx","abdomen",0.0589737898346003,0.08306,FALSE
+"proboscis","abdomen",0.0422102364480845,0.06751,FALSE
+"antenna","abdomen",0.258454459471476,0.0329,FALSE
+"eye","abdomen",0.0945602294064313,0.0278,FALSE
+"neck","abdomen",0.0405996527620282,0.02381,FALSE
+"wing","abdomen",0.067917813593187,0.2799,FALSE
+"haltere","abdomen",0.0594968280606658,0.3578,FALSE
+"front leg","abdomen",0.0394517686713406,0.1598,FALSE
+"middle leg","abdomen",0.0464319334873114,0.1909,FALSE
+"hind leg","abdomen",0.0746730342286048,0.4088,FALSE
+"abdomen","abdomen",1,8.081,TRUE
+"reproductive","abdomen",0.994970988000316,2.699,FALSE
+"hemolymph","reproductive",0.0824553462694042,0.01257,FALSE
+"enteric","reproductive",0.0821726051152528,0.04782,FALSE
+"pharynx","reproductive",0.0315313553853077,0.005709,FALSE
+"proboscis","reproductive",0.0345756333054065,0.004585,FALSE
+"antenna","reproductive",0.234711351982531,0.0003819,FALSE
+"eye","reproductive",0.067886367265006,0.0001115,FALSE
+"neck","reproductive",0.0137020424689626,0.0001095,FALSE
+"wing","reproductive",0.0304362068136939,0.007428,FALSE
+"haltere","reproductive",0.017232035406017,0.001459,FALSE
+"front leg","reproductive",0.0316756709802179,0.01258,FALSE
+"middle leg","reproductive",0.0370323090526822,0.01605,FALSE
+"hind leg","reproductive",0.0431296648628036,0.01637,FALSE
+"abdomen","reproductive",0.994970988000316,0.8,FALSE
+"reproductive","reproductive",1,0.3076,TRUE
