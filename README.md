@@ -697,3 +697,13 @@ Data and code are released under open-source licenses to facilitate scientific r
 </div>
 
 
+
+## Open access (HHMI)
+
+This software was developed with support from the Howard Hughes Medical
+Institute (HHMI). Per HHMI's open-access policy, the associated manuscript
+("Distributed control circuits across a brain-and-cord connectome") and its
+Harvard Dataverse data deposit are released under the
+[Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+This source code remains under its existing OSI-approved open-source license
+— see [`LICENSE`](LICENSE).
