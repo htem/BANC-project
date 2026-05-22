@@ -161,14 +161,22 @@ franken.meta <- dplyr::bind_rows(franken.meta_unique,franken.meta_duplicates) %>
 #   dplyr::select(-an_cluster,-dn_cluster, -eff_cluster)
 
 # ----- End of live block: write the dated snapshot ----------------------
+# Atomic write: write to <name>.tmp.<pid> first, then rename. Without this,
+# a script that crashes mid-write — or two scripts that race to refresh the
+# snapshot in the same session — leave behind a half-written .parquet that
+# pyarrow / arrow can't read ("Unexpected end of stream"). The rename is
+# atomic at the filesystem level on the same volume, so the final path
+# either has the complete snapshot or its previous version.
 tryCatch({
   .snap_out <- file.path("data", "meta",
                          sprintf("franken_meta_%s.parquet",
                                  format(Sys.Date(), "%Y%m%d")))
-  arrow::write_parquet(franken.meta, .snap_out, compression = "snappy")
+  .snap_tmp <- paste0(.snap_out, ".tmp.", Sys.getpid())
+  arrow::write_parquet(franken.meta, .snap_tmp, compression = "snappy")
+  file.rename(.snap_tmp, .snap_out)
   message(sprintf("Wrote franken.meta snapshot %s (%.1f MB)",
                   .snap_out, file.info(.snap_out)$size / 1024^2))
-  rm(.snap_out)
+  rm(.snap_out, .snap_tmp)
 }, error = function(e) message("franken snapshot write failed: ", conditionMessage(e)))
 
 }  # end if(.live_needed)

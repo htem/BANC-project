@@ -517,14 +517,20 @@ if (file.exists(cns_network_file)) {
 }
 
 # ----- End of live block: write the dated snapshot ----------------------
+# Atomic write: write to <name>.tmp.<pid> first, then rename. See
+# franken-meta-live.R for the rationale (a half-written .parquet from a
+# crashed or concurrent run is unreadable by arrow with "Unexpected end
+# of stream"). file.rename is atomic on the same filesystem.
 tryCatch({
   .snap_out <- file.path("data", "meta",
                          sprintf("banc_888_meta_%s.parquet",
                                  format(Sys.Date(), "%Y%m%d")))
-  arrow::write_parquet(banc.meta, .snap_out, compression = "snappy")
+  .snap_tmp <- paste0(.snap_out, ".tmp.", Sys.getpid())
+  arrow::write_parquet(banc.meta, .snap_tmp, compression = "snappy")
+  file.rename(.snap_tmp, .snap_out)
   message(sprintf("Wrote banc.meta snapshot %s (%.1f MB)",
                   .snap_out, file.info(.snap_out)$size / 1024^2))
-  rm(.snap_out)
+  rm(.snap_out, .snap_tmp)
 }, error = function(e) message("Snapshot write failed: ", conditionMessage(e)))
 
 }  # end if(.live_needed)
