@@ -128,6 +128,12 @@ manuscript/print/figure*/
 dataverse/*
 *banc_meta.csv
 
+# Working / scratch notes — planning files, session TODOs. These live
+# alongside the committed code (e.g. manuscript/print/dataverse/
+# DATAVERSE_TODO.md) but should not be part of the published history.
+TODO.md
+*_TODO.md
+
 
 # R default plot output
 Rplots.pdf
