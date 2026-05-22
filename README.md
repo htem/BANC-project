@@ -27,8 +27,6 @@ The **Brain-And-Nerve-Cord (BANC)** is the first synapse-resolution connectome t
 
 This repository accompanies the paper *Distributed control circuits across a brain-and-cord connectome* (Bates, Phelps, Kim, Yang et al., 2026). It holds the R analysis pipeline that produced every figure and statistical result, the per-figure illustrator-ready PDFs and tabular outputs, and a committed snapshot of the metadata needed to reproduce the analyses end-to-end. Larger data products (per-synapse tables, influence parquets, neuron meshes) are kept on the [Harvard Dataverse deposit](https://doi.org/10.7910/DVN/7WTH1N) and are pulled on demand by the analysis scripts.
 
-This codebase was led by [Alexander Shakeel Bates](https://scholar.google.com/citations?user=BOVTiXIAAAAJ&hl=en) while a postdoctoral fellow in the lab of [Rachel I. Wilson](https://neuro.hms.harvard.edu/faculty-staff/rachel-wilson) at Harvard Medical School, with contributions from the wider BANC author team.
-
 <div align="center">
 
 <img src="https://github.com/htem/BANC-project/blob/main/images/tyler-sloan/brain_vnc_neck_1000s_100p.png?raw=true" width="540"
@@ -220,6 +218,8 @@ Please cite both the paper and the Dataverse deposit:
 ```
 
 ## Acknowledgements
+
+This codebase was led by [Alexander Shakeel Bates](https://scholar.google.com/citations?user=BOVTiXIAAAAJ&hl=en) in the lab of [Rachel Wilson](https://neuro.hms.harvard.edu/faculty-staff/rachel-wilson) at Harvard Medical School, and working with [Wei-Chung Allen Lee](https://www.lee.hms.harvard.edu/), and with help from [Helen Yang](https://scholar.google.com/citations?user=T5rocQ0AAAAJ&hl=en), Jasper Phelps, Mo Osman and Tatsuo Okubo.
 
 This work is the product of a large collaborative effort. The full author list, affiliations, and detailed acknowledgements are in the paper and in the [Dataverse front-matter](https://doi.org/10.7910/DVN/7WTH1N).
 
