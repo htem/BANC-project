@@ -1,0 +1,9 @@
+=== Cluster concordance: new UMAP clusters vs SeaTable annotations ===
+N neurons evaluated: 3161
+
+Adjusted Rand Index (1 = perfect agreement, 0 = random):
+  new vs super_cluster:  0.395
+  new vs st_cluster:     0.57
+  new vs manual_cluster: 0.581
+
+Contingency heatmaps saved to figure_3/links/supplement/

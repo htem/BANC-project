@@ -1,0 +1,61 @@
+Betweenness Dunn post-hoc test summary
+Date: 2026-05-20
+
+========================================
+1. AN/DN vs all other super classes (afferent-to-efferent betweenness)
+========================================
+
+Betweenness varies significantly with super-class (Kruskal–Wallis test, p = 0.00e+00). Post-hoc Dunn tests with Holm correction showed that ascending neurons (ANs) and descending neurons (DNs) had higher betweenness than all other super classes (all adjusted p ≤ 0.2018).
+
+Pairwise comparisons (Holm-corrected):
+  descending vs ascending: p.adj = 0.2018 [ns], median descending = 463.20, median ascending = 252.07
+  descending vs ventral_nerve_cord_intrinsic: p.adj = 5.68e-07 [*], median descending = 463.20, median ventral_nerve_cord_intrinsic = 121.12
+  descending vs visual_centrifugal: p.adj = 1.53e-111 [*], median descending = 463.20, median visual_centrifugal = 1.22
+  descending vs central_brain_intrinsic: p.adj = 0.00e+00 [*], median descending = 463.20, median central_brain_intrinsic = 0.28
+  descending vs visual_projection: p.adj = 2.76e-267 [*], median descending = 463.20, median visual_projection = 1.61
+  descending vs optic_lobe_intrinsic: p.adj = 0.00e+00 [*], median descending = 463.20, median optic_lobe_intrinsic = 0.10
+  ascending vs ventral_nerve_cord_intrinsic: p.adj = 2.47e-05 [*], median ascending = 252.07, median ventral_nerve_cord_intrinsic = 121.12
+  ascending vs visual_centrifugal: p.adj = 4.98e-115 [*], median ascending = 252.07, median visual_centrifugal = 1.22
+  ascending vs central_brain_intrinsic: p.adj = 0.00e+00 [*], median ascending = 252.07, median central_brain_intrinsic = 0.28
+  ascending vs visual_projection: p.adj = 0.00e+00 [*], median ascending = 252.07, median visual_projection = 1.61
+  ascending vs optic_lobe_intrinsic: p.adj = 0.00e+00 [*], median ascending = 252.07, median optic_lobe_intrinsic = 0.10
+
+  Comparisons expected: 10, significant (highlighted > other): 11
+  Max adjusted p (among significant): 0.2018
+
+========================================
+2. AN/DN vs all other super classes (all-to-all betweenness)
+========================================
+
+All-to-all betweenness varies significantly with super-class (Kruskal–Wallis test, p = 0.00e+00). Post-hoc Dunn tests with Holm correction showed that ANs and DNs had higher all-to-all betweenness than all other super classes (all adjusted p ≤ 2.83e-25).
+
+Pairwise comparisons (Holm-corrected):
+  descending vs visual_centrifugal: p.adj = 2.93e-07 [*], median visual_centrifugal = 870376.63, median descending = 307590.18
+  ascending vs visual_centrifugal: p.adj = 2.93e-07 [*], median visual_centrifugal = 870376.63, median ascending = 389155.38
+  descending vs ascending: p.adj = 0.6635 [ns], median descending = 307590.18, median ascending = 389155.38
+  descending vs visual_projection: p.adj = 2.83e-25 [*], median descending = 307590.18, median visual_projection = 132351.03
+  descending vs central_brain_intrinsic: p.adj = 4.49e-183 [*], median descending = 307590.18, median central_brain_intrinsic = 56259.52
+  descending vs optic_lobe_intrinsic: p.adj = 1.17e-212 [*], median descending = 307590.18, median optic_lobe_intrinsic = 52528.25
+  descending vs ventral_nerve_cord_intrinsic: p.adj = 1.05e-224 [*], median descending = 307590.18, median ventral_nerve_cord_intrinsic = 45382.42
+  ascending vs visual_projection: p.adj = 2.28e-39 [*], median ascending = 389155.38, median visual_projection = 132351.03
+  ascending vs central_brain_intrinsic: p.adj = 2.45e-285 [*], median ascending = 389155.38, median central_brain_intrinsic = 56259.52
+  ascending vs optic_lobe_intrinsic: p.adj = 0.00e+00 [*], median ascending = 389155.38, median optic_lobe_intrinsic = 52528.25
+  ascending vs ventral_nerve_cord_intrinsic: p.adj = 0.00e+00 [*], median ascending = 389155.38, median ventral_nerve_cord_intrinsic = 45382.42
+
+  Comparisons expected: 10, significant (highlighted > other): 8
+  Max adjusted p (among significant): 2.83e-25
+
+========================================
+3. VNC intrinsic vs remaining non-AN/DN super classes
+========================================
+
+Among non-AN/DN super-classes, betweenness also varies significantly (Kruskal–Wallis test, p = 0.00e+00). Post-hoc Dunn tests with Holm correction showed that VNC intrinsic neurons had higher betweenness than the remaining four super-classes (all adjusted p ≤ 6.72e-119).
+
+Pairwise comparisons (Holm-corrected):
+  ventral_nerve_cord_intrinsic vs visual_centrifugal: p.adj = 6.72e-119 [*], median ventral_nerve_cord_intrinsic = 121.12, median visual_centrifugal = 1.22
+  ventral_nerve_cord_intrinsic vs central_brain_intrinsic: p.adj = 0.00e+00 [*], median ventral_nerve_cord_intrinsic = 121.12, median central_brain_intrinsic = 0.28
+  ventral_nerve_cord_intrinsic vs visual_projection: p.adj = 0.00e+00 [*], median ventral_nerve_cord_intrinsic = 121.12, median visual_projection = 1.61
+  ventral_nerve_cord_intrinsic vs optic_lobe_intrinsic: p.adj = 0.00e+00 [*], median ventral_nerve_cord_intrinsic = 121.12, median optic_lobe_intrinsic = 0.10
+
+  Comparisons expected: 4, significant (highlighted > other): 4
+  Max adjusted p (among significant): 6.72e-119

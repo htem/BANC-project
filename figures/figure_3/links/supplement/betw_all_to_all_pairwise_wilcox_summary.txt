@@ -1,0 +1,37 @@
+Pairwise Wilcoxon Rank-Sum Tests
+======================================================================
+Date: 2026-04-28 10:28:25
+Total observations: 80108
+Number of groups: 7
+Number of comparisons: 5
+Adjustment method: holm | alpha = 0.05
+
+Medians by group
+----------------------------------------------------------------------
+|group                        |     n| median_value|        iqr|
+|:----------------------------|-----:|------------:|----------:|
+|visual_centrifugal           |   365|    592618.10| 2548241.05|
+|descending                   |  1044|    223710.96|  867972.37|
+|ascending                    |  1592|    285024.54|  896652.26|
+|visual_projection            |  5653|     86346.39|  232902.52|
+|central_brain_intrinsic      | 28157|     39690.21|  134059.25|
+|optic_lobe_intrinsic         | 30755|     43175.98|  133910.36|
+|ventral_nerve_cord_intrinsic | 12542|     36930.13|   89040.77| 
+
+
+Pairwise comparisons (Wilcoxon rank-sum tests)
+ ----------------------------------------------------------------------
+|group1     |group2             |   n1|   n2|  median1|   median2|       W| p_value|  p_adj|signif |p_adj_disp   | rank_biserial|effect_size |
+|:----------|:------------------|----:|----:|--------:|---------:|-------:|-------:|------:|:------|:------------|-------------:|:-----------|
+|ascending  |descending         | 1592| 1044| 285024.5| 223710.96|  851323|  0.2882| 0.2882|ns     |0.288        |        0.0244|negligible  |
+|ascending  |visual_centrifugal | 1592|  365| 285024.5| 592618.10|  234324|  0.0000| 0.0000|****   |1.55×10^-8   |       -0.1935|small       |
+|ascending  |visual_projection  | 1592| 5653| 285024.5|  86346.39| 6136813|  0.0000| 0.0000|****   |< 2.2×10^-16 |        0.3638|medium      |
+|descending |visual_centrifugal | 1044|  365| 223711.0| 592618.10|  151090|  0.0000| 0.0000|****   |1.13×10^-8   |       -0.2070|small       |
+|descending |visual_projection  | 1044| 5653| 223711.0|  86346.39| 3951574|  0.0000| 0.0000|****   |< 2.2×10^-16 |        0.3391|medium      | 
+
+
+======================================================================
+ FIGURE LEGEND (copy-paste ready)
+ ======================================================================
+ Pairwise Wilcoxon rank-sum tests with Holm correction for multiple comparisons (α=0.05) showed significant differences between the medians for ascending vs visual centrifugal (p=1.55×10^-8, r=-0.193, small effect); ascending vs visual projection (p=< 2.2×10^-16, r=0.364, medium effect); descending vs visual centrifugal (p=1.13×10^-8, r=-0.207, small effect) and descending vs visual projection (p=< 2.2×10^-16, r=0.339, medium effect). Effect sizes reported as rank-biserial correlation (r). 
+ ======================================================================

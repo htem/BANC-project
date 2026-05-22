@@ -1,0 +1,76 @@
+Pairwise Wilcoxon Rank-Sum Tests
+======================================================================
+Date: 2026-05-20 13:58:14
+Total observations: 119493
+Number of groups: 7
+Number of comparisons: 3
+Adjustment method: holm | alpha = 0.05
+
+Medians by group
+----------------------------------------------------------------------
+|group                        |     n| median_value|       iqr|
+|:----------------------------|-----:|------------:|---------:|
+|descending                   |   990|     463.1996| 1268.4411|
+|ascending                    |  1516|     252.0717| 1045.9933|
+|ventral_nerve_cord_intrinsic | 12382|     121.1171|  434.2938|
+|visual_centrifugal           |   449|       1.2190|   56.6519|
+|central_brain_intrinsic      | 28460|       0.2827|   12.7923|
+|visual_projection            |  7054|       1.6051|   16.9143|
+|optic_lobe_intrinsic         | 68642|       0.1000|    1.0692| 
+
+
+Pairwise comparisons (Wilcoxon rank-sum tests)
+ ----------------------------------------------------------------------
+|group1     |group2                       |   n1|    n2|  median1|  median2|        W| P_value| P_adj|signif |P_adj_disp     | rank_biserial|effect_size |
+|:----------|:----------------------------|----:|-----:|--------:|--------:|--------:|-------:|-----:|:------|:--------------|-------------:|:-----------|
+|ascending  |descending                   | 1516|   990| 252.0717| 463.1996|   670861|       0|     0|****   |7.02 × 10^−6   |       -0.1060|small       |
+|ascending  |ventral_nerve_cord_intrinsic | 1516| 12382| 252.0717| 121.1171| 11374634|       0|     0|****   |< 2.2 × 10^−16 |        0.2119|small       |
+|descending |ventral_nerve_cord_intrinsic |  990| 12382| 463.1996| 121.1171|  8096354|       0|     0|****   |< 2.2 × 10^−16 |        0.3210|medium      | 
+
+
+======================================================================
+ FIGURE LEGEND (copy-paste ready)
+ ======================================================================
+ Pairwise Wilcoxon rank-sum tests with Holm correction for multiple comparisons (α=0.05) showed significant differences between the medians for ascending vs descending (p=7.02 × 10^−6, r=-0.106, small effect); ascending vs ventral nerve cord intrinsic (p=< 2.2 × 10^−16, r=0.212, small effect) and descending vs ventral nerve cord intrinsic (p=< 2.2 × 10^−16, r=0.321, medium effect). Effect sizes reported as rank-biserial correlation (r). 
+ ======================================================================
+
+Concise stat
+----------------------------------------------------------------------
+ (P < 2.2 × 10^−16, pairwise Wilcoxon rank-sum (holm-adjusted), 3 comparisons, min adjusted p across pairs, n = 119493) 
+
+
+Dunn Post-Hoc Tests (Kruskal-Wallis + pairwise)
+----------------------------------------------------------------------
+Omnibus: Kruskal–Wallis H(6) = 32762.0247, P = < 2.2 × 10^−16
+Post-hoc: Dunn test with Holm correction for multiple comparisons
+Highlighted groups: ascending, descending, ventral_nerve_cord_intrinsic
+
+Dunn pairwise results (highlighted groups):
+----------------------------------------------------------------------
+|group1                       |group2                       | statistic|      P|  P.adj|P.adj.signif |  median1|  median2|hl                           |hl_higher |comparison_type   |
+|:----------------------------|:----------------------------|---------:|------:|------:|:------------|--------:|--------:|:----------------------------|:---------|:-----------------|
+|descending                   |ascending                    |   -1.2764| 0.2018| 0.2018|ns           | 463.1996| 252.0717|descending                   |TRUE      |within_highlights |
+|descending                   |ventral_nerve_cord_intrinsic |   -5.3035| 0.0000| 0.0000|****         | 463.1996| 121.1171|descending                   |TRUE      |within_highlights |
+|descending                   |visual_centrifugal           |  -22.5344| 0.0000| 0.0000|****         | 463.1996|   1.2190|descending                   |TRUE      |vs_other          |
+|descending                   |central_brain_intrinsic      |  -45.3728| 0.0000| 0.0000|****         | 463.1996|   0.2827|descending                   |TRUE      |vs_other          |
+|descending                   |visual_projection            |  -34.9969| 0.0000| 0.0000|****         | 463.1996|   1.6051|descending                   |TRUE      |vs_other          |
+|descending                   |optic_lobe_intrinsic         |  -55.3472| 0.0000| 0.0000|****         | 463.1996|   0.1000|descending                   |TRUE      |vs_other          |
+|ascending                    |ventral_nerve_cord_intrinsic |   -4.5207| 0.0000| 0.0000|****         | 252.0717| 121.1171|ascending                    |TRUE      |within_highlights |
+|ascending                    |visual_centrifugal           |  -22.8924| 0.0000| 0.0000|****         | 252.0717|   1.2190|ascending                    |TRUE      |vs_other          |
+|ascending                    |central_brain_intrinsic      |  -53.6736| 0.0000| 0.0000|****         | 252.0717|   0.2827|ascending                    |TRUE      |vs_other          |
+|ascending                    |visual_projection            |  -40.1149| 0.0000| 0.0000|****         | 252.0717|   1.6051|ascending                    |TRUE      |vs_other          |
+|ascending                    |optic_lobe_intrinsic         |  -66.2241| 0.0000| 0.0000|****         | 252.0717|   0.1000|ascending                    |TRUE      |vs_other          |
+|ventral_nerve_cord_intrinsic |visual_centrifugal           |  -23.0423| 0.0000| 0.0000|****         | 121.1171|   1.2190|ventral_nerve_cord_intrinsic |TRUE      |vs_other          |
+|ventral_nerve_cord_intrinsic |central_brain_intrinsic      | -119.9873| 0.0000| 0.0000|****         | 121.1171|   0.2827|ventral_nerve_cord_intrinsic |TRUE      |vs_other          |
+|ventral_nerve_cord_intrinsic |visual_projection            |  -67.8808| 0.0000| 0.0000|****         | 121.1171|   1.6051|ventral_nerve_cord_intrinsic |TRUE      |vs_other          |
+|ventral_nerve_cord_intrinsic |optic_lobe_intrinsic         | -163.5154| 0.0000| 0.0000|****         | 121.1171|   0.1000|ventral_nerve_cord_intrinsic |TRUE      |vs_other          |
+
+----------------------------------------------------------------------
+STATEMENT (copy-paste ready)
+----------------------------------------------------------------------
+Kruskal–Wallis test showed significant variation across groups (H(6) = 32762.02, P = < 2.2 × 10^−16). Post-hoc Dunn tests with Holm correction for multiple comparisons (α=0.05) showed ascending (ANs), descending (DNs) and ventral nerve cord intrinsic had significantly higher medians than all other groups (all P < 2.2 × 10^−16). Among highlighted groups: no significant difference between descending vs ascending (P = 0.202); significant differences between descending vs ventral nerve cord intrinsic (P = 5.68 × 10^−7) and ascending vs ventral nerve cord intrinsic (P = 2.47 × 10^−5)
+----------------------------------------------------------------------
+Concise stat
+----------------------------------------------------------------------
+(P < 2.2 × 10^−16, Kruskal-Wallis omnibus + Dunn post-hoc, H(6) = 32762.02, Dunn holm-adjusted, n = 119493)
+---------------------------------------------------------------------- 
