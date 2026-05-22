@@ -161,18 +161,21 @@ franken.meta <- dplyr::bind_rows(franken.meta_unique,franken.meta_duplicates) %>
 #   dplyr::select(-an_cluster,-dn_cluster, -eff_cluster)
 
 # ----- End of live block: write the dated snapshot ----------------------
-# Atomic write: write to <name>.tmp.<pid> first, then rename. Without this,
-# a script that crashes mid-write — or two scripts that race to refresh the
-# snapshot in the same session — leave behind a half-written .parquet that
-# pyarrow / arrow can't read ("Unexpected end of stream"). The rename is
-# atomic at the filesystem level on the same volume, so the final path
-# either has the complete snapshot or its previous version.
+# Snapshot format: feather (Arrow IPC), not parquet. arrow 16.1.0 wrote a
+# deterministically-corrupt 5.5 MB parquet for this franken.meta schema —
+# arrow / pyarrow could read the footer (62 cols × 163 833 rows declared)
+# but the row group failed "Unexpected end of stream". Feather doesn't
+# trip the same bug. banc.meta still uses parquet (works fine for that
+# schema); switch this back if/when the parquet writer bug is fixed.
+#
+# Atomic write: tmp.<pid> + file.rename so a crashed or concurrent run
+# can't leave a half-finished snapshot at the canonical path.
 tryCatch({
   .snap_out <- file.path("data", "meta",
-                         sprintf("franken_meta_%s.parquet",
+                         sprintf("franken_meta_%s.feather",
                                  format(Sys.Date(), "%Y%m%d")))
   .snap_tmp <- paste0(.snap_out, ".tmp.", Sys.getpid())
-  arrow::write_parquet(franken.meta, .snap_tmp, compression = "snappy")
+  arrow::write_feather(franken.meta, .snap_tmp, compression = "lz4")
   file.rename(.snap_tmp, .snap_out)
   message(sprintf("Wrote franken.meta snapshot %s (%.1f MB)",
                   .snap_out, file.info(.snap_out)$size / 1024^2))
