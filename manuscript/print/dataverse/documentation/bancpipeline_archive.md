@@ -2,8 +2,8 @@
 filename: bancpipeline_archive.zip
 upstream_url: https://github.com/htem/bancpipeline
 default_branch: main
-pinned_commit: 56659bb
-pinned_date: 2026-05-01
+pinned_commit: 2da50aa
+pinned_date: 2026-05-22
 release_tag: (none — pinned to main HEAD)
 license: GPL-3.0
 language: R + shell (SLURM)
@@ -11,7 +11,7 @@ content_type: application/zip
 
 # --- Fields posted to Dataverse ---
 description: >-
-  Snapshot of bancpipeline, the R + SLURM data-processing pipeline that produces every compiled-data product in this Dataverse. The pipeline runs on Harvard Medical School's O2 cluster and is the canonical reproducibility resource for the BANC paper: starting from the raw CAVE annotation tables, the BANC SeaTable curation store, the Zetta.ai synapse detections and the Drugowitsch lab's synapse-level neurotransmitter predictions, it assembles banc_888_meta.feather, the per-neuron metrics feather, the v2 / v3 enriched synapse parquets, the simple and split edgelists, the NBLAST cross-dataset match feathers (FAFB, MANC, Hemibrain, FANC, maleCNS, native, mirror), the per-neuron neurotransmitter prediction CSV, and the influence shards and aggregations. Top-level o2_banc_*.sh scripts orchestrate the SLURM jobs and the R sources live under banc/. The pipeline depends on bancr for data access, on influencer + the Drugowitsch lab's ConnectomeInfluenceCalculator for the influence step, on the natverse stack for cross-dataset registration and NBLAST, and on Andrew Champion's Elastix registrations for BANC ↔ JRC2018F / JRC2018VNCF transforms. Developed in Rachel Wilson's lab at Harvard Medical School. Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the repository is private upstream and continues to evolve at the GitHub URL above.
+  Snapshot of bancpipeline, the R + SLURM data-processing pipeline that produces every compiled-data product in this Dataverse. The pipeline runs on Harvard Medical School's O2 cluster and is the canonical reproducibility resource for the BANC paper: starting from the raw CAVE annotation tables, the BANC SeaTable curation store, the Zetta.ai synapse detections and the Drugowitsch lab's synapse-level neurotransmitter predictions, it assembles banc_888_meta.feather, the per-neuron metrics feather, the v2 / v3 enriched synapse parquets, the simple and split edgelists, the NBLAST cross-dataset match feathers (FAFB, MANC, Hemibrain, FANC, maleCNS, native, mirror), the per-neuron neurotransmitter prediction CSV, and the influence shards and aggregations. Top-level o2_banc_*.sh scripts orchestrate the SLURM jobs and the R sources live under banc/. The pipeline depends on bancr for data access, on influencer + the Drugowitsch lab's ConnectomeInfluenceCalculator for the influence step, on the natverse stack for cross-dataset registration and NBLAST, and on Andrew Champion's Elastix registrations for BANC ↔ JRC2018F / JRC2018VNCF transforms. Developed in Rachel Wilson's lab at Harvard Medical School. Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the live repository continues to evolve at the GitHub URL above.
 categories:
   - Code
 directoryLabel: code

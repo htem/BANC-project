@@ -2,8 +2,8 @@
 filename: synister_banc_archive.zip
 upstream_url: https://github.com/htem/synister_banc
 default_branch: main
-pinned_commit: (set at deposit time — main HEAD on upload date)
-pinned_date: (set at deposit time)
+pinned_commit: 1d6b0cc
+pinned_date: 2026-05-22
 release_tag: (none — pinned to main HEAD)
 license: (no LICENSE file in upstream as of 2025-07-29 — see Notes)
 language: Python
