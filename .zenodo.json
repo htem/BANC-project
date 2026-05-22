@@ -77,27 +77,34 @@
     }
   ],
   "contributors": [
-    {"type": "ContactPerson", "name": "Maloney, Ryan T.", "orcid": "0000-0002-6111-7822", "affiliation": "Harvard University"},
-    {"type": "ContactPerson", "name": "de Bivort, Benjamin L.", "orcid": "0000-0001-6165-7696", "affiliation": "Harvard University"}
+    {
+      "type": "ContactPerson",
+      "name": "Maloney, Ryan T.",
+      "orcid": "0000-0002-6111-7822",
+      "affiliation": "Harvard University"
+    },
+    {
+      "type": "ContactPerson",
+      "name": "de Bivort, Benjamin L.",
+      "orcid": "0000-0001-6165-7696",
+      "affiliation": "Harvard University"
+    }
   ],
   "grants": [
     {
-      "id": "10.13039/100010269::222782/Z/21/Z"
+      "id": "029chgv08::222782"
     },
     {
-      "id": "10.13039/100000002::K99NS129759"
+      "id": "01cwqze88::1K99NS129759-01"
     },
     {
-      "id": "10.13039/100000002::R01NS121874"
+      "id": "01cwqze88::1R01NS121874-01"
     },
     {
-      "id": "10.13039/100000002::RF1MH117808"
+      "id": "01cwqze88::1RF1MH117808-01A1"
     },
     {
-      "id": "10.13039/100000002::U19NS118246"
-    },
-    {
-      "id": "10.13039/501100005089::IS23084"
+      "id": "01cwqze88::1U19NS118246-01"
     }
   ],
   "keywords": [
