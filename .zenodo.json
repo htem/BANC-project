@@ -76,6 +76,10 @@
       "affiliation": "Boston Children's Hospital, Harvard Medical School"
     }
   ],
+  "contributors": [
+    {"type": "ContactPerson", "name": "Maloney, Ryan T.", "orcid": "0000-0002-6111-7822", "affiliation": "Harvard University"},
+    {"type": "ContactPerson", "name": "de Bivort, Benjamin L.", "orcid": "0000-0001-6165-7696", "affiliation": "Harvard University"}
+  ],
   "grants": [
     {
       "id": "10.13039/100010269::222782/Z/21/Z"
