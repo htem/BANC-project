@@ -924,39 +924,25 @@ df <- add_row(df, "banc_nuclei_count", nuclei_count, "auto",
               "Unique nuclei detected in BANC. Methods: Segmentation.")
 
 # Mitochondria count
-# Priority: local parquet cache > GCS download > live CAVE query.
-# Parquet is produced by /tmp/make_mito_table.R (or any pipeline that runs
-# banc_mitochondria() and writes data/meta/banc_888_mitochondria.parquet);
-# canonical GCS copy at
-# gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/
-#   banc_888_mitochondria.parquet
-message("Counting mitochondria...")
-.mito_local <- "data/meta/banc_888_mitochondria.parquet"
-.mito_gcs   <- paste0("gs://lee-lab_brain-and-nerve-cord-fly-connectome/",
-                      "compiled_data/banc_888/banc_888_mitochondria.parquet")
-.mito_count <- tryCatch({
-  if (file.exists(.mito_local)) {
-    nrow(arrow::read_parquet(.mito_local))
-  } else {
-    .ok <- suppressWarnings(system2("gsutil",
-              c("cp", .mito_gcs, .mito_local),
-              stdout = FALSE, stderr = FALSE)) == 0L
-    if (.ok && file.exists(.mito_local)) {
-      nrow(arrow::read_parquet(.mito_local))
-    } else {
-      # Last-resort: live CAVE query with 120 s hard timeout
-      callr::r(function() nrow(bancr::banc_mitochondria()), timeout = 120)
-    }
-  }
-}, error = function(e) {
-  message("  Could not fetch mitochondria table: ", e$message)
-  NA_integer_
-})
-if (!is.na(.mito_count)) {
-  df <- add_row(df, "banc_mitochondria_count", .mito_count, "auto",
-                "Mitochondria detections in BANC (CAVE mitochondria_v1, cached as parquet on GCS). Methods: Segmentation.")
-}
-rm(.mito_count, .mito_local, .mito_gcs)
+# Hard-coded from the row count of the v888 human-readable mitochondria
+# CSV at:
+#   gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/
+#     v888/mitochondria_v1_human_readable.csv.gz
+# The CSV has no header; row count == mitochondria count.
+# Computed 2026-05-22 via:
+#   gsutil cat <gcs_path> | gunzip | wc -l   # ≈ 80 s on a 1.0 GB .csv.gz
+# Re-running on every numbers.R refresh is unnecessary; uncomment the
+# live block below if the CSV is ever rebuilt.
+.mito_count <- 38928244L
+# .mito_count <- as.integer(system2(
+#   "bash", c("-c", paste(
+#     "gsutil cat",
+#     "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/",
+#     "v888/mitochondria_v1_human_readable.csv.gz",
+#     "| gunzip | wc -l")), stdout = TRUE))
+df <- add_row(df, "banc_mitochondria_count", .mito_count, "auto",
+              "Mitochondria detections in BANC v888 (CAVE mitochondria_v1 segmentation; row count of mitochondria_v1_human_readable.csv.gz). Methods: Segmentation.")
+rm(.mito_count)
 
 ###########################
 ### Cell type counts    ###

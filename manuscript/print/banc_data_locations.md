@@ -35,6 +35,9 @@ lee-lab_brain-and-nerve-cord-fly-connectome/neuron_connectivity/v888/synapses_v2
 ###  BANC v3 synapses raw
 lee-lab_brain-and-nerve-cord-fly-connectome/neuron_connectivity/v888/synapses_v3_human_readable.csv.gz
 
+###  BANC v1 mitochondria raw (per-mitochondrion CAVE annotation table, v888 root_ids)
+lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/mitochondria_v1_human_readable.csv.gz
+
 ###  BANC v2 synapses enriched
 lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v2_enriched.parquet
 
