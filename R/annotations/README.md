@@ -31,8 +31,16 @@ clear at a glance that running one of these will change shared state.
 
 ## Authentication
 
+> ⚠️ **SeaTable write operations only work for members of the BANC core
+> team.** The four scripts in this folder push annotations back to the
+> internal SeaTable workspace. Without authentication you will get a
+> 401 / 403 at the write step; read-only `banctable_query()` calls work
+> for anyone with a personal SeaTable API token.
+
 All four scripts authenticate to SeaTable via `bancr::banctable_query()`
 (read) and `bancr::banctable_update_rows()` (write). The credentials are
-in `~/.bancr.config.yml` (per user; not in the repo). If you do not
-have write access to BANC's SeaTable workspace these scripts will fail
-fast at the write step.
+in `~/.bancr.config.yml` (per user; not in the repo). Members of the
+core team set their token there; external users who clone this repo
+should expect the live-write scripts to fail fast — the figure scripts
+in [`../figures/`](../figures/) are entirely read-only and run from the
+committed metadata snapshot, so they do not need this auth.

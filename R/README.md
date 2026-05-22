@@ -88,6 +88,16 @@ source. The live SeaTable + GCS code is also the reference for
 **what** went into the snapshot — see comments in `banc-meta-live.R`
 for the column-coalescing priority.
 
+> ⚠️ **SeaTable access is restricted to the BANC core team.** The live
+> refresh authenticates against the internal `cns_meta` SeaTable
+> workspace via `bancr::banctable_query()`, which requires a SeaTable
+> API token in `~/.bancr.config.yml`. External users who clone this
+> repo do **not** need this — the committed parquet snapshot in
+> `data/meta/` is the canonical metadata for paper reproduction, and
+> every script in `R/figures/` loads from it by default. The
+> `BANC_LIVE=1` path (and everything in [`annotations/`](annotations/))
+> is only useful if you can authenticate to BANC's internal SeaTable.
+
 ## Upstream pipeline
 
 The cached connectivity feathers, per-neuron metrics, betweenness CSVs,
