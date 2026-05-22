@@ -6,21 +6,21 @@
   "access_right": "open",
   "creators": [
     {"name": "Bates, Alexander Shakeel", "orcid": "0000-0002-1195-0445", "affiliation": "Harvard Medical School"},
-    {"name": "Phelps, Jasper S.", "orcid": "0000-0001-8033-258X", "affiliation": "Harvard Medical School"}
+    {"name": "Phelps, Jasper S.", "orcid": "0000-0001-8033-258X", "affiliation": "Harvard Medical School"},
+    {"name": "Kim, Minsu", "orcid": "0000-0002-0074-6684", "affiliation": "Harvard Medical School"},
+    {"name": "Yang, Helen H.", "orcid": "0000-0001-5140-9664", "affiliation": "Harvard Medical School"},
+    {"name": "Ajabi, Zaki", "orcid": "0000-0002-4411-4005", "affiliation": "Harvard Medical School"},
+    {"name": "Drugowitsch, Jan", "orcid": "0000-0002-7846-0408", "affiliation": "Harvard Medical School"},
+    {"name": "Wilson, Rachel I.", "orcid": "0000-0001-8573-9266", "affiliation": "Harvard Medical School"},
+    {"name": "Lee, Wei-Chung Allen", "orcid": "0000-0002-4618-295X", "affiliation": "Boston Children's Hospital, Harvard Medical School"}
   ],
   "contributors": [
-    {"type": "ContactPerson", "name": "Kim, Minsu", "orcid": "0000-0002-0074-6684", "affiliation": "Harvard Medical School"},
-    {"type": "ContactPerson", "name": "Yang, Helen H.", "orcid": "0000-0001-5140-9664", "affiliation": "Harvard Medical School"},
     {"type": "ContactPerson", "name": "Matsliah, Arie", "orcid": "0009-0001-4490-2028", "affiliation": "Princeton Neuroscience Institute"},
-    {"type": "ContactPerson", "name": "Ajabi, Zaki", "orcid": "0000-0002-4411-4005", "affiliation": "Harvard Medical School"},
     {"type": "ContactPerson", "name": "Perlman, Eric", "orcid": "0000-0001-5542-1302", "affiliation": "Yikes LLC"},
     {"type": "ContactPerson", "name": "Osman, Mohammed Abdal Monium", "orcid": "0000-0001-8606-6518", "affiliation": "Harvard Medical School"},
     {"type": "ContactPerson", "name": "Fan, Jingxuan", "orcid": "0000-0001-7860-4558", "affiliation": "Harvard Medical School"},
     {"type": "ContactPerson", "name": "Zhang, Zuoyu", "orcid": "0009-0009-6679-4396", "affiliation": "Beijing Institute for Brain Research, CIBR"},
-    {"type": "ContactPerson", "name": "Okubo, Tatsuo S.", "orcid": "0000-0001-7139-0956", "affiliation": "Beijing Institute for Brain Research, CIBR"},
-    {"type": "ContactPerson", "name": "Drugowitsch, Jan", "orcid": "0000-0002-7846-0408", "affiliation": "Harvard Medical School"},
-    {"type": "ContactPerson", "name": "Wilson, Rachel I.", "orcid": "0000-0001-8573-9266", "affiliation": "Harvard Medical School"},
-    {"type": "ContactPerson", "name": "Lee, Wei-Chung Allen", "orcid": "0000-0002-4618-295X", "affiliation": "Boston Children's Hospital, Harvard Medical School"}
+    {"type": "ContactPerson", "name": "Okubo, Tatsuo S.", "orcid": "0000-0001-7139-0956", "affiliation": "Beijing Institute for Brain Research, CIBR"}
   ],
   "keywords": [
     "connectomics", "Drosophila", "BANC", "figure reproduction",
