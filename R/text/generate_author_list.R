@@ -10,8 +10,8 @@
 #' without renumbering).
 #'
 #' @section Reads:
-#'   Google Sheet "BANC author list" (URL in `banc_author_url`, hard-coded
-#'   here because it's a stable manuscript artefact)
+#'   Google Sheet "BANC author list" — ID stored in `banc.keys$gsheet_banc_author_info`
+#'   (loaded by `R/startup/load-keys.R` from gitignored `data/private/keys.csv`)
 #'   tabs: `authors`, `FlyWire Consortium`
 #'
 #' @section Writes:
@@ -29,7 +29,12 @@ library(dplyr)
 library(stringr)
 library(flextable)
 
-banc_author_url <- "https://docs.google.com/spreadsheets/d/<REDACTED-GSHEET-ID>/edit?usp=sharing"
+gsheet_id <- banc.keys$gsheet_banc_author_info
+if (is.null(gsheet_id) || !nzchar(gsheet_id)) {
+  stop("banc.keys$gsheet_banc_author_info not set. ",
+       "Add it to data/private/keys.csv (gitignored) — see CLAUDE.md for the canonical entries.")
+}
+banc_author_url <- sprintf("https://docs.google.com/spreadsheets/d/%s/edit", gsheet_id)
 author_sheet_name <- "authors"
 consortium_sheet_name <- "FlyWire Consortium"
 
