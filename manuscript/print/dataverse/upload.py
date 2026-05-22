@@ -259,14 +259,14 @@ def upload_one(fm: dict, doc_name: str, key: str, server: str,
 
     url = (f"{server}/api/datasets/:persistentId/add"
            f"?persistentId={quote(persistent_id, safe=':/')}")
-    # type=application/octet-stream forces Dataverse to skip tabular
-    # ingest entirely (the equivalent of DVUploader's -noIngest flag).
-    # Without this Dataverse auto-extracts .zip / .tar.gz archives at
-    # upload time, and silently converts .csv → .tab (with associated
-    # metadata side-cars). We want every deposit stored byte-for-byte
-    # as uploaded.
+    # NOTE: the /add endpoint extracts .zip / .tar.gz on the server side
+    # regardless of the curl multipart Content-Type or jsonData mimeType
+    # (Dataverse sniffs file bytes with libmagic). The only reliable way
+    # to upload an archive ATOMICALLY is direct-S3 — see upload_direct_s3
+    # below. The caller can force direct-S3 for every upload by passing
+    # --direct-s3-threshold 1.
     cmd = ["curl", "-sS", "-H", f"X-Dataverse-key:{key}", "-X", "POST",
-           "-F", f"file=@{src};filename={deposit_name};type=application/octet-stream",
+           "-F", f"file=@{src};filename={deposit_name}",
            "-F", f"jsonData=<{json_path}", url]
     out = subprocess.check_output(cmd, text=True)
     try:
