@@ -200,7 +200,7 @@ chemosensory,#8FD40D,modality,lime_green
 visceral_circulatory,#F1DDBB,modality,beige
 endocrine,#F1DDBB,modality,beige
 sensory_ascending,#B0D989,modality,light_green
-tactile,#FF1493,super_cluster,deep_pink
+tactile,#FF1493,modality,deep_pink
 proprioceptive,#1BB6AF,super_cluster,teal
 johnstons_organ_other,#121B56,modality,navy_blue
 johnstons_organ,#121B56,modality,navy_blue
@@ -254,8 +254,10 @@ TRACING_ISSUE,#EF7C12,status,orange
 NOT_PROOFREAD,#EE4244,status,red
 "NOT_PROOFREAD,TRACING_ISSUE",#C23A4B,status,dark_red
 TOO_SMALL,#B3B3B3,status,light_grey
+ALIGNMENT,#009F3F,status,green
 NBLAST,#FBBB48,status,golden_yellow
 vnc,#8FD40D,region,lime_green
+ventral_nerve_cord,#8FD40D,region,lime_green
 ascending,#089c39,super_class,regular_green
 central_complex_output,#54BCD1,super_class,light blue
 central_complex,#2a5f75,super_class,regal_blue
@@ -305,93 +307,33 @@ dendrite_glutamate,#00ffbf,transmitter,cyan
 dendrite_gaba,#3d99ff,transmitter,blue
 aversion,#D72000,modality,red
 aversive,#D72000,modality,red
-CNS_01,#000000,cns_network,black
-CNS_02,#4D4D4D,cns_network,dark_grey
-CNS_03,#F4B95A,cns_network,peach
-CNS_04,#EF7C12,cns_network,orange
-CNS_05,#FC5A50,cns_network,coral
-CNS_06,#F58B42,cns_network,orange
-CNS_07,#F39A13,cns_network,orange
-CNS_08,#F0E442,cns_network,yellow
-CNS_09,#FBBB48,cns_network,golden_yellow
-CNS_10,#009F3F,cns_network,green
-CNS_11,#1BB6AF,cns_network,teal
-CNS_12,#132157,cns_network,navy_blue
-CNS_13,#54BCD1,cns_network,sky_blue
-CNS_14,#7D8091,cns_network,blue_grey
-CNS_15,#963DA8,cns_network,purple
-CNS_16,#EFC7E6,cns_network,pink
-AN_01,#000000,neck_cluster,black
-AN_02,#4D4D4D,neck_cluster,dark_grey
-AN_03,#F4B95A,neck_cluster,peach
-AN_04,#F1DDBB,neck_cluster,beige
-AN_05,#AF6125,neck_cluster,brown
-AN_06,#D72000,neck_cluster,red
-AN_07,#FC5A50,neck_cluster,coral
-AN_08,#EF5834,neck_cluster,orange_red
-AN_09,#F58B42,neck_cluster,orange
-AN_10,#F39A13,neck_cluster,orange
-AN_11,#F0E442,neck_cluster,yellow
-AN_12,#FBBB48,neck_cluster,golden_yellow
-AN_13,#F0E442,neck_cluster,yellow
-AN_14,#F5E27E,neck_cluster,pale_yellow
-AN_15,#85BD4A,neck_cluster,green
-AN_16,#527D5B,neck_cluster,dark_green
-AN_17,#009F3F,neck_cluster,green
-AN_18,#1BB6AF,neck_cluster,teal
-AN_19,#1FA99F,neck_cluster,teal
-AN_20,#132157,neck_cluster,navy_blue
-AN_21,#1186CB,neck_cluster,blue
-AN_22,#54BCD1,neck_cluster,sky_blue
-AN_23,#A1D8EB,neck_cluster,light_blue
-AN_24,#6D2C7B,neck_cluster,purple
-AN_25,#963DA8,neck_cluster,purple
-AN_26,#B56FCC,neck_cluster,lavender
-AN_27,#EFC7E6,neck_cluster,pink
-DN_01,#000000,neck_cluster,black
-DN_02,#4D4D4D,neck_cluster,dark_grey
-DN_03,#F4B95A,neck_cluster,peach
-DN_04,#F1DDBB,neck_cluster,beige
-DN_05,#AF6125,neck_cluster,brown
-DN_06,#D72000,neck_cluster,red
-DN_07,#FC5A50,neck_cluster,coral
-DN_08,#EF5834,neck_cluster,orange_red
-DN_09,#F58B42,neck_cluster,orange
-DN_10,#F39A13,neck_cluster,orange
-DN_11,#F0E442,neck_cluster,yellow
-DN_12,#FBBB48,neck_cluster,golden_yellow
-DN_13,#F0E442,neck_cluster,yellow
-DN_14,#F5E27E,neck_cluster,pale_yellow
-DN_15,#85BD4A,neck_cluster,green
-DN_16,#527D5B,neck_cluster,dark_green
-DN_17,#009F3F,neck_cluster,green
-DN_18,#1BB6AF,neck_cluster,teal
-DN_19,#1FA99F,neck_cluster,teal
-DN_20,#132157,neck_cluster,navy_blue
-DN_21,#1186CB,neck_cluster,blue
-DN_22,#54BCD1,neck_cluster,sky_blue
-DN_23,#A1D8EB,neck_cluster,light_blue
-DN_24,#6D2C7B,neck_cluster,purple
-DN_25,#963DA8,neck_cluster,purple
-DN_26,#B56FCC,neck_cluster,lavender
-DN_27,#EFC7E6,neck_cluster,pink
+feeding-ingestion,#009F3F,super_cluster,green
+taste-touch,#0a5728,super_cluster,green
 feeding,#009F3F,super_cluster,green
 reproduction,#FC6882,super_cluster,pink
+limb-coordination,#9e958a,super_cluster,latte
 walking,#9e958a,super_cluster,latte
 flight power,#8f7059,super_cluster,beaver
-tactile perception,#FF1493,super_cluster,deep_pink
+head-leg-tactile,#FF1493,super_cluster,deep_pink
+tactile perception,#FF1493,modality,deep_pink
 proprioceptive perception,#1BB6AF,super_cluster,teal
 threat response,#ae0000,super_cluster,deep_red
 walking steering,#FBBB48,super_cluster,golden_yellow
+takeoff-landing,#8A2BE2,super_cluster,blue_violet
 landing,#8A2BE2,super_cluster,blue_violet
 probing,#60BC5B,super_cluster,light_green
 visceral control,#6D2C7B,super_cluster,purple
 flight steering 2,#046785,super_cluster,dark_turquoise
 flight steering 1,#FF6347,super_cluster,tomato
 head and eye,#A1D8EB,super_cluster,light_blue
+head orienting,#A1D8EB,super_cluster,light_blue
 head and eye orienting,#A1D8EB,super_cluster,light_blue
 grooming,#32CD32,super_cluster,lime_green
 flight steering ,#00CED1,modality,dark_turquoise
+wing-leg-tactile,#FBBB48,modality,golden yellow
+noxious-touch,#FBBB48,modality,golden yellow
+vibratory,#B56FCC,modality,lavender
+vibro-tactile,#B56FCC,modality,lavender
 escape,#ae0000,modality,deep_red
 1,#000000,neck_cluster,black
 2,#4D4D4D,neck_cluster,dark_grey
@@ -487,3 +429,41 @@ double_identified,#EFC7E6,completion,pink
 pre_identified,#D72000,completion,red
 post_identified,#54BCD1,completion,sky_blue
 unidentified,#B3B3B3,completion,lightgrey
+nblast,#8F92A1,comparison,blue_grey
+matched by morphology,#CC79A7,comparison,rose
+matched by connectivity,#54BCD1,comparison,sky_blue
+matched_by_morphology,#CC79A7,comparison,rose
+matched_by_connectivity,#54BCD1,comparison,sky_blue
+type changed,#EF7C12,comparison,tangerine
+type did not change,#1BB6AF,comparison,teal
+Connectivity match better,#54BCD1,review,sky_blue
+Morphology match better,#CC79A7,review,rose
+All wrong,#EF7C12,review,tangerine
+isomorphic,#54BCD1,dimorphism,sky_blue
+dimorphic,#EF7C12,dimorphism,tangerine
+female-specific,#CC79A7,dimorphism,rose
+male-specific,#1186CB,dimorphism,blue
+connectivity != nblast,#54BCD1,comparison,sky_blue
+morphology != nblast,#CC79A7,comparison,rose
+morphology != connectivity,#EF7C12,comparison,tangerine
+agree,#1BB6AF,agreement,teal
+disagree,#EF7C12,agreement,tangerine
+manc_cell_type,#8FD40D,dataset_field,lime_green
+malecns_cell_type,#389636,dataset_field,dark_green
+hemilineage,#1BB6AF,dataset_field,teal
+brain/other,#EE4244,region,red
+unlabelled,#B3B3B3,dimorphism,light_grey
+abdomen-positioning,#3CB371,eff_super_cluster,medium_sea_green
+abdomen-ureter,#20B2AA,eff_super_cluster,light_sea_green
+energy homeostasis,#DAA520,eff_super_cluster,goldenrod
+ingestion-digestion,#CD5C5C,eff_super_cluster,indian_red
+abdomen-reproductive,#7B68EE,eff_super_cluster,medium_slate_blue
+abdomen motor 1,#2E8B57,eff_super_cluster,sea_green
+middle-hind leg,#CC7722,eff_super_cluster,ochre
+proboscis-antenna,#DB7093,eff_super_cluster,pale_violet_red
+head-eye-antenna,#9370DB,eff_super_cluster,medium_purple
+flight-steering,#4682B4,eff_super_cluster,steel_blue
+flight-energy-power,#1E3A5F,eff_super_cluster,dark_navy
+thoracic-abdominal,#708090,eff_super_cluster,slate_gray
+abdomen motor 2,#6B8E23,eff_super_cluster,olive_drab
+feeding-endocrine,#B8860B,eff_super_cluster,dark_goldenrod

@@ -1,0 +1,7 @@
+region,feather,n_top_matches,n_correct,pct_correct,mean_score_correct
+central_brain,banc_fafb_783_nblast.feather,44023,24869,56.49092519819185,0.4774988942056376
+optic_lobe,banc_fafb_783_nblast.feather,85866,21310,24.817739268162022,0.4901534490849367
+ventral_nerve_cord,banc_fafb_783_nblast.feather,2553,7,0.27418723070896983,0.32000000000000006
+central_brain,banc_manc_v1.2.1_nblast.feather,1311,206,15.713196033562166,0.5123300970873786
+optic_lobe,banc_manc_v1.2.1_nblast.feather,4,0,0,NA
+ventral_nerve_cord,banc_manc_v1.2.1_nblast.feather,25672,5986,23.31723278279838,0.5142950217173405

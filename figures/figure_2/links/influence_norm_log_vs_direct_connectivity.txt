@@ -1,0 +1,30 @@
+Influence validation sidecar — influence_norm_log
+Date: 2026-05-20 16:27
+Connected = any direct edge (no count threshold; matches the validation IC).
+Sensory seeds sampled:    1000 (targets: 129374 non-sensory)
+AN/DN seeds sampled:      1000 (targets: 143301 non-AN/DN)
+
+== Facet: sensory ==
+Total direct interactions (connected):   282
+Total indirect interactions (not conn'd): 999702
+Quantile thresholds of the DIRECT distribution:
+  25th pctl: 18.2073  50th pctl: 18.8065  75th pctl: 19.4057
+  Direct   >= 25th (18.2073):  211 / 282 (74.8%)
+  Indirect >= 25th (18.2073):  33259 / 999702 (3.3%)
+  Direct   >= 50th (18.8065):  143 / 282 (50.7%)
+  Indirect >= 50th (18.8065):  17922 / 999702 (1.8%)
+  Direct   >= 75th (19.4057):  71 / 282 (25.2%)
+  Indirect >= 75th (19.4057):  10925 / 999702 (1.1%)
+
+== Facet: AN/DN ==
+Total direct interactions (connected):   1452
+Total indirect interactions (not conn'd): 998556
+Quantile thresholds of the DIRECT distribution:
+  25th pctl: 18.9475  50th pctl: 19.4645  75th pctl: 20.1225
+  Direct   >= 25th (18.9475):  1100 / 1452 (75.8%)
+  Indirect >= 25th (18.9475):  62172 / 998556 (6.2%)
+  Direct   >= 50th (19.4645):  757 / 1452 (52.1%)
+  Indirect >= 50th (19.4645):  22285 / 998556 (2.2%)
+  Direct   >= 75th (20.1225):  366 / 1452 (25.2%)
+  Indirect >= 75th (20.1225):  7164 / 998556 (0.7%)
+

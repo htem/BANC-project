@@ -1,163 +1,112 @@
-# BANC Analysis Scripts
+# R/ — analysis pipeline for the BANC paper
 
-This directory contains R scripts for analysing BANC data and reproducing all paper figures. The scripts are organised into functional categories to support different types of analysis.
+The R code in this directory produces every figure panel and statistical
+output reported in *Distributed control circuits across a brain-and-cord
+connectome* (Bates, Phelps, Kim, Yang et al., 2026). Each subdirectory has a
+single responsibility:
 
-💡 **For the most current connectome data, visit [FlyWire Codex](https://codex.flywire.ai/banc) before running analyses.**
+- **[`startup/`](startup/)** — configuration + helpers + data loaders.
+  Sourced by every figure script. Includes the snapshot/live dispatcher
+  for `banc.meta` and `franken.meta`, the GCS / arrow utilities, the
+  private-key loader (`load-keys.R`), and the canonical paper colours +
+  ordering vectors.
+- **[`figures/`](figures/)** — one `panels_*.R` script per figure or per
+  closely-related panel group. Reads `banc.meta` and (where needed)
+  `banc.edgelist.simple`, then writes the per-panel PDFs and statistical
+  sidecar `.txt` files into `figures/figure_N/links/`. The script name
+  describes the analysis, not the figure number — see the table in
+  [`figures/README.md`](figures/README.md) for the figure → script
+  mapping.
+- **[`text/`](text/)** — non-figure outputs: `numbers.R` compiles the
+  in-text statistics into `manuscript/print/numbers.csv` and refreshes
+  the corresponding Google Sheet; `supplemental_data.R` writes the ten
+  supplementary CSV tables; `nblast_top_match_correct.R` recomputes the
+  cross-dataset NBLAST match accuracy; `ngl_links.R` regenerates the
+  Neuroglancer state URLs cited in figure legends.
+- **[`annotations/`](annotations/)** — scripts that **write live** to
+  SeaTable or rebuild the interactive cluster tools. Not auto-loaded.
+  Run by hand, as documented in [`annotations/README.md`](annotations/README.md).
 
-## Directory Organisation
+## How a figure is produced
 
-### `figures/` - Figure Generation Scripts
-Scripts that directly generate panels for publication figures. Each script corresponds to specific figure components:
-
-- `panel_inventory.R` - Dataset overview and quality metrics (Figure 1)
-- `panel_proofread_matching.R` - Neuron reconstruction statistics (Figure 1) 
-- `panel_all_to_all_influence.R` - Influence analysis heatmaps (Figure 2)
-- `panel_efferent_umap.R` - Efferent neuron clustering (Figure 2)
-- `panel_an_dn_umap.R` - Ascending/descending neuron analysis (Figure 3)
-- `panel_super_clusters.R` - Behavioural module identification (Figure 3)
-- `panels_body_parts.R` - Body part specific circuits (Figure 4)
-- `panel_sensory_motor.R` - Sensory-motor integration analysis (Figure 5)
-- `panel_cluster_sensory_correlations.R` - CNS network integration (Figure 6)
-
-### `startup/` - Configuration and Data Loading
-Essential scripts that set up the analysis environment:
-
-- `banc-startup.R` - Main configuration file (set data paths here)
-- `banc-meta.R` - Load BANC neuron metadata
-- `banc-functions.R` - Custom analysis functions
-- `banc-edgelist.R` - Load connectivity data
-- `banc-influence.R` - Load influence metrics
-- `franken-meta.R` - Load integrated connectome data
-
-### `exploration/` - Additional Analysis Scripts
-Extended analyses and custom investigations:
-
-- `banc_vignettes.R` - Circuit vignette analyses
-- `banc_influence_dapp.R` - Influence metric validation
-- `banc_connectome_clustered.R` - Network clustering approaches
-- Various body part and modality specific analyses
-
-### `text/` - Paper Content Generation
-Scripts that generate numerical results and supplemental information:
-
-- `numbers.R` - Statistical summaries for paper text
-- `supplemental_data.R` - Generate supplemental data tables
-- `generate_author_list.R` - Author information processing
-
-## Getting Started
-
-### 1. Setup Data Access
-
-Edit `startup/banc-startup.R` to configure data locations:
+Every figure script in `R/figures/` follows the same skeleton:
 
 ```r
-# For users with Harvard Dataverse download
-banc.connectivity.save.path <- "/path/to/downloaded/sqlite/files"
-banc.influence.save.path <- "/path/to/influence/data"
+# 1. Load configuration + data
+source("R/startup/banc-startup.R")     # paths, env vars, helpers
+source("R/startup/banc-meta.R")        # banc.meta + derived per-class subsets
+source("R/startup/banc-edgelist.R")    # banc.edgelist.simple (if needed)
 
-# Or use provided paths for HMS users
-source("R/startup/banc-startup.R")
+# 2. Build the panel
+# ... ggplot / pheatmap / etc. ...
+
+# 3. Save next to the .ai file that links it
+ggsave(file.path(banc.fig2.path, "panel_name.pdf"), p, ...)
 ```
 
-### 2. Install Required Packages
+`banc.fig1.path`, `banc.fig2.path`, … are defined in `banc-startup.R` and
+point at `figures/figure_N/links/`. Supplementary panels go to
+`banc.figN.supp.path` (which is `links/supplement/`). Overflow analyses
+go to `banc.figN.extra.path` (`links/extra/`).
 
-The scripts require several R packages. Install missing packages as needed:
+## Reproducing a specific figure
 
-```r
-# Core packages
-install.packages(c("dplyr", "ggplot2", "igraph", "DBI", "RSQLite"))
+The single-line recipe per figure is:
 
-# Specialized packages
-install.packages(c("umap", "cluster", "RColorBrewer", "viridis"))
-
-# Optional: natverse for neuroanatomy
-devtools::install_github("natverse/natverse")
+```bash
+BANC_NCORES=1 Rscript R/figures/panels_<analysis>.R
 ```
 
-### 3. Load BANC Environment
+For example:
 
-```r
-# Load core BANC environment
-source("R/startup/banc-startup.R")
-source("R/startup/banc-meta.R")
-source("R/startup/banc-edgelist.R")
+```bash
+BANC_NCORES=1 Rscript R/figures/panels_inventory.R              # Figure 1
+BANC_NCORES=1 Rscript R/figures/panels_influence_validation.R   # Figure 2c, ED 4b
+BANC_NCORES=1 Rscript R/figures/panels_betweenness_layers.R     # Figure 3a
+BANC_NCORES=1 Rscript R/figures/panels_an_dn_umap.R             # Figure 3d
+BANC_NCORES=1 Rscript R/figures/panels_cluster_sensory_correlations.R  # Figure 4a
+BANC_NCORES=1 Rscript R/figures/panels_cns_networks.R           # Figure 6
 ```
 
-### 4. Generate Figures
+`BANC_NCORES=1` forces sequential mode for the parallel influence
+calculator (PSOCK workers accumulate memory on this machine; sequential
+mode is faster and predictable in practice).
 
-Run individual figure scripts to reproduce paper panels:
+## Live-data refresh
 
-```r
-# Generate Figure 1 panels
-source("R/figures/panel_inventory.R")
+Analyses default to the committed parquet snapshot at
+`data/meta/banc_888_meta_<YYYYMMDD>.parquet`. To pull fresh annotations
+from SeaTable + GCS (and refresh the snapshot):
 
-# Generate Figure 2 panels  
-source("R/figures/panel_all_to_all_influence.R")
-
-# Generate all figures
-figure_scripts <- list.files("R/figures", pattern = "panel_.*\\.R", full.names = TRUE)
-lapply(figure_scripts, source)
+```bash
+BANC_LIVE=1 Rscript R/startup/banc-meta-live.R
 ```
 
-## Data Dependencies
+This writes a freshly-dated snapshot under `data/meta/`. The dispatcher
+at `R/startup/banc-meta.R` then loads the newest snapshot on next
+source. The live SeaTable + GCS code is also the reference for
+**what** went into the snapshot — see comments in `banc-meta-live.R`
+for the column-coalescing priority.
 
-The scripts expect access to:
+## Upstream pipeline
 
-1. **Main SQLite databases:**
-   - `banc_data.sqlite` - Complete BANC connectome
-   - `frankenbrain_v1.1_data.sqlite` - Integrated brain+VNC dataset
-   - `fafb_783_data.sqlite` - FlyWire brain reference
+The cached connectivity feathers, per-neuron metrics, betweenness CSVs,
+spectral-clustering CSVs, cascade pickles, and NBLAST similarity
+matrices that the R scripts here consume are **produced by
+[`bancpipeline`](https://github.com/htem/bancpipeline)** running on the
+HMS O2 cluster and published to GCS under
+`gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_<NNN>/`.
 
-2. **Influence metrics:**
-   - `influence_banc_626.sqlite` - Pre-computed influence scores
+Each `data/<subdir>/README.md` cross-references the producing
+bancpipeline script for that subdir. The pattern is:
 
-3. **Metadata and processed datasets** in `data/` directory
+```
+bancpipeline (HMS O2 / SLURM) ─ produces ─▶ GCS feathers / parquets
+                                                │
+                                                ▼
+                            BANC-project (this repo) ─ consumes ─▶ figures / numbers
+```
 
-Download locations are specified in the main README.
-
-## Customizing Analyses
-
-### Colour Schemes
-Modify `settings/paper_colours_lacroix.csv` to customise visualisation colours.
-
-### Analysis Parameters
-Key parameters can be adjusted in the startup scripts:
-- `banc.version` - Dataset version identifier
-- Influence thresholds and normalization methods
-- Clustering parameters
-
-### Adding New Analyses
-1. Create new script in appropriate subdirectory
-2. Source required startup scripts
-3. Follow existing code patterns for data access
-4. Use standardised colour schemes for consistency
-
-## Output Locations
-
-Generated figures are saved to:
-- `figures/figure_X/links/` - Individual figure panels
-- Working directory - Intermediate analysis files
-
-## Troubleshooting
-
-**Common Issues:**
-- **Path errors:** Check data paths in `banc-startup.R`
-- **Missing packages:** Install required dependencies
-- **Memory issues:** Large datasets may require 16+ GB RAM
-- **SQLite access:** Ensure proper file permissions
-
-**Getting Help:**
-- Check existing scripts for similar analyses
-- Review data column documentation in `data/README.md`
-- Use BANC community resources (see main README)
-
-## Performance Notes
-
-- **Large datasets:** Scripts may take several minutes to hours for full analyses
-- **Memory usage:** Some analyses require substantial RAM (8-32 GB recommended)
-- **Parallel processing:** Some scripts support parallelization for speed improvements
-- **Caching:** Intermediate results are cached when possible to speed re-runs
-
-## Citation
-
-If you use or modify these analysis scripts, please cite the BANC paper and acknowledge the specific scripts used in your analysis.
+If a `data/<subdir>/` artefact looks stale or wrong, the fix lives in
+bancpipeline, not here. The R-side scripts re-pull from GCS on next
+session source (or via `BANC_LIVE=1` for the metadata layer).

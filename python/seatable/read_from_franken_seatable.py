@@ -1,4 +1,15 @@
-# This script shows how to read particular columns from seatable using a SQL query
+"""Minimal example: read columns from the frankenbrain SeaTable base
+(``cns_meta``) via SQL.
+
+Same shape as ``read_from_banc_seatable.py`` but targets the
+cross-dataset ``cns_meta`` base, which holds the BANC ↔ FAFB ↔ MANC
+cell-type bridge ("franken meta"). Useful when you need the
+cross-dataset metadata from Python; most of the analysis pipeline gets
+it via ``franken_meta()`` in R.
+
+Set up:
+    export BANCTABLE_TOKEN=<your personal token>
+"""
 
 # Load libraries
 import seatable_api

@@ -1,0 +1,3 @@
+metric,value,n_pairs,seed_n,ic_count_thresh,direct_thresh,pair_kind,date
+pairwise_adjusted_influence_modal_direct_ge5,20,10494,1000,5,count_ge5,direct,2026-05-21
+pairwise_adjusted_influence_modal_indirect_ge5,5,78441016,1000,5,count_ge5,indirect,2026-05-21

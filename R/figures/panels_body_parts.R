@@ -1,8 +1,58 @@
-####################################
-####################################
-### DN TO EFFECTORS THRESHOLDING ###
-####################################
-####################################
+#' DN/AN-to-effector body-part influence summaries (Fig. 2d, ED Fig. 5)
+#'
+#' For every AN and DN with a known causal behavioural function in
+#' `cns.functions` (citation present, non-putative), pulls cached
+#' query_influence() outputs and projects them onto effector neurons
+#' grouped by `body_part_motor` / `body_part_efferent`. Plots include:
+#'
+#'   - Pictogram of effector body parts (Fig. 2d).
+#'   - Per-AN/DN dot plots of adjusted influence onto each body part,
+#'     with the "high-influence" elbow cutoff at 17.28 (ED Fig. 5d).
+#'   - Cumulative distribution + elbow detection (ED Fig. 5e); the
+#'     fitted threshold is written to
+#'     `data/determined_thresholds/influence_norm_log_elbow_threshold.csv`
+#'     and re-read by `banc-startup.R`. The fit is locked behind the
+#'     `BANC_RECALCULATE=TRUE` env var (default: re-use the saved value
+#'     so downstream panels stay consistent with the paper threshold of
+#'     17.28).
+#'   - Body-part combinatorics counts (ED Fig. 5f–h).
+#'
+#' @section Reads:
+#'   banc.meta, banc.edgelist.simple, cns.functions, paper.cols
+#'   data/influence/.../<an_or_dn>_influence.csv per causal cell type
+#'
+#' @section Writes:
+#'   figures/figure_2/links/*_body_parts_*.pdf                            (Fig. 2d pictogram)
+#'   figures/figure_2/links/supplement/*_an_dn_body_parts_*.pdf            (ED Fig. 5d–h)
+#'   figures/figure_2/links/extra/...                                      (sensitivity sweeps)
+#'   data/determined_thresholds/influence_norm_log_elbow_threshold.csv
+#'
+#' @section Paper:
+#'   Fig. 2d — effector body-part legend (referenced by Fig. 2e + ED Fig. 4b).
+#'   ED Fig. 5d — example DN/AN influence on body parts, with elbow line.
+#'   ED Fig. 5e — cumulative influence distribution + elbow at 17.28.
+#'   ED Fig. 5f–h — body-part combinatorics counts.
+#'   Methods §"Influence" (Eq. 10, source-size-corrected) +
+#'   §"Modules for local feedback control".
+#'
+#' @section Schema:
+#'   `allowed_modalities` defines the AN/DN subset; CHANGE WITH CARE — the
+#'   v888 paper-text numbers (in numbers.R) and ED Fig. 5e cell-type list
+#'   are pinned to this filter.
+#'
+#'   The 17.28 cutoff is the paper-version "high-influence" threshold,
+#'   loaded from the saved CSV by default. Pass `BANC_RECALCULATE=TRUE`
+#'   to re-fit against the current snapshot (overwrites the CSV);
+#'   re-fits drift the threshold by ~0.1-0.2 units per few days of
+#'   curation and propagate to every downstream panel that filters at
+#'   this cutoff (panels_an_dn_connectivity.R, panels_mbx_cx_control.R).
+#'
+#' @section Used by:
+#'   R/figures/panels_an_dn_*.R (read the elbow threshold)
+#'   R/text/numbers.R (`influence_norm_thresh`, body-part combinatorics)
+#'
+#' @section Reproduce:
+#'   BANC_NCORES=1 Rscript R/figures/panels_body_parts.R
 
 ###############
 ### STARTUP ###
@@ -10,66 +60,62 @@
 
 # load
 source("R/startup/banc-startup.R")
-source("R/startup/franken-meta.R")
 source("R/startup/banc-meta.R")
 source("R/startup/banc-edgelist.R")
 
-# Create a mapping for DN categories
-dn_categories <- c(
-  "DNa02" = "DNa02: turning", 
-  "DNa01" = "DNa01: turning",
-  "DNp01" = "DNp01: escape", 
-  "DNp02" = "DNp02: escape",
-  "MDN" = "MDN: backwards walking", 
-  "DNp50" = "DNp50: backwards walking", 
-  "DNp42" = "DNp42: backwards walking",
-  "DNg97" = "DNg97: forwards walking", 
-  "DNg100" = "DNg100: forwards walking", 
-  "DNg12" = "DNg12: grooming", 
-  "DNg62" = "DNg62: grooming",
-  "DNp07" = "DNp07: landing", 
-  "DNp10" = "DNp10: landing",
-  "DNa12" = "DNa12: abdomen curl", 
-  "DNg14" = "DNg14: abdomen curl",
-  "DNa15" = "DNa15: flight", 
-  "DNb01" = "DNb01: flight",
-  "DNp37" = "DNp37: oviposition", 
-  "oviDNb" = "oviDNb: oviposition",
-  "DNp20" = "DNp20: ocellar", 
-  "DNp22" = "DNp22: ocellar",
-  "DNp25" = "DNp25: hygrosensation", 
-  "DNp44" = "DNp44: hygrosensation",
-  "DNpe043" = "DNpe043: circadian", 
-  "DNp27" = "DNp27: circadian",
-  "AN17A026" = "AN17A026: walking", 
-  "AN19A018" = "AN19A018: halting",
-  "AN19A018_a" = "AN19A018: halting",
-  "AN19A018_b" = "AN19A018: halting",
-  "AN19A018_c" = "AN19A018: halting",
-  "AN19A018_d" = "AN19A018: halting",
-  "AN19A018_A3" = "AN19A018: halting",
-  "AN19A018_a_A3" = "AN19A018: halting",
-  "AN19A018_b_A3" = "AN19A018: halting",
-  "AN19A018_c_A3" = "AN19A018: halting",
-  "AN19A018_d_A3" = "AN19A018: halting",
-  "AN07B043" = "AN07B043: grooming",
-  "AN06B011" = "AN06B011: walking"
+# Build DN/AN categories dynamically from cns.functions table
+# Include cell types with modality + citations, excluding putative citations
+allowed_modalities <- c("walking", "steering", "grooming", "abdomen_motion",
+                        "flight", "proboscis_extension", "escape_takeoff",
+                        "landing", "halting", "ocellar", "reproduction")
+causal_functions <- cns.functions %>%
+  dplyr::filter(super_class %in% c("ascending","descending"),
+                !is.na(modality), modality != "",
+                !is.na(citations), citations != "",
+                !grepl("putative", citations, ignore.case = TRUE)) %>%
+  dplyr::filter(sapply(modality, function(m) {
+    mods <- trimws(unlist(strsplit(m, ",")))
+    any(mods %in% allowed_modalities)
+  })) %>%
+  dplyr::mutate(
+    # Use first allowed modality for label
+    primary_modality = sapply(modality, function(m) {
+      mods <- trimws(unlist(strsplit(m, ",")))
+      matched <- mods[mods %in% allowed_modalities]
+      if (length(matched) > 0) matched[1] else mods[1]
+    })
+  ) %>%
+  dplyr::distinct(cell_type, .keep_all = TRUE)
+
+dn_categories <- setNames(
+  paste0(causal_functions$cell_type, ": ", causal_functions$primary_modality),
+  causal_functions$cell_type
 )
+
+# Also include AN subtypes (e.g. AN19A018_a) that match base cell types
+an_subtypes <- banc.meta %>%
+  dplyr::filter(!is.na(seed_07)) %>%
+  dplyr::distinct(seed_07) %>%
+  dplyr::pull(seed_07)
+for (ct in names(dn_categories)) {
+  matches <- an_subtypes[grepl(paste0("^", ct, "_"), an_subtypes)]
+  if (length(matches) > 0) {
+    new_entries <- setNames(rep(dn_categories[[ct]], length(matches)), matches)
+    dn_categories <- c(dn_categories, new_entries)
+  }
+}
+message(sprintf("Built %d causal DN/AN categories from cns.functions (%d base + subtypes)",
+                length(dn_categories), nrow(causal_functions)))
 causal.dns <- c(names(dn_categories))
 causal.dn.search <- paste(causal.dns,collapse="|")
 chosen.seeds <- unique(banc.meta$seed_07[grepl(causal.dn.search,banc.meta$seed_07)])
 chosen.seeds <- chosen.seeds[!grepl("auto",chosen.seeds)]
 
 # Get alternative dataset for validation (seed_07)
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path,influence.sqlite))
-key.neck.db <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(!is_seed,
-                seed %in% causal.dns,
-                level %in% c("seed_07"),
-                id %in% !!banc.eff.meta$root_id) %>%
-  dplyr::collect()
-dbDisconnect(con)
+key.neck.db <- query_influence(
+    levels = "seed_07", seeds = causal.dns,
+    ids = banc.eff.meta$root_id, normalize = FALSE
+  )
 
 # Calculate scores
 causal.dns <- unique(key.neck.db$seed)
@@ -192,59 +238,75 @@ heatmap_df <- as.data.frame(heatmap_matrix_normalized) %>%
   # Filter for only the causal DNs we're interested in
   dplyr::filter(seed %in% causal.dns) %>%
   # Add the category labels
-  dplyr::mutate(seed_category = factor(dn_categories[seed], levels = dn_categories[causal.dns]))
+  dplyr::mutate(seed_category = factor(dn_categories[seed], levels = unique(dn_categories[causal.dns])))
 
 # Sort values for elbow method visualization
 elbow_df <- heatmap_df %>%
   arrange(desc(influence_norm_log)) %>%
   mutate(rank = row_number())
 
-# Function to find the most significant angle change in a specific range
-find_angle_change_in_range <- function(ranks, values, start_rank, end_rank, window_size = 100) {
-  # Filter data to the specified range
-  idx_in_range <- which(ranks >= start_rank & ranks <= end_rank)
-  ranks_subset <- ranks[idx_in_range]
-  values_subset <- values[idx_in_range]
-  
-  # Skip if too few points
-  if(length(ranks_subset) <= 2*window_size) {
-    return(list(rank = NA, value = NA))
+# ---- Elbow threshold: saved value by default, re-fit only on demand ----
+#
+# The "high-influence" cutoff (currently 17.28) is the paper version of
+# this threshold and is consumed by panels_an_dn_connectivity.R,
+# panels_mbx_cx_control.R, and the downstream blocks of this script.
+# Re-fitting against today's snapshot would drift it (snapshot curation
+# moves the elbow by ~0.1-0.2 units per few days), which in turn drifts
+# every downstream panel that filters at this cutoff — so the saved
+# value at data/determined_thresholds/influence_norm_log_elbow_threshold.csv
+# is the source of truth.
+#
+# To force a re-fit (and overwrite the CSV with the new value), launch
+# the script with BANC_RECALCULATE=TRUE; the .banc_force_recalculate
+# flag is set in banc-startup.R from that env var.
+.elbow_csv <- "data/determined_thresholds/influence_norm_log_elbow_threshold.csv"
+.recalculate_elbow <- exists(".banc_force_recalculate") && isTRUE(.banc_force_recalculate)
+
+if (!.recalculate_elbow && file.exists(.elbow_csv)) {
+  .saved <- read.csv(.elbow_csv, stringsAsFactors = FALSE)
+  first_bend_end <- list(value = as.numeric(.saved$threshold_value[1]),
+                         rank  = as.integer(.saved$threshold_rank[1]))
+  message(sprintf("Loaded saved elbow threshold: %.4f (rank %d) from %s",
+                  first_bend_end$value, first_bend_end$rank, .elbow_csv))
+  message("  set BANC_RECALCULATE=TRUE to re-fit + overwrite the CSV")
+} else {
+  if (.recalculate_elbow) message("BANC_RECALCULATE=TRUE — re-fitting elbow against today's snapshot")
+
+  # `find_angle_change_in_range()` lives in R/startup/banc-functions.R
+  # (hoisted 2026-05-21; shared with panels_mbx_cx_control.R).
+
+  # Sample the curve at regular intervals
+  sample_indices <- round(seq(1, nrow(elbow_df), length.out = 1000))
+  ranks <- elbow_df$rank[sample_indices]
+  values <- elbow_df$influence_norm_log[sample_indices]
+
+  # Search a wide range for the elbow, scaling with dataset size
+  search_end <- min(nrow(elbow_df) * 0.3, 10000)
+  first_bend_end <- find_angle_change_in_range(ranks, values,
+                                               round(search_end * 0.05),
+                                               round(search_end),
+                                               window_size = 20)
+
+  # Fallback if elbow detection fails
+  if (is.na(first_bend_end$value)) {
+    warning("Elbow detection failed — falling back to 95th percentile of influence_norm_log")
+    first_bend_end$value <- quantile(elbow_df$influence_norm_log, 0.95)
+    first_bend_end$rank  <- which.min(abs(elbow_df$influence_norm_log - first_bend_end$value))
   }
-  
-  # Calculate angles
-  angles <- numeric(length(ranks_subset) - 2*window_size)
-  for(i in (window_size+1):(length(ranks_subset)-window_size)) {
-    p1 <- c(ranks_subset[i-window_size], values_subset[i-window_size])
-    p2 <- c(ranks_subset[i], values_subset[i])
-    p3 <- c(ranks_subset[i+window_size], values_subset[i+window_size])
-    
-    # Calculate vectors
-    v1 <- c(p2[1] - p1[1], p2[2] - p1[2])
-    v2 <- c(p3[1] - p2[1], p3[2] - p2[2])
-    
-    # Normalize vectors
-    v1 <- v1 / sqrt(sum(v1^2))
-    v2 <- v2 / sqrt(sum(v2^2))
-    
-    # Calculate angle (in degrees)
-    angles[i-window_size] <- acos(sum(v1 * v2)) * (180/pi)
-  }
-  
-  # Find maximum angle
-  max_angle_idx <- which.max(angles) + window_size
-  max_angle_rank <- ranks_subset[max_angle_idx]
-  max_angle_value <- values_subset[max_angle_idx]
-  
-  return(list(rank = max_angle_rank, value = max_angle_value))
+  message(sprintf("Elbow threshold (re-fitted): %.4f at rank %d", first_bend_end$value, first_bend_end$rank))
+
+  # Persist the new threshold for downstream scripts
+  threshold_df <- data.frame(
+    metric          = "influence_norm_log",
+    threshold_value = first_bend_end$value,
+    threshold_rank  = first_bend_end$rank,
+    method          = "elbow_maximum_curvature",
+    date            = Sys.Date()
+  )
+  write.csv(threshold_df, .elbow_csv, row.names = FALSE)
+  message(sprintf("Saved influence threshold: %.4f (rank %d) to %s",
+                  first_bend_end$value, first_bend_end$rank, .elbow_csv))
 }
-
-# Sample the curve at regular intervals
-sample_indices <- round(seq(1, nrow(elbow_df), length.out = 1000))
-ranks <- elbow_df$rank[sample_indices]
-values <- elbow_df$influence_norm_log[sample_indices]
-
-# Find the angle change specifically in the range where we expect the first bend to end
-first_bend_end <- find_angle_change_in_range(ranks, values, 500, 2000, window_size = 20)
 
 # Join elbow_df with direct connection data
 elbow_df_with_direct <- elbow_df %>%
@@ -558,9 +620,10 @@ ggsave(file.path(banc.fig2.extra.path, sprintf("%s_select_dn_to_effector_influen
 
 # Make plot
 g.jitter <- ggplot(heatmap_df_with_direct  %>%
-                     dplyr::filter(seed %in% c("DNa02","DNa15","oviDNb","AN06B011")), 
-                   aes(x = body_part_effector, 
-                           y = influence_norm_log, 
+                     dplyr::filter(seed %in% c("DNa02","DNa15","oviDNb","AN06B011"),
+                                   influence_norm_log > 0),
+                   aes(x = body_part_effector,
+                           y = influence_norm_log,
                            group = body_part_effector,
                            color = connection_type)) +
   geom_jitter(width = 0.2, alpha = 0.7, size = 2) + 
@@ -592,8 +655,10 @@ g.jitter <- ggplot(heatmap_df_with_direct  %>%
 
 # Save the plot with updated facet labels and consistent y-scale
 print(g.jitter)
-ggsave(file.path(banc.fig2.supp.path, sprintf("%s_select_dn_to_effector_influence_jitterplot.png",inf.metric)), 
+ggsave(file.path(banc.fig2.supp.path, sprintf("%s_select_dn_to_effector_influence_jitterplot.png",inf.metric)),
        g.jitter, width = 4, height = 14, dpi = 300)
+ggsave(file.path(banc.fig2.supp.path, sprintf("%s_select_dn_to_effector_influence_jitterplot.pdf",inf.metric)),
+       g.jitter, width = 4, height = 14)
 
 ###########################
 ### ASSESS TRIAGED POOL ###
@@ -603,15 +668,10 @@ ggsave(file.path(banc.fig2.supp.path, sprintf("%s_select_dn_to_effector_influenc
 chosen.seeds <- unique(banc.meta$seed_12[grepl("^AN|^DN",banc.meta$seed_12)])
 
 # Get alternative dataset for validation (seed_03)
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path, influence.sqlite))
-inf.neck.db <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(!is_seed,
-                seed %in% chosen.seeds,
-                level %in% c("seed_12"), 
-                id %in% !!banc.eff.meta$root_id) %>%
-  dplyr::collect() 
-DBI::dbDisconnect(con)
+inf.neck.db <- query_influence(
+    levels = "seed_12", seeds = chosen.seeds,
+    ids = banc.eff.meta$root_id, normalize = FALSE
+  )
 
 # Calculate norms
 inf.neck.db <- inf.neck.db %>%
@@ -854,7 +914,7 @@ effector_combinations <- inf.neck.db %>%
   dplyr::filter(influence_norm_log >= threshold.inf.value) %>%
   dplyr::mutate(region = dplyr::case_when(
     is.na(body_part_effector)|body_part_effector=="" ~ NA,
-    region=="neck_connective" ~ "central_brain",
+    grepl("ascending|descending", super_class) ~ "central_brain",
     region=="optic_lobe" ~ "central_brain",
     grepl("brain",region) ~ "central_brain",
     grepl("vnc",region) ~ "ventral_nerve_cord",
@@ -866,7 +926,8 @@ effector_combinations <- inf.neck.db %>%
     body_parts = list(sort(unique(body_part_effector[!is.na(body_part_effector)]))),
     combination = paste(sort(unique(body_part_effector[!is.na(body_part_effector)])), collapse = "+"),
     regions = paste(sort(unique(region[!is.na(region)])), collapse = "+"),
-    super_classes = paste(sort(unique(super_class[!is.na(super_class)])), collapse = "+"),
+    super_classes = paste(sort(unique(ifelse(super_class == "ascending_visceral_circulatory",
+                                           "visceral_circulatory", super_class)[!is.na(super_class)])), collapse = "+"),
     above_threshold = TRUE,
     .groups = "drop"
   ) %>%
@@ -898,11 +959,16 @@ combo_counts <- effector_combinations %>%
     num_parts = sapply(strsplit(as.character(combination), "\\+"), length)
   ) %>%
   dplyr::group_by(seed_type, regions, num_parts) %>%
-  dplyr::summarize(count = dplyr::n(), 
+  dplyr::summarize(count = dplyr::n(),
                    .groups = "drop")
 
+# Preserve linear x-axis: keep every integer 1..max even when count is 0.
+.max_parts <- max(combo_counts$num_parts, na.rm = TRUE)
+combo_counts <- combo_counts %>%
+  dplyr::mutate(num_parts = factor(num_parts, levels = seq_len(.max_parts)))
+
 g.combo <- ggplot(combo_counts,
-       aes(x = factor(num_parts), y = count, fill = regions)) +
+       aes(x = num_parts, y = count, fill = regions)) +
   geom_col(color = "white") +                        
   facet_wrap(~ seed_type) +                      
   theme_minimal() +
@@ -922,7 +988,8 @@ g.combo <- ggplot(combo_counts,
   ggplot2::scale_fill_manual(values = c(ventral_nerve_cord=paper.cols[["ventral_nerve_cord"]],
                                         central_brain=paper.cols[["central_brain"]],
                                         `central_brain+ventral_nerve_cord`=paper.cols[["neck_connective"]]),
-                             na.value = "lightgrey")
+                             na.value = "lightgrey") +
+  ggplot2::scale_x_discrete(drop = FALSE)
 
 # Show
 print(g.combo)
@@ -939,11 +1006,15 @@ combo_counts <- effector_combinations %>%
     num_parts = sapply(strsplit(as.character(combination), "\\+"), length)
   ) %>%
   dplyr::group_by(seed_type, super_classes, num_parts) %>%
-  dplyr::summarize(count = dplyr::n(), 
+  dplyr::summarize(count = dplyr::n(),
                    .groups = "drop")
 
+.max_parts2 <- max(combo_counts$num_parts, na.rm = TRUE)
+combo_counts <- combo_counts %>%
+  dplyr::mutate(num_parts = factor(num_parts, levels = seq_len(.max_parts2)))
+
 g.combo2 <- ggplot(combo_counts,
-                  aes(x = factor(num_parts), y = count, fill = super_classes)) +
+                  aes(x = num_parts, y = count, fill = super_classes)) +
   geom_col(color = "white") +                        
   facet_wrap(~ seed_type) +                      
   theme_minimal() +
@@ -960,10 +1031,23 @@ g.combo2 <- ggplot(combo_counts,
     y = "number of neck neurons",
     fill = "effector super classes"
   ) +
-  ggplot2::scale_fill_manual(values = c(motor=paper.cols[["motor"]],
-                                        visceral_circulatory=paper.cols[["endocrine"]],
-                                        `motor+visceral_circulatory`=paper.cols[["neck_connective"]]),
-                             na.value = "lightgrey")
+  {
+    # Build dynamic color mapping for all super_classes combinations in data
+    all_sc <- unique(combo_counts$super_classes[!is.na(combo_counts$super_classes)])
+    sc_cols <- setNames(
+      rep("lightgrey", length(all_sc)),  # default grey for unknown
+      all_sc
+    )
+    # Override known categories
+    if ("motor" %in% all_sc) sc_cols["motor"] <- paper.cols[["motor"]]
+    if ("visceral_circulatory" %in% all_sc) sc_cols["visceral_circulatory"] <- paper.cols[["endocrine"]]
+    if ("motor+visceral_circulatory" %in% all_sc) sc_cols["motor+visceral_circulatory"] <- paper.cols[["neck_connective"]]
+    # Log any unmapped categories
+    unmapped <- setdiff(all_sc, c("motor", "visceral_circulatory", "motor+visceral_circulatory"))
+    if (length(unmapped) > 0) message("  Grey super_classes categories: ", paste(unmapped, collapse=", "))
+    ggplot2::scale_fill_manual(values = sc_cols, na.value = "lightgrey")
+  } +
+  ggplot2::scale_x_discrete(drop = FALSE)
 
 # Show
 print(g.combo2)
@@ -1000,7 +1084,6 @@ fmt_combo <- function(x) {
 # Rebuild combo_top (safe if already built)
 combo_top <- combo_freq %>%
   dplyr::filter(combination %in% top_singles) %>%
-  dplyr::mutate(combination = stats::relevel(factor(combination), ref = rev(top_singles)[1])) %>%  
   dplyr::mutate(combination = factor(combination, levels = rev(top_singles)))
 
 # Prepare one label per combination at the end of the taller bar
@@ -1013,7 +1096,7 @@ labels_unique <- combo_top %>%
     y_pos = y_pos + 0.03 * ymax1  # small nudge to the right
   )
 g.bp.unique.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y = freq, fill = seed_type)) +
-  ggplot2::geom_col(position = ggplot2::position_dodge(width = 0.8)) +
+  ggplot2::geom_col(position = ggplot2::position_dodge2(width = 0.8, preserve = "single")) +
   ggplot2::coord_flip(clip = "off") +
   ggplot2::theme_minimal() +
   ggplot2::labs(
@@ -1057,7 +1140,6 @@ top_combos <- combo_freq %>%
   dplyr::pull(combination)
 combo_top <- combo_freq %>%
   dplyr::filter(combination %in% top_combos) %>%
-  dplyr::mutate(combination = stats::relevel(factor(combination), ref = rev(top_combos)[1])) %>%  # ensure factor exists
   dplyr::mutate(combination = factor(combination, levels = rev(top_combos)))
 
 # Prepare one label per combination at the end of the taller bar
@@ -1072,7 +1154,7 @@ labels_combos <- combo_top %>%
 
 # And now in combination
 g.bp.freq <- ggplot2::ggplot(combo_top, ggplot2::aes(x = combination, y = freq, fill = seed_type)) +
-  ggplot2::geom_col(position = ggplot2::position_dodge(width = 0.8)) +
+  ggplot2::geom_col(position = ggplot2::position_dodge2(width = 0.8, preserve = "single")) +
   ggplot2::coord_flip(clip = "off") +
   ggplot2::theme_minimal() +
   ggplot2::labs(

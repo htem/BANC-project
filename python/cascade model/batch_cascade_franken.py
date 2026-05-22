@@ -1,3 +1,15 @@
+"""Frankenbrain variant of ``batch_cascade.py``: runs the signal-cascade
+model on the merged BANC + FAFB + MANC graph ("frankenbrain v1.6"),
+used as the multi-dataset reference graph for cross-dataset cascade
+validation.
+
+Same interface as ``batch_cascade.py``; the only differences are the
+SQLite path (frankenbrain edgelist instead of per-dataset) and the
+output naming convention. Produces the pickles consumed by
+``../../R/figures/panels_influence_validation.R`` for the Fig. 2b /
+ED Fig. 4a panels.
+"""
+
 import pandas as pd
 import numpy as np
 import sqlite3

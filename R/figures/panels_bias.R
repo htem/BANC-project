@@ -1,8 +1,37 @@
-######################
-######################
-### EFFECTORS UMAP ###
-######################
-######################
+#' Side-biased effector clusters and their AN/DN drivers (ED Fig. 4f)
+#'
+#' Identifies effector clusters where one body side dominates (e.g. the
+#' bilaterally-split leg groups in ED Fig. 4f), then back-traces which
+#' AN/DN cell types preferentially influence the dominant side. Side
+#' dominance is measured as `max_side_prop > 0.8` per cluster on the
+#' effector UMAP from `panels_efferent_umap.R`.
+#'
+#' For each side-biased cluster, the script aggregates per-AN/DN
+#' influence across the neurons in that cluster, then highlights the
+#' AN/DNs whose influence on the biased cluster is unusually high
+#' compared to the cluster's contralateral pair — these are the
+#' "biasing" cell types reported in the ED Fig. 4f legend.
+#'
+#' @section Reads:
+#'   banc.meta, banc.eff.meta, banc.neck.meta, banc.edgelist.simple
+#'   data/banc_eff_umap_clusters.csv                                          (from panels_efferent_umap.R)
+#'
+#' @section Writes:
+#'   figures/figure_4/links/supplement/effector_side_bias_*.pdf               (ED Fig. 4f side panels)
+#'   figures/figure_4/links/extra/                                            (exploratory bias plots)
+#'   data/determined_thresholds/effector_side_bias.csv                        (side-prop cutoff log)
+#'
+#' @section Paper:
+#'   ED Fig. 4f (right column, bilateral split) — front-leg and middle-
+#'   hind-leg clusters are the only bilaterally split effector groups.
+#'   Methods §"Naming effector groups".
+#'
+#' @section Schema:
+#'   `max_side_prop > 0.8` is the side-bias threshold; below this the
+#'   cluster is treated as bilateral and skipped.
+#'
+#' @section Reproduce:
+#'   BANC_NCORES=1 Rscript R/figures/panels_bias.R
 
 ###############
 ### STARTUP ###
@@ -10,7 +39,6 @@
 
 # load
 source("R/startup/banc-startup.R")
-source("R/startup/franken-meta.R")
 source("R/startup/banc-meta.R")
 
 # new meta
@@ -28,25 +56,16 @@ weird <- c("DNxl080", "DNge079")
 banc.an.dn.meta <- banc.neck.meta %>%
   dplyr::filter(super_class %in% c("ascending","descending")) %>%
   dplyr::filter(!grepl("^SA|^SN|^AN_4|^AN_5",cell_type))
-chosen.cts <- unique(banc.an.dn.meta$cell_type, banc.an.dn.meta$composite_cell_type)
-con <- DBI::dbConnect(RSQLite::SQLite(),
-                      file.path(banc.dropbox.influence.save.path,influence.sqlite))
-influence.neck.eff.db <- dplyr::tbl(con, influence.table) %>%
-  dplyr::filter(!is_seed,
-                level %in% c("seed_07")) %>%
-  dplyr::filter(
-    seed %in% !!chosen.cts,
-    id %in% !!banc.eff2.meta$id
+chosen.cts <- unique(c(banc.an.dn.meta$cell_type, banc.an.dn.meta$cell_sub_type))
+influence.neck.eff.db <- query_influence(
+    levels = "seed_07", seeds = chosen.cts, ids = banc.eff2.meta$id
   ) %>%
-  dplyr::collect() %>%
-  calculate_influence_norms() %>%
   dplyr::left_join(banc.meta.post %>%
                      dplyr::distinct(post_root_id, .keep_all = TRUE),
                    by = c("id"="post_root_id")) %>%
   dplyr::left_join(banc.meta.pre%>%
                      dplyr::distinct(pre_id, .keep_all = TRUE),
                    by = c("seed"="pre_cell_type"))
-dbDisconnect(con)
 
 # Cast
 influence.for.m <- reshape2::acast(data = influence.neck.eff.db, 
@@ -95,7 +114,10 @@ summary_df_umap <- umap_eff_df %>%
   dplyr::summarise(
     n = dplyr::n(),
     max_side_prop = base::max(base::prop.table(base::table(side))),
-    most_common_body_part = base::names(base::sort(base::table(body_part_effector), decreasing=TRUE))[1]
+    most_common_body_part = {
+      t <- base::table(body_part_effector[!is.na(body_part_effector)])
+      if (length(t) == 0) NA_character_ else base::names(base::sort(t, decreasing=TRUE))[1]
+    }
   ) %>%
   dplyr::ungroup()
 
@@ -103,39 +125,44 @@ biased_clusters_umap <- summary_df_umap %>%
   dplyr::filter(max_side_prop > 0.8 & most_common_body_part == "front_leg") %>%
   dplyr::pull(unordered_cluster)
 
-biased_df_umap <- umap_eff_df %>%
-  dplyr::filter(unordered_cluster %in% biased_clusters_umap) %>%
-  dplyr::select(id, unordered_cluster)
+problem_seeds <- character(0)
+if (length(biased_clusters_umap) > 0) {
+  biased_df_umap <- umap_eff_df %>%
+    dplyr::filter(unordered_cluster %in% biased_clusters_umap) %>%
+    dplyr::select(id, unordered_cluster)
 
-biased_matrix_umap <- influence.m[biased_df_umap$id, , drop = FALSE]
-base::rownames(biased_matrix_umap) <- biased_df_umap$id
-biased_clusters_vector_umap <- biased_df_umap$unordered_cluster
+  biased_matrix_umap <- influence.m[biased_df_umap$id, , drop = FALSE]
+  base::rownames(biased_matrix_umap) <- biased_df_umap$id
+  biased_clusters_vector_umap <- biased_df_umap$unordered_cluster
 
-means_per_cluster_umap <- base::apply(
-  biased_matrix_umap, 2,
-  function(seed_col) { base::tapply(seed_col, biased_clusters_vector_umap, base::mean, na.rm = TRUE) }
-)
-means_per_cluster_umap <- base::t(means_per_cluster_umap)
+  means_per_cluster_umap <- base::apply(
+    biased_matrix_umap, 2,
+    function(seed_col) { base::tapply(seed_col, biased_clusters_vector_umap, base::mean, na.rm = TRUE) }
+  )
+  means_per_cluster_umap <- base::t(means_per_cluster_umap)
 
-split_range_umap <- base::apply(means_per_cluster_umap, 1, function(x) base::diff(base::range(x, na.rm = TRUE)))
-split_sd_umap <- base::apply(means_per_cluster_umap, 1, stats::sd, na.rm = TRUE)
+  split_range_umap <- base::apply(means_per_cluster_umap, 1, function(x) base::diff(base::range(x, na.rm = TRUE)))
+  split_sd_umap <- base::apply(means_per_cluster_umap, 1, stats::sd, na.rm = TRUE)
 
-driving_seeds_umap <- base::names(base::sort(split_range_umap, decreasing = TRUE)[1:10])
+  driving_seeds_umap <- base::names(base::sort(split_range_umap, decreasing = TRUE)[1:10])
 
-seeds_table_umap <- base::data.frame(
-  seed = base::colnames(means_per_cluster_umap),
-  split_range = split_range_umap,
-  split_sd = split_sd_umap
-)
-seeds_table_sorted_umap <- seeds_table_umap[base::order(-seeds_table_umap$split_range), ]
+  seeds_table_umap <- base::data.frame(
+    seed = base::colnames(means_per_cluster_umap),
+    split_range = split_range_umap,
+    split_sd = split_sd_umap
+  )
+  seeds_table_sorted_umap <- seeds_table_umap[base::order(-seeds_table_umap$split_range), ]
 
-# Print move prominent
-base::cat("\nTop driving seeds (UMAP clusters):\n")
-base::print(driving_seeds_umap)
-base::print(seeds_table_sorted_umap[1:6, ])
+  # Print most prominent
+  base::cat("\nTop driving seeds (UMAP clusters):\n")
+  base::print(driving_seeds_umap)
+  base::print(seeds_table_sorted_umap[1:min(6, nrow(seeds_table_sorted_umap)), ])
 
-# ----- 1. Remove 6 most problematic seeds (already available from your previous steps) -----
-problem_seeds <- rownames(seeds_table_sorted_umap[1:200,])
+  # ----- 1. Remove most problematic seeds -----
+  problem_seeds <- rownames(seeds_table_sorted_umap[1:min(200, nrow(seeds_table_sorted_umap)),])
+} else {
+  message("No biased front_leg clusters found (max_side_prop > 0.8) — skipping bias seed analysis")
+}
 influence.m.red <- influence.m[, !base::colnames(influence.m) %in% problem_seeds, drop=FALSE]
 
 # ----- 2. Run UMAP on the full and reduced matrices -----

@@ -35,16 +35,16 @@ if(exists("franken.meta")){
 # BANC neck meta
 if(exists("banc.meta")){
   banc.neck.meta <- banc.meta %>%
-    dplyr::filter(region=="neck_connective") %>%
+    dplyr::filter(grepl("ascending|descending", super_class)) %>%
     dplyr::filter(!is.na(cell_type)) %>%
     dplyr::arrange(cell_type, fafb_cell_type, manc_cell_type,
-                   top_nt,
+                   neurotransmitter,
                    side) %>%
     dplyr::distinct(root_id, .keep_all = TRUE) %>%
-    dplyr::mutate(top_nt = dplyr::case_when(
-      is.na(top_nt) ~ "unclear",
-      top_nt%in%c("NA","na","unknown","Unclear","Unknown","none","0") ~ "unclear",
-      TRUE ~ top_nt
+    dplyr::mutate(neurotransmitter = dplyr::case_when(
+      is.na(neurotransmitter) ~ "unclear",
+      neurotransmitter%in%c("NA","na","unknown","Unclear","Unknown","none","0") ~ "unclear",
+      TRUE ~ neurotransmitter
     )) %>%
     dplyr::mutate(side = dplyr::case_when(
       is.na(side) ~ "midline",
@@ -57,8 +57,8 @@ if(exists("banc.meta")){
     )) %>%
     dplyr::distinct(root_id, root_position_nm, side, super_class, cell_class, 
                     pd_width, input_connections, output_connections, input_side_index, output_side_index,
-                    cell_type, composite_cell_type, fafb_cell_type, manc_cell_type, cell_sub_class, 
-                    top_nt, neurotransmitter_verified, cluster,
+                    cell_type, cell_sub_type, fafb_cell_type, manc_cell_type, cell_sub_class, 
+                    neurotransmitter, neurotransmitter_verified, cluster,
                     fafb_match, manc_match)
   
   # Pre and post, for joining
@@ -84,12 +84,12 @@ if(exists("banc.edgelist.simple")){
   dn.elist.pre <- banc.edgelist.simple %>%
     dplyr::filter(pre_super_class %in% c("descending")) %>%
     dplyr::left_join(franken.meta.post %>% 
-                       dplyr::select(post_composite_cell_type,
+                       dplyr::select(post_cell_sub_type,
                                      post_body_part_effector,
                                      post_body_part_sensory,
                                      post_origin) %>%
-                       dplyr::distinct(post_composite_cell_type, .keep_all = TRUE),
-                     by = c("post_composite_cell_type"))   %>%
+                       dplyr::distinct(post_cell_sub_type, .keep_all = TRUE),
+                     by = c("post_cell_sub_type"))   %>%
     dplyr::mutate(targeting = dplyr::case_when(
       pre_side=="right"&post_side=="left" ~ "contra",
       pre_side=="left"&post_side=="right" ~ "ipsi",
@@ -98,12 +98,12 @@ if(exists("banc.edgelist.simple")){
   dn.elist.post <- banc.edgelist.simple %>%
     dplyr::filter(post_super_class %in% c("descending","efferent_descending")) %>%
     dplyr::left_join(franken.meta.pre %>% 
-                       dplyr::select(pre_composite_cell_type,
+                       dplyr::select(pre_cell_sub_type,
                                      pre_body_part_effector,
                                      pre_body_part_sensory,
                                      pre_origin) %>%
-                       dplyr::distinct(pre_composite_cell_type, .keep_all = TRUE),
-                     by = c("pre_composite_cell_type"))   %>%
+                       dplyr::distinct(pre_cell_sub_type, .keep_all = TRUE),
+                     by = c("pre_cell_sub_type"))   %>%
     dplyr::mutate(targeting = dplyr::case_when(
       pre_side=="right"&post_side=="left" ~ "contra",
       pre_side=="left"&post_side=="right" ~ "ipsi",
@@ -114,12 +114,12 @@ if(exists("banc.edgelist.simple")){
   an.elist.pre <- banc.edgelist.simple %>%
     dplyr::filter(pre_super_class %in% c("ascending")) %>%
     dplyr::left_join(franken.meta.post %>% 
-                       dplyr::select(post_composite_cell_type,
+                       dplyr::select(post_cell_sub_type,
                                      post_body_part_effector,
                                      post_body_part_sensory,
                                      post_origin) %>%
-                       dplyr::distinct(post_composite_cell_type, .keep_all = TRUE),
-                     by = c("post_composite_cell_type")) %>%
+                       dplyr::distinct(post_cell_sub_type, .keep_all = TRUE),
+                     by = c("post_cell_sub_type")) %>%
     dplyr::mutate(targeting = dplyr::case_when(
       pre_side=="right"&post_side=="left" ~ "contra",
       pre_side=="left"&post_side=="right" ~ "ipsi",
@@ -128,12 +128,12 @@ if(exists("banc.edgelist.simple")){
   an.elist.post <- banc.edgelist.simple %>%
     dplyr::filter(post_super_class %in% c("ascending","efferent_ascending")) %>%
     dplyr::left_join(franken.meta.pre %>% 
-                       dplyr::select(pre_composite_cell_type,
+                       dplyr::select(pre_cell_sub_type,
                                      pre_body_part_effector,
                                      pre_body_part_sensory,
                                      pre_origin) %>%
-                       dplyr::distinct(pre_composite_cell_type, .keep_all = TRUE),
-                     by = c("pre_composite_cell_type"))  %>%
+                       dplyr::distinct(pre_cell_sub_type, .keep_all = TRUE),
+                     by = c("pre_cell_sub_type"))  %>%
     dplyr::mutate(targeting = dplyr::case_when(
       pre_side=="right"&post_side=="left" ~ "contra",
       pre_side=="left"&post_side=="right" ~ "ipsi",
@@ -142,93 +142,93 @@ if(exists("banc.edgelist.simple")){
   
   # Create a matrix of undirected connections
   dn.elist.cat <- rbind(dn.elist.pre %>%
-                          dplyr::mutate(pre_composite_cell_type = dplyr::case_when(
-                            !is.na(pre_composite_cell_type) ~ pre_composite_cell_type,
+                          dplyr::mutate(pre_cell_sub_type = dplyr::case_when(
+                            !is.na(pre_cell_sub_type) ~ pre_cell_sub_type,
                             TRUE ~ pre, 
                           )) %>%
-                          dplyr::mutate(post_composite_cell_type = dplyr::case_when(
-                            !is.na(post_composite_cell_type) ~ post_composite_cell_type,
+                          dplyr::mutate(post_cell_sub_type = dplyr::case_when(
+                            !is.na(post_cell_sub_type) ~ post_cell_sub_type,
                             TRUE ~ post, 
                           )) %>%
-                          dplyr::group_by(pre, post_composite_cell_type) %>%
+                          dplyr::group_by(pre, post_cell_sub_type) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          #dplyr::mutate(id = pre_composite_cell_type, partner_id = paste0("post_",post)) %>%
-                          dplyr::mutate(id = pre, partner_id = paste0("post_",post_composite_cell_type)) %>%
+                          #dplyr::mutate(id = pre_cell_sub_type, partner_id = paste0("post_",post)) %>%
+                          dplyr::mutate(id = pre, partner_id = paste0("post_",post_cell_sub_type)) %>%
                           dplyr::distinct(id, partner_id, count, norm),
                         dn.elist.post %>%
-                          dplyr::mutate(post_composite_cell_type = dplyr::case_when(
-                            !is.na(post_composite_cell_type) ~ post_composite_cell_type,
+                          dplyr::mutate(post_cell_sub_type = dplyr::case_when(
+                            !is.na(post_cell_sub_type) ~ post_cell_sub_type,
                             TRUE ~ post, 
                           )) %>%
-                          dplyr::mutate(pre_composite_cell_type = dplyr::case_when(
-                            !is.na(pre_composite_cell_type) ~ pre_composite_cell_type,
+                          dplyr::mutate(pre_cell_sub_type = dplyr::case_when(
+                            !is.na(pre_cell_sub_type) ~ pre_cell_sub_type,
                             TRUE ~ pre, 
                           )) %>%
-                          dplyr::group_by(post, pre_composite_cell_type) %>%
+                          dplyr::group_by(post, pre_cell_sub_type) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          #dplyr::mutate(id = post_composite_cell_type, partner_id = paste0("pre_",pre)) %>%
-                          dplyr::mutate(id = post, partner_id = paste0("pre_",pre_composite_cell_type)) %>%
+                          #dplyr::mutate(id = post_cell_sub_type, partner_id = paste0("pre_",pre)) %>%
+                          dplyr::mutate(id = post, partner_id = paste0("pre_",pre_cell_sub_type)) %>%
                           dplyr::distinct(id, partner_id, count, norm),
                         an.elist.pre %>%
-                          dplyr::mutate(pre_composite_cell_type = dplyr::case_when(
-                            !is.na(pre_composite_cell_type) ~ pre_composite_cell_type,
+                          dplyr::mutate(pre_cell_sub_type = dplyr::case_when(
+                            !is.na(pre_cell_sub_type) ~ pre_cell_sub_type,
                             TRUE ~ pre, 
                           )) %>%
-                          dplyr::mutate(post_composite_cell_type = dplyr::case_when(
-                            !is.na(post_composite_cell_type) ~ post_composite_cell_type,
+                          dplyr::mutate(post_cell_sub_type = dplyr::case_when(
+                            !is.na(post_cell_sub_type) ~ post_cell_sub_type,
                             TRUE ~ post, 
                           )) %>%
-                          dplyr::group_by(pre, post_composite_cell_type) %>%
+                          dplyr::group_by(pre, post_cell_sub_type) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          #dplyr::mutate(id = pre_composite_cell_type, partner_id = paste0("post_",post)) %>%
-                          dplyr::mutate(id = pre, partner_id = paste0("post_",post_composite_cell_type)) %>%
+                          #dplyr::mutate(id = pre_cell_sub_type, partner_id = paste0("post_",post)) %>%
+                          dplyr::mutate(id = pre, partner_id = paste0("post_",post_cell_sub_type)) %>%
                           dplyr::distinct(id, partner_id, count, norm),
                         an.elist.post %>%
-                          dplyr::mutate(post_composite_cell_type = dplyr::case_when(
-                            !is.na(post_composite_cell_type) ~ post_composite_cell_type,
+                          dplyr::mutate(post_cell_sub_type = dplyr::case_when(
+                            !is.na(post_cell_sub_type) ~ post_cell_sub_type,
                             TRUE ~ post, 
                           )) %>%
-                          dplyr::mutate(pre_composite_cell_type = dplyr::case_when(
-                            !is.na(pre_composite_cell_type) ~ pre_composite_cell_type,
+                          dplyr::mutate(pre_cell_sub_type = dplyr::case_when(
+                            !is.na(pre_cell_sub_type) ~ pre_cell_sub_type,
                             TRUE ~ pre, 
                           )) %>%
-                          dplyr::group_by(post, pre_composite_cell_type) %>%
+                          dplyr::group_by(post, pre_cell_sub_type) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          #dplyr::mutate(id = post_composite_cell_type, partner_id = paste0("pre_",pre)) %>%
-                          dplyr::mutate(id = post, partner_id = paste0("pre_",pre_composite_cell_type)) %>%
+                          #dplyr::mutate(id = post_cell_sub_type, partner_id = paste0("pre_",pre)) %>%
+                          dplyr::mutate(id = post, partner_id = paste0("pre_",pre_cell_sub_type)) %>%
                           dplyr::distinct(id, partner_id, count, norm)) 
   
   
   # Create a matrix of undirected connections
   an.elist.cat <- rbind(an.elist.pre %>%
-                          dplyr::mutate(pre_composite_cell_type = dplyr::case_when(
-                            !is.na(pre_composite_cell_type) ~ pre_composite_cell_type,
+                          dplyr::mutate(pre_cell_sub_type = dplyr::case_when(
+                            !is.na(pre_cell_sub_type) ~ pre_cell_sub_type,
                             TRUE ~ pre, 
                           )) %>%
-                          dplyr::group_by(pre_composite_cell_type, post) %>%
+                          dplyr::group_by(pre_cell_sub_type, post) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          dplyr::mutate(id = pre_composite_cell_type, partner_id = paste0("post_",post)) %>%
+                          dplyr::mutate(id = pre_cell_sub_type, partner_id = paste0("post_",post)) %>%
                           dplyr::distinct(id, partner_id, count, norm),
                         an.elist.post %>%
-                          dplyr::mutate(post_composite_cell_type = dplyr::case_when(
-                            !is.na(post_composite_cell_type) ~ post_composite_cell_type,
+                          dplyr::mutate(post_cell_sub_type = dplyr::case_when(
+                            !is.na(post_cell_sub_type) ~ post_cell_sub_type,
                             TRUE ~ post, 
                           )) %>%
-                          dplyr::group_by(post_composite_cell_type, pre) %>%
+                          dplyr::group_by(post_cell_sub_type, pre) %>%
                           dplyr::mutate(count = sum(count, na.rm = TRUE),
                                         norm = mean(norm, na.rm = TRUE)) %>%
                           dplyr::ungroup() %>%
-                          dplyr::mutate(id = post_composite_cell_type, partner_id = paste0("pre_",pre)) %>%
+                          dplyr::mutate(id = post_cell_sub_type, partner_id = paste0("pre_",pre)) %>%
                           dplyr::distinct(id, partner_id, count, norm)) %>%
     dplyr::distinct(id, partner_id, count, norm)
 }

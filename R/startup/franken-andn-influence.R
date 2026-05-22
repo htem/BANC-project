@@ -30,9 +30,9 @@ DBI::dbDisconnect(con)
 influence.neck.meta  <- influence.neck.meta %>%
   dplyr::left_join(franken.meta.post %>%
                      dplyr::select(post_id, post_side, post_cluster, post_body_part_sensory, post_body_part_effector,
-                                   post_region, post_super_class, post_hemilineage, post_sez_class,
+                                   post_region, post_super_class, post_hemilineage,
                                    post_cell_function, post_nerve, post_cell_class, post_cell_sub_class, 
-                                   post_cell_type, post_composite_cell_type, post_top_nt) %>%
+                                   post_cell_type, post_cell_sub_type, post_neurotransmitter) %>%
                      dplyr::distinct(post_id, .keep_all = TRUE),
                    by = c("id"="post_id")) %>%
   dplyr::left_join(franken.meta.pre %>%
@@ -40,7 +40,7 @@ influence.neck.meta  <- influence.neck.meta %>%
                      dplyr::select(pre_side, pre_cluster, pre_body_part_sensory, pre_body_part_effector,
                                    pre_region, pre_super_class, pre_hemilineage, 
                                    pre_cell_function, pre_nerve, pre_cell_class, pre_cell_sub_class, 
-                                   pre_cell_type, pre_composite_cell_type, pre_top_nt, seed) %>%
+                                   pre_cell_type, pre_cell_sub_type, pre_neurotransmitter, seed) %>%
                      dplyr::distinct(pre_cell_type, .keep_all = TRUE),
                    by = c("seed")) %>%
   dplyr::left_join(cns.functions %>%
@@ -54,10 +54,10 @@ influence.neck.meta  <- influence.neck.meta %>%
                      dplyr::distinct(post_cell_type, .keep_all = TRUE),
                    by = c("post_cell_type")) %>%
   dplyr::filter(!grepl("afferent|sensory|glia",post_super_class)) %>%
-  dplyr::mutate(super_class = case_when(
-    post_super_class == "brain_central_other" & !is.na(post_sez_class) ~ "sez",
-    TRUE ~ post_super_class
-  )) %>%
+  # dplyr::mutate(super_class = case_when(
+  #   post_super_class == "brain_central_other" & !is.na(post_sez_class) ~ "sez",
+  #   TRUE ~ post_super_class
+  # )) %>%
   dplyr::mutate(post_cell_type = ifelse(grepl("KCg-s",post_cell_type),"KCg-s",post_cell_type)) %>%
   dplyr::mutate(post_cell_sub_class = ifelse(is.na(post_cell_sub_class),gsub("_.*","",post_cell_type),post_cell_sub_class)) %>%
   dplyr::group_by(id, level) %>%

@@ -1,15 +1,15 @@
 CNS Network → Effector Super Clusters: Additional Tests
-Metric: influence_log | Date: 2026-02-02 
+Metric: influence_log | Date: 2026-05-19 
 
 TEST 1: Specific networks have NO values above median (Exact probability)
 ------------------------------------------------------------------------
-Matrix 50th percentile threshold: 19.410
+Matrix 50th percentile threshold: 23.200
 
-central complex: 0/13 above median (expect 50%) | P(0 above by chance)=1.221e-04
-right olfactory: 0/13 above median (expect 50%) | P(0 above by chance)=1.221e-04
-left olfactory: 0/13 above median (expect 50%) | P(0 above by chance)=1.221e-04
+central complex related: 0/15 above median (expect 50%) | P(0 above by chance)=3.052e-05
+right olfactory: 0/15 above median (expect 50%) | P(0 above by chance)=3.052e-05
+left olfactory: 0/15 above median (expect 50%) | P(0 above by chance)=3.052e-05
 
-Combined: P(all 3 networks have 0 above median)=1.819e-12 ***
+Combined: P(all 3 networks have 0 above median)=2.842e-14 ***
 Interpretation: All three tested networks lack high-influence connections
 
 TEST 2: Most CNS networks have high influence on ≥1 effector group
@@ -18,6 +18,6 @@ Networks with ≥1 connection above median: 10/13 (76.9%)
 Binomial test (vs 50% expected): p=4.614e-02 * | 95% CI [0.51, 1.00]
 
 Networks WITHOUT high influence (n=3):
-  left olfactory (max=18.300)
-  right olfactory (max=18.550)
-  central complex (max=19.050)
+  left olfactory (max=23.050)
+  right olfactory (max=23.150)
+  central complex related (max=23.030)

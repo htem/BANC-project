@@ -1,5 +1,27 @@
-# script to read author list spreadsheet and output author list, affiliations,
-#  FlyWire Consortium
+#' Author list and FlyWire Consortium block builder for the manuscript
+#'
+#' Reads the author-list Google Sheet and formats the resulting flat
+#' table into the prose author line, affiliations block, and FlyWire
+#' Consortium acknowledgement block used in the manuscript front matter.
+#'
+#' Order validation: checks that the `Order` column is a complete
+#' sequence 1..nrow with no duplicates or gaps before producing the
+#' formatted block (a missing position usually means a row was deleted
+#' without renumbering).
+#'
+#' @section Reads:
+#'   Google Sheet "BANC author list" (URL in `banc_author_url`, hard-coded
+#'   here because it's a stable manuscript artefact)
+#'   tabs: `authors`, `FlyWire Consortium`
+#'
+#' @section Writes:
+#'   manuscript/print/author_list.docx                                         (officer + flextable)
+#'
+#' @section Paper:
+#'   Front matter author line + affiliations + FlyWire Consortium acknowledgement.
+#'
+#' @section Reproduce:
+#'   Rscript R/text/generate_author_list.R
 
 library(googlesheets4)
 library(officer)

@@ -1,0 +1,63 @@
+Package: BANCproject
+Title: Analysis Pipeline for the BANC Connectome Paper
+Version: 1.0.0
+Authors@R: c(
+    person("Alexander S.", "Bates",   role = c("aut", "cre"),
+           email = "alexander.shakeel.bates@gmail.com"),
+    person("Jasper S.",   "Phelps",   role = "aut"),
+    person("Minsu",       "Kim",      role = "aut"),
+    person("Helen H.",    "Yang",     role = "aut"),
+    person("BANC-FlyWire", "Consortium", role = "ctb"))
+Description: Source code accompanying Bates, Phelps, Kim, Yang et al.
+    (2026), 'Distributed control circuits across a brain-and-cord
+    connectome'. Builds every figure and text-output reported in the
+    paper from a bundled per-neuron metadata snapshot and the larger
+    data products hosted on the Harvard Dataverse deposit
+    (doi:10.7910/DVN/7WTH1N). Not a CRAN package — this DESCRIPTION
+    exists so that `devtools::install_deps()` resolves the runtime
+    dependencies in a reproducible way.
+License: CC BY 4.0
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 4.2)
+Imports:
+    arrow,
+    bancr,
+    cowplot,
+    curl,
+    data.table,
+    dplyr,
+    fafbseg,
+    ggplot2,
+    ggpubr,
+    ggrepel,
+    googledrive,
+    googlesheets4,
+    igraph,
+    influencer,
+    jsonlite,
+    knitr,
+    nat,
+    nat.h5reg,
+    pheatmap,
+    progress,
+    purrr,
+    readr,
+    reticulate,
+    rstatix,
+    scales,
+    stringr,
+    tibble,
+    tidyr,
+    umap,
+    uwot,
+    xml2,
+    yaml,
+    zip
+Suggests:
+    devtools,
+    testthat
+RoxygenNote: 7.3.1
+URL: https://github.com/htem/BANC-project, https://doi.org/10.7910/DVN/7WTH1N
+BugReports: https://github.com/htem/BANC-project/issues

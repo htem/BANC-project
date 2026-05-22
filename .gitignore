@@ -63,6 +63,13 @@ ehthumbs.db
 Thumbs.db
 .png
 
+# Claude Code files
+.claude/
+CLAUDE.md
+
+# Local data cache (large feather files downloaded from GCS)
+data/cache/
+
 # Large files
 *.nd2
 *.obj
@@ -75,27 +82,71 @@ Thumbs.db
 **/cascade_results/
 **/__pycache__/
 slurm-*.out
-data/cascade/
 **/sbatch_logs/
 *.html
 
-# Cascade files
-data/influence/frankenbrain_v1.5/
-data/cascade/frankenbrain_v1.5/an
-data/cascade/frankenbrain_v1.5/an2
-data/cascade/frankenbrain_v1.5/dn
-data/cascade/frankenbrain_v1.5/dn2
-data/cascade/frankenbrain_v1.5/mb_project
+# Cascade files — keep README + frankenbrain_v1.6 (paper-version cascade
+# outputs); exclude the older v1.5 by-class subdirs (stale and large).
+data/cascade/frankenbrain_v1.5/
 
-# PNG files in extra and neuroanatomy subdirectories
-figures/*/links/neuroanatomy/*.pdf
+# extra images for figures
+figures/figure_1/links/extra/
+figures/figure_2/links/extra/
+figures/figure_3/links/extra/
+figures/figure_4/links/extra/
+figures/figure_5/links/extra/
+figures/figure_6/links/extra/
+figures/figure_extra/
 
-# PNG files in figure_4 links directory (including all subdirectories)
+# PNG files in extra subdirectories
+figures/*/links/extra/*.png
+
+# PNG files in figure_4 links directory (excluding the dirs we explicitly track)
 figures/figure_4/links/**/*.png
-figures/figures_biorxiv/
+!figures/figure_4/links/neuroanatomy/*.png
+!figures/figure_4/links/head_orienting/sensors/influence_log_minmax/*.png
+!figures/figure_4/links/head_orienting/effectors/influence_log_minmax/*.png
+figures/schematics/*.ai
+figures/biorxiv/*
+figures/biorxiv_v1/*
+figures/biorxiv_v2/*
+figures/submission/*
+figures/resubmission/*
+manuscript/*
+# Re-include manuscript/print/ (numbers.csv, ngl_links.csv, supplemental
+# data, neuroglancer_states, etc.), manuscript/abstracts/ (conference
+# abstracts), and manuscript/scripts/ (paper-orchestration helpers like
+# regenerate_paper.sh, fix_ai_paths.py) so they can be tracked. Keep the
+# figure-asset subdirectories under manuscript/print/ ignored — those
+# are rebuilt by figure scripts and would bloat history. Confidential
+# subdirs (biorxiv, resubmission_1, resubmission_2 — cover letters,
+# response-to-referees, reporting summaries) stay excluded.
+!manuscript/print/
+!manuscript/abstracts/
+!manuscript/scripts/
+manuscript/print/figure*/
+dataverse/*
 *banc_meta.csv
 
 
+# R default plot output
+Rplots.pdf
+
 # R data
 .RDataTmp
-figures/figure_1/figure_1.ai
+*.Rproj
+BANC-project.Rproj
+BANC-project.Rproj
+/manuscript/*
+!/manuscript/print/
+!/manuscript/abstracts/
+!/manuscript/scripts/
+/manuscript/print/figure*/
+# Local-only Word-export workspace (download_and_clean_gdoc.R outputs)
+/manuscript/print/text/
+data/meta/hemibrain_meta.csv
+data/meta/hemibrain_nt_meta_2024-02-01.csv
+data/meta/bc_orig_cache.feather
+# Private identifiers (Google Doc/Sheet/Drive IDs, etc.) — read by
+# R/startup/load-keys.R as banc.keys. Never committed.
+data/private/

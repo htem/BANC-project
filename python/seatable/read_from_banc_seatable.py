@@ -1,4 +1,18 @@
-# This script shows how to read particular columns from seatable using a SQL query
+"""Minimal example: read columns from the BANC SeaTable base via SQL.
+
+Shows how to authenticate with the SeaTable Python API
+(``seatable_api``) using a personal token stored in the
+``BANCTABLE_TOKEN`` environment variable, point at the BANC workspace
++ base, and run a SQL ``SELECT`` to pull a column subset. Useful as a
+starting point if you need Python-side SeaTable access; most of the
+analysis pipeline accesses BANC metadata via the R client
+(``bancr::banctable_query()``) instead.
+
+Set up:
+    export BANCTABLE_TOKEN=<your personal token>
+    (per-user; create at
+     https://api.seatable.io/reference/getaccounttokenfromusername)
+"""
 
 # Load libraries
 import seatable_api

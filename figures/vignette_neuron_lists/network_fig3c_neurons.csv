@@ -1,0 +1,98 @@
+display_name,root_id,cell_representative_point_id,cell_type,cell_class,cell_sub_class,super_class,cluster,side,neurotransmitter,body_part_sensory,body_part_effector
+AN19B025,720575941535925018,526,AN19B025,ascending_neuron,,ascending,head orienting,right,acetylcholine,,
+AN19B025,720575941461958340,643,AN19B025,ascending_neuron,,ascending,head orienting,left,acetylcholine,,
+DNpe013,720575941733215019,837,DNpe013,descending_neuron,,descending,head orienting,right,acetylcholine,,
+DNpe013,720575941507751447,885,DNpe013,descending_neuron,,descending,head orienting,left,acetylcholine,,
+unnamed_inhibitory_interneuron,720575941491145525,102593,IN02A029,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,left,glutamate,,
+unnamed_inhibitory_interneuron,720575941515653475,105135,IN02A029,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,left,glutamate,,
+unnamed_inhibitory_interneuron,720575941516859235,105205,IN07B014,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,left,acetylcholine,,
+unnamed_inhibitory_interneuron,720575941669104883,108182,IN07B014,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,right,acetylcholine,,
+unnamed_inhibitory_interneuron,720575941652546837,109593,IN02A029,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,right,glutamate,,
+unnamed_inhibitory_interneuron,720575941652544021,109731,IN02A029,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,right,glutamate,,
+unnamed_inhibitory_interneuron,720575941414919569,109732,IN02A029,,ventral_nerve_cord_ipsilateral_interconnecting,ventral_nerve_cord_intrinsic,,right,glutamate,,
+neck_roll_motor_neuron,720575941492452222,636,DProN4,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_unknown_motor_neuron,720575941598584768,747,CvN9,neck_motor_neuron,,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_roll_motor_neuron,720575941575975350,849,DProN3a,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_roll_pitch_motor_neuron,720575941504200613,872,DProN5,neck_motor_neuron,neck_roll_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_unknown_motor_neuron,720575941565285730,979,CvN9,neck_motor_neuron,,motor,head-eye-antenna,right,acetylcholine,,neck
+neck_unknown_motor_neuron,720575941642129528,1021,CvN10,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941489332169,1042,DProN4,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_unknown_motor_neuron,720575941526954424,1057,CvN10,neck_motor_neuron,,motor,head-eye-antenna,right,octopamine,,neck
+neck_roll_motor_neuron,720575941544264041,1068,DProN3b,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_unknown_motor_neuron,720575941435429676,1162,DProN7,neck_motor_neuron,,motor,head-eye-antenna,right,gaba,,neck
+neck_yaw_motor_neuron,720575941507987877,1197,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,acetylcholine,,neck
+neck_roll_motor_neuron,720575941553264211,1252,CvN3,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_yaw_motor_neuron,720575941548493857,1270,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_unknown_motor_neuron,720575941564833938,1302,CvN11,neck_motor_neuron,,motor,head-eye-antenna,left,glutamate,,neck
+neck_roll_motor_neuron,720575941439741119,1441,DProN1,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_yaw_motor_neuron,720575941573751305,1502,CvNA2,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,octopamine,,neck
+neck_unknown_motor_neuron,720575941731588651,1586,DProN7,neck_motor_neuron,,motor,head-eye-antenna,left,glutamate,,neck
+neck_unknown_motor_neuron,720575941478578511,1602,DProN6,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941573355592,1759,CvNA2,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+middle_leg_motor_neuron,720575941594091397,3805,trochanter_flexor_MesoAN,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+antenna_motor_neuron,720575941478847262,5403,CB0810,antenna_motor_neuron,,motor,front leg,left,acetylcholine,,"antenna, scape"
+antenna_motor_neuron,720575941402749552,6298,CB0873,antenna_motor_neuron,,motor,front leg,left,octopamine,,"antenna, scape"
+neck_roll_motor_neuron,720575941525682253,9004,DProN3b,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+wing_steering_motor_neuron,720575941547394081,10406,i2,wing_motor_neuron,wing_steering_motor_neuron,motor,flight-steering,left,gaba,,wing
+eye_motor_neuron,720575941569716338,10699,CB0804,eye_motor_neuron,,motor,head-eye-antenna,left,gaba,,eye
+middle_leg_motor_neuron,720575941644192200,12105,trochanter_flexor_MesoAN,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,left,gaba,,middle_leg
+wing_steering_motor_neuron,720575941475745898,12922,i2,wing_motor_neuron,wing_steering_motor_neuron,motor,flight-steering,right,gaba,,wing
+eye_motor_neuron,720575941557406756,12932,CB0804,eye_motor_neuron,,motor,head-eye-antenna,right,glutamate,,eye
+wing_tension_motor_neuron,720575941597267356,13141,tpn,wing_motor_neuron,wing_tension_motor_neuron,motor,flight-steering,right,acetylcholine,,wing
+antenna_motor_neuron,720575941583384671,17213,CB0886,antenna_motor_neuron,,motor,head-eye-antenna,right,gaba,,antenna
+antenna_motor_neuron,720575941669313447,17340,CB0873,antenna_motor_neuron,,motor,front leg,right,octopamine,,"antenna, scape"
+antenna_motor_neuron,720575941671982759,18833,CB0810,antenna_motor_neuron,,motor,front leg,right,acetylcholine,,"antenna, scape"
+middle_leg_motor_neuron,720575941553691876,21507,trochanter_flexor_MesoAN,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+neck_roll_motor_neuron,720575941448945757,30032,DProN3a,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+antenna_motor_neuron,720575941526643202,30762,CB0886,antenna_motor_neuron,,motor,head-eye-antenna,left,gaba,,antenna
+wing_tension_motor_neuron,720575941474595370,31270,tpn,wing_motor_neuron,wing_tension_motor_neuron,motor,flight-steering,left,gaba,,wing
+neck_pitch_motor_neuron,720575941495864905,617,CvN7,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_pitch_motor_neuron,720575941513990988,767,CvN5,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_pitch_motor_neuron,720575941597457564,1102,CvN4,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_pitch_motor_neuron,720575941459454704,1171,CvN7,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_pitch_motor_neuron,720575941428762249,1255,CvN4,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,octopamine,,neck
+neck_pitch_motor_neuron,720575941609437613,1355,CvN6,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_pitch_motor_neuron,720575941508147746,1381,CvN5,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_pitch_motor_neuron,720575941539792220,1432,CvN6,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941457562694,1493,CvN3,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+front_leg_motor_neuron,720575941692129243,3727,sternal_anterior_rotator_miller_31,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,right,gaba,,front_leg
+front_leg_motor_neuron,720575941497568199,5282,tibia_flexor,leg_motor_neuron,front_leg_motor_neuron,motor,middle-hind leg,left,gaba,,front_leg
+front_leg_motor_neuron,720575941548546696,5295,pleural_remotor_and_abductor,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,left,gaba,,front_leg
+front_leg_motor_neuron,720575941531923147,5302,sternal_anterior_rotator,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,left,gaba,,front_leg
+front_leg_motor_neuron,720575941494164864,5304,pleural_remotor_and_abductor,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,left,acetylcholine,,front_leg
+front_leg_motor_neuron,720575941508205185,5305,femur_reductor_tiny,leg_motor_neuron,front_leg_motor_neuron,motor,middle-hind leg,left,,,front_leg
+eye_motor_neuron,720575941611096028,10698,CB0901,eye_motor_neuron,,motor,head-eye-antenna,left,octopamine,,eye
+front_leg_motor_neuron,720575941593715569,12882,pleural_remotor_and_abductor_miller_29,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,right,gaba,,front_leg
+front_leg_motor_neuron,720575941559281679,12887,accessory_tibia_flexor_A,leg_motor_neuron,front_leg_motor_neuron,motor,middle-hind leg,right,gaba,,front_leg
+front_leg_motor_neuron,720575941560573608,12891,tarsus_depressor_retro_tarsus_depressor,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,right,gaba,,front_leg
+front_leg_motor_neuron,720575941691007896,12893,pleural_remotor_and_abductor_miller_29,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,right,acetylcholine,,front_leg
+eye_motor_neuron,720575941525655833,12935,CB0901,eye_motor_neuron,,motor,head-eye-antenna,right,octopamine,,eye
+front_leg_motor_neuron,720575941595712448,21523,sternal_posterior_rotator_miller_32,leg_motor_neuron,front_leg_motor_neuron,motor,front leg,right,gaba,,front_leg
+neck_roll_pitch_motor_neuron,720575941530511747,557,DProN5,neck_motor_neuron,neck_roll_pitch_motor_neuron,motor,head-eye-antenna,right,octopamine,,neck
+neck_unknown_motor_neuron,720575941574538504,566,DProN9,neck_motor_neuron,,motor,head-eye-antenna,right,gaba,,neck
+neck_roll_motor_neuron,720575941489125351,788,DProN2,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941512880643,791,DProN2,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_unknown_motor_neuron,720575941493508551,835,DProN8,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_unknown_motor_neuron,720575941390352388,893,DProN9,neck_motor_neuron,,motor,head-eye-antenna,left,octopamine,,neck
+neck_unknown_motor_neuron,720575941577663825,1121,DProN8,neck_motor_neuron,,motor,head-eye-antenna,right,octopamine,,neck
+hind_leg_motor_neuron,720575941612256476,3779,accessory_tibia_flexor_A,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,gaba,,hind_leg
+hind_leg_motor_neuron,720575941454830131,5329,accessory_tibia_flexor_A,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,hind_leg
+hind_leg_motor_neuron,720575941494740094,5632,sternal_anterior_rotator_ventrolateral_ribbon,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,hind_leg
+hind_leg_motor_neuron,720575941508440193,8279,tibia_flexor_Fast,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,hind_leg
+hind_leg_motor_neuron,720575941521190835,8294,tibia_flexor,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,hind_leg
+hind_leg_motor_neuron,720575941549456673,8306,long_tendon_muscle_ltm_B,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,hind_leg
+middle_leg_motor_neuron,720575941497881417,10416,tibia_flexor,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,left,acetylcholine,,middle_leg
+hind_leg_motor_neuron,720575941438181205,12916,sternal_anterior_rotator_ventrolateral_ribbon,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,right,acetylcholine,,hind_leg
+middle_leg_motor_neuron,720575941519971511,13241,accessory_tibia_flexor_B,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+hind_leg_motor_neuron,720575941574355016,18987,sternal_anterior_rotator_ventrolateral_ribbon,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,right,gaba,,hind_leg
+hind_leg_motor_neuron,720575941447103669,19695,long_tendon_muscle_B_femur,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,right,gaba,,hind_leg
+hind_leg_motor_neuron,720575941584932486,19700,accessory_tibia_flexor_A,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,right,gaba,,hind_leg
+middle_leg_motor_neuron,720575941568355066,20630,sternal_anterior_rotator_MesoLN_ventral_1,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+middle_leg_motor_neuron,720575941505891422,20639,accessory_tibia_flexor_A,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+hind_leg_motor_neuron,720575941410034859,21169,accessory_tibia_flexor_A,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,right,acetylcholine,,hind_leg
+middle_leg_motor_neuron,720575941573687049,21597,tibia_flexor,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+hind_leg_motor_neuron,720575941538992021,23455,sternal_anterior_rotator_ventrolateral_ribbon,leg_motor_neuron,hind_leg_motor_neuron,motor,middle-hind leg,left,gaba,,hind_leg
+middle_leg_motor_neuron,720575941519664856,23651,sternal_anterior_rotator_MesoLN_ventral_2,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,left,gaba,,middle_leg
+middle_leg_motor_neuron,720575941658392344,26276,tibia_flexor,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,left,gaba,,middle_leg
+middle_leg_motor_neuron,720575941556850771,41748,accessory_tibia_flexor_B,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,right,gaba,,middle_leg
+middle_leg_motor_neuron,720575941523135223,41765,accessory_tibia_flexor_A,leg_motor_neuron,middle_leg_motor_neuron,motor,middle-hind leg,left,gaba,,middle_leg

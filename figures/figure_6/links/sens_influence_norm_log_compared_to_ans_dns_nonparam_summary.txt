@@ -1,44 +1,42 @@
 Non-parametric Summary (vs 'sensory')
 ======================================================================
-Date: 2026-02-01 20:20:00
-Observations: 3872
+Date: 2026-05-19 03:26:07
+Observations: 3996
 Groups (types): 4
-Reference group: 'sensory' (median = 16.77)
+Reference group: 'sensory' (median = 17.47)
 Adjustment: holm | alpha = 0.05
 
 Medians by group (descending)
 ----------------------------------------------------------------------
-# A tibble: 4 × 4
-  type                       n median_value                iqr
-  <fct>                  <int>        <dbl>              <dbl>
-1 sensory                  968       16.77  1.07            e0
-2 visual_projection        968       15.525 3.0325          e0
-3 mushroom_body_output     968       14.56  2.11500000000000e0
-4 central_complex_output   968       12.06  2.5625          e0
+|type                   |   n| median_value|   iqr|
+|:----------------------|---:|------------:|-----:|
+|sensory                | 999|        17.47| 1.815|
+|visual_projection      | 999|        17.19| 2.725|
+|mushroom_body_output   | 999|        15.57| 2.155|
+|central_complex_output | 999|        13.48| 2.320|
 
 Kolmogorov-Smirnov tests (distribution differences)
 ----------------------------------------------------------------------
-# A tibble: 3 × 8
-  type           n_group median_val                ks_D  ks_p ks_p_adj ks_signif
-  <fct>            <int>      <dbl>               <dbl> <dbl>    <dbl> <chr>    
-1 visual_projec…     968     15.525 4.45247933884298e-1     0        0 ****     
-2 mushroom_body…     968     14.56  6.63223140495868e-1     0        0 ****     
-3 central_compl…     968     12.06  8.82231404958678e-1     0        0 ****     
-# ℹ 1 more variable: ks_p_adj_disp <chr>
+|type                   | n_group| median_val|   ks_D| ks_P| ks_P_adj|ks_signif |ks_P_adj_disp  |
+|:----------------------|-------:|----------:|------:|----:|--------:|:---------|:--------------|
+|mushroom_body_output   |     999|      15.57| 0.5135|    0|        0|****      |< 2.2 × 10^−16 |
+|central_complex_output |     999|      13.48| 0.8118|    0|        0|****      |< 2.2 × 10^−16 |
+|visual_projection      |     999|      17.19| 0.1692|    0|        0|****      |7.67 × 10^−13  |
 
 Wilcoxon rank-sum tests (median differences)
 ----------------------------------------------------------------------
-# A tibble: 3 × 10
-  type   n_group median_val wilcox_W              wilcox_p          wilcox_p_adj
-  <fct>    <int>      <dbl>    <dbl>                 <dbl>                 <dbl>
-1 visua…     968     15.525 263956.5 4.03575502354019e- 62 4.03575502354019e- 62
-2 mushr…     968     14.56  109119.5 9.94805878382582e-188 1.98961175676516e-187
-3 centr…     968     12.06   16627.5 1.47842995677143e-295 4.43528987031459e-295
-# ℹ 4 more variables: wilcox_signif <chr>, wilcox_p_adj_disp <chr>,
-#   rank_biserial <dbl>, effect_size <chr>
+|type                   | n_group| median_val| wilcox_W| wilcox_P| wilcox_P_adj|wilcox_signif |wilcox_P_adj_disp | rank_biserial|effect_size |
+|:----------------------|-------:|----------:|--------:|--------:|------------:|:-------------|:-----------------|-------------:|:-----------|
+|mushroom_body_output   |     999|      15.57| 176260.5|        0|            0|****          |< 2.2 × 10^−16    |       -0.6468|large       |
+|central_complex_output |     999|      13.48|  34388.0|        0|            0|****          |< 2.2 × 10^−16    |       -0.9311|large       |
+|visual_projection      |     999|      17.19| 434431.5|        0|            0|****          |5.51 × 10^−7      |       -0.1294|small       |
 
 ======================================================================
 FIGURE LEGEND (copy-paste ready)
 ======================================================================
-Non-parametric comparisons of each group to 'sensory' (N=3872; K=4 groups; holm-adjusted α=0.05): Wilcoxon rank-sum tests showed significant differences for visual_projection (p=4.04e-62, r=-0.437, medium effect); mushroom_body_output (p=1.99e-187, r=-0.767, large effect); and central_complex_output (p=4.44e-295, r=-0.965, large effect). Effect sizes reported as rank-biserial correlation (r).
+Non-parametric comparisons of each group to 'sensory' (N=3996; K=4 groups; holm-adjusted α=0.05): Wilcoxon rank-sum tests showed significant differences for mushroom_body_output (p=< 2.2 × 10^−16, r=-0.647, large effect); central_complex_output (p=< 2.2 × 10^−16, r=-0.931, large effect); and visual_projection (p=5.51 × 10^−7, r=-0.129, small effect). Effect sizes reported as rank-biserial correlation (r).
 ======================================================================
+
+Concise stat
+----------------------------------------------------------------------
+(P < 2.2 × 10^−16, Wilcoxon rank-sum vs 'sensory' (holm-adjusted), K = 4 groups, min adjusted p across comparisons, n = 3996)

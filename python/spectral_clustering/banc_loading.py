@@ -1,3 +1,18 @@
+"""Helpers for loading BANC v626 SQLite tables into the sparse-matrix
+form expected by the spectral-clustering pipeline.
+
+Exposes ``table_to_sparse_matrix(table, row_key, col_key, …)``: takes
+a pandas DataFrame with row + column identifier columns and a
+``count`` column, returns a ``scipy.sparse.coo_matrix`` plus the
+ordered row / column label vectors so the matrix can be re-keyed
+later.
+
+Used by ``banc_spectral_clustering_final.ipynb`` (the notebook that
+developed the spectral-clustering method for the paper); the
+productionised pipeline now lives at
+``bancpipeline/banc/clustering/banc-spectral-clustering.py``.
+"""
+
 import sqlite3
 import numpy as np
 import pandas as pd

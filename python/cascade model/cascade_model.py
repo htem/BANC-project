@@ -1,3 +1,31 @@
+"""Signal-cascade algorithm (Winding et al. 2023, *Science*) applied to
+*Drosophila* connectomes.
+
+Implements ``SignalCascade``: a stochastic linear-threshold cascade
+model that propagates activation from a source neuron population
+through the synaptic graph. Each timestep, every currently-active
+neuron attempts transmission to its downstream partners with
+probability ``p_transmission`` per synapse; a target neuron becomes
+active when its weighted input crosses ``activation_threshold``. Runs
+are repeated ``n_iterations`` times to derive activation probabilities
+per (source, target, timestep) tuple.
+
+Used in two places: (i) as the reference algorithm against which the
+BANC adjusted-influence metric is validated (Fig. 2b cross-check,
+ED Fig. 4a — see ``../../R/figures/panels_influence_validation.R``);
+and (ii) on the merged BANC + FAFB + MANC "frankenbrain v1.6" graph
+for the multi-dataset sanity check.
+
+This module defines the class only. Driver scripts in this directory
+(``batch_cascade.py``, ``batch_cascade_franken.py``,
+``real_data_cascade_main.py``) construct ``SignalCascade`` instances,
+run them against the BANC SQLite tables, and write the per-seed
+pickles that land in ``../../data/cascade/frankenbrain_v1.6/``.
+
+The productionised copy of this module is mirrored at
+``bancpipeline/analysis/python/cascade_model.py``.
+"""
+
 import numpy as np
 from collections import defaultdict
 import matplotlib.pyplot as plt

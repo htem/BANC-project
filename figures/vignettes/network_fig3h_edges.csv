@@ -1,0 +1,15 @@
+from,to,count,pre_top_nt
+ANXXX139,DNg27,31,gaba
+ANXXX139,ISN,6,gaba
+ANXXX139,l_NSC_CRZ,215,gaba
+ANXXX139,leg_nociceptor,17,gaba
+DNg27,ANXXX139,61,"acetylcholine,glutamate"
+DNg27,l_NSC_CRZ,104,"acetylcholine,glutamate"
+DNg27,wing_power_motor_neuron,265,"acetylcholine,glutamate"
+ISN,ANXXX139,17,"octopamine,acetylcholine"
+ISN,DNg27,116,"octopamine,acetylcholine"
+ISN,l_NSC_CRZ,4,"octopamine,acetylcholine"
+l_NSC_CRZ,DNg27,33,"Crz,sNPF"
+leg_nociceptor,ANXXX139,58,serotonin
+leg_nociceptor,l_NSC_CRZ,25,serotonin
+thorax_nociceptor,ANXXX139,9,serotonin

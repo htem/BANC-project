@@ -1,0 +1,41 @@
+Cell types above threshold for seed_class = central_complex_output
+Threshold (influence_norm_log): 17.2800
+Total cell types: 20 across 8 super_clusters
+
+## postural control (n = 2)
+  AN18B053  [18.58]
+  AN07B045  [18.08]
+
+## head orienting (n = 1)
+  DNg36_a  [17.85]
+
+## walking (n = 5)
+  DNpe016  [19.22]
+  DNbe006  [18.21]
+  DNb09  [17.84]
+  DNg97  [17.42]
+  AN23B004  [17.35]
+
+## flight power (n = 1)
+  DNg106  [17.38]
+
+## reproduction (n = 1)
+  AN17B008  [18.61]
+
+## taste-touch (n = 1)
+  AN17B008  [18.61]
+
+## flight steering 1 (n = 7)
+  DNa03  [19.34]
+  DNb01  [18.78]
+  DNg04  [18.16]
+  DNpe019  [17.73]
+  DNg01  [17.69]
+  DNg71  [17.66]
+  DNae002  [17.37]
+
+## walking steering (n = 3)
+  DNa02  [17.93]
+  DNa13  [17.39]
+  DNae001  [17.39]
+

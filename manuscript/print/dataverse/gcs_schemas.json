@@ -1,0 +1,2124 @@
+[
+  {
+    "index": 1,
+    "heading": "BANC column documentation",
+    "raw": "https://github.com/sjcabs/fly_connectome_data_tutorial/blob/main/data/dataset_documentation/banc_data.md",
+    "path": "https://github.com/sjcabs/fly_connectome_data_tutorial/blob/main/data/dataset_documentation/banc_data.md",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 2,
+    "heading": "Acknowledgements",
+    "raw": "/Users/papers/BANC-project/acknowledgements.md",
+    "path": "/Users/papers/BANC-project/acknowledgements.md",
+    "fs": "local",
+    "size_bytes": 17205,
+    "kind": "file",
+    "format": "md",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 3,
+    "heading": "Bibliography",
+    "raw": "/Users/papers/BANC-project/manuscript/print/bibliography.bib",
+    "path": "/Users/papers/BANC-project/manuscript/print/bibliography.bib",
+    "fs": "local",
+    "size_bytes": 646143,
+    "kind": "file",
+    "format": "bib",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 4,
+    "heading": "BANC meta data",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_meta.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_meta.feather",
+    "fs": "gcs",
+    "size_bytes": 51450978,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 188162,
+    "schema": [
+      {
+        "name": "banc_888_id",
+        "type": "string"
+      },
+      {
+        "name": "supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "position",
+        "type": "string"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "nucleus_id",
+        "type": "string"
+      },
+      {
+        "name": "proofread",
+        "type": "string"
+      },
+      {
+        "name": "roughly_proofread",
+        "type": "string"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "side",
+        "type": "string"
+      },
+      {
+        "name": "root_position",
+        "type": "string"
+      },
+      {
+        "name": "root_position_nm",
+        "type": "string"
+      },
+      {
+        "name": "root_region",
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "type": "string"
+      },
+      {
+        "name": "hemilineage",
+        "type": "string"
+      },
+      {
+        "name": "nerve",
+        "type": "string"
+      },
+      {
+        "name": "tract",
+        "type": "string"
+      },
+      {
+        "name": "neuromere",
+        "type": "string"
+      },
+      {
+        "name": "flow",
+        "type": "string"
+      },
+      {
+        "name": "super_class",
+        "type": "string"
+      },
+      {
+        "name": "cell_class",
+        "type": "string"
+      },
+      {
+        "name": "cell_sub_class",
+        "type": "string"
+      },
+      {
+        "name": "cell_type",
+        "type": "string"
+      },
+      {
+        "name": "fafb_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "fafb_alignment_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "manc_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "malecns_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "hemibrain_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "fanc_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "fafb_match",
+        "type": "string"
+      },
+      {
+        "name": "manc_match",
+        "type": "string"
+      },
+      {
+        "name": "malecns_match",
+        "type": "string"
+      },
+      {
+        "name": "hemibrain_match",
+        "type": "string"
+      },
+      {
+        "name": "fanc_match",
+        "type": "string"
+      },
+      {
+        "name": "fafb_nblast_match",
+        "type": "string"
+      },
+      {
+        "name": "manc_nblast_match",
+        "type": "string"
+      },
+      {
+        "name": "hemibrain_nblast_match",
+        "type": "string"
+      },
+      {
+        "name": "fanc_nblast_match",
+        "type": "string"
+      },
+      {
+        "name": "malecns_nblast_match",
+        "type": "string"
+      },
+      {
+        "name": "sexually_dimorphic",
+        "type": "string"
+      },
+      {
+        "name": "cluster",
+        "type": "string"
+      },
+      {
+        "name": "manual_cluster",
+        "type": "string"
+      },
+      {
+        "name": "super_cluster",
+        "type": "string"
+      },
+      {
+        "name": "cns_network",
+        "type": "string"
+      },
+      {
+        "name": "body_part_sensory",
+        "type": "string"
+      },
+      {
+        "name": "body_part_effector",
+        "type": "string"
+      },
+      {
+        "name": "peripheral_target_type",
+        "type": "string"
+      },
+      {
+        "name": "cell_function",
+        "type": "string"
+      },
+      {
+        "name": "cell_function_detailed",
+        "type": "string"
+      },
+      {
+        "name": "neurotransmitter_predicted",
+        "type": "string"
+      },
+      {
+        "name": "neurotransmitter_score",
+        "type": "double"
+      },
+      {
+        "name": "neurotransmitter_verified",
+        "type": "string"
+      },
+      {
+        "name": "neuropeptide_verified",
+        "type": "string"
+      },
+      {
+        "name": "l2_nodes",
+        "type": "double"
+      },
+      {
+        "name": "l2_cable_length_um",
+        "type": "double"
+      },
+      {
+        "name": "volume_nm3",
+        "type": "double"
+      },
+      {
+        "name": "input_connections",
+        "type": "double"
+      },
+      {
+        "name": "output_connections",
+        "type": "double"
+      },
+      {
+        "name": "input_side_index",
+        "type": "double"
+      },
+      {
+        "name": "output_side_index",
+        "type": "double"
+      },
+      {
+        "name": "mitochondria",
+        "type": "double"
+      },
+      {
+        "name": "mitochondria_volume",
+        "type": "double"
+      },
+      {
+        "name": "pd_width",
+        "type": "double"
+      },
+      {
+        "name": "segregation_index",
+        "type": "double"
+      },
+      {
+        "name": "seed_01",
+        "type": "string"
+      },
+      {
+        "name": "seed_02",
+        "type": "string"
+      },
+      {
+        "name": "seed_03",
+        "type": "string"
+      },
+      {
+        "name": "seed_04",
+        "type": "string"
+      },
+      {
+        "name": "seed_05",
+        "type": "string"
+      },
+      {
+        "name": "seed_06",
+        "type": "string"
+      },
+      {
+        "name": "seed_07",
+        "type": "string"
+      },
+      {
+        "name": "seed_08",
+        "type": "string"
+      },
+      {
+        "name": "seed_09",
+        "type": "string"
+      },
+      {
+        "name": "seed_10",
+        "type": "string"
+      },
+      {
+        "name": "seed_11",
+        "type": "string"
+      },
+      {
+        "name": "seed_12",
+        "type": "string"
+      },
+      {
+        "name": "seed_13",
+        "type": "string"
+      },
+      {
+        "name": "seed_14",
+        "type": "string"
+      }
+    ],
+    "elapsed_s": 3.18
+  },
+  {
+    "index": 5,
+    "heading": "BANC metrics per neuron",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_metrics.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_metrics.feather",
+    "fs": "gcs",
+    "size_bytes": 7859154,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 188199,
+    "schema": [
+      {
+        "name": "banc_888_id",
+        "type": "string"
+      },
+      {
+        "name": "l2_nodes",
+        "type": "double"
+      },
+      {
+        "name": "l2_cable_length_um",
+        "type": "double"
+      },
+      {
+        "name": "input_connections",
+        "type": "double"
+      },
+      {
+        "name": "output_connections",
+        "type": "double"
+      },
+      {
+        "name": "input_side_index",
+        "type": "double"
+      },
+      {
+        "name": "output_side_index",
+        "type": "double"
+      },
+      {
+        "name": "mitochondria",
+        "type": "double"
+      },
+      {
+        "name": "mitochondria_volume",
+        "type": "double"
+      },
+      {
+        "name": "pd_width",
+        "type": "double"
+      },
+      {
+        "name": "segregation_index",
+        "type": "double"
+      },
+      {
+        "name": "volume_nm3",
+        "type": "double"
+      }
+    ],
+    "elapsed_s": 0.73
+  },
+  {
+    "index": 6,
+    "heading": "BANC neurotransmitter predictions results per neuron",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_neurotransmitter_prediction.csv",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_neurotransmitter_prediction.csv",
+    "fs": "gcs",
+    "error": "not found",
+    "elapsed_s": 0.12
+  },
+  {
+    "index": 7,
+    "heading": "BANC SWC files (to ZIP)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 183201,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941263393328_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941295224624_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941296661296_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941299028907_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941299241899_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941301342123_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941302183851_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941302221227_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941302732080_l2.swc",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/720575941304076912_l2.swc"
+    ],
+    "elapsed_s": 32.27
+  },
+  {
+    "index": 8,
+    "heading": "BANC v2 synapses",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v2_enriched.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v2_enriched.parquet",
+    "fs": "gcs",
+    "size_bytes": 10327245312,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 168951110,
+    "num_row_groups": 1690,
+    "schema": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "double"
+      },
+      {
+        "name": "pre_root_id",
+        "type": "large_string"
+      },
+      {
+        "name": "post_root_id",
+        "type": "large_string"
+      },
+      {
+        "name": "X",
+        "type": "double"
+      },
+      {
+        "name": "Y",
+        "type": "double"
+      },
+      {
+        "name": "Z",
+        "type": "double"
+      },
+      {
+        "name": "neuropil",
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "type": "large_string"
+      },
+      {
+        "name": "side",
+        "type": "string"
+      },
+      {
+        "name": "acetylcholine",
+        "type": "double"
+      },
+      {
+        "name": "dopamine",
+        "type": "double"
+      },
+      {
+        "name": "gaba",
+        "type": "double"
+      },
+      {
+        "name": "glutamate",
+        "type": "double"
+      },
+      {
+        "name": "histamine",
+        "type": "double"
+      },
+      {
+        "name": "octopamine",
+        "type": "double"
+      },
+      {
+        "name": "serotonin",
+        "type": "double"
+      },
+      {
+        "name": "tyramine",
+        "type": "double"
+      },
+      {
+        "name": "syn_top_nt",
+        "type": "string"
+      },
+      {
+        "name": "syn_top_p",
+        "type": "double"
+      },
+      {
+        "name": "label",
+        "type": "int32"
+      }
+    ],
+    "elapsed_s": 0.7
+  },
+  {
+    "index": 9,
+    "heading": "BANC v3 synapses",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v3_enriched.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v3_enriched.parquet",
+    "fs": "gcs",
+    "size_bytes": 6025295437,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 198741886,
+    "num_row_groups": 1988,
+    "schema": [
+      {
+        "name": "id",
+        "type": "large_string"
+      },
+      {
+        "name": "size",
+        "type": "int32"
+      },
+      {
+        "name": "pre_root_id",
+        "type": "large_string"
+      },
+      {
+        "name": "post_root_id",
+        "type": "large_string"
+      },
+      {
+        "name": "neuropil",
+        "type": "large_string"
+      },
+      {
+        "name": "region",
+        "type": "string"
+      },
+      {
+        "name": "side",
+        "type": "string"
+      },
+      {
+        "name": "X",
+        "type": "double"
+      },
+      {
+        "name": "Y",
+        "type": "double"
+      },
+      {
+        "name": "Z",
+        "type": "double"
+      }
+    ],
+    "elapsed_s": 0.79
+  },
+  {
+    "index": 10,
+    "heading": "BANC v2 neuron-neuron edgelist (size threshold of >= 5 applied on BANC v2 synapses)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v2.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v2.feather",
+    "fs": "gcs",
+    "size_bytes": 298465650,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 11510975,
+    "schema": [
+      {
+        "name": "pre",
+        "type": "string"
+      },
+      {
+        "name": "post",
+        "type": "string"
+      },
+      {
+        "name": "count",
+        "type": "int32"
+      },
+      {
+        "name": "norm",
+        "type": "double"
+      },
+      {
+        "name": "post_count",
+        "type": "int32"
+      },
+      {
+        "name": "pre_count",
+        "type": "int32"
+      }
+    ],
+    "elapsed_s": 51.95
+  },
+  {
+    "index": 11,
+    "heading": "BANC v2 neuron-neuron edgelist (size threshold of >= 10 applied on BANC v3 synapses)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v3.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v3.feather",
+    "fs": "gcs",
+    "size_bytes": 352129906,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 13507098,
+    "schema": [
+      {
+        "name": "pre",
+        "type": "string"
+      },
+      {
+        "name": "post",
+        "type": "string"
+      },
+      {
+        "name": "count",
+        "type": "int32"
+      },
+      {
+        "name": "norm",
+        "type": "double"
+      },
+      {
+        "name": "post_count",
+        "type": "int32"
+      },
+      {
+        "name": "pre_count",
+        "type": "int32"
+      }
+    ],
+    "elapsed_s": 43.41
+  },
+  {
+    "index": 12,
+    "heading": "BANC v2 neuronal compartment-compartment edgelist",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_split_v2.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_split_v2.feather",
+    "fs": "gcs",
+    "size_bytes": 355937714,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 6309984,
+    "schema": [
+      {
+        "name": "post",
+        "type": "string"
+      },
+      {
+        "name": "pre",
+        "type": "string"
+      },
+      {
+        "name": "post_label",
+        "type": "string"
+      },
+      {
+        "name": "pre_label",
+        "type": "string"
+      },
+      {
+        "name": "count",
+        "type": "int32"
+      },
+      {
+        "name": "post_count",
+        "type": "int32"
+      },
+      {
+        "name": "norm",
+        "type": "double"
+      },
+      {
+        "name": "pre_count",
+        "type": "int32"
+      },
+      {
+        "name": "connection",
+        "type": "string"
+      },
+      {
+        "name": "post_conf_nt",
+        "type": "string"
+      },
+      {
+        "name": "post_conf_nt_p",
+        "type": "double"
+      },
+      {
+        "name": "pre_conf_nt",
+        "type": "string"
+      },
+      {
+        "name": "pre_conf_nt_p",
+        "type": "double"
+      }
+    ],
+    "elapsed_s": 31.96
+  },
+  {
+    "index": 13,
+    "heading": "BANC v2 synapses' neurotransmitter classifications",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/banc_nt_prediction_w_sizethresh_5_11102025.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/banc_nt_prediction_w_sizethresh_5_11102025.parquet",
+    "fs": "gcs",
+    "size_bytes": 3890490075,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 188692510,
+    "num_row_groups": 180,
+    "schema": [
+      {
+        "name": "acetylcholine",
+        "type": "halffloat"
+      },
+      {
+        "name": "dopamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "gaba",
+        "type": "halffloat"
+      },
+      {
+        "name": "glutamate",
+        "type": "halffloat"
+      },
+      {
+        "name": "histamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "octopamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "serotonin",
+        "type": "halffloat"
+      },
+      {
+        "name": "tyramine",
+        "type": "halffloat"
+      },
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "predicted_nt",
+        "type": "string"
+      },
+      {
+        "name": "probability",
+        "type": "halffloat"
+      }
+    ],
+    "elapsed_s": 0.43
+  },
+  {
+    "index": 14,
+    "heading": "BANC v3 synapses' neurotransmitter classifications",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/banc_nt_prediction_v3_w_sizethresh_10_05042026.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/banc_nt_prediction_v3_w_sizethresh_10_05042026.parquet",
+    "fs": "gcs",
+    "size_bytes": 5786482835,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 259391803,
+    "num_row_groups": 248,
+    "schema": [
+      {
+        "name": "acetylcholine",
+        "type": "halffloat"
+      },
+      {
+        "name": "dopamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "gaba",
+        "type": "halffloat"
+      },
+      {
+        "name": "glutamate",
+        "type": "halffloat"
+      },
+      {
+        "name": "histamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "octopamine",
+        "type": "halffloat"
+      },
+      {
+        "name": "serotonin",
+        "type": "halffloat"
+      },
+      {
+        "name": "tyramine",
+        "type": "halffloat"
+      },
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "predicted_nt",
+        "type": "string"
+      },
+      {
+        "name": "probability",
+        "type": "halffloat"
+      }
+    ],
+    "elapsed_s": 0.51
+  },
+  {
+    "index": 15,
+    "heading": "BANC v2 synapses' neuropil locations",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/synapse_neuropil_lookup_v2.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/synapse_neuropil_lookup_v2.parquet",
+    "fs": "gcs",
+    "size_bytes": 2093290134,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 213762397,
+    "num_row_groups": 204,
+    "schema": [
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "neuropil",
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "type": "large_string"
+      },
+      {
+        "name": "side",
+        "type": "string"
+      }
+    ],
+    "elapsed_s": 0.5
+  },
+  {
+    "index": 16,
+    "heading": "BANC v3 synapses' neuropil locations",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/synapse_neuropil_lookup_v3.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/synapse_neuropil_lookup_v3.parquet",
+    "fs": "gcs",
+    "size_bytes": 2386313119,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 259393451,
+    "num_row_groups": 248,
+    "schema": [
+      {
+        "name": "id",
+        "type": "large_string"
+      },
+      {
+        "name": "neuropil",
+        "type": "large_string"
+      },
+      {
+        "name": "region",
+        "type": "large_string"
+      },
+      {
+        "name": "side",
+        "type": "string"
+      }
+    ],
+    "elapsed_s": 0.44
+  },
+  {
+    "index": 17,
+    "heading": "BANC v2 manual review synapse sample",
+    "raw": "/Users/papers/BANC-project/data/synapses/2024-09-20_aelysia_synapse_sample_complete.csv",
+    "path": "/Users/papers/BANC-project/data/synapses/2024-09-20_aelysia_synapse_sample_complete.csv",
+    "fs": "local",
+    "size_bytes": 342927,
+    "kind": "file",
+    "format": "csv",
+    "columns": [
+      "id",
+      "Coordinate 1",
+      "Tags",
+      "neuropil",
+      "size",
+      "region"
+    ],
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 18,
+    "heading": "BANC v2 manual review synapse sample",
+    "raw": "/Users/papers/BANC-project/manuscript/print/supplemental_data/supplemental_data_10.csv",
+    "path": "/Users/papers/BANC-project/manuscript/print/supplemental_data/supplemental_data_10.csv",
+    "fs": "local",
+    "size_bytes": 1215,
+    "kind": "file",
+    "format": "csv",
+    "columns": [
+      "issue",
+      "min_x",
+      "min_y",
+      "min_z",
+      "max_x",
+      "max_y",
+      "max_z"
+    ],
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 19,
+    "heading": "BANC neuron meshes (to ZIP)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/banc_meshes",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/banc_meshes",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 3,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/banc_meshes/info",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/banc_meshes/meshes",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/banc_meshes/segment_properties"
+    ],
+    "elapsed_s": 0.35
+  },
+  {
+    "index": 20,
+    "heading": "BANC color MIP files",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_colormips",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_colormips",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 0,
+    "entries_sample": [],
+    "elapsed_s": 0.51
+  },
+  {
+    "index": 21,
+    "heading": "BANC neuropil meshes",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/region_outlines",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/region_outlines",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 1,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/region_outlines/info"
+    ],
+    "elapsed_s": 0.23
+  },
+  {
+    "index": 22,
+    "heading": "BANC all-to-all influence (sharded)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 277,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0001.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0002.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0003.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0004.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0005.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0006.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0007.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0008.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0009.parquet",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/chunk_0010.parquet"
+    ],
+    "elapsed_s": 0.22
+  },
+  {
+    "index": 23,
+    "heading": "BANC all to effector influence",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_all_to_effector_subclass.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_all_to_effector_subclass.parquet",
+    "fs": "gcs",
+    "size_bytes": 35448133,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 3334800,
+    "num_row_groups": 34,
+    "schema": [
+      {
+        "name": "source",
+        "type": "string"
+      },
+      {
+        "name": "target",
+        "type": "string"
+      },
+      {
+        "name": "influence",
+        "type": "double"
+      }
+    ],
+    "elapsed_s": 0.36
+  },
+  {
+    "index": 24,
+    "heading": "BANC sensory to all influence",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_sensory_subclass_to_all.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_sensory_subclass_to_all.parquet",
+    "fs": "gcs",
+    "size_bytes": 284977015,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 13943894,
+    "num_row_groups": 140,
+    "schema": [
+      {
+        "name": "source",
+        "type": "string"
+      },
+      {
+        "name": "target",
+        "type": "string"
+      },
+      {
+        "name": "influence",
+        "type": "double"
+      }
+    ],
+    "elapsed_s": 0.41
+  },
+  {
+    "index": 25,
+    "heading": "JRC2018F to BANC brain elastix registration (to ZIP)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 9,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/0_manual_affine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/1_elastix_affine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/2_elastix_Bspline_coarse.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/3_elastix_Bspline_fine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/BANC_to_template.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/corresponding_points_brain_JRC2018F.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/corresponding_points_brain_banc.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/register_brain.sh",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/template_to_BANC.txt"
+    ],
+    "elapsed_s": 0.18
+  },
+  {
+    "index": 26,
+    "heading": "JRC2018VNCF to BANC elastix registration (to ZIP)",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 9,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/0_manual_affine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/1_elastix_affine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/2_elastix_Bspline_coarse.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/3_elastix_Bspline_fine.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/BANC_to_template.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/corresponding_points_vnc_JRC2018F.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/corresponding_points_vnc_banc.txt",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/register_vnc.sh",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/template_to_BANC.txt"
+    ],
+    "elapsed_s": 0.13
+  },
+  {
+    "index": 27,
+    "heading": "BANC to FAFB v783",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fafb_783_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fafb_783_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 578407490,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 8254752,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "query_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "match_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "validation",
+        "type": "bool"
+      }
+    ],
+    "elapsed_s": 43.86
+  },
+  {
+    "index": 28,
+    "heading": "BANC to HemiBrain v121",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_hemibrain_v1.2.1_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_hemibrain_v1.2.1_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 198943946,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 2963651,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "query_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "match_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "validation",
+        "type": "bool"
+      }
+    ],
+    "elapsed_s": 15.25
+  },
+  {
+    "index": 29,
+    "heading": "BANC to MANC v112",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_manc_v1.2.1_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_manc_v1.2.1_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 121791594,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 1906831,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "query_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "match_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "validation",
+        "type": "bool"
+      }
+    ],
+    "elapsed_s": 9.49
+  },
+  {
+    "index": 30,
+    "heading": "BANC to FANC v116",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fanc_1116_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fanc_1116_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 93624386,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 1658475,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "query_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "match_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "validation",
+        "type": "bool"
+      }
+    ],
+    "elapsed_s": 8.15
+  },
+  {
+    "index": 31,
+    "heading": "BANC to maleCNS",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_malecns_v0.9_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_malecns_v0.9_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 246058658,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 3840033,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "query_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "match_cell_type",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "validation",
+        "type": "bool"
+      }
+    ],
+    "elapsed_s": 20.82
+  },
+  {
+    "index": 32,
+    "heading": "BANC to BANC-mirrored",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_mirror_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_mirror_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 338917546,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 2188645,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "match_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "match_position",
+        "type": "string"
+      },
+      {
+        "name": "query_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "match_root_626",
+        "type": "string"
+      },
+      {
+        "name": "valid",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "match_root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "match_root_888",
+        "type": "string"
+      }
+    ],
+    "elapsed_s": 20.59
+  },
+  {
+    "index": 33,
+    "heading": "BANC to BANC-native",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_native_nblast.feather",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_native_nblast.feather",
+    "fs": "gcs",
+    "size_bytes": 5946082,
+    "kind": "file",
+    "format": "feather",
+    "nrows": 49289,
+    "schema": [
+      {
+        "name": "pt_root_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "string"
+      },
+      {
+        "name": "match_root_id",
+        "type": "string"
+      },
+      {
+        "name": "match_supervoxel_id",
+        "type": "string"
+      },
+      {
+        "name": "match_position",
+        "type": "string"
+      },
+      {
+        "name": "query_id",
+        "type": "string"
+      },
+      {
+        "name": "match_id",
+        "type": "string"
+      },
+      {
+        "name": "score",
+        "type": "double"
+      },
+      {
+        "name": "root_626",
+        "type": "string"
+      },
+      {
+        "name": "match_root_626",
+        "type": "string"
+      },
+      {
+        "name": "root_850",
+        "type": "string"
+      },
+      {
+        "name": "match_root_850",
+        "type": "string"
+      },
+      {
+        "name": "root_888",
+        "type": "string"
+      },
+      {
+        "name": "match_root_888",
+        "type": "string"
+      },
+      {
+        "name": "valid",
+        "type": "string"
+      }
+    ],
+    "elapsed_s": 0.65
+  },
+  {
+    "index": 34,
+    "heading": "BANC microCT",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/microCT",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/microCT",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 2,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/microCT/info",
+      "lee-lab_brain-and-nerve-cord-fly-connectome/microCT/provenance"
+    ],
+    "elapsed_s": 0.3
+  },
+  {
+    "index": 35,
+    "heading": "BANC-JRC2018 template spaces",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/templates",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/templates",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 0,
+    "entries_sample": [],
+    "elapsed_s": 0.56
+  },
+  {
+    "index": 36,
+    "heading": "BANC backbone proofread neurons",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/backbone_proofread.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/backbone_proofread.parquet",
+    "fs": "gcs",
+    "size_bytes": 10316976,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 211947,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "valid_id",
+        "type": "int64"
+      },
+      {
+        "name": "proofread",
+        "type": "bool"
+      },
+      {
+        "name": "user_id",
+        "type": "int32"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.35
+  },
+  {
+    "index": 37,
+    "heading": "BANC cell info (community annotations)",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_info.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_info.parquet",
+    "fs": "gcs",
+    "size_bytes": 12315918,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 376231,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "tag",
+        "type": "string"
+      },
+      {
+        "name": "tag2",
+        "type": "string"
+      },
+      {
+        "name": "user_id",
+        "type": "int32"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.35
+  },
+  {
+    "index": 38,
+    "heading": "BANC representative points table (keys to master annotation table, codex_annotations)",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_representative_point.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_representative_point.parquet",
+    "fs": "gcs",
+    "size_bytes": 5503064,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 158265,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.31
+  },
+  {
+    "index": 39,
+    "heading": "BANC annotations for FlyWire Codex (curated by core BANC team)",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/codex_annotations.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/codex_annotations.parquet",
+    "fs": "gcs",
+    "size_bytes": 74350281,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 1841078,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id_ref",
+        "type": "int64"
+      },
+      {
+        "name": "created_ref",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "valid_ref",
+        "type": "bool"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "target_id",
+        "type": "int64"
+      },
+      {
+        "name": "classification_system",
+        "type": "string"
+      },
+      {
+        "name": "cell_type",
+        "type": "string"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.37
+  },
+  {
+    "index": 40,
+    "heading": "Neck connective seed plane",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/neck_connective_y92500.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/neck_connective_y92500.parquet",
+    "fs": "gcs",
+    "size_bytes": 139052,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 3652,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "tag",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.25
+  },
+  {
+    "index": 41,
+    "heading": "Nerve seed planes and names",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/peripheral_nerves.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/peripheral_nerves.parquet",
+    "fs": "gcs",
+    "size_bytes": 629173,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 15615,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "tag",
+        "type": "string"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.28
+  },
+  {
+    "index": 42,
+    "heading": "Proofreading notes table (inc. roughly proofread)",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/proofreading_notes.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/proofreading_notes.parquet",
+    "fs": "gcs",
+    "size_bytes": 857667,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 21614,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us, tz=UTC]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "int64"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "tag",
+        "type": "string"
+      },
+      {
+        "name": "user_id",
+        "type": "int32"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.26
+  },
+  {
+    "index": 43,
+    "heading": "BANC's detected nuclei",
+    "raw": "gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/somas_v1.parquet",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/somas_v1.parquet",
+    "fs": "gcs",
+    "size_bytes": 5350459,
+    "kind": "file",
+    "format": "parquet",
+    "nrows": 153892,
+    "num_row_groups": 1,
+    "schema": [
+      {
+        "name": "id",
+        "type": "int64"
+      },
+      {
+        "name": "created",
+        "type": "timestamp[us]"
+      },
+      {
+        "name": "superceded_id",
+        "type": "string"
+      },
+      {
+        "name": "valid",
+        "type": "bool"
+      },
+      {
+        "name": "pt_supervoxel_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_root_id",
+        "type": "int64"
+      },
+      {
+        "name": "pt_position",
+        "type": "list<item: int64>"
+      }
+    ],
+    "elapsed_s": 0.29
+  },
+  {
+    "index": 44,
+    "heading": "BANC's detected mitochondria",
+    "raw": "MISSING",
+    "path": "MISSING",
+    "fs": "unknown",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 45,
+    "heading": "Neuroglancer states for the paper",
+    "raw": "https://github.com/jasper-tms/the-BANC-fly-connectome/tree/main/neuroglancer_states/2026a",
+    "path": "https://github.com/jasper-tms/the-BANC-fly-connectome/tree/main/neuroglancer_states/2026a",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 46,
+    "heading": "Behavioral characterisation of the BANC fly",
+    "raw": "lee-lab_brain-and-nerve-cord-fly-connectome/behavior",
+    "path": "lee-lab_brain-and-nerve-cord-fly-connectome/behavior",
+    "fs": "gcs",
+    "kind": "directory",
+    "entries_n": 1,
+    "entries_sample": [
+      "lee-lab_brain-and-nerve-cord-fly-connectome/behavior/rBIas_all_flies.png"
+    ],
+    "elapsed_s": 0.19
+  },
+  {
+    "index": 47,
+    "heading": "R client for BANC data",
+    "raw": "https://github.com/flyconnectome/bancr/",
+    "path": "https://github.com/flyconnectome/bancr/",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 48,
+    "heading": "R version of our influence code",
+    "raw": "https://github.com/natverse/influencer",
+    "path": "https://github.com/natverse/influencer",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 49,
+    "heading": "Python version of our influence code",
+    "raw": "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator",
+    "path": "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 50,
+    "heading": "R ggplot2 neuron plotting code",
+    "raw": "https://github.com/natverse/nat.ggplot/",
+    "path": "https://github.com/natverse/nat.ggplot/",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 51,
+    "heading": "BANC python tools and workflows",
+    "raw": "https://github.com/jasper-tms/the-BANC-fly-connectome",
+    "path": "https://github.com/jasper-tms/the-BANC-fly-connectome",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 52,
+    "heading": "R + Python connectome data access and analysis tutorial",
+    "raw": "https://github.com/sjcabs/fly_connectome_data_tutorial",
+    "path": "https://github.com/sjcabs/fly_connectome_data_tutorial",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 53,
+    "heading": "Documentation for the finding of known fast-acting neuropeptide usage in Drosophila",
+    "raw": "https://github.com/funkelab/drosophila_neuropeptides",
+    "path": "https://github.com/funkelab/drosophila_neuropeptides",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 54,
+    "heading": "Documentation for finding neurons of known fast-acting neurotransmitter usage in Drosophila",
+    "raw": "https://github.com/funkelab/drosophila_neurotransmitters",
+    "path": "https://github.com/funkelab/drosophila_neurotransmitters",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 55,
+    "heading": "BANC data processing pipeline (R + O2)",
+    "raw": "https://github.com/wilson-lab/bancpipeline",
+    "path": "https://github.com/wilson-lab/bancpipeline",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  },
+  {
+    "index": 56,
+    "heading": "The BANC data analysis code and plot files supporting the paper",
+    "raw": "https://github.com/htem/BANC-project",
+    "path": "https://github.com/htem/BANC-project",
+    "fs": "url",
+    "note": "non-blob source (web/github); skip",
+    "elapsed_s": 0.0
+  }
+]

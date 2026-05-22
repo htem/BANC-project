@@ -1,3 +1,12 @@
+"""Checkpoint-recovery variant of ``real_data_cascade_main.py``.
+
+Identical analysis path; resumes from a partial pickle written by an
+interrupted earlier run instead of starting from scratch. Used when a
+long SLURM job hit its wall-clock limit before completing all
+iterations.
+
+See ``real_data_cascade_main.py`` for the canonical version.
+"""
 
 import pandas as pd
 import numpy as np

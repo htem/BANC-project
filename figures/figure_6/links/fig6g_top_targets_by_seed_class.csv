@@ -1,0 +1,658 @@
+seed_class,super_cluster,target,influence_norm_log_max
+central_complex_output,flight steering 1,DNa03,19.34
+central_complex_output,walking,DNpe016,19.22
+central_complex_output,flight steering 1,DNb01,18.78
+central_complex_output,reproduction,AN17B008,18.61
+central_complex_output,taste-touch,AN17B008,18.61
+central_complex_output,postural control,AN18B053,18.58
+central_complex_output,walking,DNbe006,18.21
+central_complex_output,flight steering 1,DNg04,18.16
+central_complex_output,postural control,AN07B045,18.08
+central_complex_output,walking steering,DNa02,17.93
+central_complex_output,head orienting,DNg36_a,17.85
+central_complex_output,walking,DNb09,17.84
+central_complex_output,flight steering 1,DNpe019,17.73
+central_complex_output,flight steering 1,DNg01,17.69
+central_complex_output,flight steering 1,DNg71,17.66
+central_complex_output,walking,DNg97,17.42
+central_complex_output,walking steering,DNa13,17.39
+central_complex_output,walking steering,DNae001,17.39
+central_complex_output,flight power,DNg106,17.38
+central_complex_output,flight steering 1,DNae002,17.37
+central_complex_output,walking,AN23B004,17.35
+mushroom_body_output,reproduction,DNg104,21.09
+mushroom_body_output,taste-touch,DNge138,20.83
+mushroom_body_output,reproduction,DNp68,20.71
+mushroom_body_output,threat response,DNp42,20.62
+mushroom_body_output,reproduction,DNge150,20.61
+mushroom_body_output,reproduction,DNp52,20.55
+mushroom_body_output,postural control,ANXXX116,20.33
+mushroom_body_output,walking steering,MDN,20.29
+mushroom_body_output,flight steering 1,DNa03,20.18
+mushroom_body_output,taste-touch,AN09B004,20.13
+mushroom_body_output,walking,DNg13,20.12
+mushroom_body_output,feeding,ANXXX977,20.06
+mushroom_body_output,reproduction,DNge151,20.06
+mushroom_body_output,walking,DNpe006,19.99
+mushroom_body_output,walking steering,DNa13,19.98
+mushroom_body_output,walking steering,DNde003,19.88
+mushroom_body_output,reproduction,DNge149,19.85
+mushroom_body_output,reproduction,DNg34,19.82
+mushroom_body_output,flight power,DNge152,19.75
+mushroom_body_output,reproduction,DNg66,19.65
+mushroom_body_output,walking,DNpe028,19.62
+mushroom_body_output,threat response,DNpe026,19.6
+mushroom_body_output,threat response,DNp08,19.58
+mushroom_body_output,walking steering,DNpe023,19.54
+mushroom_body_output,walking steering,DNae001,19.53
+mushroom_body_output,walking,DNge127,19.48
+mushroom_body_output,feeding,ANXXX470,19.4
+mushroom_body_output,walking,DNb08,19.34
+mushroom_body_output,probing,DNpe003,19.2
+mushroom_body_output,feeding,ANXXX434,19.13
+mushroom_body_output,reproduction,ANXXX150,19.12
+mushroom_body_output,walking steering,DNa02,19.08
+mushroom_body_output,postural control,DNpe021,19.01
+mushroom_body_output,walking,DNde002,18.94
+mushroom_body_output,postural control,DNpe027_ab,18.91
+mushroom_body_output,probing,DNge041,18.9
+mushroom_body_output,grooming,DNge083,18.89
+mushroom_body_output,visceral control,AN09A005,18.83
+mushroom_body_output,postural control,DNb05,18.79
+mushroom_body_output,reproduction,ANXXX990,18.78
+mushroom_body_output,postural control,AN17A012,18.73
+mushroom_body_output,visceral control,DNge135,18.73
+mushroom_body_output,walking,AN17A012,18.73
+mushroom_body_output,probing,DNp56,18.63
+mushroom_body_output,walking,DNpe045,18.63
+mushroom_body_output,feeding,AN01A055,18.61
+mushroom_body_output,threat response,DNp59,18.61
+mushroom_body_output,threat response,DNge053,18.6
+mushroom_body_output,taste-touch,AN09B040,18.58
+mushroom_body_output,probing,DNbe007,18.57
+mushroom_body_output,postural control,DNp32,18.5
+mushroom_body_output,visceral control,AN27X013,18.5
+mushroom_body_output,feeding,DNg63,18.37
+mushroom_body_output,probing,DNde005,18.3
+mushroom_body_output,reproduction,DNg33,18.3
+mushroom_body_output,walking,DNpe027,18.29
+mushroom_body_output,flight steering 1,DNg04,18.26
+mushroom_body_output,flight steering 1,DNp57,18.26
+mushroom_body_output,postural control,DNp54,18.26
+mushroom_body_output,reproduction,AN09A007,18.26
+mushroom_body_output,tactile,AN09A007,18.26
+mushroom_body_output,threat response,AN08B049,18.26
+mushroom_body_output,threat response,DNpe043,18.25
+mushroom_body_output,threat response,AN01A049,18.24
+mushroom_body_output,walking,DNpe022,18.2
+mushroom_body_output,threat response,DNpe040,18.19
+mushroom_body_output,walking steering,DNae005,18.14
+mushroom_body_output,walking steering,DNa11,18.13
+mushroom_body_output,flight steering 1,DNpe005,18.11
+mushroom_body_output,visceral control,DNg102,18.07
+mushroom_body_output,walking,DNbe006,18.07
+mushroom_body_output,postural control,AN07B070,18.04
+mushroom_body_output,walking,DNa01,18.02
+mushroom_body_output,taste-touch,DNp70,17.98
+mushroom_body_output,walking,AN08B026,17.94
+mushroom_body_output,walking steering,AN08B026,17.94
+mushroom_body_output,reproduction,DNge105,17.93
+mushroom_body_output,tactile,DNde001,17.93
+mushroom_body_output,walking steering,AN02A025,17.91
+mushroom_body_output,threat response,AN08B099,17.9
+mushroom_body_output,walking steering,AN02A046,17.9
+mushroom_body_output,feeding,DNp62,17.89
+mushroom_body_output,walking,DNbe003,17.89
+mushroom_body_output,probing,DNge147,17.88
+mushroom_body_output,walking steering,DNge124,17.88
+mushroom_body_output,visceral control,ANXXX308,17.86
+mushroom_body_output,walking,DNg109,17.86
+mushroom_body_output,threat response,AN08B041,17.85
+mushroom_body_output,walking,DNbe002,17.85
+mushroom_body_output,head orienting,DNge030,17.84
+mushroom_body_output,walking steering,DNae007,17.84
+mushroom_body_output,visceral control,ANXXX019,17.83
+mushroom_body_output,walking steering,DNg111,17.83
+mushroom_body_output,postural control,DNg98,17.81
+mushroom_body_output,tactile,AN05B054,17.8
+mushroom_body_output,threat response,DNp69,17.79
+mushroom_body_output,walking,DNpe001,17.79
+mushroom_body_output,feeding,DNp44,17.75
+mushroom_body_output,flight steering 1,DNa15,17.75
+mushroom_body_output,visceral control,AN08B113,17.75
+mushroom_body_output,flight steering 1,DNg01,17.74
+mushroom_body_output,reproduction,DNp24,17.74
+mushroom_body_output,taste-touch,DNd03,17.72
+mushroom_body_output,probing,DNge174,17.71
+mushroom_body_output,probing,DNge173,17.69
+mushroom_body_output,walking steering,AN06B012,17.67
+mushroom_body_output,walking,AN19B042,17.65
+mushroom_body_output,postural control,AN18B053,17.62
+mushroom_body_output,postural control,DNpe055,17.62
+mushroom_body_output,reproduction,oviDNa_b,17.62
+mushroom_body_output,feeding,AN05B106,17.61
+mushroom_body_output,walking steering,DNg64,17.61
+mushroom_body_output,postural control,AN12B060,17.58
+mushroom_body_output,postural control,AN18B002,17.56
+mushroom_body_output,walking,DNge034,17.56
+mushroom_body_output,feeding,DNg103,17.55
+mushroom_body_output,head orienting,DNa16,17.55
+mushroom_body_output,visceral control,AN_multi_124,17.54
+mushroom_body_output,flight steering 1,DNg82,17.53
+mushroom_body_output,probing,DNg107,17.52
+mushroom_body_output,flight steering 1,DNae002,17.5
+mushroom_body_output,head orienting,DNb02,17.5
+mushroom_body_output,probing,DNge069,17.5
+mushroom_body_output,flight power,DNg02_b,17.48
+mushroom_body_output,head orienting,AN07B052,17.48
+mushroom_body_output,walking steering,DNg60,17.47
+mushroom_body_output,flight power,DNg02_h,17.46
+mushroom_body_output,threat response,DNge047,17.46
+mushroom_body_output,postural control,AN08B098,17.45
+mushroom_body_output,walking,DNg97,17.44
+mushroom_body_output,head orienting,AN07B072,17.43
+mushroom_body_output,visceral control,AN27X017,17.42
+mushroom_body_output,walking,DNp101,17.42
+mushroom_body_output,threat response,AN05B006,17.41
+mushroom_body_output,walking steering,DNge134,17.41
+mushroom_body_output,taste-touch,AN05B094,17.36
+mushroom_body_output,feeding,DNd04,17.34
+mushroom_body_output,probing,DNge023,17.34
+mushroom_body_output,flight steering 1,DNb01,17.32
+mushroom_body_output,threat response,DNge099,17.31
+mushroom_body_output,flight power,AN07B037,17.3
+mushroom_body_output,reproduction,oviDNb,17.29
+mushroom_body_output,probing,AN06A015,17.28
+visual_projection,flight power,DNp20,23.11
+visual_projection,head orienting,DNp22,22.96
+visual_projection,head orienting,DNb03,22.69
+visual_projection,head orienting,DNg41,22.44
+visual_projection,reproduction,ANXXX250,22.39
+visual_projection,head orienting,DNp17,22.24
+visual_projection,head orienting,DNp53,22.21
+visual_projection,flight steering 1,DNge107,22.14
+visual_projection,head orienting,DNg46,22.07
+visual_projection,flight power,DNge094,22.02
+visual_projection,probing,DNp56,21.86
+visual_projection,walking,DNp41,21.86
+visual_projection,walking,DNpe032,21.78
+visual_projection,head orienting,DNpe004,21.77
+visual_projection,head orienting,DNg36_b,21.72
+visual_projection,head orienting,DNpe054,21.68
+visual_projection,postural control,DNp34,21.68
+visual_projection,head orienting,DNp15,21.67
+visual_projection,flight power,DNg11,21.65
+visual_projection,flight power,DNp16,21.6
+visual_projection,flight steering 1,DNpe017,21.6
+visual_projection,head orienting,DNpe008,21.35
+visual_projection,head orienting,DNge088,21.33
+visual_projection,flight steering 1,DNp18,21.3
+visual_projection,flight steering 2,DNp19,21.28
+visual_projection,head orienting,DNb06,21.28
+visual_projection,probing,DNbe007,21.26
+visual_projection,taste-touch,DNge141,21.26
+visual_projection,reproduction,DNp27,21.24
+visual_projection,walking steering,DNae005,21.21
+visual_projection,flight power,DNpe011,21.19
+visual_projection,walking,DNae008,21.15
+visual_projection,walking,DNp102,21.11
+visual_projection,walking,DNbe003,21.09
+visual_projection,threat response,DNp04,21.08
+visual_projection,probing,DNpe002,21.06
+visual_projection,flight power,DNge091,20.99
+visual_projection,flight power,DNge097,20.98
+visual_projection,head orienting,DNge006,20.97
+visual_projection,postural control,DNp12,20.96
+visual_projection,postural control,DNp05,20.95
+visual_projection,flight power,DNpe014,20.92
+visual_projection,flight power,DNg06,20.91
+visual_projection,flight power,DNge111,20.81
+visual_projection,postural control,DNp47,20.81
+visual_projection,flight steering 1,DNg79,20.8
+visual_projection,head orienting,DNge043,20.79
+visual_projection,flight power,ANXXX094,20.78
+visual_projection,probing,DNpe003,20.74
+visual_projection,head orienting,DNge116,20.69
+visual_projection,feeding,AN01A055,20.67
+visual_projection,flight power,DNge117,20.67
+visual_projection,flight power,AN19B049,20.61
+visual_projection,head orienting,DNb02,20.6
+visual_projection,flight power,DNpe018,20.58
+visual_projection,flight power,AN06B068,20.53
+visual_projection,head orienting,AN07B071,20.53
+visual_projection,head orienting,DNge086,20.52
+visual_projection,flight power,DNg92_a,20.51
+visual_projection,head orienting,AN07B056,20.49
+visual_projection,threat response,DNp08,20.49
+visual_projection,walking,DNp07,20.48
+visual_projection,head orienting,AN06A018,20.46
+visual_projection,flight steering 1,DNp26,20.43
+visual_projection,flight steering 1,DNp31,20.42
+visual_projection,walking,DNpe016,20.42
+visual_projection,walking steering,DNg39,20.36
+visual_projection,probing,DNge041,20.34
+visual_projection,taste-touch,AN09B013,20.31
+visual_projection,walking,DNge103,20.31
+visual_projection,head orienting,DNge092,20.29
+visual_projection,flight steering 2,DNge085,20.27
+visual_projection,walking,DNpe027,20.22
+visual_projection,flight steering 2,AN08B071,20.21
+visual_projection,head orienting,DNa06,20.2
+visual_projection,head orienting,DNge109,20.17
+visual_projection,head orienting,ANXXX171,20.14
+visual_projection,walking,DNge054,20.08
+visual_projection,flight steering 2,AN19B060,20.06
+visual_projection,head orienting,AN06B048,20.06
+visual_projection,flight steering 2,AN06B051,20.05
+visual_projection,head orienting,DNg94,20.05
+visual_projection,head orienting,DNge114,20
+visual_projection,walking,DNpe028,20
+visual_projection,flight power,DNpe012,19.99
+visual_projection,taste-touch,DNg30,19.99
+visual_projection,reproduction,DNg104,19.98
+visual_projection,postural control,DNpe021,19.95
+visual_projection,head orienting,AN07B091,19.94
+visual_projection,flight power,DNut054,19.91
+visual_projection,flight power,DNg110,19.9
+visual_projection,flight steering 1,DNb04,19.9
+visual_projection,flight power,DNg92_b,19.88
+visual_projection,postural control,DNg75,19.88
+visual_projection,postural control,DNb05,19.87
+visual_projection,flight steering 2,AN03B039,19.86
+visual_projection,postural control,DNp10,19.86
+visual_projection,postural control,DNpe027_ab,19.86
+visual_projection,flight power,DNge070,19.83
+visual_projection,walking steering,DNae007,19.81
+visual_projection,taste-touch,DNg56,19.8
+visual_projection,flight steering 2,AN06A092,19.79
+visual_projection,threat response,DNp06,19.78
+visual_projection,flight steering 2,DNg18_a,19.77
+visual_projection,flight steering 2,AN07B046,19.76
+visual_projection,flight steering 1,DNa10,19.75
+visual_projection,walking,DNp39,19.75
+visual_projection,postural control,DNg95,19.72
+visual_projection,visceral control,AN09A005,19.72
+visual_projection,postural control,DNp54,19.71
+visual_projection,flight power,AN04B023,19.69
+visual_projection,walking,DNpe006,19.69
+visual_projection,walking,DNb08,19.68
+visual_projection,flight steering 1,DNg82,19.67
+visual_projection,flight power,DNg02_h,19.66
+visual_projection,postural control,DNpe020,19.66
+visual_projection,walking,DNpe024,19.66
+visual_projection,head orienting,DNge030,19.64
+visual_projection,head orienting,AN07B072,19.63
+visual_projection,postural control,DNge032,19.62
+visual_projection,flight steering 2,AN06A062,19.61
+visual_projection,walking,DNge060,19.61
+visual_projection,flight steering 1,DNpe005,19.6
+visual_projection,probing,DNg90,19.59
+visual_projection,taste-touch,DNge140,19.59
+visual_projection,flight steering 1,DNbe005,19.56
+visual_projection,walking,DNbe002,19.56
+visual_projection,taste-touch,AN09B036,19.55
+visual_projection,walking,DNge129,19.55
+visual_projection,head orienting,AN07B057,19.54
+visual_projection,probing,DNde005,19.53
+visual_projection,probing,DNge069,19.53
+visual_projection,threat response,DNp35,19.53
+visual_projection,flight steering 2,AN19B076,19.51
+visual_projection,flight power,AN07B041,19.5
+visual_projection,flight power,DNg07,19.5
+visual_projection,grooming,DNge083,19.49
+visual_projection,head orienting,DNg49,19.46
+visual_projection,head orienting,AN19B039,19.45
+visual_projection,flight power,AN18B022,19.42
+visual_projection,flight steering 1,DNg04,19.42
+visual_projection,flight steering 2,AN19B079,19.42
+visual_projection,reproduction,DNg76,19.42
+visual_projection,flight steering 1,DNae002,19.41
+visual_projection,postural control,DNpe025,19.41
+visual_projection,walking,DNg13,19.41
+visual_projection,flight steering 2,AN08B079,19.4
+visual_projection,postural control,DNpe037,19.4
+visual_projection,flight steering 1,DNbe004,19.39
+visual_projection,postural control,AN12A017,19.39
+visual_projection,flight power,DNg02_a,19.38
+visual_projection,flight steering 2,AN16B078,19.35
+visual_projection,walking,AN_GNG_181,19.35
+visual_projection,head orienting,AN07B052,19.34
+visual_projection,head orienting,AN06A112,19.33
+visual_projection,head orienting,DNg58,19.33
+visual_projection,threat response,DNp43,19.32
+visual_projection,taste-touch,DNp55,19.3
+visual_projection,walking,AN17A026,19.27
+visual_projection,postural control,DNp71,19.26
+visual_projection,walking,DNb09,19.26
+visual_projection,flight steering 2,AN07B021,19.24
+visual_projection,postural control,DNpe056,19.24
+visual_projection,flight power,DNp72,19.22
+visual_projection,reproduction,DNg34,19.21
+visual_projection,threat response,DNp103,19.18
+visual_projection,flight steering 2,AN19B065,19.17
+visual_projection,head orienting,DNpe013,19.16
+visual_projection,visceral control,DNg102,19.16
+visual_projection,flight steering 1,DNg91,19.14
+visual_projection,walking,DNp09,19.13
+visual_projection,feeding,DNg63,19.12
+visual_projection,flight steering 2,AN19B063,19.11
+visual_projection,postural control,AN08B112,19.11
+visual_projection,postural control,AN12B060,19.09
+visual_projection,walking steering,DNde003,19.09
+visual_projection,flight steering 1,DNp03,19.08
+visual_projection,walking,DNpe022,19.08
+visual_projection,flight steering 1,DNp51,19.07
+visual_projection,flight steering 1,DNpe019,19.06
+visual_projection,flight steering 2,DNg18_b,19.05
+visual_projection,head orienting,DNge033,19.04
+visual_projection,postural control,DNp32,19.04
+visual_projection,flight steering 1,DNp57,19.03
+visual_projection,threat response,AN08B041,19.01
+visual_projection,postural control,DNpe055,18.97
+visual_projection,postural control,DNg52,18.96
+visual_projection,threat response,DNp59,18.96
+visual_projection,reproduction,ANXXX027,18.95
+visual_projection,taste-touch,ANXXX027,18.95
+visual_projection,head orienting,AN07B082,18.94
+visual_projection,head orienting,DNge072,18.94
+visual_projection,taste-touch,DNpe052,18.94
+visual_projection,flight steering 1,DNg01,18.93
+visual_projection,postural control,DNp104,18.93
+visual_projection,walking,AN12B019,18.93
+visual_projection,tactile,DNge132,18.92
+visual_projection,flight steering 2,DNp73,18.91
+visual_projection,head orienting,AN18B025,18.91
+visual_projection,flight power,DNg106,18.9
+visual_projection,flight power,DNg51,18.9
+visual_projection,head orienting,DNge026,18.9
+visual_projection,flight steering 1,AN06B042,18.89
+visual_projection,head orienting,DNpe009,18.88
+visual_projection,threat response,DNp02,18.88
+visual_projection,walking steering,DNa13,18.88
+visual_projection,visceral control,DNp25,18.87
+visual_projection,walking,DNpe001,18.85
+visual_projection,flight steering 1,DNbe001,18.84
+visual_projection,visceral control,DNge135,18.84
+visual_projection,flight power,AN07B037,18.82
+visual_projection,flight steering 2,AN06A095,18.82
+visual_projection,head orienting,AN06A016,18.8
+visual_projection,flight power,DNge145,18.79
+visual_projection,walking steering,DNg64,18.79
+visual_projection,probing,AN06A015,18.78
+visual_projection,postural control,DNp13,18.77
+visual_projection,tactile,AN12B055,18.76
+visual_projection,flight steering 1,DNae003,18.75
+visual_projection,flight power,DNge090,18.74
+visual_projection,walking,ANXXX023,18.73
+visual_projection,walking steering,DNg111,18.73
+visual_projection,flight steering 2,AN19B101,18.72
+visual_projection,head orienting,AN07B076,18.72
+visual_projection,threat response,DNge047,18.72
+visual_projection,head orienting,DNg36_a,18.71
+visual_projection,walking,DNde002,18.69
+visual_projection,head orienting,DNge118,18.68
+visual_projection,postural control,DNge010,18.68
+visual_projection,reproduction,AN12B089,18.68
+visual_projection,walking,AN09B003,18.68
+visual_projection,flight steering 1,DNg71,18.67
+visual_projection,walking,DNg97,18.67
+visual_projection,feeding,AN09B019,18.66
+visual_projection,head orienting,DNa16,18.66
+visual_projection,walking,AN09B019,18.66
+visual_projection,walking,AN08B022,18.65
+visual_projection,flight power,AN07B036,18.63
+visual_projection,flight power,DNg02_b,18.63
+visual_projection,flight steering 1,DNb01,18.62
+visual_projection,walking steering,DNg96,18.62
+visual_projection,flight power,AN06B031,18.61
+visual_projection,walking,AN12B017,18.6
+visual_projection,flight steering 2,AN06A080,18.59
+visual_projection,walking,AN09B011,18.59
+visual_projection,walking steering,DNae001,18.59
+visual_projection,reproduction,DNc02,18.58
+visual_projection,reproduction,DNge013,18.58
+visual_projection,walking,DNa01,18.58
+visual_projection,walking,AN19B042,18.57
+visual_projection,walking steering,DNa11,18.57
+visual_projection,probing,DNge037,18.55
+visual_projection,reproduction,AN06B057,18.54
+visual_projection,threat response,DNp45,18.53
+visual_projection,postural control,DNp11,18.52
+visual_projection,head orienting,AN03A002,18.51
+visual_projection,walking,AN04A001,18.51
+visual_projection,walking,DNd05,18.51
+visual_projection,head orienting,DNpe015,18.5
+visual_projection,threat response,DNp38,18.5
+visual_projection,walking steering,DNa02,18.5
+visual_projection,postural control,DNg101,18.49
+visual_projection,head orienting,DNge095,18.48
+visual_projection,postural control,DNg69,18.48
+visual_projection,flight steering 1,DNp63,18.47
+visual_projection,threat response,DNpe043,18.44
+visual_projection,flight power,AN06B023,18.43
+visual_projection,flight power,AN10B017,18.43
+visual_projection,flight steering 1,AN06B023,18.43
+visual_projection,flight steering 2,AN19B059,18.43
+visual_projection,head orienting,AN07B049,18.43
+visual_projection,walking,DNg19,18.43
+visual_projection,walking steering,DNge040,18.42
+visual_projection,flight steering 1,DNa05,18.41
+visual_projection,flight steering 2,AN07B060,18.41
+visual_projection,walking,DNge058,18.41
+visual_projection,walking,DNpe045,18.41
+visual_projection,walking steering,MDN,18.41
+visual_projection,flight power,AN02A009,18.39
+visual_projection,flight steering 1,DNae010,18.39
+visual_projection,visceral control,DNpe035,18.37
+visual_projection,walking steering,DNge124,18.37
+visual_projection,postural control,DNg74_a,18.36
+visual_projection,probing,DNg37,18.36
+visual_projection,walking,DNg43,18.36
+visual_projection,flight power,DNg08_b,18.34
+visual_projection,flight power,AN02A017,18.33
+visual_projection,flight power,AN06B034,18.33
+visual_projection,flight power,DNg02_g,18.33
+visual_projection,flight steering 2,AN07B089,18.33
+visual_projection,head orienting,AN11B012,18.33
+visual_projection,threat response,DNpe031,18.32
+visual_projection,walking,AN07B013,18.32
+visual_projection,walking,DNge034,18.32
+visual_projection,flight steering 1,DNa09,18.31
+visual_projection,postural control,AN07B045,18.31
+visual_projection,walking,DNbe006,18.29
+visual_projection,flight steering 1,DNg05_b,18.28
+visual_projection,head orienting,AN07B085,18.28
+visual_projection,taste-touch,AN17B012,18.28
+visual_projection,taste-touch,DNg40,18.28
+visual_projection,flight steering 1,DNb07,18.27
+visual_projection,threat response,DNge099,18.27
+visual_projection,threat response,DNp01,18.27
+visual_projection,postural control,DNpe050,18.26
+visual_projection,head orienting,DNge018,18.25
+visual_projection,postural control,DNa14,18.25
+visual_projection,walking,DNge081,18.25
+visual_projection,postural control,DNp46,18.24
+visual_projection,flight power,AN06A041,18.23
+visual_projection,head orienting,AN18B023,18.22
+visual_projection,threat response,AN08B099,18.2
+visual_projection,postural control,AN08B097,18.19
+visual_projection,threat response,AN08B097,18.19
+visual_projection,walking,DNg109,18.19
+visual_projection,head orienting,ANXXX200,18.18
+visual_projection,visceral control,AN27X013,18.17
+visual_projection,postural control,AN05B048,18.15
+visual_projection,flight steering 1,DNge016,18.14
+visual_projection,flight steering 2,AN19B100,18.13
+visual_projection,postural control,AN19B014,18.13
+visual_projection,flight steering 1,DNa04,18.12
+visual_projection,head orienting,DNge125,18.12
+visual_projection,flight steering 2,AN19B046,18.11
+visual_projection,postural control,DNg93,18.11
+visual_projection,postural control,AN08B031,18.09
+visual_projection,postural control,AN18B053,18.08
+visual_projection,threat response,AN01A049,18.08
+visual_projection,walking,ANXXX145,18.08
+visual_projection,postural control,AN07B070,18.07
+visual_projection,postural control,AN07B003,18.06
+visual_projection,walking,DNge127,18.06
+visual_projection,head orienting,DNg89,18.05
+visual_projection,flight steering 2,AN19B104,18.04
+visual_projection,postural control,AN08B106,18.04
+visual_projection,probing,DNge147,18.03
+visual_projection,threat response,DNp23,18.02
+visual_projection,postural control,AN05B067,18
+visual_projection,taste-touch,AN05B078,17.99
+visual_projection,threat response,DNpe040,17.99
+visual_projection,reproduction,DNg33,17.98
+visual_projection,head orienting,AN06A010,17.97
+visual_projection,visceral control,DNpe048,17.97
+visual_projection,walking steering,DNg31,17.97
+visual_projection,walking,AN02A002,17.96
+visual_projection,walking steering,DNg35,17.96
+visual_projection,probing,DNg107,17.95
+visual_projection,visceral control,DNpe033,17.95
+visual_projection,flight power,DNge152,17.94
+visual_projection,probing,DNge101,17.94
+visual_projection,probing,DNge128,17.94
+visual_projection,taste-touch,AN09B004,17.94
+visual_projection,walking steering,DNpe023,17.94
+visual_projection,flight power,DNg08_a,17.93
+visual_projection,flight steering 1,DNa03,17.92
+visual_projection,postural control,aSP22,17.92
+visual_projection,flight power,DNge089,17.91
+visual_projection,walking,AN08B998,17.91
+visual_projection,proprioceptive,AN08B034,17.9
+visual_projection,taste-touch,AN08B034,17.9
+visual_projection,walking,AN17A050,17.9
+visual_projection,probing,AN12B008,17.89
+visual_projection,walking,DNge065,17.89
+visual_projection,postural control,AN07B062,17.88
+visual_projection,walking,DNg16,17.88
+visual_projection,postural control,AN19B019,17.87
+visual_projection,feeding,AN09B028,17.85
+visual_projection,head orienting,AN02A022,17.84
+visual_projection,postural control,DNge144,17.84
+visual_projection,walking,DNg100,17.84
+visual_projection,walking steering,DNge123,17.84
+visual_projection,flight power,AN10B005,17.83
+visual_projection,flight steering 2,AN06A026,17.83
+visual_projection,tactile,AN09B023,17.83
+visual_projection,taste-touch,AN09B023,17.83
+visual_projection,threat response,DNge053,17.82
+visual_projection,probing,DNge007,17.81
+visual_projection,walking,AN01B005,17.81
+visual_projection,postural control,AN08B098,17.78
+visual_projection,postural control,DNg74_b,17.78
+visual_projection,postural control,AN19B022,17.77
+visual_projection,tactile,AN05B010,17.77
+visual_projection,walking,AN09B034,17.77
+visual_projection,postural control,AN17A012,17.76
+visual_projection,postural control,DNp60,17.76
+visual_projection,reproduction,ANXXX106,17.76
+visual_projection,threat response,DNp66,17.76
+visual_projection,walking,AN17A012,17.76
+visual_projection,flight power,DNge093,17.75
+visual_projection,head orienting,DNge045,17.75
+visual_projection,reproduction,DNp30,17.75
+visual_projection,flight steering 2,DNg99,17.74
+visual_projection,head orienting,AN07B050,17.73
+visual_projection,postural control,DNg14,17.73
+visual_projection,reproduction,AN05B045,17.72
+visual_projection,threat response,DNge119,17.72
+visual_projection,postural control,AN08B069,17.71
+visual_projection,postural control,AN08B101,17.71
+visual_projection,postural control,DNge052,17.71
+visual_projection,threat response,DNp69,17.71
+visual_projection,taste-touch,DNge138,17.7
+visual_projection,threat response,AN08B094,17.69
+visual_projection,flight steering 1,DNa15,17.68
+visual_projection,reproduction,DNg03,17.68
+visual_projection,flight steering 1,DNae009,17.67
+visual_projection,head orienting,DNg12_a,17.67
+visual_projection,postural control,DNge004,17.67
+visual_projection,head orienting,AN19B018,17.65
+visual_projection,postural control,ANXXX116,17.65
+visual_projection,taste-touch,AN05B025,17.65
+visual_projection,threat response,AN08B049,17.65
+visual_projection,walking steering,AN06B026,17.65
+visual_projection,probing,ANXXX037,17.64
+visual_projection,walking steering,DNg88,17.64
+visual_projection,flight steering 2,AN16B081,17.63
+visual_projection,postural control,DNg44,17.63
+visual_projection,taste-touch,DNp70,17.63
+visual_projection,walking,AN23B004,17.63
+visual_projection,postural control,DNg45,17.62
+visual_projection,proprioceptive,AN10B037,17.62
+visual_projection,threat response,DNp64,17.62
+visual_projection,threat response,DNpe026,17.62
+visual_projection,postural control,AN27X004,17.6
+visual_projection,reproduction,oviDNa_b,17.6
+visual_projection,walking,DNp101,17.59
+visual_projection,flight steering 2,AN19B093,17.57
+visual_projection,flight steering 2,AN19B099,17.57
+visual_projection,head orienting,AN19B025,17.57
+visual_projection,flight power,DNg09,17.56
+visual_projection,grooming,DNge011,17.56
+visual_projection,flight steering 1,DNge017,17.55
+visual_projection,grooming,DNg12_e,17.55
+visual_projection,head orienting,AN06B044,17.55
+visual_projection,postural control,AN08B059,17.55
+visual_projection,flight power,AN07B004,17.54
+visual_projection,flight steering 1,DNae006,17.53
+visual_projection,tactile,DNg15,17.53
+visual_projection,flight power,AN27X011,17.52
+visual_projection,postural control,AN19B001_b,17.51
+visual_projection,probing,AN07B015,17.51
+visual_projection,flight steering 2,AN07B025,17.5
+visual_projection,walking steering,AN02A025,17.5
+visual_projection,walking steering,ANXXX131,17.5
+visual_projection,head orienting,AN06B025,17.49
+visual_projection,threat response,DNp42,17.49
+visual_projection,visceral control,ANXXX019,17.49
+visual_projection,flight power,DNp33,17.48
+visual_projection,flight steering 2,AN07B063,17.48
+visual_projection,postural control,ANXXX987,17.48
+visual_projection,postural control,DNge064,17.48
+visual_projection,reproduction,DNg57,17.48
+visual_projection,visceral control,AN08B113,17.48
+visual_projection,flight power,AN06B040,17.47
+visual_projection,reproduction,AN09B012,17.47
+visual_projection,threat response,DNpe039,17.47
+visual_projection,reproduction,DNp52,17.46
+visual_projection,taste-touch,AN09B024,17.45
+visual_projection,walking,AN07B017,17.45
+visual_projection,flight power,AN06B014,17.43
+visual_projection,flight power,DNg02_f,17.43
+visual_projection,head orienting,AN07B069,17.43
+visual_projection,walking,AN09B026,17.43
+visual_projection,flight power,AN06B046,17.42
+visual_projection,flight steering 1,DNae004,17.42
+visual_projection,postural control,DNge050,17.42
+visual_projection,feeding,AN05B097,17.41
+visual_projection,postural control,AN05B097,17.41
+visual_projection,proprioceptive,AN10B035,17.41
+visual_projection,threat response,AN05B097,17.41
+visual_projection,walking,AN05B097,17.41
+visual_projection,feeding,ANXXX434,17.4
+visual_projection,threat response,AN08B102,17.37
+visual_projection,visceral control,DNpe053,17.37
+visual_projection,flight power,DNg02_c,17.36
+visual_projection,head orienting,AN06A017,17.35
+visual_projection,postural control,AN18B004,17.35
+visual_projection,threat response,DNpe042,17.35
+visual_projection,postural control,DNge148,17.34
+visual_projection,head orienting,DNg10,17.33
+visual_projection,flight power,DNg32,17.32
+visual_projection,flight steering 1,AN18B020,17.32
+visual_projection,head orienting,AN03B050,17.32
+visual_projection,tactile,DNge104,17.32
+visual_projection,walking,AN18B001,17.32
+visual_projection,reproduction,DNge105,17.31
+visual_projection,taste-touch,AN17A004,17.31
+visual_projection,head orienting,AN06B037,17.3
+visual_projection,postural control,DNge046,17.3
+visual_projection,flight power,DNge084,17.29
+visual_projection,head orienting,DNg05_a,17.29
+visual_projection,flight power,DNpe010,17.28
+visual_projection,postural control,DNp36,17.28
+visual_projection,visceral control,AN27X017,17.28

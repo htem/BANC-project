@@ -1,3 +1,20 @@
+"""Entry point for running the signal cascade against real BANC
+connectivity data on the HMS O2 cluster.
+
+Builds a single cascade run from command-line arguments (seed cell
+class, p_transmission, n_iterations, output path) and writes the
+activation distribution per timestep to a pickle. Used as the worker
+inside a SLURM array job; see ``bancpipeline/o2/`` for the job
+submission patterns.
+
+``recovered_real_data_cascade_main.py`` is a sister script kept for
+the case where the original run was interrupted and we need to resume
+from a checkpoint.
+
+NOTE: the ``os.chdir(...)`` to ``/home/jif564/bancpipeline/...`` below
+is a server-specific path baked in for the original run; modify if you
+re-run this elsewhere.
+"""
 
 import pandas as pd
 import numpy as np

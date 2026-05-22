@@ -85,17 +85,17 @@ distance.meta <- distance.df %>%
   dplyr::left_join(franken.meta %>%
                      dplyr::select(id, side, cluster,
                                    region, super_class, hemilineage, 
-                                   cell_function, nerve, cell_class, sez_class, cell_sub_class, 
-                                   cell_type, composite_cell_type, top_nt) %>%
+                                   cell_function, nerve, cell_class, cell_sub_class, 
+                                   cell_type, cell_sub_type, top_nt) %>%
                      dplyr::distinct(id, .keep_all = TRUE),
                    by = "id") %>%
   dplyr::filter(super_class!="glia", 
                 !grepl("afferent|sensory",super_class),
                 !is.na(super_class)) %>%
-  dplyr::mutate(super_class = case_when(
-    super_class == "brain_central_other" & !is.na(sez_class) ~ "sez",
-    TRUE ~ super_class
-  )) %>%
+  # dplyr::mutate(super_class = case_when(
+  #   super_class == "brain_central_other" & !is.na(sez_class) ~ "sez",
+  #   TRUE ~ super_class
+  # )) %>%
   dplyr::mutate(cell_type = ifelse(grepl("KCg-s",cell_type),"KCg-s",cell_type)) %>%
   dplyr::mutate(cell_sub_class = ifelse(is.na(cell_sub_class),gsub("_.*","",cell_type),cell_sub_class))
 

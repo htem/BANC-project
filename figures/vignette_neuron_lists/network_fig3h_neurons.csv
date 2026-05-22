@@ -1,0 +1,36 @@
+display_name,root_id,cell_representative_point_id,cell_type,cell_class,cell_sub_class,super_class,cluster,side,neurotransmitter,body_part_sensory,body_part_effector
+DNg27,720575941662506040,137,DNg27,descending_neuron,descending_neuron,descending,postural control,right,"acetylcholine,glutamate",unknown,
+DNg27,720575941598950556,341,DNg27,descending_neuron,descending_neuron,descending,postural control,right,"acetylcholine,glutamate",unknown,
+ANXXX139,720575941581725305,631,ANXXX139,ascending_neuron,ascending_neuron,ascending,visceral control,left,gaba,unknown,
+ANXXX139,720575941564715264,743,ANXXX139,ascending_neuron,ascending_neuron,ascending,visceral control,right,gaba,unknown,
+wing_power_motor_neuron,720575941463144336,3619,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,right,gaba,unknown,wing
+wing_power_motor_neuron,720575941596050112,3859,DLM5,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,left,gaba,unknown,wing
+wing_power_motor_neuron,720575941645403000,5334,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,left,gaba,unknown,wing
+wing_power_motor_neuron,720575941640465439,5335,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,left,gaba,unknown,wing
+wing_power_motor_neuron,720575941519783640,5338,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,left,gaba,unknown,wing
+wing_power_motor_neuron,720575941533190337,12918,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,right,gaba,unknown,wing
+wing_power_motor_neuron,720575941583644382,12921,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,right,gaba,unknown,wing
+wing_power_motor_neuron,720575941479034563,12924,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,right,gaba,unknown,wing
+wing_power_motor_neuron,720575941692400603,26267,DLM5,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,right,gaba,unknown,wing
+wing_power_motor_neuron,720575941432491145,33614,DLM1-4,wing_motor_neuron,wing_power_motor_neuron,motor,flight-energy-power,left,gaba,unknown,wing
+l_NSC_CRZ,720575941626483001,5261,l_NSC_CRZ,pars_lateralis_neurosecretory_cell,retrocerebral_complex_neurosecretory_cell,visceral_circulatory,energy homeostasis,left,"Crz,sNPF",unknown,retrocerebral_complex
+l_NSC_CRZ,720575941514506572,36477,l_NSC_CRZ,pars_lateralis_neurosecretory_cell,retrocerebral_complex_neurosecretory_cell,visceral_circulatory,energy homeostasis,right,"Crz,sNPF",unknown,retrocerebral_complex
+thorax_nociceptor,720575941407465902,2052,SNxx27,multidendritic_neuron,thorax_multidendritic_neuron,sensory_ascending,,right,serotonin,thorax,
+leg_nociceptor,720575941471405664,1845,SNxx29,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,front_leg,
+leg_nociceptor,720575941643158354,2012,SNxx29,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,left,serotonin,front_leg,
+leg_nociceptor,720575941471906602,2086,SNxx29,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,front_leg,
+leg_nociceptor,720575941584961246,2788,LgAG7,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,front_leg,
+leg_nociceptor,720575941486460813,2799,SAxx02,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory_ascending,,left,serotonin,middle_leg,
+leg_nociceptor,720575941474229297,2952,SAxx02,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,middle_leg,
+leg_nociceptor,720575941447163317,3015,SAxx02,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,middle_leg,
+leg_nociceptor,720575941473812576,3080,SAxx02,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,left,serotonin,front_leg,
+leg_nociceptor,720575941536037362,3098,SAxx02,multidendritic_neuron,front_leg_multidendritic_neuron,sensory_ascending,,right,serotonin,front_leg,
+leg_nociceptor,720575941658631448,24510,SNxx29,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory,,left,serotonin,middle_leg,
+leg_nociceptor,720575941446305194,25423,SNxx29,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory,,right,serotonin,middle_leg,
+leg_nociceptor,720575941473329450,26522,SNxx29,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory,,left,serotonin,middle_leg,
+leg_nociceptor,720575941573383581,35200,SNxx29,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory,,right,serotonin,middle_leg,
+leg_nociceptor,720575941534873432,36470,SNxx29,multidendritic_neuron,middle_leg_multidendritic_neuron,sensory,,left,serotonin,middle_leg,
+ISN,720575941596535333,24420,ISN,nutrient_sensory_neuron,hemolymph_sensory_neuron,sensory,,left,"octopamine,acetylcholine",hemolymph_sensory,
+ISN,720575941595737814,27692,ISN,nutrient_sensory_neuron,hemolymph_sensory_neuron,sensory,,,"octopamine,acetylcholine",hemolymph_sensory,
+ISN,720575941500464353,38919,ISN,nutrient_sensory_neuron,hemolymph_sensory_neuron,sensory,,left,"octopamine,acetylcholine",hemolymph_sensory,
+ISN,720575941440766175,43940,ISN,nutrient_sensory_neuron,hemolymph_sensory_neuron,sensory,,right,"octopamine,acetylcholine",hemolymph_sensory,

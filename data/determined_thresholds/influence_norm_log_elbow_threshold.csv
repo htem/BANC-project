@@ -1,0 +1,2 @@
+"metric","threshold_value","threshold_rank","method","date"
+"influence_norm_log",17.28,1962,"elbow_maximum_curvature",2026-05-01

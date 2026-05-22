@@ -1,0 +1,249 @@
+variable_name,value,type,description
+influence_norm_thresh,17.28,auto,Influence norm log elbow threshold (from panels_body_parts.R elbow analysis). Results: CNS networks.
+pairwise_adjusted_influence_modal_direct_ge5,20,auto,"Mode of integer-rounded adjusted influence for direct (count_ge5) pairs from 1000 random proofread BANC sources × proofread+RPR targets, IC count_thresh = 5 (computed by panel_influence_validation.R, 10494 pairs). Fig. 2c."
+pairwise_adjusted_influence_modal_indirect_ge5,5,auto,"Mode of integer-rounded adjusted influence for indirect (count_ge5) pairs from 1000 random proofread BANC sources × proofread+RPR targets, IC count_thresh = 5 (computed by panel_influence_validation.R, 78441016 pairs). Fig. 2c."
+sensory_ge5_p25_direct_count,"70,753",auto,Direct (count >= 5) sensory-seed → target pairs whose adjusted influence is at or above the 25th percentile of the direct distribution (18.2895); out of 94032 direct pairs total. Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+sensory_ge5_p25_indirect_count,"149,139",auto,Indirect sensory-seed → target pairs whose adjusted influence is at or above the 25th percentile of the direct distribution (18.2895); out of 1316175504 indirect pairs total. Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+sensory_ge5_p25_threshold,18.29,auto,25th-percentile of the direct-pair adjusted influence distribution for sensory seeds (count >= 5 graph). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+sensory_ge5_direct_count_raw,"94,000",auto,Raw count of direct (count >= 5) sensory-seed → target pairs whose adjusted influence is above the floor; rounded to 2 sig figs (exact: 94032). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+sensory_ge5_indirect_count_raw,"1,300,000,000",auto,Raw count of indirect sensory-seed → target pairs whose adjusted influence is above the floor; rounded to 2 sig figs (exact: 1316175504). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+an_dn_ge5_p25_direct_count,"88,354",auto,Direct (count >= 5) AN/DN-seed → target pairs whose adjusted influence is at or above the 25th percentile of the direct distribution (19.0415); out of 117234 direct pairs total. Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+an_dn_ge5_p25_indirect_count,"33,934",auto,Indirect AN/DN-seed → target pairs whose adjusted influence is at or above the 25th percentile of the direct distribution (19.0415); out of 354652380 indirect pairs total. Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+an_dn_ge5_p25_threshold,19.04,auto,25th-percentile of the direct-pair adjusted influence distribution for AN/DN seeds (count >= 5 graph). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+an_dn_ge5_direct_count_raw,"120,000",auto,Raw count of direct (count >= 5) AN/DN-seed → target pairs whose adjusted influence is above the floor; rounded to 2 sig figs (exact: 117234). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+an_dn_ge5_indirect_count_raw,"350,000,000",auto,Raw count of indirect AN/DN-seed → target pairs whose adjusted influence is above the floor; rounded to 2 sig figs (exact: 354652380). Sidecar: influence_norm_log_vs_direct_connectivity_ge5.txt.
+sensory_to_andn_hops_median,3,auto,"Median directed shortest-path hops from sensory neurons to reachable AN/DN targets, on the proofread + count>0 edgelist used by the influence calculator. Methods: Influence."
+sensory_to_andn_hops_p99,5,auto,99th-percentile directed shortest-path hops from sensory neurons to reachable AN/DN targets — practical max. Methods: Influence.
+sensory_to_andn_hops_max,6,auto,Absolute max directed shortest-path hops from sensory neurons to reachable AN/DN targets observed in sample. Methods: Influence.
+sensory_to_andn_pairs_reachable_pct,99.7,auto,"Percent of (sampled sensory, AN/DN) pairs connected by any directed path (sample n=2000 sensory sources). Methods: Influence."
+andn_to_effector_hops_median,3,auto,"Median directed shortest-path hops from AN/DN neurons to reachable effector targets (motor/efferent/endocrine/visceral), on the proofread + count>0 edgelist used by the influence calculator. Methods: Influence."
+andn_to_effector_hops_p99,4,auto,99th-percentile directed shortest-path hops from AN/DN neurons to reachable effector targets — practical max. Methods: Influence.
+andn_to_effector_hops_max,6,auto,Absolute max directed shortest-path hops from AN/DN neurons to reachable effector targets observed in sample. Methods: Influence.
+andn_to_effector_pairs_reachable_pct,99.7,auto,"Percent of (AN/DN, effector) pairs connected by any directed path (sample n=3052 AN/DN sources). Methods: Influence."
+postsynaptic_detections,"218,460,852",hardcoded,Total postsynaptic detections in synapse table. Results: Synapses.
+synapse_v2_sample_fiveorless_true,"4,151",auto,"Manual review (Aelysia, 2024-09-20): synapses tagged True in the size > 5 v2 review sample (n = 4648). Methods: Synapses."
+synapse_v2_sample_fiveorless_false,444,auto,"Manual review (Aelysia, 2024-09-20): synapses tagged False in the size > 5 v2 review sample (n = 4648). Methods: Synapses."
+synapse_v2_sample_fiveorless_ambiguous,53,auto,"Manual review (Aelysia, 2024-09-20): synapses tagged Ambiguous in the size > 5 v2 review sample (n = 4648). Methods: Synapses."
+proportion_autapses,2.1%,auto,Proportion of synaptic connections that are autapses (self-connections). Results: Synapses.
+banc_meta_export_count,NA,auto,Rows in supplemental_data_2 (BANC metadata).
+fafb_meta_export_count,NA,auto,Rows in supplemental_data_3 (FAFB metadata).
+manc_meta_export_count,NA,auto,Rows in supplemental_data_4 (MANC metadata).
+malecns_meta_export_count,NA,auto,Rows in supplemental_data_5 (maleCNS metadata).
+an_dn_umap_count,NA,auto,Rows in supplemental_data_6 (AN/DN UMAP).
+eff_umap_count,NA,auto,Rows in supplemental_data_7 (effector UMAP).
+banc_region_central_brain_fafb_nblast_top_cell_type_correct_pct,56.5%,auto,% of central brain neurons whose top NBLAST match (vs FAFB) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_central_brain_fafb_nblast_top_cell_type_correct_mean_nblast,0.48,auto,Mean normalised NBLAST score for central brain neurons whose top match (vs FAFB) is correct. Methods: Cell type matching.
+banc_region_optic_lobe_fafb_nblast_top_cell_type_correct_pct,24.8%,auto,% of optic lobe neurons whose top NBLAST match (vs FAFB) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_optic_lobe_fafb_nblast_top_cell_type_correct_mean_nblast,0.49,auto,Mean normalised NBLAST score for optic lobe neurons whose top match (vs FAFB) is correct. Methods: Cell type matching.
+banc_region_ventral_nerve_cord_fafb_nblast_top_cell_type_correct_pct,0.3%,auto,% of ventral nerve cord neurons whose top NBLAST match (vs FAFB) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_ventral_nerve_cord_fafb_nblast_top_cell_type_correct_mean_nblast,0.32,auto,Mean normalised NBLAST score for ventral nerve cord neurons whose top match (vs FAFB) is correct. Methods: Cell type matching.
+banc_region_central_brain_manc_nblast_top_cell_type_correct_pct,15.7%,auto,% of central brain neurons whose top NBLAST match (vs MANC) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_central_brain_manc_nblast_top_cell_type_correct_mean_nblast,0.51,auto,Mean normalised NBLAST score for central brain neurons whose top match (vs MANC) is correct. Methods: Cell type matching.
+banc_region_optic_lobe_manc_nblast_top_cell_type_correct_pct,0.0%,auto,% of optic lobe neurons whose top NBLAST match (vs MANC) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_optic_lobe_manc_nblast_top_cell_type_correct_mean_nblast,NA,auto,Mean normalised NBLAST score for optic lobe neurons whose top match (vs MANC) is correct. Methods: Cell type matching.
+banc_region_ventral_nerve_cord_manc_nblast_top_cell_type_correct_pct,23.3%,auto,% of ventral nerve cord neurons whose top NBLAST match (vs MANC) is correct (cell-type identity resolved via franken.meta). Methods: Cell type matching.
+banc_region_ventral_nerve_cord_manc_nblast_top_cell_type_correct_mean_nblast,0.51,auto,Mean normalised NBLAST score for ventral nerve cord neurons whose top match (vs MANC) is correct. Methods: Cell type matching.
+fig6g_central_complex_output_top_targets,"DNa03, DNpe016, DNb01, AN17B008, AN18B053, DNbe006, DNg04, AN07B045, DNa02, DNg36_a, DNb09, DNpe019, DNg01, DNg71, DNg97, DNa13, DNae001, DNg106, DNae002, AN23B004",auto,"Unique AN/DN targets above influence threshold for central_complex_output (Fig 6g), ordered by max influence_norm_log_max across super_clusters. Methods: Influence."
+fig6g_central_complex_output_top_targets_count,20,auto,Unique AN/DN target count above influence threshold for central_complex_output (Fig 6g). Methods: Influence.
+fig6g_mushroom_body_output_top_targets,"DNg104, DNge138, DNp68, DNp42, DNge150, DNp52, ANXXX116, MDN, DNa03, AN09B004, DNg13, ANXXX977, DNge151, DNpe006, DNa13, DNde003, DNge149, DNg34, DNge152, DNg66, DNpe028, DNpe026, DNp08, DNpe023, DNae001, DNge127, ANXXX470, DNb08, DNpe003, ANXXX434, ANXXX150, DNa02, DNpe021, DNde002, DNpe027_ab, DNge041, DNge083, AN09A005, DNb05, ANXXX990, AN17A012, DNge135, DNp56, DNpe045, AN01A055, DNp59, DNge053, AN09B040, DNbe007, AN27X013, DNp32, DNg63, DNde005, DNg33, DNpe027, AN08B049, AN09A007, DNg04, DNp54, DNp57, DNpe043, AN01A049, DNpe022, DNpe040, DNae005, DNa11, DNpe005, DNbe006, DNg102, AN07B070, DNa01, DNp70, AN08B026, DNde001, DNge105, AN02A025, AN02A046, AN08B099, DNbe003, DNp62, DNge124, DNge147, ANXXX308, DNg109, AN08B041, DNbe002, DNae007, DNge030, ANXXX019, DNg111, DNg98, AN05B054, DNp69, DNpe001, AN08B113, DNa15, DNp44, DNg01, DNp24, DNd03, DNge174, DNge173, AN06B012, AN19B042, AN18B053, DNpe055, oviDNa_b, AN05B106, DNg64, AN12B060, AN18B002, DNge034, DNa16, DNg103, AN_multi_124, DNg82, DNg107, DNae002, DNb02, DNge069, AN07B052, DNg02_b, DNg60, DNg02_h, DNge047, AN08B098, DNg97, AN07B072, AN27X017, DNp101, AN05B006, DNge134, AN05B094, DNd04, DNge023, DNb01, DNge099, AN07B037, oviDNb, AN06A015",auto,"Unique AN/DN targets above influence threshold for mushroom_body_output (Fig 6g), ordered by max influence_norm_log_max across super_clusters. Methods: Influence."
+fig6g_mushroom_body_output_top_targets_count,140,auto,Unique AN/DN target count above influence threshold for mushroom_body_output (Fig 6g). Methods: Influence.
+fig6g_visual_projection_top_targets,"DNp20, DNp22, DNb03, DNg41, ANXXX250, DNp17, DNp53, DNge107, DNg46, DNge094, DNp41, DNp56, DNpe032, DNpe004, DNg36_b, DNp34, DNpe054, DNp15, DNg11, DNp16, DNpe017, DNpe008, DNge088, DNp18, DNb06, DNp19, DNbe007, DNge141, DNp27, DNae005, DNpe011, DNae008, DNp102, DNbe003, DNp04, DNpe002, DNge091, DNge097, DNge006, DNp12, DNp05, DNpe014, DNg06, DNge111, DNp47, DNg79, DNge043, ANXXX094, DNpe003, DNge116, AN01A055, DNge117, AN19B049, DNb02, DNpe018, AN06B068, AN07B071, DNge086, DNg92_a, AN07B056, DNp08, DNp07, AN06A018, DNp26, DNp31, DNpe016, DNg39, DNge041, AN09B013, DNge103, DNge092, DNge085, DNpe027, AN08B071, DNa06, DNge109, ANXXX171, DNge054, AN06B048, AN19B060, AN06B051, DNg94, DNge114, DNpe028, DNg30, DNpe012, DNg104, DNpe021, AN07B091, DNut054, DNb04, DNg110, DNg75, DNg92_b, DNb05, AN03B039, DNp10, DNpe027_ab, DNge070, DNae007, DNg56, AN06A092, DNp06, DNg18_a, AN07B046, DNa10, DNp39, AN09A005, DNg95, DNp54, AN04B023, DNpe006, DNb08, DNg82, DNg02_h, DNpe020, DNpe024, DNge030, AN07B072, DNge032, AN06A062, DNge060, DNpe005, DNg90, DNge140, DNbe002, DNbe005, AN09B036, DNge129, AN07B057, DNde005, DNge069, DNp35, AN19B076, AN07B041, DNg07, DNge083, DNg49, AN19B039, AN18B022, AN19B079, DNg04, DNg76, DNae002, DNg13, DNpe025, AN08B079, DNpe037, AN12A017, DNbe004, DNg02_a, AN16B078, AN_GNG_181, AN07B052, AN06A112, DNg58, DNp43, DNp55, AN17A026, DNb09, DNp71, AN07B021, DNpe056, DNp72, DNg34, DNp103, AN19B065, DNg102, DNpe013, DNg91, DNp09, DNg63, AN08B112, AN19B063, AN12B060, DNde003, DNp03, DNpe022, DNp51, DNpe019, DNg18_b, DNge033, DNp32, DNp57, AN08B041, DNpe055, DNg52, DNp59, ANXXX027, AN07B082, DNge072, DNpe052, AN12B019, DNg01, DNp104, DNge132, AN18B025, DNp73, DNg106, DNg51, DNge026, AN06B042, DNa13, DNp02, DNpe009, DNp25, DNpe001, DNbe001, DNge135, AN06A095, AN07B037, AN06A016, DNg64, DNge145, AN06A015, DNp13, AN12B055, DNae003, DNge090, ANXXX023, DNg111, AN07B076, AN19B101, DNge047, DNg36_a, DNde002, AN09B003, AN12B089, DNge010, DNge118, DNg71, DNg97, AN09B019, DNa16, AN08B022, AN07B036, DNg02_b, DNb01, DNg96, AN06B031, AN12B017, AN06A080, AN09B011, DNae001, DNa01, DNc02, DNge013, AN19B042, DNa11, DNge037, AN06B057, DNp45, DNp11, AN03A002, AN04A001, DNd05, DNa02, DNp38, DNpe015, DNg101, DNg69, DNge095, DNp63, DNpe043, AN06B023, AN07B049, AN10B017, AN19B059, DNg19, DNge040, AN07B060, DNa05, DNge058, DNpe045, MDN, AN02A009, DNae010, DNge124, DNpe035, DNg37, DNg43, DNg74_a, DNg08_b, AN02A017, AN06B034, AN07B089, AN11B012, DNg02_g, AN07B013, DNge034, DNpe031, AN07B045, DNa09, DNbe006, AN07B085, AN17B012, DNg05_b, DNg40, DNb07, DNge099, DNp01, DNpe050, DNa14, DNge018, DNge081, DNp46, AN06A041, AN18B023, AN08B099, AN08B097, DNg109, ANXXX200, AN27X013, AN05B048, DNge016, AN19B014, AN19B100, DNa04, DNge125, AN19B046, DNg93, AN08B031, AN01A049, AN18B053, ANXXX145, AN07B070, AN07B003, DNge127, DNg89, AN08B106, AN19B104, DNge147, DNp23, AN05B067, AN05B078, DNpe040, DNg33, AN06A010, DNg31, DNpe048, AN02A002, DNg35, DNg107, DNpe033, AN09B004, DNge101, DNge128, DNge152, DNpe023, DNg08_a, DNa03, aSP22, AN08B998, DNge089, AN08B034, AN17A050, AN12B008, DNge065, AN07B062, DNg16, AN19B019, AN09B028, AN02A022, DNg100, DNge123, DNge144, AN06A026, AN09B023, AN10B005, DNge053, AN01B005, DNge007, AN08B098, DNg74_b, AN05B010, AN09B034, AN19B022, AN17A012, ANXXX106, DNp60, DNp66, DNge045, DNge093, DNp30, DNg99, AN07B050, DNg14, AN05B045, DNge119, AN08B069, AN08B101, DNge052, DNp69, DNge138, AN08B094, DNa15, DNg03, DNae009, DNg12_a, DNge004, AN05B025, AN06B026, AN08B049, AN19B018, ANXXX116, ANXXX037, DNg88, AN16B081, AN23B004, DNg44, DNp70, AN10B037, DNg45, DNp64, DNpe026, AN27X004, oviDNa_b, DNp101, AN19B025, AN19B093, AN19B099, DNg09, DNge011, AN06B044, AN08B059, DNg12_e, DNge017, AN07B004, DNae006, DNg15, AN27X011, AN07B015, AN19B001_b, AN02A025, AN07B025, ANXXX131, AN06B025, ANXXX019, DNp42, AN07B063, AN08B113, ANXXX987, DNg57, DNge064, DNp33, AN06B040, AN09B012, DNpe039, DNp52, AN07B017, AN09B024, AN06B014, AN07B069, AN09B026, DNg02_f, AN06B046, DNae004, DNge050, AN05B097, AN10B035, ANXXX434, AN08B102, DNpe053, DNg02_c, AN06A017, AN18B004, DNpe042, DNge148, DNg10, AN03B050, AN18B001, AN18B020, DNg32, DNge104, AN17A004, DNge105, AN06B037, DNge046, DNg05_a, DNge084, AN27X017, DNp36, DNpe010",auto,"Unique AN/DN targets above influence threshold for visual_projection (Fig 6g), ordered by max influence_norm_log_max across super_clusters. Methods: Influence."
+fig6g_visual_projection_top_targets_count,483,auto,Unique AN/DN target count above influence threshold for visual_projection (Fig 6g). Methods: Influence.
+synapse_v2_sample_morethanfive_true,89.3%,auto,v2 synapse review: percentage of true-tagged synapses with size > 5 (n=4151 / 4648). Results: Synapses.
+synapse_v2_sample_morethanfive_false,9.55%,auto,v2 synapse review: percentage of false-tagged synapses with size > 5 (n=444 / 4648). Results: Synapses.
+synapse_v2_sample_morethanfive_ambiguous,1.14%,auto,v2 synapse review: percentage of ambiguous-tagged synapses with size > 5 (n=53 / 4648). Results: Synapses.
+synapse_v2_sample_size,"4,648",auto,Total reviewed synapses in the v2 sample (size 1-345). Results: Synapses.
+synapse_v2_sample_n_per_bin,7.1,auto,Mean reviewed-synapse count per (neuropil x size-bin) cell in the v2 sample. Results: Synapses.
+synapse_total_links,"197,100,067",auto,Total synaptic links in detection. Methods: Synaptic completeness.
+synapse_pre_completeness_pct,74%,auto,Pct presynaptic ends connected to proofread neuron. Methods: Synaptic completeness.
+synapse_post_completeness_pct,23%,auto,Pct postsynaptic ends connected to proofread neuron. Methods: Synaptic completeness.
+synapse_both_completeness_pct,18%,auto,Pct synaptic links with identified neuron on both sides. Methods: Synaptic completeness.
+roughly_proofread_neuron_count,"5,075",auto,"Roughly proofread neurons, excluding glia/trachea/not_a_neuron. Methods: Proofreading."
+proofread_plus_roughly_proofread_neuron_count,"155,916",auto,"Proofread or roughly proofread neurons, excluding glia/trachea/not_a_neuron. Equals proofread_neuron_count + roughly_proofread_neuron_count. Methods: Proofreading."
+pairwise_influence_calculations,24,auto,"Pairwise influence calculations in billions (proofread+roughly count squared / 1e9, 2 sig figs). Methods: Influence."
+banc_super_class_ascending_count,"1,849",auto,Proofread + roughly_proofread neurons with super_class = ascending. Methods: Proofreading.
+banc_super_class_ascending_visceral_circulatory_count,5,auto,Proofread + roughly_proofread neurons with super_class = ascending_visceral_circulatory. Methods: Proofreading.
+banc_super_class_central_brain_intrinsic_count,"30,909",auto,Proofread + roughly_proofread neurons with super_class = central_brain_intrinsic. Methods: Proofreading.
+banc_super_class_descending_count,"1,316",auto,Proofread + roughly_proofread neurons with super_class = descending. Methods: Proofreading.
+banc_super_class_motor_count,805,auto,Proofread + roughly_proofread neurons with super_class = motor. Methods: Proofreading.
+banc_super_class_optic_lobe_intrinsic_count,"72,138",auto,Proofread + roughly_proofread neurons with super_class = optic_lobe_intrinsic. Methods: Proofreading.
+banc_super_class_sensory_count,"15,615",auto,Proofread + roughly_proofread neurons with super_class = sensory. Methods: Proofreading.
+banc_super_class_sensory_ascending_count,516,auto,Proofread + roughly_proofread neurons with super_class = sensory_ascending. Methods: Proofreading.
+banc_super_class_sensory_descending_count,13,auto,Proofread + roughly_proofread neurons with super_class = sensory_descending. Methods: Proofreading.
+banc_super_class_ventral_nerve_cord_intrinsic_count,"12,835",auto,Proofread + roughly_proofread neurons with super_class = ventral_nerve_cord_intrinsic. Methods: Proofreading.
+banc_super_class_visceral_circulatory_count,221,auto,Proofread + roughly_proofread neurons with super_class = visceral_circulatory. Methods: Proofreading.
+banc_super_class_visual_centrifugal_count,469,auto,Proofread + roughly_proofread neurons with super_class = visual_centrifugal. Methods: Proofreading.
+banc_super_class_visual_projection_count,"7,264",auto,Proofread + roughly_proofread neurons with super_class = visual_projection. Methods: Proofreading.
+banc_super_class_with_fafb_ascending_count,"1,849",auto,Proofread + roughly_proofread cells with super_class = ascending (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_ascending_visceral_circulatory_count,5,auto,Proofread + roughly_proofread cells with super_class = ascending_visceral_circulatory (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_central_brain_intrinsic_count,"30,909",auto,Proofread + roughly_proofread cells with super_class = central_brain_intrinsic (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_descending_count,"1,316",auto,Proofread + roughly_proofread cells with super_class = descending (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_glia_count,143,auto,Proofread + roughly_proofread cells with super_class = glia (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_motor_count,806,auto,Proofread + roughly_proofread cells with super_class = motor (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_not_a_neuron_count,7,auto,Proofread + roughly_proofread cells with super_class = not_a_neuron (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_optic_lobe_intrinsic_count,"72,138",auto,Proofread + roughly_proofread cells with super_class = optic_lobe_intrinsic (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_sensory_count,"15,640",auto,Proofread + roughly_proofread cells with super_class = sensory (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_sensory_ascending_count,516,auto,Proofread + roughly_proofread cells with super_class = sensory_ascending (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_sensory_descending_count,13,auto,Proofread + roughly_proofread cells with super_class = sensory_descending (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_trachea_count,1,auto,Proofread + roughly_proofread cells with super_class = trachea (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_ventral_nerve_cord_intrinsic_count,"12,835",auto,Proofread + roughly_proofread cells with super_class = ventral_nerve_cord_intrinsic (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_visceral_circulatory_count,221,auto,Proofread + roughly_proofread cells with super_class = visceral_circulatory (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_visual_centrifugal_count,469,auto,Proofread + roughly_proofread cells with super_class = visual_centrifugal (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+banc_super_class_with_fafb_visual_projection_count,"7,385",auto,Proofread + roughly_proofread cells with super_class = visual_projection (super_class filled from fafb_alignment_super_class when blank). Includes glia/trachea/not_a_neuron categories. Methods: Proofreading.
+neuron_no_super_class,"11,825",auto,"Proofread + roughly_proofread cells with no super_class assignment (after fafb_alignment_super_class fallback), excluding cells flagged in status as NOT_A_NEURON/GLIA/TRACHEA. Methods: Proofreading."
+banc_region_central_brain_count,"39,165",auto,Proofread + roughly_proofread neurons in region = central_brain. Methods: Proofreading.
+banc_region_optic_lobe_count,"91,839",auto,Proofread + roughly_proofread neurons in region = optic_lobe. Methods: Proofreading.
+banc_region_ventral_nerve_cord_count,"24,596",auto,Proofread + roughly_proofread neurons in region = ventral_nerve_cord. Methods: Proofreading.
+cb_sensory_pct_within_region,16%,auto,Percent of PR+RPR central brain neurons whose super_class contains 'sensory'. Fig 3a legend.
+cb_effector_pct_within_region,0.47%,auto,Percent of PR+RPR central brain neurons in motor / visceral_circulatory / ascending_visceral_circulatory. Fig 3a legend.
+vnc_sensory_pct_within_region,33%,auto,Percent of PR+RPR ventral nerve cord neurons whose super_class contains 'sensory'. Fig 3a legend.
+vnc_effector_pct_within_region,3.4%,auto,Percent of PR+RPR ventral nerve cord neurons in motor / visceral_circulatory / ascending_visceral_circulatory. Fig 3a legend.
+proofread_roughly_proofread_root_ids_changed_v626_to_v888,"62,773",auto,PR/RPR neurons whose root_id changed v626 → v888 (root_626 ≠ root_888). Methods: Proofreading.
+proofread_roughly_proofread_root_ids_changed_v626_to_v888_pct,40.2%,auto,Pct of PR/RPR neurons whose root_id changed v626 → v888. Methods: Proofreading.
+proofread_roughly_proofread_root_ids_added_v626_to_v888,"42,270",auto,PR/RPR neurons first proofread on/after v626 release (2025-08-01). Methods: Proofreading.
+nt_gt_total_cell_types,"5,680",auto,Total cell types in NT ground truth dataset (all datasets). Methods: NT prediction.
+proofreader_number,155,hardcoded,Individuals with >=100 edits (hardcoded fallback). Fig 1 legend.
+proofread_neuron_count,"150,841",auto,Proofread neurons (strict proofread only). Fig 1 legend.
+identified_neuron_count,"171,512",auto,Identified entities: PR + RPR + any with cell_type set + glia/trachea. Fig 1 legend.
+total_neuron_count,"175,096",auto,Total neuron segments in BANC. Introduction.
+banc_nuclei_count,"153,493",auto,Unique nuclei detected in BANC. Methods: Segmentation.
+cell_typed_neuron_count,"147,846",auto,Neurons with cell type or alignment type annotation. Results: Cell types.
+cell_typed_neuron_no_aligned_types_count,"118,380",auto,Neurons with cell type annotation only (excluding alignment matches). Results: Cell types.
+aligned_types_count,"29,466",auto,Neurons with alignment type but no cell type (fafb/manc/malecns alignment only). Results: Cell types.
+cell_typed_neuron_proportion_cb_vnc,93.1%,auto,Proportion of CB+VNC neurons with cell type or alignment type. Results: Cell types.
+cell_typed_neuron_no_aligned_types_proportion_cb_vnc,92.1%,auto,Proportion of CB+VNC neurons with cell type only (no alignment). Results: Cell types.
+expected_cns_neuron_count,"166,000",hardcoded,Expected total CNS neuron count from franken meta. Results: Cell types.
+missing_lamina_count,"9,390",hardcoded,Lamina neuron count missing from BANC. Results: Cell types.
+cell_typed_neuron_proportion,94.4%,auto,Proportion of expected CNS neurons typed (incl alignment). Results: Cell types.
+cell_typed_neuron_no_aligned_types_proportion,75.6%,auto,Proportion of expected CNS neurons typed (excl alignment). Results: Cell types.
+unique_cell_type_count,"11,502",auto,Number of unique cell types annotated. Results: Cell types.
+nt_gt_cell_type_count,"3,379",auto,"NT ground truth cell types: distinct cell_types among BANC neurons with verified neurotransmitter (the cell_type count of banc_nt_neuron_count, motor types excluded). Methods: NT prediction."
+banc_nt_neuron_count,"60,394",auto,BANC neurons with verified NT (minus excluded types). Methods: NT prediction.
+banc_nt_cell_type_count,"3,379",auto,BANC cell types with verified NT. Methods: NT prediction.
+banc_neuropeptide_verified_count,"7,025",auto,BANC neurons with a verified neuropeptide. Methods: NT prediction.
+banc_neuropeptide_verified_pct_acetylcholine,84.8%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is acetylcholine (n=5954 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_acetylcholine,"5,954",auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is acetylcholine. Methods: NT prediction.
+banc_neuropeptide_verified_pct_glutamate,4.9%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is glutamate (n=342 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_glutamate,342,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is glutamate. Methods: NT prediction.
+banc_neuropeptide_verified_pct_gaba,2.7%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is gaba (n=192 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_gaba,192,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is gaba. Methods: NT prediction.
+banc_neuropeptide_verified_pct_dopamine,2.6%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is dopamine (n=185 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_dopamine,185,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is dopamine. Methods: NT prediction.
+banc_neuropeptide_verified_pct_none,2.3%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is none (n=165 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_none,165,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is none. Methods: NT prediction.
+banc_neuropeptide_verified_pct_tyramine,0.9%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is tyramine (n=66 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_tyramine,66,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is tyramine. Methods: NT prediction.
+banc_neuropeptide_verified_pct_octopamine,0.8%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is octopamine (n=57 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_octopamine,57,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is octopamine. Methods: NT prediction.
+banc_neuropeptide_verified_pct_serotonin,0.8%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is serotonin (n=57 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_serotonin,57,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is serotonin. Methods: NT prediction.
+banc_neuropeptide_verified_pct_histamine,0.1%,auto,% of neurons with verified neuropeptide whose neurotransmitter_predicted is histamine (n=7 / 7025). Methods: NT prediction.
+banc_neuropeptide_verified_n_histamine,7,auto,Count of neurons with verified neuropeptide whose neurotransmitter_predicted is histamine. Methods: NT prediction.
+an_neuron_count,"1,849",auto,Ascending neuron count. Results: Neck connective.
+an_neuron_matched_count,"1,768",auto,ANs with MANC match. Results: Neck connective.
+an_neuron_not_matched_count,81,auto,ANs without MANC match. Results: Neck connective.
+an_cell_type_count,527,auto,AN cell type count. Results: Neck connective.
+dn_neuron_count,"1,316",auto,Descending neuron count. Results: Neck connective.
+an_dn_count,"3,165",auto,Total AN + DN neurons. Results: Neck connective.
+an_dn_cluster_count,17,auto,"Distinct named AN/DN super_clusters in banc.meta (super_class in {ascending, descending}). Methods: Naming AN/DN clusters."
+dn_neuron_matched_count,"1,304",auto,DNs with FAFB match. Results: Neck connective.
+dn_neuron_not_matched_count,12,auto,DNs without FAFB match. Results: Neck connective.
+dn_cell_type_count,473,auto,DN cell type count. Results: Neck connective.
+dn_female_specific_neuron_count,16,auto,Female-specific DN neurons identified. Methods: Sexual dimorphism.
+dn_female_specific_cell_type_count,8,auto,Female-specific DN cell types. Methods: Sexual dimorphism.
+an_female_specific_neuron_count,38,auto,Female-specific AN neurons identified. Methods: Sexual dimorphism.
+an_female_specific_cell_type_count,17,auto,Female-specific AN cell types. Methods: Sexual dimorphism.
+an_dn_developmental_issue_count,18,auto,AN/DNs with developmental abnormality or stochastic arbor. Results: Neck connective.
+ascending_neurons_approx,"1,800",auto,Ascending neuron count rounded to 2 sig figs. Introduction.
+descending_neurons_approx,"1,300",auto,Descending neuron count rounded to 2 sig figs. Introduction.
+dn_sensory_count,13,auto,Sensory descending neuron count. Results: Neck connective.
+dn_sensory_cell_type_count,5,auto,Sensory descending cell type count. Results: Neck connective.
+an_sensory_count,517,auto,Sensory ascending neuron count. Results: Neck connective.
+an_sensory_cell_type_count,42,auto,Sensory ascending cell type count. Results: Neck connective.
+an_efferent_count,5,auto,Ascending visceral circulatory neuron count. Results: Neck connective.
+an_efferent_cell_type_count,3,auto,Ascending visceral circulatory cell type count. Results: Neck connective.
+neck_efferent_count,49,auto,Neck motor neuron count. Results: Neck connective.
+neck_count_all,"3,742",auto,All neck connective neuron segments (meta + CAVE seed plane). Results: Neck connective.
+neck_proofread,"3,686",auto,Proofread neck connective neurons. Results: Neck connective.
+neck_cave_total,"3,832",auto,Neurons crossing neck seed planes (CAVE). Results: Neck connective.
+total_sensory_count,"16,140",auto,"Sensory neurons (super_class contains 'sensory') among proofread + roughly_proofread, excluding non-neurons. Results: Sensory."
+orphan_sensory_count,"1,169",auto,Sensory neurons without identified nerve (orphan). Results: Sensory.
+sensory_used_count,"14,971",auto,Sensory neurons with identified nerve. Results: Sensory.
+total_efferent_count,"1,033",auto,Efferent neurons (flow == 'efferent') among PR + RPR; includes sensory-flagged strand neurons (e.g. SNpp54). Results: Effectors.
+effector_category_pct,99.4%,auto,Pct effectors with known body_part_effector. Results: Effectors.
+orphan_effector_count,6,auto,Effectors without body_part_effector assignment. Results: Effectors.
+sensory_category_pct,103.2%,auto,Pct sensory neurons with known body_part_sensory. Results: Sensory.
+motor_neuron_count,805,auto,Motor neurons (super_class == 'motor') among PR + RPR. Results: Effectors.
+motor_cell_type_count,205,auto,Motor neuron cell types among PR + RPR. Results: Effectors.
+visceral_circulatory_count,221,auto,Visceral/circulatory neurons (super_class == 'visceral_circulatory') among PR + RPR. Results: Effectors.
+effector_neuron_count,"1,031",auto,"Effector neurons (super_class in {motor, visceral_circulatory, ascending_visceral_circulatory}) among PR + RPR. Excludes sensory-flagged strand neurons. Results: Effectors."
+effector_outputs_within_cns,107,auto,Effector neurons whose cell type has a member with unitary CNS output >= 10 AND a member with total output >= 100 (17 cell types). Results: Effectors.
+pre_effector_count,"8,824",auto,Neurons presynaptic to any effector with a unitary connection of count >= 10 synapses (excluding effectors themselves). Fig 2 pre-effector pyramid.
+pre_pre_effector_count,"16,838",auto,"Neurons presynaptic to any pre-effector with a unitary connection of count >= 10 synapses, excluding both effectors and pre-effectors. Fig 2 pre-effector pyramid."
+banc_mean_kc_output_connections,36.6,auto,Mean KC output connections (unfiltered edgelist). Results: Connectivity.
+glia_count,"13,000",auto,Glia count (2 sig figs). Fig 1 legend.
+glia_trachea_not_a_neuron_count,"13,108",auto,Non-neuronal objects (glia + trachea + not_a_neuron). Fig 1 legend.
+astrocyte_count,413,auto,Astrocyte count (cell_class). Fig 1 legend.
+visual_projection_count,"7,321",auto,Visual projection neuron count. Results: Visual.
+banc_reviewed_postsynaptic_connections,"4,648",auto,Reviewed postsynaptic connections in the sparse Aelysia sample (manual validation). Methods: Synapses.
+banc_reviewed_postsynaptic_neuropils,67,auto,Neuropils covered by synapse review. Methods: Synapses.
+banc_reviewed_postsynaptic_connections_dense,"1,011",auto,"Real postsynaptic connections in the dense 16-cutout evaluation (true_positives + false_negatives across all cubes; excludes detector false positives, which were rejected on review). Source of banc_synapse_region_sample_by_neuropil.pdf. Methods: Synapse detection evaluation."
+nerve_count,72,auto,Number of annotated peripheral nerves. Results: Sensory.
+fafb_photo_count,"8,726",auto,FAFB R1-6 and ocellar photoreceptors (missing from BANC). Discussion.
+cns_network_neuron_count,"50,568",auto,"Neurons in CNS spectral clustering (k=14, v3). Results: CNS networks."
+cns_network_cluster_count,13,auto,Number of CNS network clusters. Results: CNS networks.
+cns_network_neuron_pct,100%,auto,"Percent of intrinsic CB+VNC neurons in clustering, 2 sig figs. Results: CNS networks."
+cns_network_an_count,"1,810",auto,ANs in the CNS-network sample. Fig 6e.
+cns_network_dn_count,"1,239",auto,DNs in the CNS-network sample. Fig 6e.
+cns_network_other_count,"47,519",auto,Non-AN/DN neurons in the CNS-network sample. Fig 6e.
+cns_network_andn_other_total,"50,568",auto,Total of cns_network_an_count + dn + other (Fig 6e KS-test n).
+spectral_clustering_input_count,"55,643",auto,Neurons input to spectral clustering before iterative pruning. Filter mirrors bancpipeline/banc/clustering/banc-spectral-clustering.R:57-96 (proofread or roughly_proofread; visual_projection + visual_centrifugal plus intrinsic neurons of central_brain/neck_connective/ventral_nerve_cord; optic-lobe intrinsics excluded by region). Methods: CNS networks.
+spectral_clustering_pruned_count,"55,167",auto,Neurons after iterative pruning (with cns_network). Methods: CNS networks.
+an_dn_cell_type_count,"1,000",auto,AN/DN cell types (excl SA/SN/AN_4/AN_5/IN). Results: AN/DN function.
+an_dn_function_count,93,auto,AN/DN cell types with known modality. Results: AN/DN function.
+an_dn_function_pct,9.3%,auto,Percentage of AN/DN types with known modality. Results: AN/DN function.
+fafb_ct_count_missing,531,auto,FAFB cell types not found in BANC. Discussion.
+fafb_ct_prop_missing,6.92%,auto,Proportion of FAFB types missing from BANC. Discussion.
+manc_ct_count_missing,171,auto,MANC cell types not found in BANC. Discussion.
+manc_ct_prop_missing,5.99%,auto,Proportion of MANC types missing from BANC. Discussion.
+effector_category_count,24,auto,Distinct body part effector categories. Results: Effectors.
+sensory_category_count,47,auto,Distinct body part sensory categories. Results: Sensory.
+flow_afferent_pct_central_brain,16.3%,auto,Afferent proportion in central_brain. Supplement.
+flow_efferent_pct_central_brain,0.46%,auto,Efferent proportion in central_brain. Supplement.
+flow_intrinsic_pct_central_brain,83.2%,auto,Intrinsic proportion in central_brain. Supplement.
+flow_afferent_pct_optic_lobe,2.26%,auto,Afferent proportion in optic_lobe. Supplement.
+flow_efferent_pct_optic_lobe,0,auto,Efferent proportion in optic_lobe. Supplement.
+flow_intrinsic_pct_optic_lobe,97.7%,auto,Intrinsic proportion in optic_lobe. Supplement.
+flow_afferent_pct_ventral_nerve_cord,34.6%,auto,Afferent proportion in ventral_nerve_cord. Supplement.
+flow_efferent_pct_ventral_nerve_cord,3.56%,auto,Efferent proportion in ventral_nerve_cord. Supplement.
+flow_intrinsic_pct_ventral_nerve_cord,61.9%,auto,Intrinsic proportion in ventral_nerve_cord. Supplement.
+connection_type_valid_total,"3,280,626",auto,Total connections with valid compartment labels on both sides. Results: Connectivity.
+connection_type_count_axon_axon,"633,949",auto,Connections of type axon-axon (overall). Results: Connectivity.
+connection_type_pct_axon_axon,19.3%,auto,Proportion of type axon-axon (overall). Results: Connectivity.
+connection_type_count_axon_dendrite,"1,579,292",auto,Connections of type axon-dendrite (overall). Results: Connectivity.
+connection_type_pct_axon_dendrite,48.1%,auto,Proportion of type axon-dendrite (overall). Results: Connectivity.
+connection_type_count_dendrite_axon,"278,229",auto,Connections of type dendrite-axon (overall). Results: Connectivity.
+connection_type_pct_dendrite_axon,8.48%,auto,Proportion of type dendrite-axon (overall). Results: Connectivity.
+connection_type_count_dendrite_dendrite,"789,156",auto,Connections of type dendrite-dendrite (overall). Results: Connectivity.
+connection_type_pct_dendrite_dendrite,24.1%,auto,Proportion of type dendrite-dendrite (overall). Results: Connectivity.
+connection_type_pct_axon_axon_central_brain,22.5%,auto,Proportion of axon-axon in central_brain. Results: Connectivity.
+connection_type_pct_axon_dendrite_central_brain,48.4%,auto,Proportion of axon-dendrite in central_brain. Results: Connectivity.
+connection_type_pct_dendrite_axon_central_brain,8.48%,auto,Proportion of dendrite-axon in central_brain. Results: Connectivity.
+connection_type_pct_dendrite_dendrite_central_brain,20.6%,auto,Proportion of dendrite-dendrite in central_brain. Results: Connectivity.
+connection_type_pct_axon_axon_optic_lobe,15.1%,auto,Proportion of axon-axon in optic_lobe. Results: Connectivity.
+connection_type_pct_axon_dendrite_optic_lobe,40.2%,auto,Proportion of axon-dendrite in optic_lobe. Results: Connectivity.
+connection_type_pct_dendrite_axon_optic_lobe,11.8%,auto,Proportion of dendrite-axon in optic_lobe. Results: Connectivity.
+connection_type_pct_dendrite_dendrite_optic_lobe,32.9%,auto,Proportion of dendrite-dendrite in optic_lobe. Results: Connectivity.
+connection_type_pct_axon_axon_ventral_nerve_cord,18.8%,auto,Proportion of axon-axon in ventral_nerve_cord. Results: Connectivity.
+connection_type_pct_axon_dendrite_ventral_nerve_cord,52.2%,auto,Proportion of axon-dendrite in ventral_nerve_cord. Results: Connectivity.
+connection_type_pct_dendrite_axon_ventral_nerve_cord,6.73%,auto,Proportion of dendrite-axon in ventral_nerve_cord. Results: Connectivity.
+connection_type_pct_dendrite_dendrite_ventral_nerve_cord,22.4%,auto,Proportion of dendrite-dendrite in ventral_nerve_cord. Results: Connectivity.
+fafb_banc_matched_ct_connections,"483,957",auto,Cell-type-to-cell-type connections matched between FAFB and BANC. ED Fig 1.
+manc_banc_matched_ct_connections,"434,357",auto,Cell-type-to-cell-type connections matched between MANC and BANC. ED Fig 1.
+morphology_review_versus_nblast_pct,47%,auto,Pct neurons where manual match differs from max-NBLAST match. Methods: Cell type matching.
+vnc_sexually_dimorphic_count,"2,919",auto,VNC neurons estimated sexually dimorphic. Results: Sexual dimorphism.
+vnc_sexually_dimorphic_pct,9%,auto,Pct of female VNC that is sexually dimorphic. Results: Sexual dimorphism.
+vnc_sex_specific_count,600,auto,VNC neurons estimated sex-specific. Results: Sexual dimorphism.
+vnc_sex_specific_pct,2%,auto,Pct of female VNC that is sex-specific. Results: Sexual dimorphism.
+manc_sex_specific_male_count,763,auto,Male-specific MANC neurons (franken.meta). Results: Sexual dimorphism.
+manc_dimorphic_male_count,"3,364",auto,Sexually dimorphic MANC (male) neurons (franken.meta). Results: Sexual dimorphism.

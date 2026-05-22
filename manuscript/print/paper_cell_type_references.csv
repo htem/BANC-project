@@ -1,0 +1,127 @@
+cell_type,vignette,super_class,super_cluster,v626_super_cluster,match_level,other_labels,description,figure_or_line
+DNa02,,descending,walking steering,walking steering,cell_type,central complex output,cross-dataset bridging example; also top central complex output target,Fig 1d; Fig 6g
+DNpe013,Fig3c,descending,head orienting,,cell_type,,influences motor neurons for antenna/eye/neck,Fig 3c
+DNa06,Fig4e,descending,head orienting,head and eye orienting,cell_type,,excitatory DN with connections to eye and neck motor neurons; targets DNg89,Fig 4e; line 471
+DNg89,Fig4e,descending,head orienting,head and eye orienting,cell_type,,targeted by DNa06; inhibits neck-pitch neurons,Fig 4e; line 474
+DNp10,Fig4f,descending,postural control,landing,cell_type,,drives landing maneuvers in response to looming visual stimuli,Fig 4f; line 480
+DNg27,Fig3h,descending,postural control,flight power,cell_type,,synapses onto wing power motor neurons + corazonin endocrine neurons,Fig 3h; line 383
+DNp65,Fig3g,descending,visceral control,visceral control,cell_type,,targeted by AN27X017; visceral control,Fig 3g; line 378
+DNp37,Fig3i,descending,postural control,reproduction,cell_type,,positioned to regulate uterine motor neurons,Fig 3i; line 398
+oviDNa_a,Fig3i,descending,reproduction,reproduction,cell_type,,modulates ascending sensory signals from uterus,Fig 3i; line 399
+DNge104,Fig3j,descending,tactile,tactile perception,cell_type,,downstream from tactile sensors; inhibitory; tactile contrast enhancement,Fig 3j; line 404
+DNa16,Fig6h_cx,descending,head orienting,head and eye orienting,cell_type,,receives input from GLNO (central complex); contributes to steering,Fig 6h; line 608
+DNa05,Fig6h_cx,descending,flight steering 1,flight steering 1,cell_type,,receives input from GLNO; contributes to steering via wing motor neurons,Fig 6h; line 608
+DNae010,Fig6h_cx,descending,flight steering 1,flight steering 1,cell_type,,wing steering motor neuron target of PFL1,Fig 6h
+DNp51,Fig6h_cx,descending,flight steering 1,flight steering 1,cell_type,central complex output,wing steering motor neuron target of PFL1; also central complex output,Fig 6h; Fig 6g
+DNbe001,Fig6h_cx,descending,flight steering 1,flight steering 1,cell_type,,wing steering motor neuron target of PFL1,Fig 6h
+DNpe001,Fig6h_cx,descending,flight steering 1,,cell_type,,wing steering motor neuron target of PFL1,Fig 6h
+DNp26,Fig6h_cx,descending,flight steering 1,flight steering 1,cell_type,,wing steering motor neuron target of PFL1,Fig 6h
+DNp42,Fig6h_mb,descending,threat response,,cell_type,mushroom body output,drives backward walking in response to noxious stimuli; also mushroom body output,Fig 6h; Fig 6g; line 601
+DNp38,Fig5c,descending,threat response,,cell_type,,receives antennal mechanosensory signals via WPNs; drives leg stiffness,Fig 5c; line 533
+DNg100,Fig5c,descending,walking,walking,cell_type,,inhibited by DNp38 via AN02A002; walking initiation (bolt neuron),Fig 5c; line 537
+DNa03,,descending,flight steering 1,flight steering 1,cell_type,central complex output,top target cell type from central complex,Fig 6g; line 647
+DNpe016,,descending,walking,walking,cell_type,central complex output,top target from central complex,Fig 6g
+DNb01,,descending,flight steering 1,flight steering 1,cell_type,central complex output,top target from central complex,Fig 6g
+DNbe006,,descending,walking,walking,cell_type,central complex output,top target from central complex,Fig 6g
+DNb09,,descending,walking,walking,cell_type,central complex output,top target from central complex,Fig 6g
+DNge150,,descending,reproduction,visceral control,cell_type,mushroom body output,top target from mushroom body,Fig 6g; line 648
+DNg104,,descending,reproduction,reproduction,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNge138,,descending,taste-touch,threat response,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNge151,,descending,reproduction,visceral control,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNp68,,descending,reproduction,visceral control,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNge149,,descending,reproduction,,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNge152,,descending,flight power,,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNg66,,descending,reproduction,reproduction,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+DNp20,,descending,flight power,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g; line 649
+DNp22,,descending,head orienting,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNpe017,,descending,flight steering 1,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNp18,,descending,flight steering 1,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNb06,,descending,head orienting,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNp53,,descending,head orienting,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNpe032,,descending,walking,flight steering 2,cell_type,visual projection output,top target from visual projection,Fig 6g
+DNg46,,descending,head orienting,flight steering 1,cell_type,visual projection output,top target from visual projection,Fig 6g
+AN19B025,Fig3c,ascending,head orienting,flight steering 1,cell_type,,wing tension + steering; front/middle/hind legs,Fig 3c
+AN19B018,Fig4e,ascending,head orienting,head and eye orienting,cell_type,,AN in head-and-eye circuit targeted by DNa06,Fig 4e
+AN18B023,Fig4e,ascending,head orienting,head and eye orienting,cell_type,,AN in head-and-eye circuit,Fig 4e
+AN03A002,Fig4e,ascending,head orienting,head and eye orienting,cell_type,,AN in head-and-eye circuit,Fig 4e
+AN06B002,Fig4f,ascending,postural control,landing,cell_type,,postsynaptic to leg proprioceptive and tactile sensory neurons; forms feedback loop with DNp10,Fig 4f; line 484
+AN27X017,Fig3g,ascending,visceral control,,cell_type,,relays abdominal oxygen sensor signals to brain endocrine cells (DILP),Fig 3g; line 376
+ANXXX139,Fig3h,ascending,visceral control,visceral control,cell_type,,AN in visceral control supercluster; downstream of corazonin neurons,Fig 3h; line 389
+ANXXX983,Fig3i,ascending,reproduction,,cell_type,also called SAG,downstream from uterus/oviduct/spermatheca sensory neurons,Fig 3i; line 395
+ANXXX981,Fig3i,ascending,reproduction,,cell_type,SAG-like,SAG-like ascending neuron in reproduction circuit,Fig 3i
+ANXXX986,Fig3i,ascending,postural control,,cell_type,,SAG-related; monitors reproductive tract,Fig 3i; line 457
+AN09B023,Fig3j,ascending,tactile|taste-touch,tactile perception,cell_type,,upstream from tactile sensors from same body parts,Fig 3j
+AN09B011,Fig3k,ascending,walking,walking steering,cell_type,,makes strong direct connection onto mALC5 (visual centrifugal neuron),Fig 3k; line 415
+AN09B029_b,Fig5c,ascending,taste-touch,proprioceptive perception,cell_type,,sends ascending mechanosensory signals,Fig 5c; line 531
+AN02A002,Fig5c,ascending,walking,walking,cell_type,,cell in walking supercluster; recruited by DNp38,Fig 5c; line 537
+AN07B037,Fig6h_cx,ascending,flight power,flight steering 1,cell_type,,AN positioned to send copies of flight steering signals to central complex,Fig 6h
+ANXXX977,,ascending,feeding,,cell_type,mushroom body output,top target from mushroom body,Fig 6g
+ANXXX250,,ascending,reproduction,reproduction,cell_type,visual projection output,top target from visual projection,Fig 6g
+CB0810,Fig3c,effector,front leg,,cell_type,head and eye orienting circuit,antenna-related effector neuron,Fig 3c
+CB0901,Fig3c,effector,head-eye-antenna,,cell_type,head and eye orienting circuit,neck pitch motor neuron,Fig 3c
+neck_yaw_motor_neuron,Fig3c;Fig4e,effector,head-eye-antenna,,cell_sub_class,,neck yaw motor neurons (CvN1-3/CvNA1/CvNA2),Fig 3c; Fig 4e
+eye_motor_neuron,Fig3c;Fig4e,effector,,,cell_sub_class,,eye motor neurons,Fig 3c; Fig 4e
+neck_pitch_motor_neuron,Fig3c;Fig4e,effector,head-eye-antenna,,cell_sub_class,,neck pitch motor neurons (CvN4-7),Fig 3c; Fig 4e
+neck_roll_motor_neuron,Fig3c;Fig4e,effector,head-eye-antenna,,cell_sub_class,,neck roll motor neurons (DProN1-9),Fig 3c; Fig 4e
+neck_roll_pitch_motor_neuron,Fig3c;Fig4e,effector,head-eye-antenna,,cell_sub_class,,neck roll/pitch motor neurons,Fig 3c; Fig 4e
+front_leg_motor_neuron,Fig3c;Fig5c;Fig6h_mb,effector,front leg,,cell_sub_class,,front leg motor neurons,Fig 3c; Fig 5c; Fig 6h
+middle_leg_motor_neuron,Fig3c;Fig5c;Fig6h_mb,effector,middle-hind leg,,cell_sub_class,,middle leg motor neurons,Fig 3c; Fig 5c; Fig 6h
+hind_leg_motor_neuron,Fig3c;Fig5c;Fig6h_mb,effector,middle-hind leg,,cell_sub_class,,hind leg motor neurons,Fig 3c; Fig 5c; Fig 6h
+leg_flexor_motor,Fig4f,effector,,,custom,landing circuit,tibia/trochanter flexor motor neurons across all legs,Fig 4f
+leg_extensor_motor,Fig4f,effector,,,custom,landing circuit,tibia/trochanter extensor motor neurons across all legs,Fig 4f
+wing_steering_motor_neuron,Fig3c;Fig6h_cx,effector,flight-steering,,cell_sub_class,,wing steering motor neurons,Fig 3c; Fig 6h
+wing_tension_motor_neuron,Fig3c,effector,flight-energy-power,,cell_sub_class,,wing tension motor neurons,Fig 3c
+wing_power_motor_neuron,Fig3h,effector,flight-energy-power,,cell_sub_class,,wing power motor neurons (DLM1-4/DLM5/DVM),Fig 3h
+DVM1a-c,,effector,flight-energy-power,,cell_type,wing power circuit,dorsal ventral muscle motor neurons (wing power),Fig 1e
+LB1a,Fig6h_mb,effector,,,cell_type,labellum,labellar bristle sensillum neuron,Fig 1e; Fig 6h
+LB2,,effector,,,cell_type,labellum,example effector,Fig 1e
+MNad21,Fig3g,effector,energy homeostasis,,cell_type,visceral control circuit; Lk/Dh44,leucokinin/Dh44 neurosecretory motor neuron (highlighted example); modulates feeding and water balance,Fig 3g
+m_NSC_DILP,Fig3g,endocrine,energy homeostasis,,cell_type,visceral control circuit,insulin-like peptide; regulated by AN27X017 circuit,Fig 3g
+oxygen_sensory,Fig3g,sensory,,,custom,visceral control circuit,abdominal oxygenation neurons (SAxx01/SNxx16); cell_sub_class contains oxygenation,Fig 3g
+aorta_sensory,Fig3g,sensory,,,custom,visceral control circuit,aorta sensory neurons; body_part_sensory contains aorta,Fig 3g
+l_NSC_CRZ,Fig3h,endocrine,energy homeostasis,,cell_type,flight power circuit,corazonin neurons modulate metabolism and stress response,Fig 3h
+thorax_nociceptor,Fig3h,sensory,,,custom,flight power circuit,thorax multidendritic nociceptors,Fig 3h
+leg_nociceptor,Fig3h;Fig6h_mb,sensory,,,custom,flight power/threat circuit,leg multidendritic nociceptors,Fig 3h; Fig 6h
+ISN,Fig3h,brain intrinsic,,,cell_type,flight power circuit,interoceptive neurons; thirst signal suppresses excitatory drive to DNg27,Fig 3h; line 387
+uterus_sensory,Fig3i,sensory,,,custom,reproduction circuit,uterus sensory neurons; body_part_sensory == uterus,Fig 3i
+reproductive_tract_sensory,Fig3i,sensory,,,custom,reproduction circuit,reproductive tract sensory neurons; body_part_sensory == reproductive_tract,Fig 3i
+reproductive_motor,Fig3i,effector,,,custom,reproduction circuit,reproductive/uterus motor neurons collapsed by cell_type,Fig 3i
+SPSN,Fig3i,sensory,,,cell_type,reproduction circuit,spermatheca sensory neuron,Fig 3i
+pC1,Fig3i,brain intrinsic,,,cell_type,reproduction circuit,upstream of reproduction supercluster DNs,Fig 3i; line 397
+eye_tactile,Fig3j,sensory,,,custom,tactile circuit,eye bristle sensory neurons,Fig 3j
+head_tactile,Fig3j,sensory,,,custom,tactile circuit,head bristle sensory neurons,Fig 3j
+wing_tactile,Fig3j,sensory,,,custom,tactile circuit,wing bristle sensory neurons,Fig 3j
+thorax_tactile,Fig3j,sensory,,,custom,tactile circuit,thorax bristle sensory neurons,Fig 3j
+leg_tactile,Fig3j,sensory,,,custom,tactile circuit,leg bristle sensory neurons,Fig 3j
+terminalia_tactile,Fig3j,sensory,,,custom,tactile circuit,terminalia bristle sensory neurons,Fig 3j
+mALC5,Fig3k,visual centrifugal,,,cell_type,walking steering circuit,visual centrifugal neuron targeted by AN09B011,Fig 3k; line 416
+Nod3,Fig3k,visual projection,,,cell_type,walking steering circuit,optic flow detector; suppressed by AN09B011 via mALC5,Fig 3k; line 417
+LPLC1,Fig3k,visual projection,,,cell_type,walking steering circuit,visual loom detector,Fig 3k; line 417
+LPLC2,Fig3k,visual projection,,,cell_type,walking steering circuit,visual loom detector,Fig 3k; line 417
+front_leg_proprioceptor,Fig3k,sensory,,,custom,walking steering circuit,front leg campaniform/chordotonal/hair_plate sensory neurons,Fig 3k
+middle_leg_proprioceptor,Fig3k,sensory,,,custom,walking steering circuit,middle leg campaniform/chordotonal/hair_plate sensory neurons,Fig 3k
+hind_leg_proprioceptor,Fig3k,sensory,,,custom,walking steering circuit,hind leg campaniform/chordotonal/hair_plate sensory neurons,Fig 3k
+front_leg_club_chordotonal_organ_neuron,Fig4f;Fig5c,sensory,,,cell_sub_class,landing/threat circuit,front leg proprioceptive (club/chordotonal),Fig 4f; Fig 5c
+hind_leg_club_chordotonal_organ_neuron,Fig4f;Fig5c,sensory,,,cell_sub_class,landing/threat circuit,hind leg proprioceptive (club/chordotonal),Fig 4f; Fig 5c
+front_leg_bristle_neuron,Fig4f,sensory,,,cell_sub_class,landing circuit,front leg tactile bristle neurons,Fig 4f
+hind_leg_bristle_neuron,Fig4f,sensory,,,cell_sub_class,landing circuit,hind leg tactile bristle neurons,Fig 4f
+IN12B018,Fig4f,VNC intrinsic,,,cell_type,landing circuit,VNC inhibitory interneuron between DNp10 and tibia flexor motor neurons,Fig 4f
+WPN,Fig5c,sensory,,,cell_type,threat response circuit,wedge projection neuron; relays antennal mechanosensory signals to DNp38; WED092c/WED092d/LHPV6q1,Fig 5c; line 533
+IN18B011,Fig5c,VNC intrinsic,,,cell_type,threat response circuit,VNC inhibitory interneuron in leg motor circuit,Fig 5c
+PPL101,Fig6h_mb,brain intrinsic,,,cell_type,mushroom body,mushroom body dopamine neuron; encodes negative valence,Fig 6h; line 596
+PPL102,Fig6h_mb,brain intrinsic,,,cell_type,mushroom body,mushroom body dopamine neuron; encodes negative valence,Fig 6h; line 596
+MBON20,Fig6h_mb,brain intrinsic,,,cell_type,mushroom body,mushroom body output neuron; positioned to suppress avoidance behavior,Fig 6h; line 602
+CB0135,Fig6h_mb,brain intrinsic,,,cell_type,mushroom body circuit,bitter-responsive neuron upstream of PPL101/102,Fig 6h
+AVLP445,Fig6h_mb,brain intrinsic,,,cell_type,mushroom body circuit,positive valence neuron in circuit,Fig 6h
+SAxx02,Fig6h_mb,sensory ascending,,,cell_type,threat response circuit,abdomen nociceptor (multidendritic),Fig 6h; line 594
+IN06B032,Fig6h_mb,VNC intrinsic,,,cell_type,threat response circuit,VNC interneuron in nociceptive circuit,Fig 6h
+IN07B010,Fig6h_mb,VNC intrinsic,,,cell_type,threat response circuit,VNC interneuron in leg motor circuit,Fig 6h
+PEN1,Fig6h_cx,brain intrinsic,,,cell_type,central complex,head direction ring neuron,Fig 6h
+EPG,Fig6h_cx,brain intrinsic,,,cell_type,central complex,head direction neuron,Fig 6h
+GLNO,Fig6h_cx,brain intrinsic,,,cell_type,central complex,angular velocity encoding; drives flight steering DNs,Fig 6h; line 607
+PFL1,Fig6h_cx,brain intrinsic,,,cell_type,central complex,compares head direction with goal direction; targets flight steering DNs,Fig 6h; line 613
+FC1,Fig6h_cx,brain intrinsic,,,cell_type,central complex,goal direction neuron,Fig 6h
+LAL047,Fig6h_cx,brain intrinsic,,,cell_type,central complex circuit,lateral accessory lobe neuron in steering circuit,Fig 6h
+LAL156a,Fig6h_cx,brain intrinsic,,,cell_type,central complex circuit,lateral accessory lobe neuron in steering circuit,Fig 6h
+wing_steering_motor_neuron,Fig6h_cx,effector,flight-steering,,cell_sub_class,,wing steering motor neurons,Fig 6h
+haltere_mechanosensor,Fig6h_cx,sensory,,,custom,,haltere mechanosensors; campaniform/hair_plate/chordotonal in haltere,Fig 6h

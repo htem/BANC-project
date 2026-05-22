@@ -1,0 +1,66 @@
+doc_md,filename,local_path,gcs_path,dataverse_filename,size_bytes,size_human,nrows,ncols,directoryLabel,categories,restrict,tabIngest,description_chars
+acknowledgements.md,acknowledgements.md,/Users/papers/BANC-project/acknowledgements.md,,,17205,,,,documentation,Documentation,False,False,1813
+aelysia_synapse_review_sample.md,2024-09-20_aelysia_synapse_sample_complete.csv,/Users/papers/BANC-project/data/synapses/2024-09-20_aelysia_synapse_sample_complete.csv,,,342927,343 KB,6029,6,synapses/manual_review,"Data,Synapses,Documentation",False,False,655
+backbone_proofread.md,backbone_proofread.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/backbone_proofread.parquet,,10316976,9.84 MB,211947,10,annotations/v888,"Annotations,Data",False,False,1119
+banc_888_betweenness.md,banc_888_betweenness_all_to_all_v2.csv,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_betweenness_all_to_all_v2.csv,,,,,,compiled_data,"Data,Connectivity",False,False,740
+banc_888_cns_network_spectral_clustering.md,banc_888_cns_network_spectral_clustering_v2.csv,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_cns_network_spectral_clustering_v2.csv,,,,,,compiled_data,"Data,Connectivity",False,False,766
+banc_888_edgelist_simple_v2.md,banc_888_edgelist_simple_v2.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v2.feather,,298465650,284.6 MB,11510975,6,compiled_data,"Data,Connectivity",False,False,1006
+banc_888_edgelist_simple_v3.md,banc_888_edgelist_simple_v3.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v3.feather,,352129906,335.8 MB,13507098,6,compiled_data,"Data,Connectivity",False,False,995
+banc_888_edgelist_split_v2.md,banc_888_edgelist_split_v2.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_split_v2.feather,,355937714,339.4 MB,6309984,13,compiled_data,"Data,Connectivity",False,False,973
+banc_888_meta.md,banc_888_meta.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_meta.feather,,51450978,49.07 MB,188162,79,compiled_data,"Data,Annotations",False,False,1111
+banc_888_metrics.md,banc_888_metrics.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_metrics.feather,,7787498,7.43 MB,188259,12,compiled_data,Data,False,False,1048
+banc_888_neurotransmitter_prediction_v2.md,banc_888_neurotransmitter_prediction_v2.csv,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_neurotransmitter_prediction_v2.csv,,22125000,21.1 MB,188199,17,compiled_data,Data,False,False,1067
+banc_888_synapses_v2_enriched.md,banc_888_synapses_v2_enriched.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v2_enriched.parquet,,10327245312,9.62 GB,168951110,21,compiled_data,"Data,Synapses",False,False,1071
+banc_888_synapses_v2_human_readable.md,banc_888_synapses_v2_human_readable.csv.gz,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_connectivity/v888/synapses_v2_human_readable.csv.gz,,12257440602,11.4 GB,,,synapses/raw,"Data,Synapses",False,False,836
+banc_888_synapses_v3_enriched.md,banc_888_synapses_v3_enriched.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v3_enriched.parquet,,6025295437,5.61 GB,198741886,10,compiled_data,"Data,Synapses",False,False,1061
+banc_888_synapses_v3_human_readable.md,banc_888_synapses_v3_human_readable.csv.gz,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_connectivity/v888/synapses_v3_human_readable.csv.gz,,15560927238,14.5 GB,,,synapses/raw,"Data,Synapses",False,False,863
+banc_color_mips.md,neuron_colormips_v888.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_colormips_v888.zip,,654332805,,,,color_mips,"Data,Images",False,False,722
+banc_fafb_783_nblast.md,banc_fafb_783_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fafb_783_nblast.feather,,578407490,551.62 MB,8254752,11,nblast,"Data,NBLAST",False,False,1085
+banc_fanc_1116_nblast.md,banc_fanc_1116_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_fanc_1116_nblast.feather,,93624386,89.29 MB,1658475,11,nblast,"Data,NBLAST",False,False,1003
+banc_hemibrain_v1.2.1_nblast.md,banc_hemibrain_v1.2.1_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_hemibrain_v1.2.1_nblast.feather,,198943946,189.73 MB,2963651,11,nblast,"Data,NBLAST",False,False,1122
+banc_malecns_v0.9_nblast.md,banc_malecns_v0.9_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_malecns_v0.9_nblast.feather,,246058658,234.66 MB,3840033,11,nblast,"Data,NBLAST",False,False,1112
+banc_manc_v1.2.1_nblast.md,banc_manc_v1.2.1_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_manc_v1.2.1_nblast.feather,,121791594,116.15 MB,1906831,11,nblast,"Data,NBLAST",False,False,1057
+banc_microCT.md,banc_microCT.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/microCT/,,1306644843,,,,microCT,"Data,Images",False,False,584
+banc_mirror_nblast.md,banc_mirror_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_mirror_nblast.feather,,338917546,323.21 MB,2188645,16,nblast,"Data,NBLAST",False,False,1091
+banc_mitochondria_v1.md,(not deposited — precomputed volume external link only),,gs://zetta_lee_fly_cns_001_mito/250423_mito/seg,,,,,,external_links,"Annotations,Data",False,False,665
+banc_native_nblast.md,banc_native_nblast.feather,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/nblast/banc_native_nblast.feather,,5946082,5.67 MB,49289,16,nblast,"Data,NBLAST",False,False,1041
+banc_neuron_meshes.md,banc_neuron_meshes.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_meshes/,,167656267776,,,,meshes,"Data,Meshes",False,False,770
+banc_neuropil_meshes.md,banc_neuropil_meshes.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/region_outlines/,,43780820,,,,meshes,"Data,Meshes",False,False,768
+banc_nt_ground_truth.md,banc_nt_ground_truth.zip,,,,,,,,synapses/nt_classifier,"Annotations,Data",False,False,795
+banc_nt_prediction_v3_w_sizethresh_10_05042026.md,banc_nt_prediction_v3_w_sizethresh_10_05042026.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/banc_nt_prediction_v3_w_sizethresh_10_05042026.parquet,,5786482835,5.39 GB,259391803,11,synapses/v3.0,"Data,Synapses",False,False,846
+banc_nt_prediction_w_sizethresh_5_11102025.md,banc_nt_prediction_w_sizethresh_5_11102025.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/banc_nt_prediction_w_sizethresh_5_11102025.parquet,,3890490075,3.62 GB,188692510,11,synapses/v2.0,"Data,Synapses",False,False,848
+banc_problem_regions.md,banc_problem_regions.csv,/Users/papers/BANC-project/manuscript/print/supplemental_data/supplemental_data_10.csv,,banc_problem_regions.csv,1215,1.2 KiB,22,7,documentation,"Documentation,Data",False,False,548
+banc_project_archive.md,banc_project_archive.zip,,,,,,,,code,Code,False,False,1091
+banc_python_archive.md,banc-0.6.1.tar.gz,,,,,,,,code,Code,False,False,893
+banc_supplemental_data.md,banc_supplemental_data.zip,/Users/papers/BANC-project/manuscript/print/supplemental_data,,,91000000,,,,supplemental_data,"Data,Documentation",False,False,1117
+banc_swc_skeletons.md,banc_swc_skeletons.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_banc_space_swc/,,26326591523,,,,skeletons,"Data,Skeletons",False,False,627
+banc_template_spaces.md,banc_template_spaces.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/templates/,,848034232,,,,registrations,"Data,Registration",False,False,638
+bancpipeline_archive.md,bancpipeline_archive.zip,,,,,,,,code,Code,False,False,1364
+bancr_archive.md,bancr_archive.zip,,,,,,,,code,Code,False,False,1186
+behavior.md,behavior.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/behavior/,,365283167,,,,behavior,"Data,Behavior",False,False,583
+bibliography.md,bibliography.bib,/Users/papers/BANC-project/manuscript/print/bibliography.bib,,,646143,631 KiB,,,documentation,Documentation,False,False,397
+cell_info.md,cell_info.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_info.parquet,,12315918,11.75 MB,376231,10,annotations/v888,"Annotations,Data",False,False,1020
+cell_representative_point.md,cell_representative_point.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/cell_representative_point.parquet,,5503064,5.25 MB,158265,7,annotations/v888,"Annotations,Data",False,False,979
+codex_annotations.md,codex_annotations.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/codex_annotations.parquet,,74350281,70.91 MB,1841078,12,annotations/v888,"Annotations,Data",False,False,1182
+connectome_influence_calculator_archive.md,connectome_influence_calculator_archive.zip,,,,,,,,code,Code,False,False,1285
+drosophila_neuropeptides_archive.md,drosophila_neuropeptides_archive.zip,,,,,,,,code,Code,False,False,1058
+drosophila_neurotransmitters_archive.md,drosophila_neurotransmitters_archive.zip,,,,,,,,code,Code,False,False,1224
+fly_connectome_data_tutorial_archive.md,fly_connectome_data_tutorial_archive.zip,,,,,,,,code,Code,False,False,1144
+influence_all_to_all.md,influence/all_to_all/,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/all_to_all/,,308262988315,287.10 GB,,,influence/all_to_all,"Data,Influence",False,False,949
+influence_all_to_effector_subclass.md,influence_all_to_effector_subclass.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_all_to_effector_subclass.parquet,,35448133,33.81 MB,3334800,3,influence,"Data,Influence",False,False,694
+influence_sensory_subclass_to_all.md,influence_sensory_subclass_to_all.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/influence/influence_sensory_subclass_to_all.parquet,,284977015,271.78 MB,13943894,3,influence,"Data,Influence",False,False,831
+influencer_archive.md,influencer_archive.zip,,,,,,,,code,Code,False,False,1151
+nat_ggplot_archive.md,nat_ggplot_archive.zip,,,,,,,,code,Code,False,False,1284
+neck_connective_y121000.md,neck_connective_y121000.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/neck_connective_y121000.parquet,,85778,83.8 KB,3712,8,annotations/v888,"Annotations,Data",False,False,707
+neck_connective_y92500.md,neck_connective_y92500.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/neck_connective_y92500.parquet,,139052,135.79 KB,3652,8,annotations/v888,"Annotations,Data",False,False,1075
+neuroglancer_states.md,neuroglancer_states_2026a.zip,/Users/papers/BANC-project/manuscript/print/neuroglancer_states/2026a,,,6710886,,,,neuroglancer_states,"Documentation,Data",False,False,638
+peripheral_nerves.md,peripheral_nerves.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/peripheral_nerves.parquet,,629173,614.43 KB,15615,8,annotations/v888,"Annotations,Data",False,False,1048
+proofreading_notes.md,proofreading_notes.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/proofreading_notes.parquet,,857667,837.57 KB,21614,9,annotations/v888,"Annotations,Data",False,False,1006
+registration_brain_jrc2018f.md,registration_brain_jrc2018f.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/registrations/brain_240721/,,19656147,,,,registrations,"Data,Registration",False,False,750
+registration_vnc_jrc2018vncf.md,registration_vnc_jrc2018vncf.zip,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/registrations/vnc_240721/,,71237061,,,,registrations,"Data,Registration",False,False,689
+requirements.md,requirements.txt,/Users/papers/BANC-project/requirements.txt,,,7719,,,,documentation,Documentation,False,False,894
+somas_v1.md,somas_v1.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_annotations/v888/somas_v1.parquet,,5350459,5.10 MB,153892,7,annotations/v888,"Annotations,Data",False,False,1098
+synapse_neuropil_lookup_v2.md,synapse_neuropil_lookup_v2.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v2.0/synapse_neuropil_lookup_v2.parquet,,2093290134,1.95 GB,213762397,4,synapses/v2.0,"Data,Synapses",False,False,748
+synapse_neuropil_lookup_v3.md,synapse_neuropil_lookup_v3.parquet,,gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v3.0/synapse_neuropil_lookup_v3.parquet,,2386313119,2.22 GB,259393451,4,synapses/v3.0,"Data,Synapses",False,False,601
+synister_banc_archive.md,synister_banc_archive.zip,,,,,,,,code,Code,False,False,940
+the_banc_fly_connectome_archive.md,the_banc_fly_connectome_archive.zip,,,,,,,,code,Code,False,False,1249

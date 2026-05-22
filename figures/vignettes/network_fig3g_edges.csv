@@ -1,0 +1,17 @@
+from,to,count,pre_top_nt
+AN27X017,DNp65,329,serotonin
+AN27X017,MNad21,27,acetylcholine
+AN27X017,m_NSC_DILP,989,serotonin
+AN27X017,oxygen_sensory,11,serotonin
+DNp65,AN27X017,191,gaba
+DNp65,MNad21,618,gaba
+DNp65,m_NSC_DILP,52,gaba
+MNad21,AN27X017,6,"Dh44,Lk"
+MNad21,oxygen_sensory,3,"Dh44,Lk"
+aorta_sensory,AN27X017,7,serotonin
+aorta_sensory,m_NSC_DILP,1062,serotonin
+m_NSC_DILP,DNp65,3,"dARC1,Ilp2,Ilp3,Ilp5"
+oxygen_sensory,AN27X017,769,serotonin
+oxygen_sensory,DNp65,12,serotonin
+oxygen_sensory,MNad21,28,serotonin
+oxygen_sensory,m_NSC_DILP,3,acetylcholine

@@ -1,0 +1,58 @@
+display_name,root_id,cell_representative_point_id,cell_type,cell_class,cell_sub_class,super_class,cluster,side,neurotransmitter,body_part_sensory,body_part_effector
+DNa06,720575941581684601,123,DNa06,descending_neuron,descending_neuron,descending,head orienting,right,acetylcholine,unknown,
+DNa06,720575941496676295,41993,DNa06,descending_neuron,descending_neuron,descending,head orienting,left,acetylcholine,unknown,
+DNg89,720575941474677825,1349,DNg89,descending_neuron,descending_neuron,descending,head orienting,right,gaba,unknown,
+DNg89,720575941611136476,3266,DNg89,descending_neuron,descending_neuron,descending,head orienting,left,gaba,unknown,
+AN19B018,720575941432109582,1141,AN19B018,ascending_neuron,ascending_neuron,ascending,head orienting,left,acetylcholine,unknown,
+AN19B018,720575941558335524,1180,AN19B018,ascending_neuron,ascending_neuron,ascending,head orienting,right,acetylcholine,unknown,
+AN18B023,720575941617642965,1081,AN18B023,ascending_neuron,ascending_neuron,ascending,head orienting,right,acetylcholine,unknown,
+AN18B023,720575941586431812,1226,AN18B023,ascending_neuron,ascending_neuron,ascending,head orienting,left,acetylcholine,unknown,
+AN03A002,720575941562287202,676,AN03A002,ascending_neuron,ascending_neuron,ascending,head orienting,left,acetylcholine,unknown,
+AN03A002,720575941567089908,798,AN03A002,ascending_neuron,ascending_neuron,ascending,head orienting,right,acetylcholine,unknown,
+neck_pitch_motor_neuron,720575941495864905,617,CvN7,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_pitch_motor_neuron,720575941513990988,767,CvN5,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_motor_neuron,720575941565285730,979,CvN9,neck_motor_neuron,,motor,head-eye-antenna,right,acetylcholine,,neck
+neck_pitch_motor_neuron,720575941597457564,1102,CvN4,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_pitch_motor_neuron,720575941459454704,1171,CvN7,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_roll_motor_neuron,720575941553264211,1252,CvN3,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_pitch_motor_neuron,720575941428762249,1255,CvN4,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,octopamine,,neck
+neck_motor_neuron,720575941564833938,1302,CvN11,neck_motor_neuron,,motor,head-eye-antenna,left,glutamate,,neck
+neck_pitch_motor_neuron,720575941609437613,1355,CvN6,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_pitch_motor_neuron,720575941508147746,1381,CvN5,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_pitch_motor_neuron,720575941539792220,1432,CvN6,neck_motor_neuron,neck_pitch_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941544483252,1457,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_motor_neuron,720575941517213177,1748,CvN11,neck_motor_neuron,,motor,head-eye-antenna,right,gaba,,neck
+neck_roll_motor_neuron,720575941525682253,9004,DProN3b,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941534975425,632,CvNA1,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941575975350,849,DProN3a,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_yaw_motor_neuron,720575941526853030,1003,CvNA1,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_motor_neuron,720575941642129528,1021,CvN10,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941544264041,1068,DProN3b,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_motor_neuron,720575941435429676,1162,DProN7,neck_motor_neuron,,motor,head-eye-antenna,right,gaba,,neck
+neck_yaw_motor_neuron,720575941507987877,1197,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,acetylcholine,,neck
+neck_yaw_motor_neuron,720575941548493857,1270,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941439741119,1441,DProN1,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_roll_motor_neuron,720575941457562694,1493,CvN3,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_yaw_motor_neuron,720575941573751305,1502,CvNA2,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,octopamine,,neck
+neck_yaw_motor_neuron,720575941455715053,1536,VCvN3,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,glutamate,,neck
+neck_yaw_motor_neuron,720575941514963811,1548,VCvN3,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_motor_neuron,720575941731588651,1586,DProN7,neck_motor_neuron,,motor,head-eye-antenna,left,glutamate,,neck
+neck_motor_neuron,720575941478578511,1602,DProN6,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941508147234,1621,"VCvN1,VCvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,acetylcholine,,neck
+neck_yaw_motor_neuron,720575941492017790,1673,"CvN1,CvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_yaw_motor_neuron,720575941573355592,1759,CvNA2,neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941564288263,1930,"VCvN1,VCvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_yaw_motor_neuron,720575941577100277,2011,"VCvN1,VCvN2",neck_motor_neuron,neck_yaw_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+eye_motor_neuron,720575941611096028,10698,CB0901,eye_motor_neuron,,motor,head-eye-antenna,left,octopamine,,eye
+eye_motor_neuron,720575941525655833,12935,CB0901,eye_motor_neuron,,motor,head-eye-antenna,right,octopamine,,eye
+neck_roll_motor_neuron,720575941448945757,30032,DProN3a,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941492452222,636,DProN4,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_roll_motor_neuron,720575941489332169,1042,DProN4,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck
+neck_motor_neuron,720575941574538504,566,DProN9,neck_motor_neuron,,motor,head-eye-antenna,right,gaba,,neck
+neck_motor_neuron,720575941598584768,747,CvN9,neck_motor_neuron,,motor,head-eye-antenna,left,acetylcholine,,neck
+neck_motor_neuron,720575941493508551,835,DProN8,neck_motor_neuron,,motor,head-eye-antenna,left,gaba,,neck
+neck_motor_neuron,720575941390352388,893,DProN9,neck_motor_neuron,,motor,head-eye-antenna,left,octopamine,,neck
+neck_motor_neuron,720575941577663825,1121,DProN8,neck_motor_neuron,,motor,head-eye-antenna,right,octopamine,,neck
+neck_roll_motor_neuron,720575941502691819,2188,DProN1,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941489125351,788,DProN2,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,left,gaba,,neck
+neck_roll_motor_neuron,720575941512880643,791,DProN2,neck_motor_neuron,neck_roll_motor_neuron,motor,head-eye-antenna,right,gaba,,neck

@@ -1,0 +1,223 @@
+# BANC-Project — runtime requirements
+#
+# The codebase in this repository works with the following R and Python
+# versions, and these R library and Python package versions. The pipeline
+# is driven from R; Python is called under the hood via the `reticulate`
+# package for the influence calculator, spectral clustering, cascade model,
+# betweenness centrality, GCS-backed feather reads, and SeaTable I/O.
+
+# =============================================================================
+# Interpreter versions
+# =============================================================================
+
+# R       4.2.1   (2022-06-23, "Funny-Looking Kid")
+# Python  3.12.2
+
+# =============================================================================
+# R packages (installed in the active R library)
+# =============================================================================
+
+# Core data + I/O
+arrow                  16.1.0
+bit64                  4.6.0.1
+data.table             1.16.2
+DBI                    1.3.0
+RSQLite                2.4.6
+readr                  2.1.5
+readxl                 1.4.1
+vroom                  1.6.5
+jsonlite               2.0.0
+
+# tidyverse + manipulation
+dplyr                  1.2.1
+forcats                0.5.2
+glue                   1.8.0
+plyr                   1.8.9
+purrr                  1.2.1
+reshape2               1.4.4
+rlang                  1.1.7
+snakecase              0.11.1
+stringr                1.6.0
+tibble                 3.3.1
+tidyr                  1.3.1
+tidytext               0.3.4
+tidyverse              1.3.2
+
+# Plotting
+ggplot2                4.0.0.9000
+ggimage                0.3.3
+ggnewscale             0.5.2.9000
+ggpubr                 0.6.0.999
+ggraph                 2.2.1
+ggrepel                0.9.5
+ggsignif               0.6.4
+ggsvg                  0.1.13
+gridExtra              2.3
+nat.ggplot             0.1.0
+pheatmap               1.0.12
+plotly                 4.11.0
+scales                 1.4.0
+RColorBrewer           1.1.3
+extrafont              0.18
+Rttf2pt1               1.3.11
+
+# Tables / typesetting
+flextable              0.8.2
+gt                     0.7.0
+knitr                  1.51
+officer                0.4.4
+openxlsx               4.2.5.1
+
+# Stats / clustering / dim-reduction
+car                    3.1.2
+carData                3.0.5
+dendextend             1.17.1
+dynamicTreeCut         1.63.1
+effectsize             0.8.1
+emmeans                1.8.2
+kernlab                0.9.31
+lsa                    0.73.3
+MASS                   7.3.58.1
+mclust                 6.0.1
+Matrix                 1.6.1.1
+matrixStats            0.62.0
+proxy                  0.4.27
+rstatix                0.7.2
+seriation              1.4.0
+uwot                   0.1.14
+vegan                  2.6.4
+
+# Graph / networks
+igraph                 1.5.1
+RSpectra               0.16.1
+tidygraph              1.2.3
+
+# 3D meshes / geometry
+alphashape3d           1.3.1
+concaveman             1.1.0
+misc3d                 0.9.1
+nabor                  0.5.0
+Rvcg                   0.22.2
+
+# Connectomics-specific (natverse + lab forks)
+nat                    1.11.0
+nat.flybrains          1.8.2
+nat.nblast             1.6.7
+nat.templatebrains     1.2.1
+fafbseg                0.15.5
+malevnc                0.3.3
+bancr                  0.3.0     # https://github.com/flyconnectome/bancr
+influencer             0.1.0     # https://github.com/natverse/influencer
+# hemibrainr is referenced; install if you need hemibrain bridging.
+
+# Python interop
+reticulate             1.34.0
+
+# Cloud + Google
+curl                   7.0.0
+googledrive            2.1.1
+googlesheets4          1.1.1
+
+# Interactive / widgets
+crosstalk              1.2.0
+DT                     0.26
+htmltools              0.5.9
+htmlwidgets            1.6.4
+magick                 2.7.3
+webshot2               0.1.1
+
+# Utilities
+callr                  3.7.6
+checkmate              2.3.4
+devtools               2.4.5
+parallel               4.2.1     # base R (ships with R)
+pbapply                1.7.4
+progress               1.2.3
+R.utils                2.12.2
+usethis                3.2.1
+
+# =============================================================================
+# Python packages (installed in the active interpreter)
+# =============================================================================
+#
+# Reticulate boots Python via `/opt/miniconda3/bin/python3` on this machine.
+# The R startup pins reticulate to that interpreter; if you use a different
+# Python, install the packages below into it.
+
+# Scientific stack
+numpy                  2.0.2
+pandas                 2.2.3
+scipy                  1.17.0
+matplotlib             3.10.8
+scikit-learn           1.8.0
+
+# Graph / clustering
+python-igraph          1.0.0
+leidenalg              # used by spectral_clustering helpers; install latest
+umap-learn             0.5.11
+
+# Connectomics infra
+caveclient             8.0.1
+cloud-volume           12.9.2
+
+# SeaTable
+seatable-api           # tested with current pypi; pin to the version that
+                       # matches your SeaTable server.
+
+# GCS
+gcsfs                  2025.12.0
+
+# =============================================================================
+# Install recipe
+# =============================================================================
+#
+# 1. R toolchain
+#    -----------
+#    # macOS (Homebrew)
+#    brew install r
+#    # or download R 4.2.1 from https://cran.r-project.org/bin/macosx/
+#
+#    R -e 'install.packages("BiocManager", repos = "https://cloud.r-project.org")'
+#    R -e 'install.packages(c(
+#        "arrow","bit64","data.table","DBI","RSQLite","readr","readxl","vroom","jsonlite",
+#        "dplyr","forcats","glue","plyr","purrr","reshape2","rlang","snakecase","stringr",
+#        "tibble","tidyr","tidytext","tidyverse",
+#        "ggplot2","ggimage","ggnewscale","ggpubr","ggraph","ggrepel","ggsignif","ggsvg",
+#        "gridExtra","pheatmap","plotly","scales","RColorBrewer","extrafont","Rttf2pt1",
+#        "flextable","gt","knitr","officer","openxlsx",
+#        "car","carData","dendextend","dynamicTreeCut","effectsize","emmeans","kernlab",
+#        "lsa","MASS","mclust","Matrix","matrixStats","proxy","rstatix","seriation","uwot",
+#        "vegan","igraph","RSpectra","tidygraph",
+#        "alphashape3d","concaveman","misc3d","nabor","Rvcg",
+#        "reticulate","curl","googledrive","googlesheets4",
+#        "crosstalk","DT","htmltools","htmlwidgets","magick","webshot2",
+#        "callr","checkmate","devtools","pbapply","progress","R.utils","usethis"
+#      ), repos = "https://cloud.r-project.org")'
+#
+#    # natverse + lab forks (must be installed from source)
+#    R -e 'devtools::install_github(c(
+#        "natverse/nat","natverse/nat.flybrains","natverse/nat.nblast",
+#        "natverse/nat.templatebrains","natverse/nat.ggplot","natverse/fafbseg",
+#        "natverse/malevnc","natverse/influencer",
+#        "flyconnectome/bancr"
+#      ))'
+#
+# 2. Python toolchain
+#    ----------------
+#    # Conda
+#    conda create -n banc python=3.12.2
+#    conda activate banc
+#    pip install -U numpy==2.0.2 pandas==2.2.3 scipy==1.17.0 matplotlib==3.10.8 \
+#        scikit-learn==1.8.0 python-igraph==1.0.0 leidenalg umap-learn==0.5.11 \
+#        caveclient==8.0.1 cloud-volume==12.9.2 seatable-api gcsfs==2025.12.0
+#
+# 3. Point reticulate at this Python (one-off)
+#    -----------------------------------------
+#    In R, run once:
+#      reticulate::use_python("/opt/miniconda3/envs/banc/bin/python", required = TRUE)
+#    Or set RETICULATE_PYTHON in ~/.Renviron.
+#
+# 4. Smoke test
+#    ----------
+#    R -e 'source("R/startup/banc-startup.R"); source("R/startup/banc-meta.R")'
+#    # Should print the banc.meta row count without errors.

@@ -1,0 +1,162 @@
+cell_type,other_names,super_class,cell_function,citations,doi
+VST1,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+VST2,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT50,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT49,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT31,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT30,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT28,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT27,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT26,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT23,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT22,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT21,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT04_HST,"LPT04, HST",visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT48_vCal3,"LPT48, vCal3",visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT47_vCal2,"LPT47, vCal2",visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+vCal1,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT45_dCal1,"LPT45, dCal1",visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+Nod5,NA,visual_projection,visual_vertical_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+LPT42_Nod4,"LPT42, Nod4",visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+Nod3,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+Nod2,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+Nod1,NA,visual_projection,visual_horizontal_widefieldmotion,Zhao et al 2024,10.7554/elife.93659.1
+V1,NA,visual_projection,visual_vertical_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+FD3,NA,visual_projection,visual_horizontal_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+FD1,NA,visual_projection,visual_horizontal_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+H1,NA,visual_projection,visual_horizontal_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+vCH,NA,visual_projection,visual_horizontal_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+dCH,NA,visual_projection,visual_horizontal_widefieldmotion,Wei et al 2020,10.1007/s00359-019-01380-y
+DNp05,NA,descending,escape_takeoff,"putative, Cheong & Eichler 2023",10.1101/2023.06.07.544074
+DNa01,NA,descending,steering,Rayshubskiy et al 2020,10.7554/elife.102230.1
+DNa05,NA,descending,flight,"putative, Cheong & Eichler 2023",10.1101/2023.06.07.544074
+DNa02,NA,descending,steering,"Rayshubskiy et al 2020, Yang et al 2024",10.7554/elife.102230.1
+DNa03,NA,descending,steering,Feng et al 2024,10.1101/2024.06.27.601106
+DNa11,NA,descending,steering,Feng et al 2024,10.1101/2024.06.27.601106
+DNae003,NA,descending,steering,Feng et al 2024,10.1101/2024.06.27.601106
+DNa15,NA,descending,flight,Ros et al 2024,10.1016/j.cub.2023.12.047
+DNp20,DNOVS1,descending,flight,"Suver et al., 2016",10.1523/jneurosci.2277-16.2016
+DNp22,DNOVS1,descending,ocellar,"Suver et al., 2016",10.1523/jneurosci.2277-16.2016
+DNb01,NA,descending,flight,Ros et al 2024,10.1016/j.cub.2023.12.047
+DNb02,NA,descending,steering,Braun et al. 2024,10.1038/s41586-024-07523-9
+DNb05,NA,descending,steering,Yang et al 2024,10.1016/j.cell.2024.08.033
+DNb06,NA,descending,steering,Yang et al 2024,10.1016/j.cell.2024.08.033
+DNg02,NA,descending,flight,Namiki et al 2022,10.1016/j.cub.2022.01.008
+DNg07,NA,descending,flight,Namiki et al 2022,10.1016/j.cub.2022.01.008
+DNg12,NA,descending,grooming,Guo et al 2022; Pugliese et al 2025,"10.1016/j.cub.2021.12.055, 10.1101/2025.09.12.675944"
+DNg13,NA,descending,steering,Yang et al 2024,10.1016/j.cell.2024.08.033
+DNg14,NA,descending,abdomen_motion,Braun et al. 2024,10.1038/s41586-024-07523-9
+DNg75,cDN1,descending,walking,Sapkal et al. 2024,10.1038/s41586-024-07854-7
+DNg97,oDN1,descending,walking,Sapkal et al. 2024,10.1038/s41586-024-07854-7
+DNp01,giant_fiber,descending,escape_takeoff,Lima et al. 2005,10.1016/j.cell.2005.02.004
+DNge050,BDN4,descending,walking,Sapkal et al. 2024,10.1038/s41586-024-07854-7
+DNge053,BDN1,descending,walking,Sapkal et al. 2024,10.1038/s41586-024-07854-7
+DNg28,bitter-SEL,descending,feeding,Yao and Scott 2022,10.1016/j.neuron.2021.12.028
+DNg55,BDN3,descending,steering,Sapkal et al. 2024 (downstream BPNs),10.1038/s41586-024-07854-7
+DNg62,aDN1,descending,grooming,"Braun et al. 2024, Hampel et al 2015","10.1038/s41586-024-07523-9, 10.7554/elife.08758"
+DNge011,aDN1,descending,grooming,Hampel et al 2015,10.7554/elife.08758
+DNge078,aDN2,descending,grooming,"Braun et al. 2024, Hampel et al 2015","10.1038/s41586-024-07523-9, 10.7554/elife.08758"
+DNge012,aDN1,descending,grooming,Hampel et al 2015,10.7554/elife.08758
+DNg100,BDN2,descending,walking,Sapkal et al. 2024; Pugliese et al. 2025,"10.1038/s41586-024-07854-7, 10.1101/2025.09.12.675944"
+DNp02,NA,descending,escape_takeoff,Dombrovski et al. 2023,10.1038/s41586-022-05562-8
+DNc01,SIFa,descending,neuromodulatory,Martelli et al. 2017 (immuno),10.1016/j.celrep.2017.06.043
+DNc02,SIFa,descending,neuromodulatory,Martelli et al. 2017 (immuno),10.1016/j.celrep.2017.06.043
+DNp07,NA,descending,landing,Ache et al. 2019,10.1038/s41593-019-0413-4
+DNp10,NA,descending,landing,Ache et al. 2019,10.1038/s41593-019-0413-4
+DNp09,NA,descending,halting,"Bidaye et al. 2020, Braun et al. 2024; Zacarias et al., 2018","10.1016/j.neuron.2020.07.032, 10.1038/s41467-018-05875-1, 10.1038/s41586-024-07523-9"
+DNp11,NA,descending,escape_takeoff,Dombrovski et al. 2023,10.1038/s41586-022-05562-8
+DNp35,NA,descending,escape_takeoff,"putative, Cheong & Eichler 2023",10.1101/2023.06.07.544074
+DNg22,NA,descending,neuromodulatory,"Song et al., 2023 (immuno)",10.1038/s41422-023-00800-8
+DNg70,NA,descending,neuromodulatory,"Mollá-Albaladejo et al., 2024",10.7554/elife.100947.1
+DNp32,NA,descending,neuromodulatory,"Carlsson et al., 2010 (immuno)",10.1002/cne.22405
+DNg30,"SPN, ICLI",descending,neuromodulatory,"Jiang et al., 2013",10.1073/pnas.1310676110
+DNg34,"OA-VPM1, aDT8",descending,octopaminergic,"Certel et al., 2010, Babski et al., 2024","10.1016/j.heliyon.2024.e29952, 10.1371/journal.pone.0013248"
+DNp13,pMN1,descending,reproduction,"Wang et al. 2020, Lillvis et al. 2024","10.1016/j.cub.2024.01.015, 10.1038/s41586-020-2055-9"
+DNp15,NA,descending,steering,Erginkaya et al. 2023,10.1038/s41593-025-01948-9
+DNp17,NA,descending,steering,Jan Ache - Neuroethology poster,10.1101/2025.07.22.666129
+DNp37,vpoDN_pMN2,descending,reproduction,Wang et al. 2021,10.1038/s41586-020-2972-7
+DNp42,NA,descending,walking,Braun et al. 2024,"10.1038/s41586-024-07523-9, 10.1101/394403"
+MDN,DNp50,descending,walking,Bidaye et al 2014,10.1126/science.1249964
+DNpe048,SMP367,descending,neuromodulatory,"González Segarra et al., 2023 (transgenics)",NA
+DNp27,NA,descending,neuromodulatory,"Meiselman et al., 2022 (immuno); Brown et al. 2024 (intersection); Chen et al., 2015 (immuno)","10.1016/j.cub.2022.01.061, 10.1016/j.cub.2024.04.039, 10.1016/j.peptides.2015.01.002, 10.1371/journal.pgen.1010357"
+DNp30,DSKMP1A,descending,hunger,"Soderberg et al., 2012 (immuno)",10.3389/fendo.2012.00109
+DNp62,DSKMP1B,descending,hunger,"Soderberg et al., 2012",10.3389/fendo.2012.00109
+DNp29,NPFP1,descending,hunger,Krashes et al. 2009 (immuno),10.1016/j.cell.2009.08.035
+oviDNb,oviDNb,descending,reproduction,Wang et al 2020,10.1038/s41586-020-2055-9
+oviDNa_b,oviDNb,descending,reproduction,Wang et al 2020,10.1038/s41586-020-2055-9
+oviDNa_a,oviDNa,descending,reproduction,Wang et al 2020,10.1038/s41586-020-2055-9
+oviDNa,oviDNa,descending,reproduction,Wang et al 2020,10.1038/s41586-020-2055-9
+DNg26,NA,descending,reproduction,Gautham et al 2024 ?????,10.1038/s41586-024-07749-7
+DNp03,NA,descending,flight,Buchsbaum et al. 2024,10.1016/j.cub.2024.12.001
+DNp04,NA,descending,escape_takeoff,Dombrovski et al. 2023,10.1038/s41586-022-05562-8
+DNp06,NA,descending,escape_takeoff,Kim et al. 2023,10.1016/j.cub.2022.12.014
+LC4,NA,visual_projection,visual_loom,"Klapoetke et al 2022, Kim et al 2023, Wu et al 2016, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.cub.2022.12.014, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022"
+LC16,NA,visual_projection,visual_loom,"Sen et al 2017, Cazale-Debat et al 2024, Klapoetke et al 2022, Turner et al 2022, Wu et al 2016, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.cub.2017.02.008, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LC12,NA,visual_projection,"visual_object,visual_loom","Klapoetke et al 2022, Turner et al 2022, Wu et al 2016","10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LC17,NA,visual_projection,"visual_object,visual_loom","Wu et al 2016, Klapoetke et al 2022, Turner et al 2022, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LPLC1,NA,visual_projection,visual_loom,"Wu et al 2016, Klapoetke et al 2022, Kim et al 2023, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.cub.2022.04.023, 10.1016/j.cub.2022.12.014, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022"
+LPLC2,NA,visual_projection,"visual_small_object,visual_loom","Wu et al 2016, Klapoetke et al 2022, Turner et al 2022, Kim et al 2023, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.cub.2022.12.014, 10.1016/j.neuron.2022.02.013, 10.1038/nature24626, 10.7554/elife.21022, 10.7554/elife.82587"
+LT52,NA,visual_projection,visual_front_leg_feedback,Hartman et al 2025,10.1016/j.cub.2025.06.055
+LC13,NA,visual_projection,visual_small_object,"Wu et al 2016, Kim et al 2023","10.1016/j.cub.2022.12.014, 10.7554/elife.21022"
+LC10d,NA,visual_projection,visual_small_object,"Ribeiro et al 2018, Wu et al 2016","10.1016/j.cell.2018.06.020, 10.7554/elife.21022"
+LC10c,NA,visual_projection,visual_small_object,"Ribeiro et al 2018, Wu et al 2016","10.1016/j.cell.2018.06.020, 10.7554/elife.21022"
+LC10b,NA,visual_projection,visual_small_object,"Ribeiro et al 2018, Wu et al 2016","10.1016/j.cell.2018.06.020, 10.7554/elife.21022"
+LC10a,NA,visual_projection,visual_small_object,"Ribeiro et al 2018, Sten et al 2021, Wu et al 2016","10.1016/j.cell.2018.06.020, 10.1038/s41586-021-03714-w, 10.7554/elife.21022"
+LC9,NA,visual_projection,"visual_small_object,visual_loom","Turner et al. 2022, Aptekar et al 2015, Bidaye et al 2020, Wu et al 2016, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.neuron.2020.07.032, 10.1523/jneurosci.0652-15.2015, 10.7554/elife.21022, 10.7554/elife.82587"
+LC11,NA,visual_projection,visual_small_object,"Klapoetke et al 2022, Turner et al 2022, Keleş et al 2020, Keleş & Frye 2017, Tanaka & Clark 2020, Wu et al 2016, Kim et al 2023, Panser et al 2016; Tanaka & Clark 2020","10.1016/j.cub.2016.05.052, 10.1016/j.cub.2017.01.012, 10.1016/j.cub.2020.04.068, 10.1016/j.cub.2022.12.014, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LC15,NA,visual_projection,"visual_large_objects,visual_thin_vertical_bar","Wu et al 2016, Klapoetke et al 2022, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022"
+LC18,NA,visual_projection,visual_small_object,"Wu et al 2016, Klapoetke et al 2022, Turner et al 2022, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LC21,NA,visual_projection,visual_small_object,"Wu et al 2016, Klapoetke et al 2022, Turner et al 2022, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.1016/j.neuron.2022.02.013, 10.7554/elife.21022, 10.7554/elife.82587"
+LC25,NA,visual_projection,visual_thin_vertical_bar,"Wu et al 2016, Klapoetke et al 2022","10.1016/j.neuron.2022.02.013, 10.7554/elife.21022"
+LC26,NA,visual_projection,"visual_small_object,visual_loom",Turner et al 2022,10.7554/elife.82587
+LC6,NA,visual_projection,"visual_small_object,visual_loom","Turner et al 2022, Wu et al 2016, Panser et al 2016","10.1016/j.cub.2016.05.052, 10.7554/elife.21022, 10.7554/elife.82587"
+DNg66,OA-VUMd4,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNg104,VPM2,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNge138,OA-VUMd1,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNge149,OA-VUMd2,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNge150,OA-VUMd3,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNge152,OA-VUMd2,descending,octopaminergic,"Babski et al., 2024",10.1016/j.heliyon.2024.e29952
+DNge172,mute,descending,reproduction,Braun et al. 2024,10.1038/s41586-024-07523-9
+DNa12,aSP22,descending,abdomen_motion,McKellar et al. 2019,10.1016/j.cub.2018.12.019
+DNa04,NA,descending,flight,"Brezovec et al., 2024",10.1016/j.cub.2023.12.063
+AN06B011,"LAL-PS-AN, AN_multi_10",ascending,walking,"Fujiwara et al., 2020","10.1016/j.neuron.2022.04.008, 10.3389/fphys.2019.01552"
+AN27X008,"MsAHN, AHN, MDHn",ascending,flight,"Cheong et al., 2024",10.7554/elife.96084.1
+AN03A001,SS42740,ascending,walking,"Chen et al., 2023",10.1038/s41593-023-01281-z
+AN27X017,bowtie,ascending,halting,"Jones et al., 2023",10.1371/journal.pbio.3002012
+ANXXX983,"AN_SMP_2, SAG",ascending,reproduction,Feng et al. 2014,10.1016/j.neuron.2014.05.017
+dMS9,NA,ascending,wing_vibration,Lillvis et al 2024,10.1016/j.cub.2024.01.015
+vMS13,NA,ascending,wing_vibration,Lillvis et al 2024,10.1016/j.cub.2024.01.015
+vMS16,NA,ascending,wing_vibration,Lillvis et al 2024,10.1016/j.cub.2024.01.015
+AN08B134,SS31232,ascending,proboscis_extension,"Chen et al., 2023",10.1038/s41593-023-01281-z
+AN27X005,SS29579,ascending,walking,"Chen et al., 2023",10.1038/s41593-023-01281-z
+AN10B001,SS51046,ascending,turning,"Chen et al., 2023",10.1038/s41593-023-01281-z
+AN10B005,SS27485,ascending,rest,"Chen et al., 2023",10.1038/s41593-023-01281-z
+AN19A018,"BRK1, BRK2, AN_GNG_53,BRK3, BRK4, AN_GNG_54,BRK5, BRK6, AN_GNG_76",ascending,halting,"Sapkal et al., 2024",10.1038/s41586-024-07854-7
+AN17A026,TwoLumps,ascending,walking,"Sen et al., 2017","10.1016/j.cub.2017.02.008, 10.1016/j.cub.2019.11.004"
+AN05B102a,PPN1,ascending,pheromone,"Kallman et al., 2015",10.7554/elife.11188
+AN08B031,vPR13,ascending,wing_vibration,"Lillvis et al., 2024",10.1016/j.cub.2024.01.015
+AN08B043,vPR13,ascending,wing_vibration,"Lillvis et al., 2024",10.1016/j.cub.2024.01.015
+AN08B059,vPR13,ascending,wing_vibration,"Lillvis et al., 2024",10.1016/j.cub.2024.01.015
+AN08B069,vPR13,ascending,wing_vibration,"Lillvis et al., 2024",10.1016/j.cub.2024.01.015
+AN09B017,vAB3,ascending,pheromone,"Clowney et al., 2015",10.1016/j.neuron.2015.07.025
+AN27X004,MtAHN,ascending,flight,"Cheong et al., 2024",10.7554/elife.96084.1
+MeTu1,NA,visual_projection,visual_thin_vertical_bar,Garner et al 2024,10.1038/s41586-024-07967-z
+MeTu2a,MeTu-DRA,visual_projection,visual_polarized_light,"Garner et al 2024, Kind et al 2021, Hardcastle et al 2021","10.1038/s41586-024-07967-z, 10.7554/elife.63225, 10.7554/elife.71858"
+MeTu2b,MeTu-DRA,visual_projection,visual_polarized_light,"Garner et al 2024, Kind et al 2021,  Hardcastle et al 2021","10.1038/s41586-024-07967-z, 10.7554/elife.63225, 10.7554/elife.71858"
+MeTu3a,NA,visual_projection,visual_polarized_light,Garner et al 2024,10.1038/s41586-024-07967-z
+MeTu3b,NA,visual_projection,visual_chromatic,Garner et al 2024,10.1038/s41586-024-07967-z
+MeTu3c,NA,visual_projection,visual_chromatic,Garner et al 2024,10.1038/s41586-024-07967-z
+aMe12,NA,visual_projection,visual_chromatic,Kind et al 2021,10.7554/elife.71858
+MTe50,ML-VPN1,visual_projection,visual_chromatic,Kind et al 2021,10.7554/elife.71858
+MeMe_e10,MeMe-DRA,visual_projection,visual_polarized_light,Hardcastle et al 2021,10.7554/elife.63225
+DNp47,NA,descending,landing,Liessem et al 2025,"10.1016/j.cub.2022.12.005, 10.1101/2025.12.13.693955"
+DNg79,NA,descending,landing,Liessem et al 2025,"10.1016/j.cub.2022.12.005, 10.1101/2025.12.13.693955"
+DNb08,NA,descending,walking,Pugliese et al 2025,10.1101/2025.09.12.675944
+DNp60,NA,descending,threat_response,"Cao et al., 2025 (10.1101/2025.10.25.684556)",10.1101/2025.10.25.684556
+DNpe050,NA,descending,threat_response,"Cao et al., 2025 (10.1101/2025.10.25.684556)",10.1101/2025.10.25.684556
+AN08B018,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868
+AN09B004,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868
+AN09B018_a,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868
+AN09B018_b,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868
+AN09B018_c,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868
+AN09B018_d,NA,ascending,nociception,Jones et al. 2025,10.1101/2025.10.28.684868

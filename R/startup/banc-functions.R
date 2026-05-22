@@ -1,110 +1,549 @@
-##########################
-## BANC ANALYSIS FUNCTIONS ##
-##########################
-# Core utility functions for processing BANC connectome data
-# including influence calculations, visualisation helpers, and data transforms
+#' BANC analysis helpers
+#'
+#' Roxygen2-documented helpers shared across figure / text / annotation
+#' scripts. Categories:
+#'   - Metadata filters (`filter_valid_neurons`, etc.).
+#'   - Influence helpers (`query_influence`, `calculate_influence_norms`,
+#'     `banc_influence_loop`).
+#'   - Stat summaries (`write_kruskal_summary`, `write_dunn_posthoc`,
+#'     `write_anova_summary`, `write_diversity_nonparam_summary`,
+#'     `format_table_txt`, `fmt_p_value`, `humanise_group`).
+#'   - Plot helpers (`banc_plot_violin_by_class`, `convert_to_dark_mode`,
+#'     `cap_to_99th`).
+#'   - I/O helpers (`banc_load_betweenness`).
+#'
+#' Naming convention: `<verb>_<object>` for general helpers
+#' (`cap_to_99th`, `fmt_p_value`), `banc_<noun>` for things tied to BANC
+#' data (`banc_load_betweenness`, `banc_plot_key_features`), leading `.`
+#' for private-ish helpers used inside one file. Functions are hoisted
+#' here once they have at least two callers or are non-trivial enough to
+#' be worth documenting.
+#'
+#' Sourced unconditionally by `R/startup/banc-startup.R`.
+
+#' Filter metadata to valid neurons
+#'
+#' Standardised filter for removing non-neuronal entries (glia, trachea, debris,
+#' merges, etc.) from BANC metadata. Designed for use in dplyr chains:
+#'   banc.meta %>% filter_valid_neurons()
+#'
+#' @param df data.frame with banc.meta columns (super_class, status, proofread, root_id)
+#' @param only_proofread logical; if TRUE (default), keep only proofread or roughly_proofread neurons
+#' @param deduplicate logical; if TRUE (default), keep one row per root_id,
+#'   preferring the row with the most non-NA metadata columns
+#' @return filtered (and optionally deduplicated) data.frame
+filter_valid_neurons <- function(df,
+                                  only_proofread = TRUE,
+                                  deduplicate = TRUE) {
+  # Exclude non-neuronal super_classes
+  if ("super_class" %in% colnames(df)) {
+    df <- df %>%
+      dplyr::filter(!grepl("glia|trachea|not_a_neuron|debris",
+                           super_class, ignore.case = TRUE))
+  }
+  # Exclude non-neuronal status values
+  if ("status" %in% colnames(df)) {
+    df <- df %>%
+      dplyr::filter(!grepl("GLIA|TRACHEA|NOT_A_NEURON|DEBRIS|DELETE",
+                           status))
+  }
+  # Proofread filter
+  if (only_proofread) {
+    if ("proofread" %in% colnames(df) && "roughly_proofread" %in% colnames(df)) {
+      df <- df %>%
+        dplyr::filter(as.logical(proofread) %in% TRUE |
+                      as.logical(roughly_proofread) %in% TRUE)
+    } else if ("proofread" %in% colnames(df)) {
+      df <- df %>%
+        dplyr::filter(as.logical(proofread) %in% TRUE)
+    }
+  }
+  # Deduplicate by root_id, keeping the row with the most non-NA values
+  if (deduplicate) {
+    id_col <- if ("root_id" %in% colnames(df)) "root_id"
+              else if ("id" %in% colnames(df)) "id"
+              else NULL
+    if (!is.null(id_col)) {
+      df <- df %>%
+        dplyr::mutate(.n_nonna = rowSums(!is.na(dplyr::pick(dplyr::everything())))) %>%
+        dplyr::arrange(dplyr::desc(.n_nonna)) %>%
+        dplyr::distinct(!!rlang::sym(id_col), .keep_all = TRUE) %>%
+        dplyr::select(-.n_nonna)
+    }
+  }
+  df
+}
+
+# ---------------------------------------------------------------------------
+# banc_influence_loop — shared PSOCK-parallel influence computation helper
+# ---------------------------------------------------------------------------
+# Replaces the per-script for(ct in cts){calculate_influence_py(...)} pattern.
+#
+# Arguments:
+#   cts          Character vector of seed identifiers (cell types, seed_02
+#                values, or raw root_ids when seed_column = NULL).
+#   seed_column  Column in meta_df to look up root_ids from cts values.
+#                NULL means each element of cts IS a root_id (single-neuron mode,
+#                e.g. panel_influence_validation.R).
+#   level_name   Value for the `level` column in the output.
+#   target_ids   Character vector of target root_ids to keep in results.
+#   ic           Existing influence calculator for the sequential path.
+#                Ignored in parallel mode (each worker builds its own).
+#                If NULL in sequential mode, one is built and cached as ic_banc.
+#   meta_df      Data frame with at least root_id + seed_column. Default:
+#                banc.meta from the global env.
+#   elist_df     Edgelist data frame (count > 0 pre-filtered). Default:
+#                banc.edgelist.simple %>% filter(count > 0) from global env.
+#   ncores       Integer. NULL = auto (min(4, detectCores()-1), but sequential
+#                if < 50 tasks). 1L = force sequential. Respects BANC_NCORES
+#                env var: BANC_NCORES=1 forces sequential everywhere.
+#
+# Returns: data.frame with id, seed, level, influence_original,
+#          influence_norm_original, Influence_score_(unsigned), etc.
+#
+# Kill-switch: BANC_NCORES=1 in shell, or ncores=1L per-call.
+# ---------------------------------------------------------------------------
+banc_influence_loop <- function(cts, seed_column, level_name, target_ids,
+                                ic = NULL,
+                                meta_df = NULL,
+                                elist_df = NULL,
+                                ncores = NULL) {
+  if (is.null(meta_df))  meta_df  <- as.data.frame(get("banc.meta", envir = .GlobalEnv))
+  if (is.null(elist_df)) elist_df <- get("banc.edgelist.simple", envir = .GlobalEnv) %>%
+                                       dplyr::filter(count > 0)
+  n <- length(cts)
+  if (n == 0) return(data.frame())
+
+  # Resolve ncores — BANC_NCORES env var takes precedence
+  env_nc <- Sys.getenv("BANC_NCORES", unset = NA)
+  if (!is.na(env_nc) && nzchar(env_nc)) {
+    ncores <- suppressWarnings(as.integer(env_nc))
+  }
+  if (is.null(ncores)) {
+    ncores <- max(1L, min(4L, parallel::detectCores() - 1L))
+    if (n < 50) ncores <- 1L
+  }
+  ncores <- as.integer(max(1L, ncores))
+
+  # Helper: look up seed root_ids for one ct value
+  .get_seed_ids <- function(ct, meta, seed_col) {
+    if (is.null(seed_col)) return(as.character(ct))
+    unique(meta$root_id[meta[[seed_col]] == ct & !is.na(meta[[seed_col]])])
+  }
+
+  # --- Sequential path ---
+  if (ncores <= 1L) {
+    message(sprintf("[%s] Computing influence sequentially (%d tasks)...",
+                    level_name, n))
+    if (is.null(ic)) {
+      if (exists("ic_banc", envir = .GlobalEnv)) {
+        ic <- get("ic_banc", envir = .GlobalEnv)
+      } else {
+        message("  Building influence calculator...")
+        ic <- influence_calculator_py(edgelist_simple = elist_df,
+                                      meta = meta_df, count_thresh = 5)
+        assign("ic_banc", ic, envir = .GlobalEnv)
+      }
+    }
+    out <- vector("list", n)
+    pb <- progress::progress_bar$new(
+      format = paste0(level_name, " [:bar] :current/:total (:percent) eta: :eta"),
+      total = n, clear = FALSE, width = 70
+    )
+    for (i in seq_along(cts)) {
+      ct <- cts[i]
+      tryCatch({
+        ids <- .get_seed_ids(ct, meta_df, seed_column)
+        if (length(ids) == 0) { pb$tick(); next }
+        res <- calculate_influence_py(ic, ids) %>%
+          dplyr::filter(id %in% target_ids)
+        res$seed <- ct
+        res$level <- level_name
+        res$influence_norm_original <-
+          res$`Influence_score_(unsigned)` / length(ids)
+        out[[i]] <- res
+      }, error = function(e) {
+        message(sprintf("  Warning: %s/%s failed: %s", level_name, ct, e$message))
+      })
+      pb$tick()
+    }
+    result <- as.data.frame(data.table::rbindlist(out, fill = TRUE))
+    if (nrow(result) > 0) result$influence_original <- result$`Influence_score_(unsigned)`
+    message(sprintf("[%s] Done — %d rows.", level_name, nrow(result)))
+    return(result)
+  }
+
+  # --- Parallel path: PSOCK cluster ---
+  message(sprintf("[%s] Computing influence in parallel (%d tasks, %d workers)...",
+                  level_name, n, ncores))
+  message("  Workers building PETSc calculators — expect a few minutes startup.")
+
+  chunks <- parallel::splitIndices(n, ncores)
+  cts_chunks <- lapply(chunks, function(idx) cts[idx])
+
+  cl <- parallel::makeCluster(ncores)
+  on.exit(parallel::stopCluster(cl), add = TRUE)
+
+  results <- parallel::parLapply(cl, cts_chunks,
+    function(chunk, seed_col, lvl, tgt_ids, meta_w, elist_w) {
+      ic_w <- influencer::influence_calculator_py(
+        edgelist_simple = elist_w, meta = meta_w, count_thresh = 5
+      )
+      out <- vector("list", length(chunk))
+      for (j in seq_along(chunk)) {
+        ct <- chunk[j]
+        tryCatch({
+          if (is.null(seed_col)) {
+            ids <- as.character(ct)
+          } else {
+            ids <- unique(meta_w$root_id[meta_w[[seed_col]] == ct &
+                                           !is.na(meta_w[[seed_col]])])
+          }
+          if (length(ids) == 0) next
+          res <- influencer::calculate_influence_py(ic_w, ids)
+          res <- res[res$id %in% tgt_ids, ]
+          res$seed <- ct
+          res$level <- lvl
+          res$influence_norm_original <-
+            res$`Influence_score_(unsigned)` / length(ids)
+          out[[j]] <- res
+        }, error = function(e) NULL)
+      }
+      do.call(rbind, out)
+    },
+    seed_col = seed_column, lvl = level_name, tgt_ids = target_ids,
+    meta_w = meta_df, elist_w = elist_df
+  )
+
+  result <- as.data.frame(data.table::rbindlist(results, fill = TRUE))
+  if (nrow(result) > 0) result$influence_original <- result$`Influence_score_(unsigned)`
+  message(sprintf("[%s] Done — %d rows.", level_name, nrow(result)))
+  result
+}
 
 calculate_influence_norms <- function(influence.df,
                                       const = -24,
                                       quantile = FALSE){
-  if(!"target"%in%colnames(influence.df)){
-    influence.df$target <- influence.df$id
-    orig.target = FALSE
-  }else{
-    orig.target = TRUE
-  }
+  # Use data.table for fast grouped operations on large datasets
+  has_target <- "target" %in% colnames(influence.df)
   inf.threshold <- exp(const)
-  if(!"influence_syn_norm"%in%colnames(influence.df)){
-    influence.df$influence_syn_norm <- 1
+
+  dt <- data.table::as.data.table(influence.df)
+  if (!has_target) dt[, target := id]
+  if (!"influence_original" %in% names(dt)) dt[, influence_original := influence]
+  if (!"influence_norm_original" %in% names(dt)) dt[, influence_norm_original := influence_norm]
+
+  # Compute no_seeds from ratio of original to norm_original
+  dt[, no_seeds := data.table::fifelse(is.na(influence_original / influence_norm_original),
+                           1, influence_original / influence_norm_original)]
+
+  # Aggregate per (target, seed): sum influence, then deduplicate
+  dt[, `:=`(
+    influence_per_seed_sum = sum(influence_original, na.rm = TRUE)
+  ), by = .(target, seed)]
+  dt <- unique(dt, by = c("target", "seed"), fromLast = FALSE)
+
+  # Count unique IDs per target group AFTER deduplication
+  # (when target==id, this is always 1 — matching old dplyr behavior)
+  dt[, no_targets := data.table::uniqueN(id), by = target]
+
+  # Compute normalized values
+  dt[, `:=`(
+    influence = pmax(influence_per_seed_sum, inf.threshold),
+    influence_norm = pmax(influence_per_seed_sum / (no_seeds[1] * no_targets[1]),
+                         inf.threshold)
+  ), by = .(target, seed)]
+
+  # Log transforms
+  dt[, `:=`(
+    influence_norm_log = log(influence_norm) - const,
+    influence_log = log(influence / no_targets) - const
+  )]
+  dt[is.na(influence), influence_log := 0]
+  dt[, influence_per_seed_sum := NULL]
+
+  # Quantile (per-seed)
+  if (!is.null(quantile)) {
+    dt[, influence_quantile := signif(stats::quantile(influence_original, quantile, na.rm = TRUE), 4),
+       by = seed]
   }
-  if(!"influence_syn_norm_original"%in%colnames(influence.df)){
-    influence.df$influence_syn_norm <- 1
+
+  # Min-max normalization by target and by seed in two passes
+  dt[, `:=`(
+    influence_norm_log_minmax = {
+      mn <- min(influence_norm_log, na.rm = TRUE); mx <- max(influence_norm_log, na.rm = TRUE)
+      if (mx == mn) rep(0, .N) else (influence_norm_log - mn) / (mx - mn)
+    },
+    influence_log_minmax = {
+      mn <- min(influence_log, na.rm = TRUE); mx <- max(influence_log, na.rm = TRUE)
+      if (mx == mn) rep(0, .N) else (influence_log - mn) / (mx - mn)
+    }
+  ), by = target]
+
+  dt[, `:=`(
+    influence_norm_log_minmax_seed = {
+      mn <- min(influence_norm_log, na.rm = TRUE); mx <- max(influence_norm_log, na.rm = TRUE)
+      if (mx == mn) rep(0, .N) else (influence_norm_log - mn) / (mx - mn)
+    },
+    influence_log_minmax_seed = {
+      mn <- min(influence_log, na.rm = TRUE); mx <- max(influence_log, na.rm = TRUE)
+      if (mx == mn) rep(0, .N) else (influence_log - mn) / (mx - mn)
+    }
+  ), by = seed]
+
+  # Round to 4 significant figures
+  for (col in c("influence", "influence_log", "influence_norm", "influence_norm_log",
+                "influence_log_minmax", "influence_norm_log_minmax",
+                "influence_log_minmax_seed", "influence_norm_log_minmax_seed")) {
+    if (col %in% names(dt)) data.table::set(dt, j = col, value = signif(dt[[col]], 4))
   }
-  if(!"influence_original"%in%colnames(influence.df)){
-    influence.df$influence_original <- influence.df$influence
+
+  # Clean up
+  dt[, c("no_seeds", "no_targets") := NULL]
+  if (!has_target) dt[, target := NULL]
+
+  # Convert back to tibble
+  tibble::as_tibble(dt)
+}
+
+############################################################
+## FUNCTION: query_influence
+## Purpose:
+##   Compute influence scores on-the-fly using the influencer package.
+##
+##   Requires: banc.edgelist.simple and banc.meta in global env
+##   Uses influencer::influence_calculator_py() + calculate_influence_py()
+##
+## Inputs:
+##   - levels    : character vector of seed levels, e.g. c("seed_07")
+##   - seeds     : character vector of seed cell types (NULL = all seeds in level)
+##   - ids       : character vector of target neuron ids (NULL = all)
+##   - include_seeds : logical, whether to include seed neurons (default FALSE)
+##   - normalize : logical, whether to apply calculate_influence_norms (default TRUE)
+##
+## Returns:
+##   data.frame with columns: id, is_seed, influence, influence_original,
+##   influence_norm_original, seed, level
+##   (plus normalized columns if normalize=TRUE)
+############################################################
+query_influence <- function(levels = NULL,
+                            seeds = NULL,
+                            ids = NULL,
+                            include_seeds = FALSE,
+                            normalize = TRUE,
+                            ncores = NULL) {
+
+  # Ensure edgelist and meta are available
+  if (!exists("banc.edgelist.simple", envir = .GlobalEnv)) {
+    tryCatch(source("R/startup/banc-edgelist.R"), error = function(e) {
+      stop("banc.edgelist.simple not available and banc-edgelist.R failed: ", e$message)
+    })
   }
-  if(!"influence_norm_original"%in%colnames(influence.df)){
-    influence.df$influence_norm_original <- influence.df$influence_norm
+  if (!exists("banc.meta", envir = .GlobalEnv)) {
+    stop("banc.meta must be loaded before calling query_influence()")
   }
-  influence.df <- influence.df %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(no_seeds = influence_original/influence_norm_original,
-                  no_seeds = ifelse(is.na(no_seeds),1,no_seeds),
-                  no_synapses = influence_original/influence_syn_norm) %>%
-    dplyr::group_by(target) %>%
-    dplyr::mutate(no_targets = length(unique(id))) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(
-      no_seeds = as.numeric(no_seeds),
-      no_targets = as.numeric(no_targets)
-    ) %>%
-    dplyr::group_by(seed) %>%
-    dplyr::mutate(influence_per_seed = influence_original,#*no_seeds,
-                  influence_per_synapse = influence_original*no_synapses) %>%
-    dplyr::group_by(target, seed) %>%
-    dplyr::mutate(influence = sum(influence_original,na.rm = TRUE),
-                  influence_norm = sum(influence_per_seed,na.rm = TRUE)/(no_seeds*no_targets),
-                  influence = ifelse(influence<inf.threshold,inf.threshold,influence),
-                  influence_norm = ifelse(influence_norm<inf.threshold,inf.threshold,influence_norm),
-                  #influence_norm = sum(influence_norm,na.rm = TRUE),
-                  influence_syn_norm =  sum(influence_per_synapse,na.rm = TRUE)/(no_targets*no_synapses),
-                  influence_syn_norm = ifelse(influence_syn_norm<inf.threshold,inf.threshold,influence_syn_norm),
-                  influence_syn_norm = sum(influence_syn_norm,na.rm = TRUE),
-                  influence_norm_log = log(influence_norm),
-                  influence_log = log((influence/no_targets)),
-                  influence_syn_norm_log = log(influence_syn_norm)) %>%
-    { 
-      if (!is.null(quantile)) {
-        dplyr::mutate(.,
-                      influence_quantile = stats::quantile(influence_original, quantile, na.rm = TRUE),
-                      influence_quantile = signif(influence_quantile, 4)
-        )
-      } else {
-        .
+
+  elist <- get("banc.edgelist.simple", envir = .GlobalEnv)
+  meta <- get("banc.meta", envir = .GlobalEnv)
+
+  # Resolve ncores
+  # BANC_NCORES env var takes precedence over the function arg, so a single
+  # `Sys.setenv(BANC_NCORES=1)` (or shell export) forces sequential mode across
+  # the whole pipeline without editing every figure script.
+  env_ncores <- Sys.getenv("BANC_NCORES", unset = NA)
+  if (!is.na(env_ncores) && nzchar(env_ncores)) {
+    ncores <- suppressWarnings(as.integer(env_ncores))
+  } else if (is.null(ncores)) {
+    ncores <- max(1L, parallel::detectCores() - 1L)
+  }
+  ncores <- as.integer(ncores)
+  if (is.na(ncores) || ncores < 1L) ncores <- 1L
+
+  # Determine seed groups
+  if (is.null(levels)) levels <- paste0("seed_", sprintf("%02d", 0:14))
+  levels <- intersect(levels, colnames(meta))
+
+  # Coerce ids to character once upfront (root IDs must always be character)
+  if (!is.null(ids)) ids <- as.character(ids)
+
+  # Build the full list of (level, seed_value) pairs to process
+  all_tasks <- list()
+  for (lvl in levels) {
+    lvl_seeds <- unique(na.omit(meta[[lvl]]))
+    lvl_seeds <- lvl_seeds[lvl_seeds != ""]
+    if (!is.null(seeds)) lvl_seeds <- intersect(lvl_seeds, seeds)
+    if (length(lvl_seeds) == 0) next
+    for (sv in lvl_seeds) {
+      all_tasks <- append(all_tasks, list(list(level = lvl, seed_value = sv)))
+    }
+  }
+
+  if (length(all_tasks) == 0) {
+    warning("No influence results computed. Check that seed levels/values exist in banc.meta.")
+    return(data.frame(id = character(), is_seed = logical(), influence = numeric(),
+                      seed = character(), level = character()))
+  }
+
+  # --- Helper: process a single (level, seed_value) task ---
+  .process_one_task <- function(task, ic, meta_df, include_seeds, ids) {
+    lvl <- task$level
+    sv  <- task$seed_value
+    seed_ids <- unique(meta_df$root_id[meta_df[[lvl]] == sv & !is.na(meta_df[[lvl]])])
+    if (length(seed_ids) == 0) return(NULL)
+
+    inf_raw <- calculate_influence_py(ic, seed_ids)
+    inf_raw <- inf_raw %>%
+      dplyr::mutate(
+        seed = sv,
+        level = lvl,
+        is_seed = id %in% as.character(seed_ids),
+        influence = `Influence_score_(unsigned)`,
+        influence_original = `Influence_score_(unsigned)`,
+        influence_norm_original = `Influence_score_(unsigned)` / length(seed_ids)
+      ) %>%
+      dplyr::select(id, is_seed, influence, influence_original,
+                    influence_norm_original,
+                    seed, level,
+                    dplyr::any_of(c("n_input_synapses", "n_output_synapses")))
+
+    if (!include_seeds) inf_raw <- inf_raw %>% dplyr::filter(!is_seed)
+    if (!is.null(ids)) {
+      inf_raw$id <- as.character(inf_raw$id)
+      inf_raw <- inf_raw %>% dplyr::filter(id %in% ids)
+    }
+    inf_raw
+  }
+
+  # --- Sequential path (ncores == 1): original behaviour ---
+  if (ncores == 1L) {
+    message(sprintf("Computing influence sequentially (%d tasks)...", length(all_tasks)))
+
+    # Create or reuse cached influence calculator
+    if (!exists("banc.ic", envir = .GlobalEnv)) {
+      message("Building influence calculator (first call, will be cached)...")
+      banc.ic <- influence_calculator_py(
+        edgelist_simple = elist %>% dplyr::filter(count > 0),
+        meta = meta,
+        count_thresh = 5
+      )
+      assign("banc.ic", banc.ic, envir = .GlobalEnv)
+      message("Influence calculator ready.")
+    }
+    ic <- get("banc.ic", envir = .GlobalEnv)
+
+    influence.list <- list()
+    n_done <- 0L
+    for (task in all_tasks) {
+      tryCatch({
+        res <- .process_one_task(task, ic, meta, include_seeds, ids)
+        if (!is.null(res)) influence.list <- append(influence.list, list(res))
+      }, error = function(e) {
+        message(sprintf("  Warning: influence for seed '%s' in %s failed: %s",
+                        task$seed_value, task$level, e$message))
+      })
+      n_done <- n_done + 1L
+      if (n_done %% 20 == 0) message(sprintf("  %d / %d tasks done", n_done, length(all_tasks)))
+    }
+
+  } else {
+    # --- Parallel path (ncores > 1): PSOCK cluster ---
+    message(sprintf("Computing influence in parallel using %d cores (%d tasks)...",
+                    ncores, length(all_tasks)))
+
+    # Prepare serializable data for workers (no Python objects)
+    elist_filtered <- elist %>% dplyr::filter(count > 0)
+    meta_df <- as.data.frame(meta)
+
+    # Split tasks into ncores chunks
+    chunk_indices <- parallel::splitIndices(length(all_tasks), ncores)
+    task_chunks <- lapply(chunk_indices, function(idx) all_tasks[idx])
+
+    # Worker function: builds its own Python influence calculator, processes its chunk
+    .worker_fn <- function(task_chunk, elist_df, meta_worker, include_seeds_w, ids_w) {
+      # Each worker creates its own Python influence calculator
+      ic_worker <- influencer::influence_calculator_py(
+        edgelist_simple = elist_df,
+        meta = meta_worker,
+        count_thresh = 5
+      )
+
+      results <- list()
+      for (task in task_chunk) {
+        tryCatch({
+          lvl <- task$level
+          sv  <- task$seed_value
+          seed_ids <- unique(meta_worker$root_id[meta_worker[[lvl]] == sv &
+                                                   !is.na(meta_worker[[lvl]])])
+          if (length(seed_ids) == 0) next
+
+          inf_raw <- influencer::calculate_influence_py(ic_worker, seed_ids)
+          inf_raw <- inf_raw %>%
+            dplyr::mutate(
+              seed = sv,
+              level = lvl,
+              is_seed = id %in% as.character(seed_ids),
+              influence = `Influence_score_(unsigned)`,
+              influence_original = `Influence_score_(unsigned)`,
+              influence_norm_original = `Influence_score_(unsigned)` / length(seed_ids)
+            ) %>%
+            dplyr::select(id, is_seed, influence, influence_original,
+                          influence_norm_original,
+                          seed, level,
+                          dplyr::any_of(c("n_input_synapses", "n_output_synapses")))
+
+          if (!include_seeds_w) inf_raw <- inf_raw %>% dplyr::filter(!is_seed)
+          if (!is.null(ids_w)) {
+            inf_raw$id <- as.character(inf_raw$id)
+            inf_raw <- inf_raw %>% dplyr::filter(id %in% ids_w)
+          }
+          results <- append(results, list(inf_raw))
+        }, error = function(e) {
+          # silently skip failed seeds in workers
+        })
       }
-    } %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(influence_norm_log = influence_norm_log-const,
-                  influence_log = influence_log-const,
-                  influence_syn_norm_log = influence_syn_norm_log-const) %>%
-    dplyr::group_by(seed) %>%
-    dplyr::mutate(influence_log = ifelse(is.na(influence),0,influence_log)) %>%
-    dplyr::ungroup() %>%
-    dplyr::distinct(target, 
-                    seed, 
-                    .keep_all = TRUE) %>%
-    dplyr::group_by(target) %>%
-    dplyr::mutate(influence_norm_log_minmax = (influence_norm_log-min(influence_norm_log,na.rm=TRUE))/(max(influence_norm_log,na.rm=TRUE)-min(influence_norm_log,na.rm=TRUE)),
-                  influence_log_minmax = (influence_log-min(influence_log,na.rm=TRUE))/(max(influence_log,na.rm=TRUE)-min(influence_log,na.rm=TRUE)),
-                  influence_syn_norm_log_minmax = (influence_syn_norm_log-min(influence_syn_norm_log,na.rm=TRUE))/(max(influence_syn_norm_log,na.rm=TRUE)-min(influence_syn_norm_log,na.rm=TRUE))) %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(seed) %>%
-    dplyr::mutate(influence_norm_log_minmax_seed = (influence_norm_log-min(influence_norm_log,na.rm=TRUE))/(max(influence_norm_log,na.rm=TRUE)-min(influence_norm_log,na.rm=TRUE)),
-                  influence_log_minmax_seed = (influence_log-min(influence_log,na.rm=TRUE))/(max(influence_log,na.rm=TRUE)-min(influence_log,na.rm=TRUE)),
-                  influence_syn_norm_log_minmax_seed = (influence_syn_norm_log-min(influence_syn_norm_log,na.rm=TRUE))/(max(influence_syn_norm_log,na.rm=TRUE)-min(influence_syn_norm_log,na.rm=TRUE))) %>%
-    dplyr::ungroup() %>%
-    dplyr::distinct(target,
-                    seed, 
-                    .keep_all = TRUE) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(influence = signif(influence,4),
-                  influence_log = signif(influence_log,4),
-                  influence_norm = signif(influence_norm,4),
-                  influence_syn_norm = signif(influence_syn_norm,4),
-                  influence_norm_log = signif(influence_norm_log,4),
-                  influence_syn_norm_log = signif(influence_syn_norm_log,4),
-                  influence_log_minmax = signif(influence_log_minmax,4),
-                  influence_norm_log_minmax = signif(influence_norm_log_minmax,4),
-                  influence_syn_norm_log_minmax = signif(influence_syn_norm_log_minmax,4),
-                  influence_log_minmax_seed  = signif(influence_log_minmax_seed,4),
-                  influence_norm_log_minmax_seed  = signif(influence_norm_log_minmax_seed,4),
-                  influence_syn_norm_log_minmax_seed  = signif(influence_syn_norm_log_minmax_seed,4)
-    ) 
-  if(!orig.target){
-    influence.df$target <- NULL
+      dplyr::bind_rows(results)
+    }
+
+    cl <- parallel::makeCluster(ncores, type = "PSOCK")
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+
+    # Load required packages on each worker
+    parallel::clusterEvalQ(cl, {
+      library(influencer)
+      library(dplyr)
+      library(reticulate)
+    })
+
+    # Run workers
+    influence.list <- parallel::parLapply(
+      cl, task_chunks,
+      fun = .worker_fn,
+      elist_df = elist_filtered,
+      meta_worker = meta_df,
+      include_seeds_w = include_seeds,
+      ids_w = ids
+    )
   }
+
+  if (length(influence.list) == 0) {
+    warning("No influence results computed. Check that seed levels/values exist in banc.meta.")
+    return(data.frame(id = character(), is_seed = logical(), influence = numeric(),
+                      seed = character(), level = character()))
+  }
+
+  influence.df <- dplyr::bind_rows(influence.list)
+  rm(influence.list); gc(verbose = FALSE)
+  message(sprintf("Computed influence: %d rows (%d seeds across %d levels)",
+                  nrow(influence.df), length(unique(influence.df$seed)), length(levels)))
+
+  # Normalize
+  if (normalize && nrow(influence.df) > 0) {
+    influence.df <- calculate_influence_norms(influence.df)
+  }
+
   influence.df
 }
+
 
 ############################################################
 ## FUNCTION: write_anova_summary (UPDATED)
@@ -140,6 +579,20 @@ calculate_influence_norms <- function(influence.df,
 #' @param digits Number of significant digits for numeric columns (default 4)
 #' @return Character vector of lines suitable for writeLines / cat
 format_table_txt <- function(x, digits = 4) {
+  if (inherits(x, "data.frame")) {
+    # Rename p-value display columns to capital-P forms (Nature style).
+    # `rename_with` only acts on columns that match the predicate, so tables
+    # without these columns are unaffected.
+    .rn <- function(nm) {
+      # Whole-token replacement: `p` -> `P` only when `p` stands alone
+      # (between non-letter boundaries). Handles `p_value`, `p_adj`,
+      # `ks_p_adj`, `wilcox_p_adj_disp`, `p`, `p.adj`, `p.adj.signif`,
+      # `kw_p_value` etc., but leaves words like `pre`, `post`, `proofread`,
+      # `prop` alone.
+      gsub("(^|[^A-Za-z])p($|[^A-Za-z])", "\\1P\\2", nm)
+    }
+    x <- dplyr::rename_with(x, .rn)
+  }
   knitr::kable(x, format = "pipe", digits = digits)
 }
 
@@ -150,15 +603,20 @@ format_table_txt <- function(x, digits = 4) {
 #'
 #' @param p Numeric p-value
 #' @param digits Significant figures (default 3)
-#' @return Character string, e.g. "0.929", "3.83\u00d710^-24", "< 2.2\u00d710^-16"
+#' @return Character string, e.g. "0.929", "3.83 \u00d7 10^\u221224",
+#'   "< 2.2 \u00d7 10^\u221216" (Nature house style: spaces around \u00d7,
+#'   Unicode minus \u2212 on negative exponents).
 fmt_p_value <- function(p, digits = 3) {
+  .minus <- "\u2212"   # Unicode minus (U+2212), per Nature style
+  .times <- "\u00d7"   # Multiplication sign (U+00D7)
   vapply(p, function(x) {
     if (is.na(x)) return("NA")
-    if (!is.finite(x) || x < 2.2e-16) return("< 2.2\u00d710^-16")
+    if (!is.finite(x) || x < 2.2e-16) return(sprintf("< 2.2 %s 10^%s16", .times, .minus))
     if (x >= 0.001) return(as.character(signif(x, digits)))
     expo <- floor(log10(x))
     coef <- signif(x / 10^expo, digits)
-    sprintf("%s\u00d710^%d", coef, expo)
+    expo_str <- if (expo < 0) sprintf("%s%d", .minus, abs(expo)) else as.character(expo)
+    sprintf("%s %s 10^%s", coef, .times, expo_str)
   }, character(1))
 }
 
@@ -169,6 +627,28 @@ fmt_p_value <- function(p, digits = 3) {
 #' @param x Character vector of group names
 #' @return Character vector with underscores replaced by spaces
 humanise_group <- function(x) gsub("_", " ", x)
+
+#' Format a single statistical result in the canonical inline form
+#'
+#' Produces the short "(p = ..., test type, n = ...)" string used across
+#' figure legends and .txt sidecars. `extra` lets a caller append extra
+#' descriptors (e.g. `df = 16`, `eta^2 = 0.23`) before the closing paren.
+#'
+#' @param p     Numeric p-value
+#' @param test  Test type as it should appear in prose (e.g.
+#'              "two-way ANOVA", "Kruskal-Wallis", "Dunn post-hoc")
+#' @param n     Total sample size
+#' @param extra Optional character vector of additional descriptors
+#'              ("df = 16", "η² = 0.23", "Holm-adjusted") inserted between
+#'              `test` and `n`
+#' @return A single character string, e.g.
+#'   "(p = 1.23×10^-5, two-way ANOVA, df = 16, n = 3120)"
+fmt_stat_concise <- function(p, test, n, extra = character()) {
+  p_str <- fmt_p_value(p)
+  p_str <- if (startsWith(p_str, "<")) paste("P", p_str) else paste("P =", p_str)
+  parts <- c(p_str, test, extra, paste0("n = ", n))
+  paste0("(", paste(parts, collapse = ", "), ")")
+}
 
 write_anova_summary <- function(df_raw,
                                 out_path,
@@ -209,7 +689,7 @@ write_anova_summary <- function(df_raw,
   # ---- Helpers ----
   .fmt_p <- function(p) {
     val <- fmt_p_value(p)
-    if (startsWith(val, "<")) paste("p", val) else paste("p =", val)
+    ifelse(startsWith(val, "<"), paste("P", val), paste("P =", val))
   }
   .sig_word <- function(p, alpha) if (base::is.finite(p) && p < alpha) "significant" else "not significant"
   .es_label <- function(eta) {
@@ -241,10 +721,99 @@ write_anova_summary <- function(df_raw,
   )
   
   if (has_replication) {
+    # ---------- Large-design fast path ----------
+    # car::Anova(type="III") refits the model multiple times. Even a single
+    # stats::lm(value ~ source * target) with 525k obs × 7,935 cells can
+    # take many hours and exhaust memory. For large designs we therefore
+    # compute the ANOVA decomposition analytically via dplyr group-bys —
+    # O(n) and trivially memory-bounded. Override via
+    # getOption("banc.fast_anova_threshold", 1000L).
+    .anova_threshold <- getOption("banc.fast_anova_threshold", 1000L)
+    if ((as.numeric(n_src) * as.numeric(n_tgt)) > .anova_threshold) {
+      message(sprintf(
+        "[write_anova_summary] Large design (%d × %d = %d cells > %d) — analytic SS decomposition fast path",
+        n_src, n_tgt, n_src * n_tgt, .anova_threshold))
+      add_section(sprintf(
+        "Large design (%d source × %d target = %d cells) — analytic SS decomposition fast path. Override via options(banc.fast_anova_threshold = ...).",
+        n_src, n_tgt, n_src * n_tgt))
+
+      gm <- mean(df_raw$value, na.rm = TRUE)
+      ss_total <- sum((df_raw$value - gm)^2, na.rm = TRUE)
+      ss_src <- df_raw |>
+        dplyr::group_by(source) |>
+        dplyr::summarise(.n = dplyr::n(), .mean = mean(value, na.rm = TRUE),
+                         .groups = "drop") |>
+        dplyr::summarise(s = sum(.n * (.mean - gm)^2, na.rm = TRUE)) |>
+        dplyr::pull(s)
+      ss_tgt <- df_raw |>
+        dplyr::group_by(target) |>
+        dplyr::summarise(.n = dplyr::n(), .mean = mean(value, na.rm = TRUE),
+                         .groups = "drop") |>
+        dplyr::summarise(s = sum(.n * (.mean - gm)^2, na.rm = TRUE)) |>
+        dplyr::pull(s)
+      ss_cell <- df_raw |>
+        dplyr::group_by(source, target) |>
+        dplyr::summarise(.n = dplyr::n(), .mean = mean(value, na.rm = TRUE),
+                         .groups = "drop") |>
+        dplyr::summarise(s = sum(.n * (.mean - gm)^2, na.rm = TRUE)) |>
+        dplyr::pull(s)
+      ss_int  <- ss_cell - ss_src - ss_tgt
+      ss_res  <- ss_total - ss_cell
+
+      df_src <- as.numeric(n_src) - 1
+      df_tgt <- as.numeric(n_tgt) - 1
+      df_int <- df_src * df_tgt
+      df_res <- as.numeric(n_obs) - as.numeric(n_src) * as.numeric(n_tgt)
+      df_res <- max(df_res, 1)
+      ms_res <- ss_res / df_res
+      f_src <- (ss_src / df_src) / ms_res
+      f_tgt <- (ss_tgt / df_tgt) / ms_res
+      f_int <- (ss_int / df_int) / ms_res
+      p_src <- stats::pf(f_src, df_src, df_res, lower.tail = FALSE)
+      p_tgt <- stats::pf(f_tgt, df_tgt, df_res, lower.tail = FALSE)
+      p_int <- stats::pf(f_int, df_int, df_res, lower.tail = FALSE)
+      eta_src <- ss_src / (ss_src + ss_res)
+      eta_tgt <- ss_tgt / (ss_tgt + ss_res)
+      eta_int <- ss_int / (ss_int + ss_res)
+      anova_tbl <- data.frame(
+        Term     = c("source", "target", "source:target", "Residuals"),
+        SS       = c(ss_src, ss_tgt, ss_int, ss_res),
+        Df       = c(df_src, df_tgt, df_int, df_res),
+        F.value  = c(f_src, f_tgt, f_int, NA),
+        Pr_F     = c(p_src, p_tgt, p_int, NA),
+        eta2_p   = c(eta_src, eta_tgt, eta_int, NA),
+        check.names = FALSE,
+        stringsAsFactors = FALSE
+      )
+      add_section("ANOVA table (analytic, balanced-cell unweighted SS)", anova_tbl)
+      legend_text <- paste0(
+        "Two-way ANOVA (", n_obs, " obs over ", n_src, " sources × ",
+        n_tgt, " targets), source × target interaction ",
+        .sig_word(p_int, alpha), " (",
+        sprintf("F(%d, %d) = %.2f, ", df_int, df_res, f_int),
+        .fmt_p(p_int), "; partial η² = ",
+        sprintf("%.2f", eta_int), ")."
+      )
+      add_section("Concise figure-legend statement", legend_text)
+      add_section(
+        "Concise stat",
+        fmt_stat_concise(
+          p     = p_int,
+          test  = "two-way ANOVA, source×target interaction (analytic SS)",
+          n     = n_obs,
+          extra = c(sprintf("F(%d, %d) = %.2f", df_int, df_res, f_int),
+                    sprintf("partial η² = %.2f", eta_int))
+        )
+      )
+      base::writeLines(out_lines, out_path)
+      message(sprintf("Wrote %s (analytic fast path)", out_path))
+      return(invisible(list(anova = anova_tbl, fast_path = TRUE,
+                              p_int = p_int, F_int = f_int)))
+    }
     # ---------- Classical Type-III ANOVA ----------
     old_contr <- base::options("contrasts")
     changed_contr <- FALSE
-    
+
     # Choose contrast coding (treatment overrides sum-to-zero if both requested)
     if (isTRUE(force_treatment)) {
       base::options(contrasts = c("contr.treatment","contr.poly"))
@@ -257,7 +826,7 @@ write_anova_summary <- function(df_raw,
     } else {
       contrast_label <- "session contrasts"
     }
-    
+
     fit_lm  <- stats::lm(value ~ source * target, data = df_raw)
     anova_3 <- car::Anova(fit_lm, type = "III")
     es_tbl  <- effectsize::eta_squared(anova_3, partial = TRUE, ci = 0.95) |>
@@ -325,12 +894,22 @@ write_anova_summary <- function(df_raw,
     )
     
     add_section("Concise figure-legend statement", legend_text)
-    
+    add_section(
+      "Concise stat",
+      fmt_stat_concise(
+        p    = p_int,
+        test = "two-way ANOVA Type-III, source×target interaction",
+        n    = n_obs,
+        extra = c(sprintf("F(%d, %d) = %.2f", df1_int, df_res, F_int),
+                  sprintf("η² = %.2f", es_int["eta"]))
+      )
+    )
+
     # Add additive vs interaction comparison
     fit_add   <- stats::lm(value ~ source + target, data = df_raw)
     delta_tbl <- stats::anova(fit_add, fit_lm)
     add_section("Model comparison: additive vs interaction", delta_tbl)
-    
+
     # Restore contrasts only if changed
     if (changed_contr) base::options(contrasts = old_contr$contrasts)
     
@@ -369,6 +948,15 @@ write_anova_summary <- function(df_raw,
       phr_perm, " (p_perm = ", base::format(p_perm, digits = 3, scientific = TRUE), ")."
     )
     add_section("Concise figure-legend statement", legend_text)
+    add_section(
+      "Concise stat",
+      fmt_stat_concise(
+        p    = p_perm,
+        test = "permutation test of nonadditivity (no replication)",
+        n    = n_obs,
+        extra = sprintf("perms = %d", perms)
+      )
+    )
   }
   
   # ---- Write to file ----
@@ -523,6 +1111,19 @@ write_ks_summary <- function(df,
     n_total, " observations; K=", n_types, " groups) on '", value_col, "'. ",
     line_sig, if (!is.null(line_ns)) paste0(" ", line_ns) else ""
   )
+
+  # Canonical concise stat — uses the smallest (most-significant) Holm-adjusted
+  # p-value across the K-1 comparisons; "n" is total observations.
+  .min_p <- suppressWarnings(min(ks_results$p_adj, na.rm = TRUE))
+  if (!is.finite(.min_p)) .min_p <- NA_real_
+  concise_stat <- fmt_stat_concise(
+    p    = .min_p,
+    test = paste0("Kolmogorov–Smirnov vs '", ref_type, "' (",
+                  adjust_method, "-adjusted)"),
+    n    = n_total,
+    extra = c(sprintf("K = %d groups", n_types),
+              "min adjusted p across comparisons")
+  )
   
   # ---- write to file ----
   out_lines <- c(
@@ -537,6 +1138,10 @@ write_ks_summary <- function(df,
     "Legend-style statement",
     "----------------------",
     legend_text,
+    "",
+    "Concise stat",
+    "------------",
+    concise_stat,
     "",
     "Medians by group (descending)",
     "-----------------------------",
@@ -796,6 +1401,7 @@ write_nonparam_summary <- function(df,
       if (nrow(wilcox_sig_df) > 0) fmt_wilcox_list(wilcox_sig_df) else "none",
       ". Effect sizes reported as rank-biserial correlation (r)."
     )
+    .min_p_np <- suppressWarnings(min(test_results$wilcox_p_adj, na.rm = TRUE))
   } else {
     wilcox_sig_df <- test_results |>
       dplyr::filter(wilcox_p_adj < alpha) |>
@@ -818,7 +1424,17 @@ write_nonparam_summary <- function(df,
       "Wilcoxon rank-sum tests showed significant differences for ",
       if (nrow(wilcox_sig_df) > 0) fmt_wilcox_list(wilcox_sig_df) else "none", "."
     )
+    .min_p_np <- suppressWarnings(min(test_results$wilcox_p_adj, na.rm = TRUE))
   }
+  if (!is.finite(.min_p_np)) .min_p_np <- NA_real_
+  concise_stat <- fmt_stat_concise(
+    p    = .min_p_np,
+    test = paste0("Wilcoxon rank-sum vs '", ref_type, "' (",
+                  adjust_method, "-adjusted)"),
+    n    = n_total,
+    extra = c(sprintf("K = %d groups", n_types),
+              "min adjusted p across comparisons")
+  )
 
   # ---- write to file ----
   if (calculate_effect_size) {
@@ -860,7 +1476,11 @@ write_nonparam_summary <- function(df,
     "FIGURE LEGEND (copy-paste ready)",
     strrep("=", 70),
     legend_text,
-    strrep("=", 70)
+    strrep("=", 70),
+    "",
+    "Concise stat",
+    strrep("-", 70),
+    concise_stat
   )
 
   base::dir.create(base::dirname(out_path), recursive = TRUE, showWarnings = FALSE)
@@ -1028,6 +1648,20 @@ write_pairwise_wilcox <- function(data, value_col, group_col = super_class,
       "======================================================================\n"
   )
 
+  .min_p_pw <- suppressWarnings(min(test_results$p_adj, na.rm = TRUE))
+  if (!is.finite(.min_p_pw)) .min_p_pw <- NA_real_
+  pw_concise <- fmt_stat_concise(
+    p    = .min_p_pw,
+    test = paste0("pairwise Wilcoxon rank-sum (", adjust_method, "-adjusted)"),
+    n    = sum(meds$n),
+    extra = c(sprintf("%d comparisons", length(comparisons)),
+              "min adjusted p across pairs")
+  )
+  cat(file = out_path, append = TRUE,
+      "\nConcise stat\n----------------------------------------------------------------------\n",
+      pw_concise, "\n"
+  )
+
   list(
     test_results = test_results,
     medians = meds,
@@ -1137,8 +1771,8 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
   if (all_cross_sig) {
     max_p <- max(cross_sig$p.adj)
     p_fmt <- fmt_p_value(max_p)
-    p_clause <- if (startsWith(p_fmt, "<")) sprintf("all p %s", p_fmt)
-                else sprintf("all p \u2264 %s", p_fmt)
+    p_clause <- if (startsWith(p_fmt, "<")) sprintf("all P %s", p_fmt)
+                else sprintf("all P \u2264 %s", p_fmt)
     cross_stmt <- sprintf(
       "%s had significantly higher medians than all other groups (%s)",
       hl_text, p_clause)
@@ -1147,7 +1781,7 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
     pair_items <- cross_sig %>%
       dplyr::mutate(
         other = ifelse(group1 %in% highlights, group2, group1),
-        item  = sprintf("%s vs %s (p=%s)",
+        item  = sprintf("%s vs %s (P = %s)",
                         .label_group(hl), humanise_group(other),
                         fmt_p_value(p.adj))) %>%
       dplyr::pull(item)
@@ -1165,7 +1799,7 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
     parts <- c()
     if (nrow(ns_rows) > 0) {
       ns_items <- ns_rows %>%
-        dplyr::mutate(item = sprintf("%s vs %s (p=%s)",
+        dplyr::mutate(item = sprintf("%s vs %s (P = %s)",
                                      humanise_group(group1), humanise_group(group2),
                                      fmt_p_value(p.adj))) %>%
         dplyr::pull(item)
@@ -1174,7 +1808,7 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
     }
     if (nrow(sig_rows) > 0) {
       sig_items <- sig_rows %>%
-        dplyr::mutate(item = sprintf("%s vs %s (p=%s)",
+        dplyr::mutate(item = sprintf("%s vs %s (P = %s)",
                                      humanise_group(group1), humanise_group(group2),
                                      fmt_p_value(p.adj))) %>%
         dplyr::pull(item)
@@ -1186,7 +1820,7 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
 
   # Combine
   kw_stmt <- sprintf(
-    "Kruskal\u2013Wallis test showed significant variation across groups (\u03c7\u00b2(%d) = %.2f, p = %s).",
+    "Kruskal\u2013Wallis test showed significant variation across groups (H(%d) = %.2f, P = %s).",
     kw$df, kw$statistic, fmt_p_value(kw$p))
 
   statement <- paste(kw_stmt,
@@ -1204,7 +1838,7 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
     section_lines <- c(
       "\n\nDunn Post-Hoc Tests (Kruskal-Wallis + pairwise)",
       "----------------------------------------------------------------------",
-      sprintf("Omnibus: Kruskal\u2013Wallis \u03c7\u00b2(%d) = %.4f, p = %s",
+      sprintf("Omnibus: Kruskal\u2013Wallis H(%d) = %.4f, P = %s",
               kw$df, kw$statistic, fmt_p_value(kw$p)),
       sprintf("Post-hoc: Dunn test with %s correction for multiple comparisons", adj_label),
       sprintf("Highlighted groups: %s\n", paste(highlights, collapse = ", ")),
@@ -1216,6 +1850,16 @@ write_dunn_posthoc <- function(data, value_col, group_col = super_class,
       "STATEMENT (copy-paste ready)",
       "----------------------------------------------------------------------",
       statement,
+      "----------------------------------------------------------------------",
+      "Concise stat",
+      "----------------------------------------------------------------------",
+      fmt_stat_concise(
+        p     = kw$p,
+        test  = "Kruskal-Wallis omnibus + Dunn post-hoc",
+        n     = sum(meds$n),
+        extra = c(sprintf("H(%d) = %.2f", kw$df, kw$statistic),
+                  sprintf("Dunn %s-adjusted", adjust_method))
+      ),
       "----------------------------------------------------------------------"
     )
     cat(file = append_to, append = TRUE, paste(section_lines, collapse = "\n"), "\n")
@@ -1262,7 +1906,8 @@ write_diversity_nonparam_summary <- function(
     out_path     = NULL,
     adjust_method = "holm",
     alpha         = 0.05,
-    calculate_effect_size = FALSE  # Default FALSE to avoid integer overflow with large datasets
+    calculate_effect_size = FALSE,  # Default FALSE to avoid integer overflow with large datasets
+    include_kw   = TRUE              # FALSE: skip KW section + prefix; always run pairwise Wilcoxon
 ) {
   for (pkg in c("dplyr","effectsize")) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -1299,7 +1944,7 @@ write_diversity_nonparam_summary <- function(
   # ---- helpers ----
   .fmt_p <- function(p) {
     val <- fmt_p_value(p)
-    if (startsWith(val, "<")) paste("p", val) else paste0("p=", val)
+    ifelse(startsWith(val, "<"), paste("P", val), paste("P =", val))
   }
   .stars <- function(p) {
     if (!is.finite(p)) return("****")
@@ -1361,8 +2006,8 @@ write_diversity_nonparam_summary <- function(
     if (!has_group) {
       df_g <- df0
       kw <- stats::kruskal.test(df_g[[value_col]] ~ df_g[[category_col]])
-      out <- add_sec(out, "Kruskal–Wallis (overall)", kw)
-      if (kw$p.value < alpha) {
+      if (include_kw) out <- add_sec(out, "Kruskal–Wallis (overall)", kw)
+      if (!include_kw || kw$p.value < alpha) {
         pw <- stats::pairwise.wilcox.test(df_g[[value_col]], df_g[[category_col]],
                                           p.adjust.method = adjust_method, exact = FALSE)
         pmat <- pw$p.value
@@ -1391,35 +2036,36 @@ write_diversity_nonparam_summary <- function(
           pw_long$stars <- sapply(pw_long$p_adj, .stars)
         }
         out <- add_sec(out, "Pairwise Wilcoxon across categories (adjusted p)", pw_long)
-        if (kw$p.value < alpha) {
-          sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
-          within_text <- c(within_text,
-                           if (nrow(sig_pairs))
-                             paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
-                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
-                                    ". Significant pairs (", adjust_method, "): ",
-                                    paste0(sig_pairs$category1, "–", sig_pairs$category2,
-                                           " (", .fmt_p(sig_pairs$p_adj), ")", collapse = "; "), ".")
-                           else
-                             paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
-                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
-                                    ". No significant pairs after ", adjust_method, ".")
-          )
-        }
-      } else {
+        sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
+        .kw_prefix <- if (include_kw)
+          sprintf("Kruskal–Wallis across categories: H(%d) = %.2f, %s. ",
+                  kw$parameter, round(unname(kw$statistic), 2), .fmt_p(kw$p.value))
+          else ""
         within_text <- c(within_text,
-                         paste0("Kruskal–Wallis across categories: χ²(", kw$parameter, ") = ",
-                                round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
-                                ". No evidence of category differences."))
+                         if (nrow(sig_pairs))
+                           paste0(.kw_prefix, "Pairwise Wilcoxon (", adjust_method, "): ",
+                                  paste0(sig_pairs$category1, "–", sig_pairs$category2,
+                                         " (", .fmt_p(sig_pairs$p_adj), ")", collapse = "; "), ".")
+                         else
+                           paste0(.kw_prefix, "Pairwise Wilcoxon (", adjust_method,
+                                  "): no significant pairs.")
+        )
+      } else {
+        if (include_kw) {
+          within_text <- c(within_text,
+                           paste0("Kruskal–Wallis across categories: H(", kw$parameter, ") = ",
+                                  round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
+                                  ". No evidence of category differences."))
+        }
       }
     } else {
       for (g in levels(df0[[group_col]])) {
         df_g <- df0[df0[[group_col]] == g, , drop = FALSE]
         if (nrow(df_g) < 2 || nlevels(df_g[[category_col]]) < 2) next
         kw <- stats::kruskal.test(df_g[[value_col]] ~ df_g[[category_col]])
-        out <- add_sec(out, paste0("Kruskal–Wallis within group: ", g), kw)
+        if (include_kw) out <- add_sec(out, paste0("Kruskal–Wallis within group: ", g), kw)
         pw <- NULL; pw_long <- data.frame()
-        if (kw$p.value < alpha) {
+        if (!include_kw || kw$p.value < alpha) {
           pw <- stats::pairwise.wilcox.test(df_g[[value_col]], df_g[[category_col]],
                                             p.adjust.method = adjust_method, exact = FALSE)
           pmat <- pw$p.value
@@ -1450,23 +2096,26 @@ write_diversity_nonparam_summary <- function(
           }
         }
         within_list[[g]] <- pw_long
-        if (kw$p.value < alpha) {
-          sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
+        sig_pairs <- pw_long[pw_long$p_adj < alpha, , drop = FALSE]
+        .kw_prefix <- if (include_kw)
+          sprintf("Kruskal–Wallis: H(%d) = %.2f, %s. ",
+                  kw$parameter, round(unname(kw$statistic), 2), .fmt_p(kw$p.value))
+          else ""
+        if (nrow(pw_long)) {
           within_text <- c(within_text,
                            if (nrow(sig_pairs))
-                             paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
-                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
-                                    ". Significant pairs (", adjust_method, "): ",
+                             paste0("[", g, "] ", .kw_prefix,
+                                    "Pairwise Wilcoxon (", adjust_method, "): ",
                                     paste0(sig_pairs$category1, "–", sig_pairs$category2,
                                            " (", .fmt_p(sig_pairs$p_adj), ")", collapse = "; "), ".")
                            else
-                             paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
-                                    round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
-                                    ". No significant pairs after ", adjust_method, ".")
+                             paste0("[", g, "] ", .kw_prefix,
+                                    "Pairwise Wilcoxon (", adjust_method,
+                                    "): no significant pairs.")
           )
-        } else {
+        } else if (include_kw) {
           within_text <- c(within_text,
-                           paste0("[", g, "] Kruskal–Wallis: χ²(", kw$parameter, ") = ",
+                           paste0("[", g, "] Kruskal–Wallis: H(", kw$parameter, ") = ",
                                   round(unname(kw$statistic), 2), ", ", .fmt_p(kw$p.value),
                                   ". No evidence of category differences."))
         }
@@ -1754,7 +2403,7 @@ convert_to_dark_mode <- function(plot,
 }
 
 banc_interpret_umaps <- function(
-    umap.df,  
+    umap.df,
     influence.df,
     elist.pre = NULL,
     elist.post = NULL,
@@ -1771,11 +2420,31 @@ banc_interpret_umaps <- function(
     seed.map = NULL,
     target.map = NULL,
     recalculate = FALSE,
-    width = 10, 
+    width = 10,
     height = 10,
+    dpi = 300,
+    ncores = NULL,
     scaled_heatmap_palette = NULL,
-    scaled_heatmap_breaks = NULL
+    scaled_heatmap_breaks = NULL,
+    # Optional fixed zoom box (UMAP-space). When provided, the function
+    # uses these instead of the per-seed bbox computed from non-NA
+    # influence points — so a "concise sample" of cell types can be
+    # locked across panels (sensors vs effectors) and metrics. Set both
+    # NULL to fall back to per-seed auto-zoom (legacy behaviour).
+    xlim_fixed = NULL,
+    ylim_fixed = NULL
 ){
+  # Parallelism control (added 2026-04-09):
+  # - ncores = NULL -> auto-detect (min(detectCores()-1, 6L)), but honour BANC_NCORES env var
+  # - ncores = 1L (or BANC_NCORES=1) -> sequential (old behaviour)
+  # - otherwise -> parallel::mclapply with fork-based workers (macOS/Linux)
+  .env_ncores <- suppressWarnings(as.integer(Sys.getenv("BANC_NCORES", NA_character_)))
+  if (is.null(ncores)) {
+    ncores <- if (!is.na(.env_ncores)) .env_ncores
+              else max(1L, min(parallel::detectCores() - 1L, 6L))
+  }
+  ncores <- max(1L, as.integer(ncores))
+  .is_forkable <- .Platform$OS.type != "windows"
   
   # create save folder
   dir.create(file.path(save.path,identifier), recursive = TRUE, showWarnings = FALSE)
@@ -1823,18 +2492,38 @@ banc_interpret_umaps <- function(
         influence.df <- calculate_influence_norms(influence.df)
       }
       entries <- na.omit(unique(influence.df$seed))
-      if(all(is.na(influence.df[[inf.metric]]))){
-        next
+      if(length(entries) == 0 || !(inf.metric %in% colnames(influence.df)) ||
+         all(is.na(influence.df[[inf.metric]]))){
+        message("banc_interpret_umaps: no usable influence data for inf.metric=",
+                inf.metric, " — skipping umaps block")
+        entries <- character(0)
       }
-      thresh.high <- quantile(na.omit(influence.df[[inf.metric]]),0.95)
-      thresh.low <- quantile(na.omit(influence.df[[inf.metric]]),0.05)
-      for(entry in entries){
+      if (length(entries) > 0) {
+        # Compute thresholds from NON-ZERO values only (2026-04-10) — zeros
+        # are fill values from absent influence and drag the low quantile down,
+        # compressing the color scale into saturation for meaningful values.
+        # Use 10th/99th percentiles (widened 2026-04-10 from 5th/95th) to give
+        # more dynamic range at the hot end — the old 95th percentile was too
+        # aggressive, clipping most mid-high values to saturated red.
+        .nz_vals <- na.omit(influence.df[[inf.metric]])
+        .nz_vals <- .nz_vals[.nz_vals > 0]
+        if (length(.nz_vals) > 0) {
+          thresh.high <- quantile(.nz_vals, 0.99)
+          thresh.low  <- quantile(.nz_vals, 0.10)
+        } else {
+          thresh.high <- 1
+          thresh.low  <- 0
+        }
+      }
+      # Render one UMAP overlay PNG for a single seed 'entry'. Extracted so we can
+      # run it in parallel via mclapply (added 2026-04-09 to cut blowouts runtime).
+      .render_seed_entry <- function(entry){
         message("Working on influence seed: ", entry)
         inf.entry <- influence.df %>%
           dplyr::filter(seed==entry)
         if(max(inf.entry[[inf.metric]],na.rm=TRUE)==0){
           message("no data for entry: ", entry)
-          next
+          return(invisible(NULL))
         }
         if("id"%in%colnames(umap.df)){
           umap.df.entry <- dplyr::left_join(umap.df,
@@ -1849,13 +2538,37 @@ banc_interpret_umaps <- function(
         }
         umap.df.entry$norm <- umap.df.entry[[inf.metric]]
         if(all(is.na(umap.df.entry[[inf.metric]]))){
-          next
+          return(invisible(NULL))
         }
+        # Keep all rows (cluster + grey-context). Order: NA first (drawn at
+        # the bottom by geom_point), then ascending norm so the highest
+        # values render on top.
         umap.df.entry <- umap.df.entry %>%
-          dplyr::filter(!is.na(norm)) %>%
-          dplyr::arrange(norm) 
+          dplyr::arrange(!is.na(norm), norm)
         umap.df.entry$norm <- ifelse(umap.df.entry$norm>thresh.high,thresh.high,umap.df.entry$norm)
         umap.df.entry$norm <- ifelse(umap.df.entry$norm<thresh.low,thresh.low,umap.df.entry$norm)
+        # Bounding box. If the caller supplied xlim_fixed/ylim_fixed, use
+        # them (locks the zoom across panels/metrics for a fixed cell-type
+        # sample). Otherwise fall back to per-seed auto-zoom: encompass
+        # only the points with non-NA influence from THIS seed.
+        if (!is.null(xlim_fixed) && !is.null(ylim_fixed)) {
+          .xlim_clust <- xlim_fixed
+          .ylim_clust <- ylim_fixed
+        } else {
+          .clust_pts <- umap.df.entry[!is.na(umap.df.entry$norm), c("UMAP1","UMAP2"), drop = FALSE]
+          if (nrow(.clust_pts) >= 2) {
+            .x_rng <- range(.clust_pts$UMAP1, na.rm = TRUE)
+            .y_rng <- range(.clust_pts$UMAP2, na.rm = TRUE)
+            .pad   <- 0.05  # 5% padding
+            .x_pad <- diff(.x_rng) * .pad
+            .y_pad <- diff(.y_rng) * .pad
+            .xlim_clust <- c(.x_rng[1] - .x_pad, .x_rng[2] + .x_pad)
+            .ylim_clust <- c(.y_rng[1] - .y_pad, .y_rng[2] + .y_pad)
+          } else {
+            .xlim_clust <- NULL
+            .ylim_clust <- NULL
+          }
+        }
         
         # scale colors
         n_breaks <- 100
@@ -1875,21 +2588,21 @@ banc_interpret_umaps <- function(
         
         # Make plot
         if(is.null(umap.df.entry$super_class)){
-          p_entry <- ggplot(umap.df.entry, aes(x = UMAP1, 
-                                               y = UMAP2, 
+          p_entry <- ggplot(umap.df.entry, aes(x = UMAP1,
+                                               y = UMAP2,
                                                color = norm)) +
             #geom_density_2d(aes(group = 1), col="grey70", alpha = 0.5) +
-            geom_point(data = subset(umap.df.entry, is.na(norm)), 
-                       alpha = 0.9, 
-                       size = 3, 
-                       col = "grey30") +
-            geom_point(data = subset(umap.df.entry, !is.na(norm)), 
-                       alpha = 0.9, 
+            geom_point(data = subset(umap.df.entry, is.na(norm)),
+                       alpha = 0.6,
+                       size = 1.5,
+                       col = "grey70") +
+            geom_point(data = subset(umap.df.entry, !is.na(norm)),
+                       alpha = 0.9,
                        size = 3) +
             scale_color_gradientn(colours = scaled_heatmap_palette,
                                   values = scales::rescale(scaled_heatmap_breaks),
                                   limits = c(thresh.low, thresh.high),
-                                  na.value = "grey30") +
+                                  na.value = "grey70") +
             theme_void() +
             labs(title = "",
                  x = "UMAP1",
@@ -1897,11 +2610,11 @@ banc_interpret_umaps <- function(
             theme(
               legend.position = "bottom",
               legend.text = element_text(size = 6),
-              legend.title = element_text(size = 8),  
-              legend.key.size = unit(0.5, "cm") 
+              legend.title = element_text(size = 8),
+              legend.key.size = unit(0.5, "cm")
             ) +
             labs(color = paste0(entry,": norm")) +
-            ggplot2::coord_fixed()
+            ggplot2::coord_fixed(xlim = .xlim_clust, ylim = .ylim_clust)
           
           if(nrow(cluster_centroids)){
             p_entry <- p_entry + 
@@ -1912,24 +2625,24 @@ banc_interpret_umaps <- function(
                         fontface = "bold")
           }
         }else{
-          p_entry <- ggplot(umap.df.entry, aes(x = UMAP1, 
-                                               y = UMAP2, 
-                                               color = norm, 
-                                               shape = super_class)) +
-            #geom_density_2d(aes(group = 1), col="grey70", alpha = 0.5) +
-            scale_shape_manual(values = c("ascending"=17,"descending"=19,"motor"=19,"visceral_circulatory"=17,"sensory"=19),
-                               guide = guide_legend(title = "points:")) +
-            geom_point(data = subset(umap.df.entry, is.na(norm)), 
-                       alpha = 0.9, 
-                       size = 3, 
-                       col = "grey30") +
-            geom_point(data = subset(umap.df.entry, !is.na(norm)), 
-                       alpha = 0.9, 
-                       size = 3) +
+          # Uniform circles (shape = 19) for all points — no per-super_class
+          # shape distinction (2026-05-12).
+          p_entry <- ggplot(umap.df.entry, aes(x = UMAP1,
+                                               y = UMAP2,
+                                               color = norm)) +
+            geom_point(data = subset(umap.df.entry, is.na(norm)),
+                       alpha = 0.6,
+                       size = 1.5,
+                       shape = 19,
+                       col = "grey70") +
+            geom_point(data = subset(umap.df.entry, !is.na(norm)),
+                       alpha = 0.9,
+                       size = 3,
+                       shape = 19) +
             scale_color_gradientn(colours = scaled_heatmap_palette,
                                   values = scales::rescale(scaled_heatmap_breaks),
                                   limits = c(thresh.low, thresh.high),
-                                  na.value = "grey30",
+                                  na.value = "grey70",
                                   guide = guide_legend(title = "points:")) +
             theme_void() +
             labs(title = "",
@@ -1938,15 +2651,14 @@ banc_interpret_umaps <- function(
             theme(
               legend.position = "bottom",
               legend.text = element_text(size = 6),
-              legend.title = element_text(size = 8),  
-              legend.key.size = unit(0.5, "cm") 
+              legend.title = element_text(size = 8),
+              legend.key.size = unit(0.5, "cm")
             ) +
             labs(color = paste0(entry,": norm")) +
-            guides(shape = "none") +
-            ggplot2::coord_fixed()
-          
+            ggplot2::coord_fixed(xlim = .xlim_clust, ylim = .ylim_clust)
+
           if(nrow(cluster_centroids)){
-            p_entry <- p_entry + 
+            p_entry <- p_entry +
               geom_text(data = cluster_centroids,
                         aes(label = cluster),
                         colour = "black",
@@ -1954,20 +2666,43 @@ banc_interpret_umaps <- function(
                         fontface = "bold")
           }
         }
-        if(!is.null(umap.df.entry$super_class)&all("ascendng","descending")%in%umap.df.entry$super_class){
-          p_entry <- p_entry +
-            scale_shape_manual(values = c("ascending"=17,"descending"=19),
-                             guide = guide_legend(title = "cell types:")) +
-            guides(shape = "none")
-        }
         
-        # Save
+        # Save. Defaults to PNG, but a small allow-list of seed entries are
+        # written as vector PDFs (for Illustrator placement in the paper).
+        .pdf_seed_basenames <- c(
+          "influence_log_minmax_visual vertical widefield motion_umap",
+          "influence_log_minmax_prosternal hair plate_umap",
+          "influence_log_minmax_proboscis motor_umap",
+          "influence_log_minmax_neck roll_umap"
+        )
+        .base <- paste0(inf.metric, "_", gsub("_|m ", "", entry), "_umap")
+        .ext  <- if (.base %in% .pdf_seed_basenames) ".pdf" else ".png"
         dir.create(file.path(save.path,identifier), recursive = TRUE, showWarnings = FALSE)
         ggsave(plot = p_entry,
-               filename = file.path(save.path,identifier,paste0(inf.metric,"_",gsub("_|m ","",entry),"_umap.png")),
-               width = width, height = height, dpi = 300)
-    }
-    
+               filename = file.path(save.path, identifier, paste0(.base, .ext)),
+               width = width, height = height, dpi = dpi)
+        invisible(NULL)
+      }  # end .render_seed_entry
+
+      # Dispatch the per-seed render. Fall back to sequential lapply when
+      # ncores == 1 or the platform can't fork (Windows).
+      if (length(entries) > 0) {
+        if (ncores > 1L && .is_forkable) {
+          message(sprintf("banc_interpret_umaps: rendering %d seed PNGs via mclapply on %d cores",
+                          length(entries), ncores))
+          tryCatch(
+            parallel::mclapply(entries, .render_seed_entry,
+                               mc.cores = ncores, mc.preschedule = FALSE),
+            error = function(e) {
+              message("mclapply failed, falling back to sequential: ", e$message)
+              lapply(entries, .render_seed_entry)
+            }
+          )
+        } else {
+          lapply(entries, .render_seed_entry)
+        }
+      }
+
     # Iterate over connectivity features, looking at direct outputs to postsynaptic targets
     if(!is.null(elist.pre)){
       cols <- c("post_super_class","post_cell_function", "post_nerve",
@@ -2031,7 +2766,7 @@ banc_interpret_umaps <- function(
           dir.create(file.path(save.path,identifier,col), recursive = TRUE, showWarnings = FALSE)
           ggsave(plot = p_entry,
                  filename = file.path(save.path,identifier,col,paste0(col,"_",entry,"_umap.png")),
-                 width = 10, height = 10, dpi = 300)
+                 width = 10, height = 10, dpi = dpi)
         }
       }
       
@@ -2100,7 +2835,7 @@ banc_interpret_umaps <- function(
           dir.create(file.path(save.path,identifier,col), recursive = TRUE, showWarnings = FALSE)
           ggsave(plot = p_entry,
                  filename = file.path(save.path,identifier,col, paste0(col,"_",entry,"_umap.png")),
-                 width = 10, height = 10, dpi = 300)
+                 width = 10, height = 10, dpi = dpi)
         }
       } 
     }
@@ -2321,19 +3056,48 @@ banc_plot_key_features <- function(
     quantile = NULL
 ){
   
+  # Defensive guard: skip (not crash) when upstream filters left empty/unusable data.
+  # Added 2026-04-09 — both panel_cluster_sensory_correlations.R and
+  # panels_cell_type_blowouts.R call this with filter chains that can produce
+  # empty inputs, and reshape2::dcast on all-NA values crashes with
+  # "dim(ordered) <- ns : dims [product 1] do not match the length of object [0]".
+  .skip_plot <- function(reason) {
+    msg <- sprintf("banc_plot_key_features skipping %s: %s",
+                   if (is.null(plot.name)) "<unnamed>" else plot.name, reason)
+    message(msg)
+    return(invisible(NULL))
+  }
+  if (is.null(influence.meta) || !inherits(influence.meta, "data.frame") ||
+      nrow(influence.meta) == 0) {
+    return(.skip_plot("influence.meta is empty"))
+  }
+  if (!all(c("seed", "target") %in% colnames(influence.meta))) {
+    return(.skip_plot("influence.meta missing seed/target columns"))
+  }
+
   # Reshape the data
   influence_df <- influence.meta %>%
-    dplyr::filter(!is.na(seed), 
+    dplyr::filter(!is.na(seed),
                   !is.na(target))
+  if (nrow(influence_df) == 0) {
+    return(.skip_plot("no rows after !is.na(seed)/!is.na(target) filter"))
+  }
   if(!is.null(influence.level)){
     influence_df <- influence_df %>%
       dplyr::filter(level %in% influence.level)
+    if (nrow(influence_df) == 0) {
+      return(.skip_plot(sprintf("no rows at level %s",
+                                paste(influence.level, collapse = ","))))
+    }
   }
   if(!is.null(super.class)){
     influence_df <- influence_df %>%
       dplyr::filter(grepl(super.class,super_class))
+    if (nrow(influence_df) == 0) {
+      return(.skip_plot(sprintf("no rows matching super.class=%s", super.class)))
+    }
   }
-  
+
   # Rename seeds
   if(!is.null(names(seed.map))){
     influence_df <- influence_df %>%
@@ -2349,14 +3113,24 @@ banc_plot_key_features <- function(
         TRUE ~ target
       ))
   }
-  
+
   # normalisations
   if(recalculate){
     influence_df <- calculate_influence_norms(influence_df, quantile=quantile)
   }
 
-  # Choose metric
+  # Choose metric — guard against missing column and all-NA
+  if (!(inf.metric %in% colnames(influence_df))) {
+    return(.skip_plot(sprintf("inf.metric '%s' not in columns (have: %s)",
+                              inf.metric,
+                              paste(colnames(influence_df), collapse = ","))))
+  }
   influence_df$influence_score <- influence_df[[inf.metric]]
+  if (all(is.na(influence_df$influence_score)) ||
+      all(!is.finite(influence_df$influence_score))) {
+    return(.skip_plot(sprintf("all %s values NA or non-finite (nrow=%d)",
+                              inf.metric, nrow(influence_df))))
+  }
   
   # Filter seeds
   if(!is.null(chosen.seeds)){
@@ -2376,20 +3150,34 @@ banc_plot_key_features <- function(
                     value.var = "influence_score", 
                     fill = 0)
   
+  # Guard against empty cast (happens when influence_score is all-zero after fill)
+  if (is.null(influence_matrix) || nrow(influence_matrix) == 0 ||
+      ncol(influence_matrix) < 2) {
+    .nr <- if (is.null(influence_matrix)) 0L else nrow(influence_matrix)
+    .nc <- if (is.null(influence_matrix)) 0L else ncol(influence_matrix)
+    return(.skip_plot(sprintf("dcast produced %dx%d matrix", .nr, .nc)))
+  }
+
   # Set row names and remove the seed column
   rownames(influence_matrix) <- influence_matrix$seed
   influence_matrix$seed <- NULL
   nams <- dimnames(influence_matrix)
-  
+
   # Convert to matrix
   influence_matrix <- as.matrix(influence_matrix)
-  influence_matrix <- matrix(as.numeric(as.matrix(influence_matrix)), 
-                             nrow = nrow(influence_matrix), 
+  influence_matrix <- matrix(as.numeric(as.matrix(influence_matrix)),
+                             nrow = nrow(influence_matrix),
                              ncol = ncol(influence_matrix))
   influence_matrix[is.na(influence_matrix)] <- 0
   influence_matrix[is.infinite(influence_matrix)] <- 0
   dimnames(influence_matrix) <- nams
   influence_matrix <- t(influence_matrix)
+
+  # After transpose, still guard before any hclust/pheatmap call
+  if (nrow(influence_matrix) < 2 || ncol(influence_matrix) < 2) {
+    return(.skip_plot(sprintf("final matrix too small: %dx%d",
+                              nrow(influence_matrix), ncol(influence_matrix))))
+  }
   
   # Remove all-zero rows from the original matrix
   if(!diagonal){
@@ -2451,8 +3239,22 @@ banc_plot_key_features <- function(
     row_annotation <- row_annotation[rownames(row_annotation) %in% rownames(influence_matrix),]
     row_annotation$target <- NULL 
     entries <- na.omit(unique(row_annotation[[row.annotation]]))
-    cols <- rainbow(length(entries))
-    names(cols) <- entries
+    # Use paper.cols when available, fall back to rainbow (2026-04-10).
+    # Ensures EFF super_cluster annotations etc. get their designated colors.
+    if (exists("paper.cols") && is.character(paper.cols)) {
+      cols <- ifelse(entries %in% names(paper.cols),
+                     paper.cols[entries],
+                     rainbow(length(entries)))
+      names(cols) <- entries
+      # Fill any that didn't match with rainbow
+      .missing <- is.na(cols) | cols == ""
+      if (any(.missing)) {
+        cols[.missing] <- rainbow(sum(.missing))
+      }
+    } else {
+      cols <- rainbow(length(entries))
+      names(cols) <- entries
+    }
     annotation_colors[[row.annotation]] <- cols
   }else{
     row_annotation <- NULL
@@ -2473,8 +3275,17 @@ banc_plot_key_features <- function(
     col_annotation <- col_annotation[rownames(col_annotation) %in% colnames(influence_matrix),]
     col_annotation$seed <- NULL 
     entries <- na.omit(unique(col_annotation[[col.annotation]]))
-    cols <- rainbow(length(entries))
-    names(cols) <- entries
+    if (exists("paper.cols") && is.character(paper.cols)) {
+      cols <- ifelse(entries %in% names(paper.cols),
+                     paper.cols[entries],
+                     rainbow(length(entries)))
+      names(cols) <- entries
+      .missing <- is.na(cols) | cols == ""
+      if (any(.missing)) cols[.missing] <- rainbow(sum(.missing))
+    } else {
+      cols <- rainbow(length(entries))
+      names(cols) <- entries
+    }
     annotation_colors[[col.annotation]] <- cols
   }else{
     col_annotation <- NULL
@@ -2821,3 +3632,175 @@ round_dataframe <- function(x, exclude=NULL, digits = 4, ...) {
   x
 }
 
+
+# ---- Extracted helpers (Task #19, 2026-05-21) -----------------------------
+
+#' Find the maximum-angle elbow in a (rank, value) curve over a given range
+#'
+#' Walks a downsampled curve with a sliding three-point window, computes
+#' the angle between the two segments at each point, and returns the
+#' (rank, value) of the maximum-angle point inside the [start_rank,
+#' end_rank] range. Used to identify the elbow of the cumulative
+#' adjusted-influence distribution (panels_body_parts.R yields the
+#' canonical 17.28 cutoff that downstream panels read from
+#' data/determined_thresholds/influence_norm_log_elbow_threshold.csv).
+#'
+#' @param ranks numeric vector of rank positions, ascending.
+#' @param values numeric vector of values aligned with `ranks`.
+#' @param start_rank numeric; lower bound of the search range.
+#' @param end_rank numeric; upper bound of the search range.
+#' @param window_size integer; half-width of the sliding window
+#'   (default 100); the function skips ranges with fewer than
+#'   `2 * window_size` points.
+#' @return list with `rank` and `value` of the maximum-angle point,
+#'   or both `NA` if the range is too small.
+#' @details Vectors are normalised before the dot product so the returned
+#'   angle is in degrees (0–180). Used by panels_body_parts.R (ED Fig. 5e
+#'   elbow) and panels_mbx_cx_control.R (Fig. 6f threshold sanity check).
+#' @section Used by:
+#'   R/figures/panels_body_parts.R; R/figures/panels_mbx_cx_control.R
+find_angle_change_in_range <- function(ranks, values, start_rank, end_rank, window_size = 100) {
+  idx_in_range <- which(ranks >= start_rank & ranks <= end_rank)
+  ranks_subset <- ranks[idx_in_range]
+  values_subset <- values[idx_in_range]
+
+  if (length(ranks_subset) <= 2 * window_size) {
+    return(list(rank = NA, value = NA))
+  }
+
+  angles <- numeric(length(ranks_subset) - 2 * window_size)
+  for (i in (window_size + 1):(length(ranks_subset) - window_size)) {
+    p1 <- c(ranks_subset[i - window_size], values_subset[i - window_size])
+    p2 <- c(ranks_subset[i],                values_subset[i])
+    p3 <- c(ranks_subset[i + window_size], values_subset[i + window_size])
+
+    v1 <- c(p2[1] - p1[1], p2[2] - p1[2])
+    v2 <- c(p3[1] - p2[1], p3[2] - p2[2])
+
+    v1 <- v1 / sqrt(sum(v1^2))
+    v2 <- v2 / sqrt(sum(v2^2))
+
+    angles[i - window_size] <- acos(sum(v1 * v2)) * (180 / pi)
+  }
+
+  max_angle_idx   <- which.max(angles) + window_size
+  max_angle_rank  <- ranks_subset[max_angle_idx]
+  max_angle_value <- values_subset[max_angle_idx]
+
+  list(rank = max_angle_rank, value = max_angle_value)
+}
+
+#' Shannon entropy of a non-negative vector
+#'
+#' Normalises `values` to a probability distribution (dropping zeros) and
+#' returns its Shannon entropy in bits (log base 2). Used to quantify
+#' how concentrated influence is across cell-type groups (e.g. pre-
+#' effector influence diversity in panels_pre_effector_influence.R).
+#'
+#' Renamed from `calculate_entropy` on extraction so the metric is
+#' explicit at the call site (there are several distinct "entropy"
+#' formulations in the literature; this one is Shannon-in-bits).
+#'
+#' @param values non-negative numeric vector. NAs are dropped.
+#' @return numeric scalar; entropy in bits.
+#' @section Used by:
+#'   R/figures/panels_pre_effector_influence.R
+shannon_entropy <- function(values) {
+  probs <- values / sum(values, na.rm = TRUE)
+  probs <- probs[probs > 0]
+  -sum(probs * log2(probs), na.rm = TRUE)
+}
+
+#' Majority vote on a character vector, dropping NAs and empty strings
+#'
+#' Returns the most frequent value, with ties broken by the order
+#' returned by `table()` (which is alphabetic by default).
+#'
+#' @param x character vector.
+#' @return scalar character of the modal value, or `NA_character_`
+#'   when `x` is empty after dropping NAs / empty strings.
+#' @section Used by:
+#'   R/figures/panels_vignette_networks.R (super_class, super_cluster
+#'   and majority pre-neurotransmitter aggregation per display_name).
+majority_vote <- function(x) {
+  x <- x[!is.na(x) & x != ""]
+  if (length(x) == 0) return(NA_character_)
+  names(sort(table(x), decreasing = TRUE))[1]
+}
+
+#' Kruskal–Wallis + Dunn pairwise summary against highlighted groups
+#'
+#' Runs a Kruskal–Wallis test of `value_col ~ group_col` plus a Dunn
+#' pairwise post-hoc (Holm-corrected), then filters the Dunn output to
+#' pairs that involve any of the `highlights` groups and where the
+#' highlighted side has the higher median. Returns the raw scalars and
+#' the filtered Dunn table so the caller can render both the on-plot
+#' bracket summary and the .txt sidecar.
+#'
+#' @param data data.frame containing `value_col` and `group_col`.
+#' @param value_col bare column name (NSE) of the numeric value.
+#' @param group_col bare column name (NSE) of the grouping factor
+#'   (default `super_class`).
+#' @param highlights character vector of group levels whose pairs we
+#'   want to retain (default `c("ascending","descending")`).
+#' @return list with elements `kw_p`, `max_pairwise_p`, `dunn_table`
+#'   (filtered to highlighted-higher pairs), `dunn_full` (all pairs
+#'   touching `highlights`), `n_expected`, `n_significant`,
+#'   `other_groups`, and `meds` (per-group medians).
+#' @section Used by:
+#'   R/figures/panels_betweenness_layers.R (Fig. 3a sensory-to-effector
+#'   betweenness, ED Fig. 5a all-to-all betweenness).
+kw_dunn_summary <- function(data, value_col, group_col = super_class,
+                            highlights = c("ascending","descending")) {
+
+  gsym <- rlang::ensym(group_col)
+  vsym <- rlang::ensym(value_col)
+
+  df <- data %>%
+    dplyr::select(!!gsym, !!vsym) %>%
+    dplyr::filter(is.finite(!!vsym)) %>%
+    dplyr::mutate(!!gsym := droplevels(as.factor(!!gsym)))
+
+  fml <- stats::as.formula(paste(rlang::as_string(vsym), "~", rlang::as_string(gsym)))
+  kw  <- rstatix::kruskal_test(df, formula = fml)
+  kw_p <- kw$p
+
+  meds <- df %>%
+    dplyr::group_by(!!gsym) %>%
+    dplyr::summarise(med = stats::median(!!vsym, na.rm = TRUE), .groups = "drop") %>%
+    dplyr::rename(group = !!gsym)
+
+  dunn <- rstatix::dunn_test(df, formula = fml, p.adjust.method = "holm")
+
+  dunn_hl <- dunn %>%
+    dplyr::filter(group1 %in% highlights | group2 %in% highlights) %>%
+    dplyr::left_join(meds %>% dplyr::rename(group1 = group, med1 = med), by = "group1") %>%
+    dplyr::left_join(meds %>% dplyr::rename(group2 = group, med2 = med), by = "group2") %>%
+    dplyr::mutate(
+      hl         = ifelse(group1 %in% highlights, group1, group2),
+      hl_med     = ifelse(group1 %in% highlights, med1,  med2),
+      other_med  = ifelse(group1 %in% highlights, med2,  med1),
+      hl_higher  = hl_med > other_med
+    ) %>%
+    dplyr::filter(hl_higher)
+
+  max_p <- if (nrow(dunn_hl)) max(dunn_hl$p.adj, na.rm = TRUE) else NA_real_
+
+  dunn_full <- dunn %>%
+    dplyr::filter(group1 %in% highlights | group2 %in% highlights) %>%
+    dplyr::left_join(meds %>% dplyr::rename(group1 = group, med1 = med), by = "group1") %>%
+    dplyr::left_join(meds %>% dplyr::rename(group2 = group, med2 = med), by = "group2") %>%
+    dplyr::mutate(
+      hl    = ifelse(group1 %in% highlights, group1, group2),
+      other = ifelse(group1 %in% highlights, group2, group1)
+    )
+
+  all_groups   <- levels(df[[rlang::as_string(gsym)]])
+  other_groups <- setdiff(all_groups, highlights)
+  n_expected   <- length(highlights) * length(other_groups)
+
+  list(kw_p = kw_p, max_pairwise_p = max_p,
+       dunn_table = dunn_hl, dunn_full = dunn_full,
+       n_expected = n_expected, n_significant = nrow(dunn_hl),
+       other_groups = other_groups, meds = meds)
+}

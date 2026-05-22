@@ -1,3 +1,22 @@
+"""Batch driver for the BANC signal cascade.
+
+Reads a JSON manifest of source neuron groups (one entry per modality),
+loads the BANC connectivity tables from SQLite, constructs a
+``cascade_model.SignalCascade`` for each source group, runs it to
+convergence, and pickles the activation distributions to disk.
+
+Outputs land in ``../../data/cascade/`` keyed by source modality; the
+manifest ``cascade_modality_batch.json`` records the seed → pickle
+mapping used.
+
+CLI:
+    python batch_cascade.py --manifest cascade_modality_batch.json \\
+        --sql banc_<version>_data.sqlite --out data/cascade/<version>/
+
+The frankenbrain (merged BANC + FAFB + MANC) variant of this driver is
+``batch_cascade_franken.py`` — same shape, different graph.
+"""
+
 import pandas as pd
 import numpy as np
 import sqlite3

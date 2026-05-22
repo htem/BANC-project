@@ -1,0 +1,380 @@
+{
+  "title": "BANC (live)",
+  "dimensions": {
+    "x": [
+      "0.000000004",
+      "m"
+    ],
+    "y": [
+      "0.000000004",
+      "m"
+    ],
+    "z": [
+      "0.000000045",
+      "m"
+    ]
+  },
+  "position": [
+    125097.5,
+    122589.5,
+    2827.5
+  ],
+  "crossSectionOrientation": [
+    0,
+    1,
+    0,
+    0
+  ],
+  "crossSectionScale": 15.1354,
+  "projectionOrientation": [
+    -0.0565,
+    -0.0509,
+    0.0039,
+    0.9971
+  ],
+  "projectionScale": 302229.5051,
+  "layers": [
+    {
+      "type": "image",
+      "source": "precomputed://gs://seunglab_lee_fly_cns_001_alignment/aligned/v0",
+      "tab": "source",
+      "name": "BANC EM"
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/region_outlines",
+        "subsources": {
+          "bounds": true,
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "pick": false,
+      "tab": "segments",
+      "meshSilhouetteRendering": 2,
+      "segments": [
+        "1"
+      ],
+      "segmentQuery": "<id",
+      "colorSeed": 2939100304,
+      "segmentColors": {
+        "1": "#ffffff"
+      },
+      "name": "region outlines"
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/malecns_v0.9_meshes_navis_tpsreg_250206",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "name": "malecns v0.9 imported",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/fafb_783_meshes_elastix_tpsreg_240721",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "colorSeed": 2860966783,
+      "name": "fafb v783 imported",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/hemibrain_v1.2.1_meshes_elastix_tpsreg_240721",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "colorSeed": 2830100975,
+      "name": "hemibrain v1.2.1 imported",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/mirrored_hemibrain_v1.2.1_meshes_elastix_tpsreg_240721",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "colorSeed": 3019710613,
+      "name": "hemibrain v1.2.1 imported, mirrored",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/fanc_1116_meshes_elastix_tpsreg_240721",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "name": "fanc v1116 imported",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": {
+        "url": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/imported_meshes/manc_v1.2.1_meshes_elastix_tpsreg_240721",
+        "subsources": {
+          "properties": true,
+          "mesh": true
+        },
+        "enableDefaultSubsources": false
+      },
+      "tab": "segments",
+      "segments": [],
+      "colorSeed": 1741371904,
+      "name": "manc v1.2.1 imported",
+      "archived": true
+    },
+    {
+      "type": "image",
+      "source": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/templates/JRC2018F_aligned240721_to_BANC.ng",
+      "tab": "rendering",
+      "opacity": 0.55,
+      "name": "JRC2018F atlas imported",
+      "archived": true
+    },
+    {
+      "type": "image",
+      "source": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/synapses/v1.1/synapsecloud_sizethresh6_blursigma1.ng",
+      "tab": "rendering",
+      "opacity": 0.55,
+      "name": "synapse cloud (v1.1)",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": "precomputed://gs://zetta_lee_fly_cns_001_synapse/240623_run/seg",
+      "pick": false,
+      "tab": "source",
+      "segments": [],
+      "name": "postsynapses (v1.1)",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/nuclei/seg_v1",
+      "tab": "segments",
+      "selectedAlpha": 0.8,
+      "segments": [],
+      "name": "nuclei (v1)",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": "precomputed://gs://zetta_lee_fly_cns_001_mito/250423_mito/seg",
+      "tab": "segments",
+      "segments": [],
+      "name": "mitochondria (v1)",
+      "archived": true
+    },
+    {
+      "type": "segmentation",
+      "source": "precomputed://gs://lee-lab_brain-and-nerve-cord-fly-connectome/neuron_meshes",
+      "tab": "segments",
+      "segments": [
+        "720575941692129243",
+        "720575941656372304",
+        "720575941518204888",
+        "720575941499964555",
+        "720575941461333648",
+        "720575941511883985",
+        "720575941532427754",
+        "720575941515355795",
+        "720575941668683687",
+        "720575941506261538",
+        "720575941408338862",
+        "720575941639506207",
+        "720575941582911865",
+        "720575941501929010",
+        "720575941527847608",
+        "720575941642303944",
+        "720575941551356570",
+        "720575941536923624",
+        "720575941455787245",
+        "720575941548546696",
+        "720575941498960546",
+        "720575941507031612",
+        "720575941531923147",
+        "720575941516874094",
+        "720575941494164864",
+        "720575941402088304",
+        "720575941518851694",
+        "720575941527458562",
+        "720575941549009663",
+        "720575941478847262",
+        "720575941402749552",
+        "720575941538762701",
+        "720575941568546418",
+        "720575941593715569",
+        "720575941478281440",
+        "720575941560573608",
+        "720575941691007896",
+        "720575941450561358",
+        "720575941428654255",
+        "720575941579753849",
+        "720575941593802373",
+        "720575941593843589",
+        "720575941531180261",
+        "720575941399414563",
+        "720575941667380979",
+        "720575941549915252",
+        "720575941592581671",
+        "720575941524966169",
+        "720575941669313447",
+        "720575941489684937",
+        "720575941671982759",
+        "720575941559306355",
+        "720575941636735861",
+        "720575941625808330",
+        "720575941475791722",
+        "720575941559978797",
+        "720575941391252886",
+        "720575941595712448",
+        "720575941353301552",
+        "720575941568724980",
+        "720575941524746573",
+        "720575941625549211",
+        "720575941574013085",
+        "720575941573516296",
+        "720575941556297811",
+        "720575941523368779",
+        "720575941504396567",
+        "720575941592225831",
+        "720575941505568069",
+        "720575941451737978",
+        "720575941524365337",
+        "720575941526437988",
+        "720575941518133464",
+        "720575941531504357",
+        "720575941590014007",
+        "720575941573346120",
+        "720575941483752077"
+      ],
+      "segmentColors": {
+        "720575941692129243": "#ee756f",
+        "720575941656372304": "#ee756f",
+        "720575941518204888": "#ee756f",
+        "720575941499964555": "#ee756f",
+        "720575941461333648": "#ee756f",
+        "720575941511883985": "#ee756f",
+        "720575941532427754": "#ee756f",
+        "720575941515355795": "#ee756f",
+        "720575941668683687": "#ee756f",
+        "720575941506261538": "#ee756f",
+        "720575941408338862": "#ee756f",
+        "720575941639506207": "#ee756f",
+        "720575941582911865": "#ee756f",
+        "720575941501929010": "#ee756f",
+        "720575941527847608": "#ee756f",
+        "720575941642303944": "#ee756f",
+        "720575941551356570": "#ee756f",
+        "720575941536923624": "#ee756f",
+        "720575941455787245": "#ee756f",
+        "720575941548546696": "#ee756f",
+        "720575941498960546": "#ee756f",
+        "720575941507031612": "#ee756f",
+        "720575941531923147": "#ee756f",
+        "720575941516874094": "#ee756f",
+        "720575941494164864": "#ee756f",
+        "720575941402088304": "#ee756f",
+        "720575941518851694": "#ee756f",
+        "720575941527458562": "#ee756f",
+        "720575941549009663": "#ee756f",
+        "720575941478847262": "#ee756f",
+        "720575941402749552": "#ee756f",
+        "720575941538762701": "#ee756f",
+        "720575941568546418": "#ee756f",
+        "720575941593715569": "#ee756f",
+        "720575941478281440": "#ee756f",
+        "720575941560573608": "#ee756f",
+        "720575941691007896": "#ee756f",
+        "720575941450561358": "#ee756f",
+        "720575941428654255": "#ee756f",
+        "720575941579753849": "#ee756f",
+        "720575941593802373": "#ee756f",
+        "720575941593843589": "#ee756f",
+        "720575941531180261": "#ee756f",
+        "720575941399414563": "#ee756f",
+        "720575941667380979": "#ee756f",
+        "720575941549915252": "#ee756f",
+        "720575941592581671": "#ee756f",
+        "720575941524966169": "#ee756f",
+        "720575941669313447": "#ee756f",
+        "720575941489684937": "#ee756f",
+        "720575941671982759": "#ee756f",
+        "720575941559306355": "#ee756f",
+        "720575941636735861": "#ee756f",
+        "720575941625808330": "#ee756f",
+        "720575941475791722": "#ee756f",
+        "720575941559978797": "#ee756f",
+        "720575941391252886": "#ee756f",
+        "720575941595712448": "#ee756f",
+        "720575941353301552": "#ee756f",
+        "720575941568724980": "#ee756f",
+        "720575941524746573": "#ee756f",
+        "720575941625549211": "#ee756f",
+        "720575941574013085": "#ee756f",
+        "720575941573516296": "#ee756f",
+        "720575941556297811": "#ee756f",
+        "720575941523368779": "#ee756f",
+        "720575941504396567": "#ee756f",
+        "720575941592225831": "#ee756f",
+        "720575941505568069": "#ee756f",
+        "720575941451737978": "#ee756f",
+        "720575941524365337": "#ee756f",
+        "720575941526437988": "#ee756f",
+        "720575941518133464": "#ee756f",
+        "720575941531504357": "#ee756f",
+        "720575941590014007": "#ee756f",
+        "720575941573346120": "#ee756f",
+        "720575941483752077": "#ee756f"
+      },
+      "name": "BANC static"
+    }
+  ],
+  "showSlices": false,
+  "gpuMemoryLimit": 6000000000,
+  "systemMemoryLimit": 8000000000,
+  "selectedLayer": {
+    "visible": true,
+    "layer": "BANC static"
+  },
+  "layout": "xy-3d",
+  "layerListPanel": {
+    "size": 240,
+    "visible": true
+  }
+}

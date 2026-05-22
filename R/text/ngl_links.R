@@ -1,543 +1,332 @@
-##############################
-## NEUROGLANCER LINK BUILDER ##
-##############################
-# Generate URLs for 3D neuron visualisation in Neuroglancer and Codex
-# Creates interactive links for paper supplementary materials
+#' Neuroglancer + Codex link builder for paper figure legends
+#'
+#' Generates every `https://ng.banc.community/2026a/<slug>` and
+#' Codex `https://codex.flywire.ai/app/connectivity?...` URL referenced
+#' in the figure legends, captions, and inline citations of the doc. Uses
+#' `bancr::bancsee()` (wrapped in `safe_bancsee()` to suppress per-call
+#' failures) to build the Neuroglancer JSON; Codex links are constructed
+#' from cell_type filters.
+#'
+#' Vignette neuron rosters come from the curated CSVs at
+#' `figures/vignette_neuron_lists/` (produced by panels_vignette_networks.R).
+#'
+#' @section Reads:
+#'   banc.meta, paper.cols
+#'   manuscript/print/paper_cell_type_references.csv                          (canary cell-type list)
+#'   figures/vignette_neuron_lists/network_<vig>_neurons.csv                  (per-vignette rosters)
+#'
+#' @section Writes:
+#'   manuscript/print/ngl_links.csv                                            (one row per (entry, ngl, codex))
+#'
+#' @section Paper:
+#'   Every Neuroglancer / Codex hyperlink in the figure legends + Methods +
+#'   Supplementary captions (e.g. "[Neuroglancer](https://ng.banc.community/2026a/figure-3c)").
+#'
+#' @section Used by:
+#'   The doc's hyperlinks are authored by hand, but this CSV is the
+#'   single source-of-truth for which slugs exist and what they resolve to.
+#'
+#' @section Reproduce:
+#'   Rscript R/text/ngl_links.R
 
-# Generate Codex network visualisation URLs for specified cell types
-banc_codex_network <- function(cell.types = NULL,
-                                ids = NULL,
-                                codex.url = "https://codex.flywire.ai/app/connectivity?dataset=banc",
-                                open = FALSE,
-                                min_syn_cnt = 3,
-                                edge_syn_cap = 50){
-  if(!is.null(cell.types)){
-    cell.types.search <- paste(cell.types,collapse="+%7C%7C+cell_type+%3D%3D+")
-    cell.types.search <- paste0("cell_type+%3D%3D+",gsub("\\+\\%7C\\%7C\\+cell_type\\+\\%3D\\%3D\\+$","",cell.types.search))
-    cell.types.search <- paste(cell.types,collapse="+%7C%7C+cell_type+%3D%3D+")
-    cell.types.search <- paste0("cell_type+%3D%3D+",gsub("\\+\\%7C\\%7C\\+cell_type\\+\\%3D\\%3D\\+$","",cell.types.search))
-  }
-  if(!is.null(ids)){
-    ids.search <- paste(ids,collapse="+%7C%7C+root_id+%3D%3D+")
-    ids.search <- paste0("root_id+%3D%3D+",gsub("\\+\\%7C\\%7C\\+root_id\\+\\%3D\\%3D\\+$","",ids.search))
-    ids.search <- paste(ids,collapse="+%7C%7C+root_id+%3D%3D+")
-    ids.search <- paste0("root_id+%3D%3D+",gsub("\\+\\%7C\\%7C\\+root_id\\+\\%3D\\%3D\\+$","",ids.search))
-  }
-  if(is.null(ids)&!is.null(cell.types)){
-    search <- cell.types.search 
-  }else if(!is.null(ids)&is.null(cell.types)){
-    search <- ids.search 
-  }else if(!is.null(ids)&!is.null(cell.types)){
-    search <- paste(ids.search,"+%7C%7C+",cell.types.search)
-  }else{
-    stop("please provide argument cell.types or ids")
-  }
-  url <- sprintf("%s&cell_names_or_ids=%s&download=&group_by=type&edge_filter=all&cap=%d&min_syn_cnt=%d",
-                 codex.url,
-                 search,
-                 edge_syn_cap,
-                 min_syn_cnt)
-  if(open){
-    utils::browseURL(url)
-    invisible()
-  }else{
-    url 
-  }
-}
-
-# BANC codex search
-banc_codex_search <- function(cell.types = NULL,
-                               ids = NULL,
-                               codex.url = "https://codex.flywire.ai/app/search?dataset=banc",
-                               open = FALSE,
-                              page.size = 100){
-  if(!is.null(cell.types)){
-    cell.types.search <- paste(cell.types,collapse="+%7C%7C+cell_type+%3D%3D+")
-    cell.types.search <- paste0("cell_type+%3D%3D+",gsub("\\+\\%7C\\%7C\\+cell_type\\+\\%3D\\%3D\\+$","",cell.types.search))
-    cell.types.search <- paste(cell.types,collapse="+%7C%7C+cell_type+%3D%3D+")
-    cell.types.search <- paste0("cell_type+%3D%3D+",gsub("\\+\\%7C\\%7C\\+cell_type\\+\\%3D\\%3D\\+$","",cell.types.search))
-  }
-  if(!is.null(ids)){
-    ids.search <- paste(ids,collapse="+%7C%7C+root_id+%3D%3D+")
-    ids.search <- paste0("root_id+%3D%3D+",gsub("\\+\\%7C\\%7C\\+root_id\\+\\%3D\\%3D\\+$","",ids.search))
-    ids.search <- paste(ids,collapse="+%7C%7C+root_id+%3D%3D+")
-    ids.search <- paste0("root_id+%3D%3D+",gsub("\\+\\%7C\\%7C\\+root_id\\+\\%3D\\%3D\\+$","",ids.search))
-  }
-  if(is.null(ids)&!is.null(cell.types)){
-    search <- cell.types.search 
-  }else if(!is.null(ids)&is.null(cell.types)){
-    search <- ids.search 
-  }else if(!is.null(ids)&!is.null(cell.types)){
-    search <- paste(ids.search,"+%7C%7C+",cell.types.search)
-  }else{
-    stop("please provide argument cell.types or ids")
-  }
-  url <- sprintf("%s&filter_string=%s&sort_by=&page_size=%d",
-                 codex.url,
-                 search,
-                 page.size)
-  if(open){
-    utils::browseURL(url)
-    invisible()
-  }else{
-    url 
-  }
-}
-
-
-###############
-### STARTUP ###
-###############
-
-# load
 source("R/startup/banc-startup.R")
-banc.meta <- banctable_query() %>%
-  dplyr::filter(!super_class%in%c("glia","trachea","not_a_neuron"))
+source("R/startup/banc-meta.R")
 
-# spreadsheet for root_ids for vignettes
-vignette_spreadsheet <- "https://docs.google.com/spreadsheets/d/11Y-ojAfcXHS1gjl9slwthNigIejJ_v_PhhqYTylw3Cs/edit?usp=sharing"
+ngl.df <- data.frame(entry = character(), ngl_link = character(),
+                     codex_link = character(), stringsAsFactors = FALSE)
 
-# Starter links
-starter.links <-  c("https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6615245819740160", 
-                           "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6590872282988544",
-                           "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5501382827180032", 
-                           "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5251862407151616")
-for(l in 1:length(starter.links)){
-  url <- sub("#!middleauth+", "?", starter.links[l], fixed = T)
-  parts <- unlist(strsplit(url, "?", fixed = T))
+add_entry <- function(entry, ngl_link, codex_link = NA_character_) {
+  ngl.df <<- rbind(ngl.df, data.frame(entry = entry, ngl_link = ngl_link,
+                                       codex_link = codex_link, stringsAsFactors = FALSE))
+}
+
+safe_bancsee <- function(...) {
+  tryCatch(bancsee(...), error = function(e) {
+    message(sprintf("  bancsee error: %s", e$message))
+    NA_character_
+  })
+}
+
+#####################
+### STARTER LINKS ###
+#####################
+
+starter.links <- c(
+  "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6615245819740160",
+  "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6590872282988544",
+  "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5501382827180032",
+  "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5251862407151616",
+  "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5970228973404160"
+)
+starter.entries <- c("neck-connective", "example-synapse", "example-nuclei",
+                     "example-mitochondria", "DNa01-match")
+for (l in seq_along(starter.links)) {
+  url <- sub("#!middleauth+", "?", starter.links[l], fixed = TRUE)
+  parts <- unlist(strsplit(url, "?", fixed = TRUE))
   json <- try(fafbseg::flywire_fetch(parts[2], token = bancr:::banc_token(),
                                      return = "text", cache = TRUE))
-  new.url <- ngl_encode_url(json, baseurl = parts[1])
-  starter.links[l] <- new.url
+  if (!inherits(json, "try-error")) {
+    starter.links[l] <- ngl_encode_url(json, baseurl = parts[1])
+  }
 }
-# Strucute
-ngl.df <- data.frame(
-  entry = c("neck-connective", 
-            "example-synapse", 
-            "example-nuclei", 
-            "example-mitochondria"),
-  ngl_link = starter.links,
-  codex_link = c(NA,NA,NA,NA)
-)
+for (l in seq_along(starter.links)) {
+  add_entry(starter.entries[l], starter.links[l])
+}
+
+# Build base — bancsee's `banc_scene()` only handles middleauth+nglstate URLs,
+# so we let it fetch the auth-protected canvas, then strip the auth-requiring
+# layers from each exported JSON below (search for `.strip_middleauth_layers`).
+# The output states display via the public gs:// segmentation only.
+base.url <- "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/5506684867837952"
+
+#######################
+### NECK ANNOTATION ###
+#######################
+
+# Same — middleauth canvas, stripped on export.
+neck.base.url <- "https://spelunker.cave-explorer.org/#!middleauth+https://global.daf-apis.com/nglstate/api/v1/6727918582497280"
+
+data <- banc.meta %>%
+  dplyr::filter(grepl("ascending|descending|motor", super_class) |
+                  grepl("neck", region) | grepl("neck", cell_class)) %>%
+  dplyr::filter(!is.na(super_class))
+banc.cols <- paper.cols[data$super_class]
+banc.cols[is.na(banc.cols)] <- "#000000"
+add_entry("neck_an_dns",
+          safe_bancsee(url = neck.base.url,
+                       banc_static_ids = na.omit(data$root_888),
+                       banc.cols = banc.cols))
+
+data <- banc.meta %>%
+  dplyr::filter(grepl("ascending|descending|motor", super_class) |
+                  grepl("neck", region) | grepl("neck", cell_class)) %>%
+  dplyr::mutate(super_cluster = ifelse(flow == "efferent", super_class, super_cluster)) %>%
+  dplyr::filter(!is.na(super_cluster))
+banc.cols <- paper.cols[data$super_cluster]
+banc.cols[is.na(banc.cols)] <- "#000000"
+add_entry("neck_an_dn_super_clusters",
+          safe_bancsee(url = neck.base.url,
+                       banc_static_ids = na.omit(data$root_888),
+                       banc.cols = banc.cols))
 
 ################
 ### FIGURE 1 ###
 ################
 
-# Figure 1 DNa02
-data <- banc.meta %>%
-  dplyr::filter(cell_type=="DNa01")
-ngl.link <- bancr::bancsee(
-  url = NULL, short = FALSE,
-                    banc_static_ids = c(na.omit(data$root_626))
-                       #manc_ids  = (na.omit(data$manc_match)),
-                       #fafb_ids = (na.omit(data$fafb_match)),
-                       #hemibrain_ids = (na.omit(data$hemibrain_match))
-                       )
-ngl.link <- rbind(ngl.df,
-                data.frame(entry = "DNa02",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.type="DNa02")))
-
-# Figure 1 LB1a
-data <- banc.meta %>%
-  dplyr::filter(cell_type=="LB1a")
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626))
-                    #manc_ids  = (na.omit(data$manc_match)),
-                    #fafb_ids = (na.omit(data$fafb_match)),
-                    #hemibrain_ids = (na.omit(data$hemibrain_match))
-                    )
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "LB1a",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.type="LB1a")))
-
-# Figure 1 LB1a
-data <- banc.meta %>%
-  dplyr::filter(cell_type=="DVM1a-c")
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    #manc_ids  = (na.omit(data$manc_match)),
-                    #fafb_ids = (na.omit(data$fafb_match)),
-                    #fhemibrain_ids = (na.omit(data$hemibrain_match))
-                    )
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "DVM1ac",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.type="DVM1a-c")))
+for (ct in c("DNa02", "LB1a", "DVM1a-c")) {
+  data <- banc.meta %>% dplyr::filter(cell_type == ct)
+  add_entry(ct,
+            safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888)),
+            banc_codex_search(cell.types = ct))
+}
 
 ################
 ### FIGURE 2 ###
 ################
 
-# Figure 2h
-sheet_name <- "Figure2h"
-fig2h <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig2h_ids <- na.omit(fig2h$root_id)
-
-data <- banc.meta %>%
-#  dplyr::filter(grepl("DNpe013|AN19B025|DproN|CvN4-7|CvN1-3|CB0810",cell_type))
-  dplyr::filter(root_626 %in% fig2h_ids)
+data <- banc.meta %>% dplyr::filter(super_class == "ascending")
 banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-2h",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(fig2h$cell_type)))))
+add_entry("ascending",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+          banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 
-# Figure 2g ascending
-data <- banc.meta %>%
-  dplyr::filter(super_class=="ascending")
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "ascending",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
+data <- banc.meta %>% dplyr::filter(super_class == "descending")
+banc.cols <- paper.cols[data$super_class]
+add_entry("descending",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+          banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 
-# Figure 2g descending
-data <- banc.meta %>%
-  dplyr::filter(super_class=="descending")
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "descending",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 2i
-data <- banc.meta %>%
-  dplyr::filter(grepl("EFF",cluster))
+data <- banc.meta %>% dplyr::filter(grepl("EFF", cluster))
 banc.cols <- paper.cols[data$cluster]
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "efferent_clusters",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
+add_entry("efferent_clusters",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+          banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 
-# Figure 2d
-data <- banc.meta %>%
-  dplyr::filter(!is.na(body_part_effector))
+data <- banc.meta %>% dplyr::filter(!is.na(body_part_effector))
 banc.cols <- paper.cols[data$body_part_effector]
 banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "efferent_body_parts",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
+add_entry("efferent_body_parts",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+          banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 
 ################
 ### FIGURE 3 ###
 ################
 
-# Figure UMAP
 data <- banc.meta %>%
-  dplyr::filter(super_class %in% c("ascending","descending")) %>%
-  dplyr::filter(!is.na(super_cluster))
+  dplyr::filter(super_class %in% c("ascending", "descending"), !is.na(super_cluster))
 banc.cols <- paper.cols[data$super_cluster]
 banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "an_dn_super_clusters",
-                           ngl_link = ngl.link,
-                           codex_link = NA))
+add_entry("an_dn_super_clusters",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols))
 
-# Each super cluster
-for(spc in na.omit(unique(banc.meta$super_cluster))){
-  data <- banc.meta %>%
-    dplyr::filter(super_cluster==spc)
+for (spc in na.omit(unique(banc.meta$super_cluster))) {
+  data <- banc.meta %>% dplyr::filter(super_cluster == spc)
   banc.cols <- paper.cols[data$super_class]
   banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-  ngl.link <- bancsee(
-                      banc_static_ids = c(na.omit(data$root_626)),
-                      banc.cols = banc.cols)
-  ngl.df <- rbind(ngl.df,
-                  data.frame(entry = spc,
-                             ngl_link = ngl.link,
-                             codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
+  add_entry(spc,
+            safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+            banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 }
 
-# Figure 3g
-sheet_name <- "Figure3g"
-fig3g <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig3g_ids <- na.omit(fig3g$root_id)
-data <- banc.meta %>%
-#  dplyr::filter(grepl("m_NSC_DILP|AN27X017|DNp65|MNad21|CB0991|SAxx01|ISN|BiT",cell_type))
-  dplyr::filter(root_626 %in% fig3g_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-3g",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 3h
-sheet_name <- "Figure3h"
-fig3h <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig3h_ids <- na.omit(fig3h$root_id)
-
-data <- banc.meta %>%
-#  dplyr::filter(grepl("DNg27|l_NSC_CRZ|ANXXX139|DLM5|DLM1-4|ISN",cell_type))
-  dplyr::filter(root_626 %in% fig3h_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-3h",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 3i
-sheet_name <- "Figure3i"
-fig3i <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig3i_ids <- na.omit(fig3i$root_id)
-
-data <- banc.meta %>%
-#  dplyr::filter(grepl("pC1a|SAG|oviDNa_a|DNp37|ANXXX986|^SPSN$|^PU$|^CMU$",cell_type))
-  dplyr::filter(root_626 %in% fig3i_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-3i",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 3j
-sheet_name <- "Figure3j"
-fig3j <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name)
-fig3j_ids <- na.omit(unlist(fig3j$root_id))
-data <- banc.meta %>%
-#  dplyr::filter(grepl("DNge104|AN08B023|AN05B056|AN09A007|SNta02|SNta07|SNta11|BM_lnOm|BM_vib|BM_ant|SNta11|SNta20|SNta11|SNta20|SNxx01|SNxx03|SNxx04|SNxx05",cell_type))
-  dplyr::filter(root_626 %in% fig3j_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-3j",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 3k
-sheet_name <- "Figure3k"
-fig3k <- googlesheets4::read_sheet(vignette_spreadsheet, sheet = sheet_name)
-fig3k_ids <- unlist(na.omit(fig3k$root_id))
-data <- banc.meta %>%
-  dplyr::filter(root_626 %in% fig3k_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee( banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-3k",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
 ################
 ### FIGURE 4 ###
 ################
 
-# Figure head and eye orienting
 data <- banc.meta %>%
-  dplyr::filter(super_class %in% c("ascending","descending")) %>%
-  dplyr::filter(super_cluster=="head and eye orienting")
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = cerise_limon_palette(nrow(data)))
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "an-dn-super-cluster-head-and-eye-orienting",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 4e
-sheet_name <- "Figure4e"
-fig4e <- read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "ccc")
-fig4e_ids <- na.omit(fig4e$root_id)
-data <- banc.meta %>%
-  #  dplyr::filter(grepl("DNg89|DNa06|AN03A002|AN18B023|AN19B018|CvN5|CvN6|CvN7|CvN8|DProN_v|DProN_d|CvN3|CvN1|CvN2|CvN_A1|CvN1|CvN_A2|CvN1|VCvN",cell_type))
-  dplyr::filter(root_626 %in% fig4e_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-4e",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 4f
-sheet_name <- "Figure4f"
-fig4f <- read_sheet(vignette_spreadsheet, sheet = sheet_name)
-fig4f_ids <- unlist(na.omit(fig4f$root_id))
-data <- banc.meta %>%
-  #  dplyr::filter(grepl("DN1p10|IN12B018|tibia_flexor|tibia_extensor|AN06B002|AN06B005|SNpp45|SNta21|SNpp39",cell_type))
-  dplyr::filter(root_626 %in% fig4f_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-4f",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-# # Figure 4g
-# sheet_name <- "Figure4g"
-# fig4g <- read_sheet(vignette_spreadsheet, sheet = sheet_name)
-# fig4g_ids <- unlist(na.omit(fig4g$root_id))
-# data <- banc.meta %>%
-#   #  dplyr::filter(grepl("DN1p10|IN12B018|tibia_flexor|tibia_extensor|AN06B002|AN06B005|SNpp45|SNta21|SNpp39",cell_type))
-#   dplyr::filter(root_626 %in% fig4g_ids)
-# banc.cols <- paper.cols[data$super_class]
-# banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-# ngl.link <- bancsee(
-#                     banc_static_ids = c(na.omit(data$root_626)),
-#                     banc.cols = banc.cols)
-# ngl.df <- rbind(ngl.df,
-#                 data.frame(entry = "figure-4g",
-#                            ngl_link = ngl.link),
-#                 codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type))))
-
-################
-### FIGURE 5 ###
-################
-
-# Figure 5c
-sheet_name <- "Figure5c"
-fig5c <- read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig5c_ids <- na.omit(fig5c$root_id)
-data <- banc.meta %>%
-  # dplyr::filter(grepl("CL210|SMP461|CL209|DNp38|AN09B029|IN1B011|AN02A002|DNg100|WPNb|SNta33|SNta15|SNta05|tibia_flexor|tibia_extensor|sternal_posterior_rotator|sternal_anterior_rotator",cell_type))
-  dplyr::filter(root_626 %in% fig5c_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-5c",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
+  dplyr::filter(super_class %in% c("ascending", "descending"),
+                super_cluster == "head orienting")
+add_entry("an-dn-super-cluster-head-orienting",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888),
+                       banc.cols = cerise_limon_palette(nrow(data))),
+          banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 
 ################
 ### FIGURE 6 ###
 ################
 
-# Figure 6g
-sheet_name <- "Figure6g"
-fig6g <- read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig6g_ids <- na.omit(fig6g$root_id)
-data <- banc.meta %>%
-  #  dplyr::filter(grepl("MBON20|LPLC2|LB1|AVLP445|DNp42|IN06B032|IN07B010|AN19B001|DNp103|DNp01|IN11A001",cell_type))
-  dplyr::filter(root_626 %in% fig6g_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-6g",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 6h
-sheet_name <- "Figure6h-in"
-fig6h <- read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "ccc")
-fig6h_ids <- na.omit(fig6h$root_id)
-
-data <- banc.meta %>%
-# dplyr::filter(grepl("EPG|PEN1|GLNO|DNa16|DNa05|AN07B037",cell_type))
-  dplyr::filter(root_626 %in% fig6h_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-6h-in",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# Figure 6h
-sheet_name <- "Figure6h-out"
-fig6h <- read_sheet(vignette_spreadsheet, sheet = sheet_name, col_types = "cccc")
-fig6h_ids <- na.omit(fig6h$root_id)
-
-data <- banc.meta %>%
-  #  dplyr::filter(grepl("EPG|PEN1|GLNO|DNa16|DNa05|AN07B037",cell_type))
-  dplyr::filter(root_626 %in% fig6h_ids)
-banc.cols <- paper.cols[data$super_class]
-banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-ngl.link <- bancsee(
-                    banc_static_ids = c(na.omit(data$root_626)),
-                    banc.cols = banc.cols)
-ngl.df <- rbind(ngl.df,
-                data.frame(entry = "figure-6h-out",
-                           ngl_link = ngl.link,
-                           codex_link = banc_codex_network(cell.types  = unique(na.omit(data$cell_type)))))
-
-# CNS networks
-for(cnsn in na.omit(unique(banc.meta$cns_network))){
-  data <- banc.meta %>%
-    dplyr::filter(cns_network==cnsn)
+for (cnsn in na.omit(unique(banc.meta$cns_network))) {
+  data <- banc.meta %>% dplyr::filter(cns_network == cnsn)
   banc.cols <- paper.cols[data$super_class]
   banc.cols[is.na(banc.cols)] <- "#FFFFFF"
-  ngl.link <- bancsee(
-                      banc_static_ids = c(na.omit(data$root_626)),
-                      banc.cols = banc.cols)
-  ngl.df <- rbind(ngl.df,
-                  data.frame(entry = cnsn,
-                             ngl_link = ngl.link,
-                             codex_link = banc_codex_search(cell.types  = unique(na.omit(data$cell_type)))))
+  add_entry(cnsn,
+            safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols),
+            banc_codex_search(cell.types = unique(na.omit(data$cell_type))))
 }
+
+########################
+### VIGNETTE LINKS   ###
+########################
+
+# Source curated neuron lists directly (these now drive panel_vignette_networks.R
+# too). Authoritative for display_name / cell_type / super_class / super_cluster
+# per neuron. Earlier this read from figures/vignettes/ — the rendered output —
+# which lagged the curated input on every manual fix-up.
+vignette.neurons.path <- "figures/vignette_neuron_lists/"
+vignette_csvs <- list.files(vignette.neurons.path, pattern = "_neurons\\.csv$", full.names = TRUE)
+
+for (csv_file in vignette_csvs) {
+  vig_name <- gsub("network_|_neurons\\.csv", "", basename(csv_file))
+  neurons <- readr::read_csv(csv_file, show_col_types = FALSE,
+                              col_types = readr::cols(root_id = readr::col_character()))
+  if (nrow(neurons) == 0) next
+
+  ids <- unique(na.omit(neurons$root_id))
+  cts <- unique(na.omit(neurons$cell_type))
+
+  meta_idx <- match(ids, banc.meta$root_id)
+  meta_idx <- meta_idx[!is.na(meta_idx)]
+  r626 <- banc.meta$root_888[meta_idx]
+  sc <- banc.meta$super_class[meta_idx]
+  banc.cols <- paper.cols[sc]
+  banc.cols[is.na(banc.cols)] <- "#FFFFFF"
+  keep <- !is.na(r626)
+  r626 <- r626[keep]
+  banc.cols <- banc.cols[keep]
+
+  fig_panel <- gsub("^fig", "figure-", vig_name)
+  add_entry(fig_panel,
+            safe_bancsee(url = base.url, banc_static_ids = r626, banc.cols = banc.cols),
+            banc_codex_network(cell.types = cts))
+  message(sprintf("  Vignette %s: %d neurons, %d cell types", vig_name, length(r626), length(cts)))
+
+  simple <- neurons %>%
+    dplyr::mutate(bp = dplyr::coalesce(body_part_sensory, body_part_effector, "")) %>%
+    dplyr::distinct(cell_type, side, bp, .keep_all = TRUE)
+  s_ids <- unique(na.omit(simple$root_id))
+  s_idx <- match(s_ids, banc.meta$root_id)
+  s_idx <- s_idx[!is.na(s_idx)]
+  s_r626 <- banc.meta$root_888[s_idx]
+  s_sc <- banc.meta$super_class[s_idx]
+  s_cols <- paper.cols[s_sc]
+  s_cols[is.na(s_cols)] <- "#FFFFFF"
+  s_keep <- !is.na(s_r626)
+  add_entry(paste0(fig_panel, "_simple"),
+            safe_bancsee(url = base.url, banc_static_ids = s_r626[s_keep],
+                         banc.cols = s_cols[s_keep]),
+            banc_codex_network(cell.types = cts))
+  message(sprintf("  Vignette %s_simple: %d neurons", vig_name, sum(s_keep)))
+}
+
+############
+### COOL ###
+############
+
+data <- banc.meta %>%
+  dplyr::filter(grepl("wing", cell_sub_class) | grepl("wing", cell_class))
+banc.cols <- paper.cols[data$super_class]
+banc.cols[is.na(banc.cols)] <- "#FFFFFF"
+add_entry("wing-neurons",
+          safe_bancsee(url = base.url, banc_static_ids = na.omit(data$root_888), banc.cols = banc.cols))
 
 ############
 ### SAVE ###
 ############
 
-# save
-readr::write_csv(x = ngl.df %>%
-                   dplyr::distinct(), 
-                 "submission/ngl-links.csv")
-# ngl.df <- "https://ng.banc.community/2025a/"
+ngl.df <- ngl.df %>% dplyr::distinct()
+utils::write.csv(ngl.df, "manuscript/print/ngl_links.csv", row.names = FALSE)
+message(sprintf("Saved %d links to manuscript/print/ngl_links.csv", nrow(ngl.df)))
 
-# NGL state links
-ngl.state.location <- "/Users/GD/LMBD/Papers/banc/the-BANC-fly-connectome/neuroglancer_states/2025a"
-for(i in 1:nrow(ngl.df)){
-  nam <- ngl.df$entry[i]
-  link <- ngl.df$ngl_link[i]
-  json <- fafbseg::ngl_decode_scene(link,
-                                    return.json = TRUE)
-  pretty_json <- jsonlite::prettify(json)
-  nam <- gsub(" |_","-",nam)
-  writeLines(pretty_json, file.path(ngl.state.location,paste0(nam,".json")))
+# Strip layers whose source uses CAVE/middleauth so the exported states load
+# without an authentication prompt. We parse the JSON string (NOT via
+# ngl_decode_scene, whose ngscene class converts the layers array into a
+# named list) so `layers` stays as a JSON array on re-serialise — neuroglancer
+# requires an array.
+.strip_middleauth_in_json <- function(json_str) {
+  parsed <- jsonlite::fromJSON(json_str,
+                               simplifyVector = FALSE,
+                               simplifyDataFrame = FALSE,
+                               simplifyMatrix = FALSE)
+  if (is.null(parsed$layers)) return(json_str)
+  parsed$layers <- Filter(function(L) {
+    src <- L$source
+    txt <- if (is.character(src)) src
+           else if (is.list(src)) paste(unlist(src), collapse = " ")
+           else ""
+    !grepl("middleauth", txt, fixed = TRUE)
+  }, parsed$layers)
+  # `parsed$layers` is now an unnamed list — toJSON emits it as an array.
+  jsonlite::toJSON(parsed, auto_unbox = TRUE, pretty = TRUE,
+                   null = "null", na = "null")
 }
 
+# Export NGL state JSONs
+ngl.state.location <- "manuscript/print/neuroglancer_states/2026a"
+dir.create(ngl.state.location, showWarnings = FALSE, recursive = TRUE)
+for (i in seq_len(nrow(ngl.df))) {
+  nam <- gsub(" |_", "-", ngl.df$entry[i])
+  link <- ngl.df$ngl_link[i]
+  if (is.na(link)) next
+  json_str <- tryCatch(
+    fafbseg::ngl_decode_scene(link, return.json = TRUE),
+    error = function(e) NULL
+  )
+  if (!is.null(json_str)) {
+    json_str <- .strip_middleauth_in_json(json_str)
+    writeLines(json_str, file.path(ngl.state.location, paste0(nam, ".json")))
+  }
+}
+message(sprintf("Exported NGL state JSONs to %s", ngl.state.location))
 
+# Save to Jasper's repo for hosting (also stripped of middleauth layers).
+ngl.state.location <- "/Users/GD/LMBD/Papers/banc/the-BANC-fly-connectome/neuroglancer_states/2026a"
+if (dir.exists(ngl.state.location)) {
+dir.create(ngl.state.location, showWarnings = FALSE, recursive = TRUE)
+for (i in seq_len(nrow(ngl.df))) {
+  nam <- gsub(" |_", "-", ngl.df$entry[i])
+  link <- ngl.df$ngl_link[i]
+  if (is.na(link)) next
+  json_str <- tryCatch(
+    fafbseg::ngl_decode_scene(link, return.json = TRUE),
+    error = function(e) NULL
+  )
+  if (!is.null(json_str)) {
+    json_str <- .strip_middleauth_in_json(json_str)
+    writeLines(json_str, file.path(ngl.state.location, paste0(nam, ".json")))
+  }
+}
+message(sprintf("Exported NGL state JSONs to %s", ngl.state.location))
 
-
-
-
+}
 
 
