@@ -137,9 +137,13 @@ def upload_shard(gcs_url: str, basename: str, jsonData: str,
 
     url = (f"{server}/api/datasets/:persistentId/add"
            f"?persistentId={quote(persistent_id, safe=':/')}")
+    # type=application/octet-stream → noIngest equivalent: stops
+    # Dataverse from auto-extracting .zip / .tar.gz on upload and from
+    # converting tabular inputs to .tab. We always want shards stored
+    # byte-for-byte as uploaded.
     out = subprocess.check_output([
         "curl", "-sS", "-H", f"X-Dataverse-key:{key}", "-X", "POST",
-        "-F", f"file=@{local};filename={basename}",
+        "-F", f"file=@{local};filename={basename};type=application/octet-stream",
         "-F", f"jsonData=<{json_path}",
         url,
     ], text=True)
