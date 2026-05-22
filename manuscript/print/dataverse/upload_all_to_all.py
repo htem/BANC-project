@@ -37,6 +37,14 @@ from urllib.parse import quote
 
 import yaml
 
+# Reuse the direct-S3 path from upload.py so this script benefits from the
+# same battle-tested multipart + register-with-addFiles flow. Direct-S3 is
+# the only Dataverse upload route that guarantees atomic, byte-for-byte
+# storage (no archive extraction, no tabular ingest, no MIME sniffing on
+# the server side) — see the "/add" failure case documented in the
+# direct-S3 commit and in DATAVERSE_TODO.md.
+from upload import upload_direct_s3
+
 HERE = Path(__file__).parent
 DOC  = HERE / "documentation" / "influence_all_to_all.md"
 LOG  = HERE / "upload_log.csv"
@@ -97,11 +105,37 @@ def md5_of(p: Path) -> str:
     return h.hexdigest()
 
 
-def read_log() -> set[tuple[str, str]]:
+def read_log() -> set[str]:
+    """Return the set of deposit filenames marked OK in upload_log.csv."""
     if not LOG.exists(): return set()
     with LOG.open() as f:
-        return {(r["deposit_filename"], r["md5"]) for r in csv.DictReader(f)
+        return {r["deposit_filename"] for r in csv.DictReader(f)
                 if r["status"] == "OK"}
+
+
+def live_filenames(key: str, server: str, persistent_id: str) -> set[str]:
+    """Filenames currently in the draft (any directoryLabel). Used as a
+    second-line resume check on top of upload_log.csv — protects against
+    log/draft divergence (manual deletes, log truncation, etc.)."""
+    pid_q = quote(persistent_id, safe=":/")
+    cmd = [
+        "curl", "-sS",
+        "-H", f"X-Dataverse-key:{key}",
+        "-H", "User-Agent: Mozilla/5.0 (BANC-Project all-to-all uploader)",
+        f"{server}/api/datasets/:persistentId/versions/:draft/files?persistentId={pid_q}",
+    ]
+    try:
+        raw = subprocess.check_output(cmd, text=True, timeout=60)
+        d = json.loads(raw)
+    except Exception as e:
+        log(f"  [live-check] could not fetch draft file list: {e}")
+        return set()
+    out = set()
+    for f in d.get("data", []):
+        df = f.get("dataFile", {})
+        if df.get("filename"):
+            out.add(df["filename"])
+    return out
 
 
 LOG_FIELDS = ("when", "doc_md", "deposit_filename", "md5", "size_bytes",
@@ -119,6 +153,12 @@ def append_log(row: dict):
 def upload_shard(gcs_url: str, basename: str, jsonData: str,
                  key: str, server: str, persistent_id: str,
                  scratch: Path, dry_run: bool) -> dict:
+    """Stream one shard GCS → local scratch → direct-S3 → register, then
+    delete the local copy. Memory footprint is bounded to one part of the
+    multipart upload at a time (Dataverse hands out 1 GiB parts by
+    default; our shards average 1.04 GiB so most are 2-part multipart),
+    plus the local on-disk copy in `scratch` (~1 GiB). Peak RAM per
+    shard ≈ 1 GiB; peak disk ≈ 1 GiB."""
     if dry_run:
         log(f"  [dry-run] {basename}")
         return {"data_file_id": "", "status": "dry-run", "md5": "",
@@ -131,35 +171,37 @@ def upload_shard(gcs_url: str, basename: str, jsonData: str,
     md5 = md5_of(local)
     log(f"  uploading ({sz/1e6:.0f} MB md5={md5[:8]})")
 
-    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
-                                     dir=str(scratch)) as tf:
-        tf.write(jsonData); json_path = tf.name
+    # The per-shard JSON encodes the API fields (description,
+    # categories, etc.) — parse it back into a dict for upload_direct_s3,
+    # which expects a frontmatter-style mapping. Force content_type to
+    # application/octet-stream so the register step records the file as
+    # binary, not as a parquet that some Dataverse instance might try to
+    # peek at.
+    fm = json.loads(jsonData)
+    fm["content_type"] = "application/octet-stream"
 
-    url = (f"{server}/api/datasets/:persistentId/add"
-           f"?persistentId={quote(persistent_id, safe=':/')}")
-    # NOTE: shards are .parquet, not archives, so /add does not extract
-    # them. But Dataverse would still try tabular ingest on a .csv shard
-    # if we ever switched format. Direct-S3 in upload.py is the
-    # canonical noIngest path; this script keeps /add because parquet
-    # bypasses ingest naturally.
-    out = subprocess.check_output([
-        "curl", "-sS", "-H", f"X-Dataverse-key:{key}", "-X", "POST",
-        "-F", f"file=@{local};filename={basename}",
-        "-F", f"jsonData=<{json_path}",
-        url,
-    ], text=True)
-    os.unlink(json_path)
     try:
-        parsed = json.loads(out)
-    except json.JSONDecodeError:
-        raise RuntimeError(f"non-JSON response: {out[:400]}")
-    if parsed.get("status") != "OK":
-        raise RuntimeError(f"upload failed: {parsed.get('message')!s}")
-    dfid = parsed["data"]["files"][0]["dataFile"]["id"]
+        res = upload_direct_s3(
+            fm=fm,
+            doc_name=DOC.name,
+            src_path=local,
+            deposit_name=basename,
+            size_bytes=sz,
+            md5_hex=md5,
+            key=key,
+            server=server,
+            persistent_id=persistent_id,
+            scratch=scratch,
+        )
+    finally:
+        # Always reclaim disk so the script never wedges from full /tmp.
+        try:
+            local.unlink()
+        except FileNotFoundError:
+            pass
 
-    local.unlink()
-    return {"data_file_id": str(dfid), "status": "OK", "md5": md5,
-            "size_bytes": sz}
+    return {"data_file_id": res.get("data_file_id", ""),
+            "status": "OK", "md5": md5, "size_bytes": sz}
 
 
 def main():
@@ -192,20 +234,31 @@ def main():
     total = len(shards)
     log(f"[a2a] {total} shards at {GCS_PREFIX}")
 
+    # Two independent resume checks: the upload_log.csv journal (fast,
+    # local) and the live draft file list (slow, network). The script
+    # ALWAYS does the live check on startup so a manually-pruned log
+    # never produces duplicate Dataverse files; --skip-existing makes
+    # the journal a second gate.
     done = read_log() if args.skip_existing else set()
-    log(f"[a2a] {len(done)} successful uploads on record")
+    log(f"[a2a] {len(done)} OK rows in upload_log.csv")
+    live = live_filenames(key, args.server, args.persistent_id)
+    log(f"[a2a] {len(live)} files currently in the live draft")
 
     chosen = shards[args.start_at - 1:]
     if args.max:
         chosen = chosen[:args.max]
-    log(f"[a2a] uploading {len(chosen)} shards "
+    log(f"[a2a] uploading up to {len(chosen)} shards "
         f"(start_at={args.start_at}, max={args.max})")
 
+    t_session = time.monotonic()
+    sz_session = 0
     for i, (gcs_url, basename) in enumerate(chosen, args.start_at):
         log(f"[{i:>3}/{total}] {basename}")
         jsonData = per_shard_jsondata(base_fm, basename, i, total)
-        if (basename, "") in done:
+        if basename in done:
             log("  skip (already in log)"); continue
+        if basename in live:
+            log("  skip (already in live draft)"); continue
         t0 = time.monotonic()
         try:
             res = upload_shard(gcs_url, basename, jsonData,
@@ -224,7 +277,10 @@ def main():
                     "status": f"error: {type(e).__name__}",
                 })
             continue
-        log(f"  → OK ({res['data_file_id']})  {time.monotonic()-t0:.0f}s")
+        dt = time.monotonic() - t0
+        sz_session += int(res["size_bytes"]) if not args.dry_run else 0
+        log(f"  → OK ({res['data_file_id']})  {dt:.0f}s "
+            f"({(res['size_bytes'] or 0)/1024**2/dt:.0f} MB/s)")
         if not args.dry_run:
             append_log({
                 "when": datetime.now(timezone.utc).isoformat(),
@@ -236,6 +292,12 @@ def main():
                 "data_file_id": res["data_file_id"],
                 "status": "OK",
             })
+
+    # Session-level summary.
+    dt = time.monotonic() - t_session
+    if sz_session:
+        log(f"[a2a] session done: {sz_session/1024**3:.1f} GiB in "
+            f"{dt/3600:.2f} h ({sz_session/1024**2/dt:.0f} MB/s)")
 
 
 if __name__ == "__main__":
