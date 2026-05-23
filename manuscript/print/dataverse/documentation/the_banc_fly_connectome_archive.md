@@ -2,23 +2,19 @@
 filename: the_banc_fly_connectome_archive.zip
 upstream_url: https://github.com/jasper-tms/the-BANC-fly-connectome
 default_branch: main
-pinned_commit: fa3104b
-pinned_date: 2026-05-11
+pinned_commit: 01d797a
+pinned_date: '2026-05-22'
 release_tag: v0.6.1
 license: GPL-3.0
 language: Python
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of the-BANC-fly-connectome, Jasper Phelps's Python toolkit for accessing and working with the BANC (Brain And Nerve Cord) connectome of an adult female Drosophila melanogaster. The repository's `banc` package bundles client helpers for the BANC CAVE deployment (segmentation, annotation tables, chunked-graph proofreading), routines for mesh download and coordinate transformation, an Elastix-based interface for aligning neurons to JRC2018F / JRC2018VNCF template space, color-MIP utilities, and example notebooks demonstrating common BANC workflows. The repository also hosts the canonical Neuroglancer state files for the BANC paper at neuroglancer_states/ and the bundled volume meshes under data/volume_meshes/. The `banc/` package directory is a symlink that re-exposes the `fanc/` source tree (forked from FANC tooling) adapted for BANC. Developed by Jasper Phelps in Wei-Chung Allen Lee's lab at Harvard Medical School and released under GPL-3.0; v0.6.1 is the latest tagged release at upload time. This is the Python counterpart to bancr; the two libraries are independent but complementary, and many users will install both. Distributed here as a ZIP pinned to v0.6.1; the live package continues to evolve at the GitHub URL above.
+description: '**Note on citation:** this code repository does not yet have a minted Zenodo DOI. When one is minted (via a tagged GitHub Release with Zenodo integration enabled), it will become the canonical citable resource; this Dataverse copy is a byte-for-byte snapshot of the main-branch HEAD on the upload date. Snapshot of the-BANC-fly-connectome, Jasper Phelps''s Python toolkit for accessing and working with the BANC (Brain And Nerve Cord) connectome of an adult female Drosophila melanogaster. The repository''s `banc` package bundles client helpers for the BANC CAVE deployment (segmentation, annotation tables, chunked-graph proofreading), routines for mesh download and coordinate transformation, an Elastix-based interface for aligning neurons to JRC2018F / JRC2018VNCF template space, color-MIP utilities, and example notebooks demonstrating common BANC workflows. The repository also hosts the canonical Neuroglancer state files for the BANC paper at neuroglancer_states/ and the bundled volume meshes under data/volume_meshes/. The `banc/` package directory is a symlink that re-exposes the `fanc/` source tree (forked from FANC tooling) adapted for BANC. Developed by Jasper Phelps in Wei-Chung Allen Lee''s lab at Harvard Medical School and released under GPL-3.0; v0.6.1 is the latest tagged release at upload time. This is the Python counterpart to bancr; the two libraries are independent but complementary, and many users will install both. Distributed here as a ZIP pinned to v0.6.1; the live package continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # the_banc_fly_connectome_archive.zip
 
 ## Purpose

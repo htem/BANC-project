@@ -1,8 +1,8 @@
 ---
 filename: banc_888_synapses_v3_enriched.parquet
 gcs_path: gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_synapses_v3_enriched.parquet
-size_bytes: 6025295437
-size_human: 5.61 GB
+size_bytes: 15487130177
+size_human: 14.42 GiB
 nrows: 198741886
 ncols: 10
 content_type: application/x-parquet

@@ -2,36 +2,19 @@
 filename: synister_banc_archive.zip
 upstream_url: https://github.com/htem/synister_banc
 default_branch: main
-pinned_commit: 1d6b0cc
-pinned_date: 2026-05-22
+pinned_commit: 760f207
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD)
 license: (no LICENSE file in upstream as of 2025-07-29 — see Notes)
 language: Python
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of synister_banc, the repository that holds the BANC
-  neurotransmitter-prediction code, ground-truth labels, and pointers to
-  the trained-model predictions. Based on the methodology of Eckstein et
-  al. (2024) "Neurotransmitter classification from electron microscopy
-  images at synaptic sites in Drosophila", adapted for the BANC v888
-  materialization. Predicts one of eight fast-acting neurotransmitters
-  (acetylcholine, dopamine, GABA, glutamate, histamine, octopamine,
-  serotonin, tyramine) at each predicted presynaptic site. The training /
-  test ground-truth set and the per-synapse prediction parquet are stored
-  on Google Cloud Storage and pointed to from this repository; the
-  per-neuron rollups (banc_888_neurotransmitter_prediction_v2.csv) are
-  what figure scripts and the published `banc_888_meta.feather` consume.
-  Distributed as a ZIP pinned to the main-branch HEAD at upload date; the
-  live code continues at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.20350569). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of synister_banc, the repository that holds the BANC neurotransmitter-prediction code, ground-truth labels, and pointers to the trained-model predictions. Based on the methodology of Eckstein et al. (2024) "Neurotransmitter classification from electron microscopy images at synaptic sites in Drosophila", adapted for the BANC v888 materialization. Predicts one of eight fast-acting neurotransmitters (acetylcholine, dopamine, GABA, glutamate, histamine, octopamine, serotonin, tyramine) at each predicted presynaptic site. The training / test ground-truth set and the per-synapse prediction parquet are stored on Google Cloud Storage and pointed to from this repository; the per-neuron rollups (banc_888_neurotransmitter_prediction_v2.csv) are what figure scripts and the published `banc_888_meta.feather` consume. Distributed as a ZIP pinned to the main-branch HEAD at upload date; the live code continues at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # synister_banc_archive.zip
 
 ## Purpose

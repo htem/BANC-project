@@ -2,23 +2,19 @@
 filename: nat_ggplot_archive.zip
 upstream_url: https://github.com/natverse/nat.ggplot
 default_branch: main
-pinned_commit: 6112a74
-pinned_date: 2026-02-16
+pinned_commit: cf0549b
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD)
 license: MIT
 language: R
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of nat.ggplot, the natverse helper package for publication-quality 2D renderings of neurons and brain meshes using ggplot2. Where natverse's stock plotting functions target rgl / plotly for 3D scenes, nat.ggplot projects skeletons, meshes, synaptic sites and compartment labels into 2D and exposes them as ggplot2 layers. Headline calls: ggneuron() for a complete 2D neuron-with-mesh scene with sensible defaults, geom_neuron() as a ggplot2 geometry layer for assembling custom panels, and gganat as the base ggplot object that supplies the projection state. The package works with any neuroanatomy that can be expressed as a neuron / neuronlist / mesh3d (its README uses BANC sample data, but the same code path handles FAFB, MANC, Hemibrain or any organism). nat.ggplot is the rendering backend behind the great majority of 2D neuron panels in the BANC paper figures — neuron silhouettes, AN / DN body-part summaries, cluster-level morphological galleries — and pairs naturally with bancr's banc_to_JRC2018F() to render BANC neurons in any of the shared template spaces. Authored by Alexander Bates in Rachel Wilson's lab at Harvard Medical School. Distributed as a ZIP pinned to the main-branch HEAD at upload date; the package continues to evolve at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.20350565). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of nat.ggplot, the natverse helper package for publication-quality 2D renderings of neurons and brain meshes using ggplot2. Where natverse''s stock plotting functions target rgl / plotly for 3D scenes, nat.ggplot projects skeletons, meshes, synaptic sites and compartment labels into 2D and exposes them as ggplot2 layers. Headline calls: ggneuron() for a complete 2D neuron-with-mesh scene with sensible defaults, geom_neuron() as a ggplot2 geometry layer for assembling custom panels, and gganat as the base ggplot object that supplies the projection state. The package works with any neuroanatomy that can be expressed as a neuron / neuronlist / mesh3d (its README uses BANC sample data, but the same code path handles FAFB, MANC, Hemibrain or any organism). nat.ggplot is the rendering backend behind the great majority of 2D neuron panels in the BANC paper figures — neuron silhouettes, AN / DN body-part summaries, cluster-level morphological galleries — and pairs naturally with bancr''s banc_to_JRC2018F() to render BANC neurons in any of the shared template spaces. Authored by Alexander Bates in Rachel Wilson''s lab at Harvard Medical School. Distributed as a ZIP pinned to the main-branch HEAD at upload date; the package continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # nat_ggplot_archive.zip
 
 ## Purpose

@@ -3,22 +3,18 @@ filename: connectome_influence_calculator_archive.zip
 upstream_url: https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator
 default_branch: main
 pinned_commit: 6b70294
-pinned_date: 2026-05-13
+pinned_date: '2026-05-22'
 release_tag: v0.4
 license: BSD-3-Clause
 language: Python
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of the Drugowitsch lab's ConnectomeInfluenceCalculator, the Python implementation of the linear-dynamical-systems influence model used to compute every adjusted-influence number in the BANC paper. Given a connectome stored as a SQLite file, the package builds a sparse rescaled connectivity matrix and solves the steady-state response equation r∞ = -(W~ - I)^-1 s for each seed pattern s. Implementation uses PETSc and SLEPc through the petsc4py / slepc4py wrappers, making it tractable on large connectomes (hundreds of thousands of neurons, millions of edges). It optionally supports signed connectivity (negative weights for inhibitory presynapses), per-call silencing of specified neurons, and an adjustable minimum post-synaptic count threshold (default 5). For BANC specifically, the package is the underlying engine called by the R-side influencer package (Zenodo DOI 10.5281/zenodo.15999929; deposited separately) and by bancpipeline, which together produce the sharded all-to-all influence parquet at compiled_data/banc_888/influence/all_to_all/ as well as the sensory- and effector-subclass aggregations. Released under BSD-3-Clause; latest tagged release at upload date is v0.4 (24 November 2025). Citable via Zenodo DOI 10.5281/zenodo.15999930 (https://doi.org/10.5281/zenodo.15999930). Distributed here as a ZIP pinned to v0.4; the live package continues to evolve at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.15999929). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of the Drugowitsch lab''s ConnectomeInfluenceCalculator, the Python implementation of the linear-dynamical-systems influence model used to compute every adjusted-influence number in the BANC paper. Given a connectome stored as a SQLite file, the package builds a sparse rescaled connectivity matrix and solves the steady-state response equation r∞ = -(W~ - I)^-1 s for each seed pattern s. Implementation uses PETSc and SLEPc through the petsc4py / slepc4py wrappers, making it tractable on large connectomes (hundreds of thousands of neurons, millions of edges). It optionally supports signed connectivity (negative weights for inhibitory presynapses), per-call silencing of specified neurons, and an adjustable minimum post-synaptic count threshold (default 5). For BANC specifically, the package is the underlying engine called by the R-side influencer package and by bancpipeline, which together produce the sharded all-to-all influence parquet at compiled_data/banc_888/influence/all_to_all/ as well as the sensory- and effector-subclass aggregations. Released under BSD-3-Clause; latest tagged release at upload date is v0.4 (24 November 2025). Distributed here as a ZIP pinned to v0.4; the live package continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # connectome_influence_calculator_archive.zip
 
 ## Purpose

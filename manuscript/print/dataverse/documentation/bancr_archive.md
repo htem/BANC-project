@@ -2,23 +2,19 @@
 filename: bancr_archive.zip
 upstream_url: https://github.com/natverse/bancr
 default_branch: main
-pinned_commit: c594c91
-pinned_date: 2026-05-13
+pinned_commit: 9139f94
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD past v0.2.1; DESCRIPTION reports 0.3.0)
 license: GPL-3.0
 language: R
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of the bancr R package, the primary user-facing client for the BANC (Brain And Nerve Cord) connectome of an adult female Drosophila melanogaster. bancr wraps CAVE, SeaTable, GCS and synapse-query endpoints behind a small set of R functions that return tibbles, neuron objects and ggplot scenes. Headline calls used throughout the paper include banc_meta() for the per-neuron metadata table, banc_partners() and banc_edgelist() for connectivity, banc_influence() for pre-computed adjusted-influence pairs, banc_nblast_matches() for cross-dataset morphological matches, banc_read_neuron_meshes() and banc_read_l2skel() for 3D morphology, banc_to_JRC2018F() and banc_mirror() for template-space transforms, and banc_view() / banc_front_view() / banc_vnc_view() for canonical scene angles. bancr depends on the natverse stack (nat, fafbseg, nat.jrcbrains, hemibrainr) and uses reticulate to reach the fafbseg-py / CAVEclient Python layer. Initialised from Greg Jefferis's fancr package and developed at Harvard by Alexander Bates with the Wilson and Lee labs. Distributed here as a ZIP pinned to commit c594c91 on main; the live package continues to evolve at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.20350647). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of the bancr R package, the primary user-facing client for the BANC (Brain And Nerve Cord) connectome of an adult female Drosophila melanogaster. bancr wraps CAVE, SeaTable, GCS and synapse-query endpoints behind a small set of R functions that return tibbles, neuron objects and ggplot scenes. Headline calls used throughout the paper include banc_meta() for the per-neuron metadata table, banc_partners() and banc_edgelist() for connectivity, banc_influence() for pre-computed adjusted-influence pairs, banc_nblast_matches() for cross-dataset morphological matches, banc_read_neuron_meshes() and banc_read_l2skel() for 3D morphology, banc_to_JRC2018F() and banc_mirror() for template-space transforms, and banc_view() / banc_front_view() / banc_vnc_view() for canonical scene angles. bancr depends on the natverse stack (nat, fafbseg, nat.jrcbrains, hemibrainr) and uses reticulate to reach the fafbseg-py / CAVEclient Python layer. Initialised from Greg Jefferis''s fancr package and developed at Harvard by Alexander Bates with the Wilson and Lee labs. Distributed here as a ZIP pinned to commit c594c91 on main; the live package continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # bancr_archive.zip
 
 ## Purpose

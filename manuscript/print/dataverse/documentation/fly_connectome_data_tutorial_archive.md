@@ -2,23 +2,19 @@
 filename: fly_connectome_data_tutorial_archive.zip
 upstream_url: https://github.com/sjcabs/fly_connectome_data_tutorial
 default_branch: main
-pinned_commit: 45c761f
-pinned_date: 2026-04-29
+pinned_commit: '5416119'
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD)
 license: MIT
 language: R + Python
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of fly_connectome_data_tutorial, the R + Python tutorial materials prepared for the San Juan Winter School on Connectomics and Brain Simulation (SJCABS). The tutorial walks new users through every major Drosophila connectome dataset — BANC, FAFB-FlyWire, MANC, Hemibrain and maleCNS — at a uniform level, covering data access and metadata exploration, neuron morphology and NBLAST, connectivity and neurotransmitter prediction, and indirect connectivity via influence scores. All datasets in the tutorial are harmonised to the unified BANC metadata schema so cross-dataset comparisons work the same way in every lesson. Lessons are delivered as matched R notebook + Python notebook pairs that produce comparable outputs. Authored by Sven Dorkenwald and Alexander Bates with contributions from Philipp Schlegel and Greg Jefferis. For users in this Dataverse the most load-bearing artefact is data/dataset_documentation/banc_data.md — a third-party, user-facing column dictionary digest of the BANC tables. Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the tutorial continues to evolve at the GitHub URL above.
+description: '**Note on citation:** this code repository does not yet have a minted Zenodo DOI. When one is minted (via a tagged GitHub Release with Zenodo integration enabled), it will become the canonical citable resource; this Dataverse copy is a byte-for-byte snapshot of the main-branch HEAD on the upload date. Snapshot of fly_connectome_data_tutorial, the R + Python tutorial materials prepared for the San Juan Winter School on Connectomics and Brain Simulation (SJCABS). The tutorial walks new users through every major Drosophila connectome dataset — BANC, FAFB-FlyWire, MANC, Hemibrain and maleCNS — at a uniform level, covering data access and metadata exploration, neuron morphology and NBLAST, connectivity and neurotransmitter prediction, and indirect connectivity via influence scores. All datasets in the tutorial are harmonised to the unified BANC metadata schema so cross-dataset comparisons work the same way in every lesson. Lessons are delivered as matched R notebook + Python notebook pairs that produce comparable outputs. Authored by Sven Dorkenwald and Alexander Bates with contributions from Philipp Schlegel and Greg Jefferis. For users in this Dataverse the most load-bearing artefact is data/dataset_documentation/banc_data.md — a third-party, user-facing column dictionary digest of the BANC tables. Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the tutorial continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # fly_connectome_data_tutorial_archive.zip
 
 ## Purpose

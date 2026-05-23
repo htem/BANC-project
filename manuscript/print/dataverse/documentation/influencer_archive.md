@@ -2,23 +2,19 @@
 filename: influencer_archive.zip
 upstream_url: https://github.com/natverse/influencer
 default_branch: main
-pinned_commit: 2519c57
-pinned_date: 2026-04-13
+pinned_commit: 7a12030
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD)
 license: GPL-3.0
 language: R
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of the influencer R package, an R port and wrapper of the Drugowitsch lab's ConnectomeInfluenceCalculator (Zenodo DOI 10.5281/zenodo.15999930). Provides two parallel implementations of the linear-dynamical-systems influence model used throughout the BANC paper: a native R backend in influence_calculator_r() built on Matrix and RSpectra, and a Python backend in influence_calculator_py() that calls PETSc / SLEPc through reticulate. Each calculator object exposes a calculate_influence() method (with calculate_influence_py() as the Python-backed wrapper) that returns the per-seed steady-state response, plus a data.table-based adjust_influence() that groups targets and recomputes per-group adjusted scores (~10-50x faster than the pure-R equivalent on the BANC edgelist). influencer caches the eigenvalue decomposition between seeds, yielding a large speedup on subsequent seed queries against the same connectome. It is the engine behind every adjusted-influence number cited in the paper and behind the precomputed parquet tables in this Dataverse. Citable via Zenodo DOI 10.5281/zenodo.15999929 (https://doi.org/10.5281/zenodo.15999929). Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the package continues to evolve at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.20350563). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of the influencer R package, an R port and wrapper of the Drugowitsch lab''s ConnectomeInfluenceCalculator. Provides two parallel implementations of the linear-dynamical-systems influence model used throughout the BANC paper: a native R backend in influence_calculator_r() built on Matrix and RSpectra, and a Python backend in influence_calculator_py() that calls PETSc / SLEPc through reticulate. Each calculator object exposes a calculate_influence() method (with calculate_influence_py() as the Python-backed wrapper) that returns the per-seed steady-state response, plus a data.table-based adjust_influence() that groups targets and recomputes per-group adjusted scores (~10-50x faster than the pure-R equivalent on the BANC edgelist). influencer caches the eigenvalue decomposition between seeds, yielding a large speedup on subsequent seed queries against the same connectome. It is the engine behind every adjusted-influence number cited in the paper and behind the precomputed parquet tables in this Dataverse. Distributed here as a ZIP pinned to the main-branch HEAD at upload date; the package continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # influencer_archive.zip
 
 ## Purpose

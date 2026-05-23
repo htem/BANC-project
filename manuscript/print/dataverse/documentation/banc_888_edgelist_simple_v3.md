@@ -1,8 +1,8 @@
 ---
 filename: banc_888_edgelist_simple_v3.feather
 gcs_path: gs://lee-lab_brain-and-nerve-cord-fly-connectome/compiled_data/banc_888/banc_888_edgelist_simple_v3.feather
-size_bytes: 352129906
-size_human: 335.8 MB
+size_bytes: 359161658
+size_human: 342.5 MB
 nrows: 13507098
 ncols: 6
 content_type: application/x-arrow

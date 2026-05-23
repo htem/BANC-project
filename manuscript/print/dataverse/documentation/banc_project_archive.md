@@ -2,23 +2,19 @@
 filename: banc_project_archive.zip
 upstream_url: https://github.com/htem/BANC-project
 default_branch: main
-pinned_commit: e27bfa8
-pinned_date: 2026-02-24
+pinned_commit: 2885e4b
+pinned_date: '2026-05-22'
 release_tag: (none — pinned to main HEAD)
 license: GPL-3.0
 language: R
 content_type: application/zip
-
-# --- Fields posted to Dataverse ---
-description: >-
-  Snapshot of BANC-project, the R analysis code and Adobe Illustrator plot files that together produced every figure in the BANC paper. Each figure of the manuscript has a matched directory under figures/figure_N/ holding the assembled .ai file(s), source PDF / PNG panels under links/, supplementary panels under links/supplement/, and exploratory or dark-mode variants under links/extra/. The R scripts that generate those panels live under R/figures/ (one panel_*.R or panels_*.R script per figure or per coherent set of panels), with shared infrastructure under R/startup/ (banc-startup.R, banc-meta.R, banc-edgelist.R, banc-functions.R) and text-side helpers under R/text/ (numbers.R, ngl_links.R) that produce the paper-cited number table and the Neuroglancer link manifest. The repository depends on bancr, influencer and the natverse stack. Developed at Harvard Medical School in the Wilson and Lee labs by Alexander Bates and collaborators. Distributed here as a ZIP pinned to commit e27bfa8 on main (24 February 2026); the live repository continues to evolve at the GitHub URL above.
+description: '**Canonical citation:** the authoritative archive for this software is on Zenodo (DOI https://doi.org/10.5281/zenodo.20350641). Cite the Zenodo DOI rather than this Dataverse copy — the Dataverse archive is a byte-for-byte snapshot pinned to the main-branch HEAD on the upload date, mirrored here for one-stop replication. Snapshot of BANC-project, the R analysis code and Adobe Illustrator plot files that together produced every figure in the BANC paper. Each figure of the manuscript has a matched directory under figures/figure_N/ holding the assembled .ai file(s), source PDF / PNG panels under links/, supplementary panels under links/supplement/, and exploratory or dark-mode variants under links/extra/. The R scripts that generate those panels live under R/figures/ (one panel_*.R or panels_*.R script per figure or per coherent set of panels), with shared infrastructure under R/startup/ (banc-startup.R, banc-meta.R, banc-edgelist.R, banc-functions.R) and text-side helpers under R/text/ (numbers.R, ngl_links.R) that produce the paper-cited number table and the Neuroglancer link manifest. The repository depends on bancr, influencer and the natverse stack. Developed at Harvard Medical School in the Wilson and Lee labs by Alexander Bates and collaborators. Distributed here as a ZIP pinned to commit e27bfa8 on main (24 February 2026); the live repository continues to evolve at the GitHub URL above.'
 categories:
-  - Code
+- Code
 directoryLabel: code
 restrict: false
 tabIngest: false
 ---
-
 # banc_project_archive.zip
 
 ## Purpose
