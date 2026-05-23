@@ -7,6 +7,9 @@ content_type: application/gzip
 
 # --- Fields posted to Dataverse ---
 description: >-
+  **Columns (no header row in the CSV):** id, pre_x, pre_y, pre_z,
+  post_x, post_y, post_z, ctr_x, ctr_y, ctr_z, size,
+  pre_supervoxel_id, pre_root_id, post_supervoxel_id, post_root_id.
   Raw, gzipped CSV of every BANC v3 synapse — the pre-enrichment
   output of the upstream synapse-prediction pipeline, expanded into
   human-readable columns (synapse id, pre / post-synaptic root_id at
