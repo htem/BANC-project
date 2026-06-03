@@ -319,6 +319,7 @@ tactile perception,#FF1493,modality,deep_pink
 proprioceptive perception,#1BB6AF,super_cluster,teal
 threat response,#ae0000,super_cluster,deep_red
 walking steering,#FBBB48,super_cluster,golden_yellow
+postural control,#8A2BE2,super_cluster,blue_violet
 takeoff-landing,#8A2BE2,super_cluster,blue_violet
 landing,#8A2BE2,super_cluster,blue_violet
 probing,#60BC5B,super_cluster,light_green
