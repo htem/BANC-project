@@ -12,6 +12,7 @@
 **First authors:** [Alexander S. Bates](https://scholar.google.com/citations?user=BOVTiXIAAAAJ&hl=en), [Jasper S. Phelps](https://scholar.google.com/citations?user=HT5N2EIAAAAJ&hl=en), [Minsu Kim](https://www.linkedin.com/in/mindy-minsu-kim), [Helen H. Yang](https://orcid.org/0000-0001-5140-9664)
 **Corresponding authors:** Mala Murthy, Jan Drugowitsch, [Rachel I. Wilson](https://scholar.google.com/citations?user=T-RODd8AAAAJ&hl=en), [Wei-Chung Allen Lee](https://scholar.google.com/citations?user=y2s07ssAAAAJ&hl=en)
 
+[![Nature (open access)](https://img.shields.io/badge/Nature-10.1038%2Fs41586--026--10735--w-006400?style=flat)](https://doi.org/10.1038/s41586-026-10735-w)
 [![bioRxiv](https://img.shields.io/badge/bioRxiv-2025.07.31.667571v3-bd2c00?style=flat)](https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3)
 [![PubMed](https://img.shields.io/badge/PubMed-40766407-1f6feb?style=flat)](https://pubmed.ncbi.nlm.nih.gov/40766407/)
 [![Harvard Dataverse](https://img.shields.io/badge/Dataverse-10.7910%2FDVN%2F7WTH1N-orange?style=flat)](https://doi.org/10.7910/DVN/7WTH1N)
@@ -25,7 +26,7 @@
 
 The **Brain-And-Nerve-Cord (BANC)** is the first synapse-resolution connectome that unites the brain and ventral nerve cord of an animal. It is a reconstruction of the central nervous system of one adult female *Drosophila melanogaster* — approximately 188,000 neurons and 199 million predicted synapses, spanning the brain, suboesophageal zone, cervical connective, and the entire ventral nerve cord. Imaged at 4 nm in-plane resolution by serial-section electron microscopy, segmented and proofread by a community of researchers and citizen scientists, and annotated for cell type, neurotransmitter, hemilineage, behavioural function, and cross-dataset identity.
 
-This repository accompanies the paper *Distributed control circuits across a brain-and-cord connectome* (Bates, Phelps, Kim, Yang et al., 2026). It holds the R analysis pipeline that produced every figure and statistical result, the per-figure illustrator-ready PDFs and tabular outputs, and a committed snapshot of the metadata needed to reproduce the analyses end-to-end. Larger data products (per-synapse tables, influence parquets, neuron meshes) are kept on the [Harvard Dataverse deposit](https://doi.org/10.7910/DVN/7WTH1N) and are pulled on demand by the analysis scripts.
+This repository accompanies the paper [*Distributed control circuits across a brain-and-cord connectome*](https://doi.org/10.1038/s41586-026-10735-w) (Bates, Phelps, Kim, Yang et al., *Nature* 2026 — open access). It holds the R analysis pipeline that produced every figure and statistical result, the per-figure illustrator-ready PDFs and tabular outputs, and a committed snapshot of the metadata needed to reproduce the analyses end-to-end. Larger data products (per-synapse tables, influence parquets, neuron meshes) are kept on the [Harvard Dataverse deposit](https://doi.org/10.7910/DVN/7WTH1N) and are pulled on demand by the analysis scripts.
 
 <div align="center">
 
@@ -198,13 +199,20 @@ The above resources are read-only for general users. Editing the segmentation or
 
 Please cite both the paper and the Dataverse deposit:
 
+> Bates AS, Phelps JS, Kim M, Yang HHJ, Matsliah A, Ajabi Z, Perlman E, *et al.* (2026).
+> *Distributed control circuits across a brain-and-cord connectome.*
+> **Nature** (open access). <https://doi.org/10.1038/s41586-026-10735-w>
+> Preprint: bioRxiv 2025.07.31.667571 (v3), <https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3>
+
 ```bibtex
 @article{bates2026banc,
   author  = {Bates, Alexander S. and Phelps, Jasper S. and Kim, Minsu and Yang, Helen H. and {others (BANC-FlyWire Consortium)}},
   title   = {Distributed control circuits across a brain-and-cord connectome},
   journal = {Nature},
   year    = {2026},
-  note    = {bioRxiv preprint: https://doi.org/10.1101/2025.07.31.667571}
+  doi     = {10.1038/s41586-026-10735-w},
+  url     = {https://doi.org/10.1038/s41586-026-10735-w},
+  note    = {Open access. Preprint v3: https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3}
 }
 
 @misc{bates2026bancdata,
