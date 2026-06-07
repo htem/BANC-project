@@ -1,6 +1,6 @@
 {
   "title": "BANC-project: Analysis + figure-reproduction repository for the BANC connectome paper",
-  "description": "R analysis pipeline that produced every figure and statistical result in Bates, Phelps, Kim, Yang et al. (2026) 'Distributed control circuits across a brain-and-cord connectome' (bioRxiv 10.1101/2025.07.31.667571). Consumes bancpipeline outputs from the Harvard Dataverse / GCS bucket and emits the per-figure illustrator-ready PDFs and tabular outputs.",
+  "description": "R analysis pipeline that produced every figure and statistical result in Bates, Phelps, Kim, Yang et al. (2026) 'Distributed control circuits across a brain-and-cord connectome' (Nature, open access; doi: 10.1038/s41586-026-10735-w; preprint v3: https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3). Consumes bancpipeline outputs from the Harvard Dataverse / GCS bucket and emits the per-figure illustrator-ready PDFs and tabular outputs.",
   "license": "CC-BY-4.0",
   "upload_type": "software",
   "access_right": "open",
