@@ -1,8 +1,8 @@
 
 Diversity: non-parametric summary
 ---------------------------------
-Date: 2026-05-20 19:12:46
-Observations: 9026409
+Date: 2026-07-20 17:11:44
+Observations: 8438583
 Categories (K): 3
 Groups (G): 2
 Category column: 'category' | Value column: 'cos_sim'
@@ -13,12 +13,12 @@ Group/category medians (descending)
 -----------------------------------
 |group            |category           |       n| median|    iqr|
 |:----------------|:------------------|-------:|------:|------:|
-|sensory → AN/DN  |same cell type     |    7345| 0.7809| 0.4845|
-|AN/DN → effector |same cell type     |    6561| 0.6292| 0.6035|
-|sensory → AN/DN  |same cluster       |  366671| 0.4566| 0.5224|
-|AN/DN → effector |same cluster       |  300432| 0.2720| 0.4772|
-|sensory → AN/DN  |different clusters | 4598265| 0.1896| 0.4002|
-|AN/DN → effector |different clusters | 3747135| 0.1133| 0.3414|
+|sensory → AN/DN  |same cell type     |    6982| 0.7672| 0.4962|
+|AN/DN → effector |same cell type     |    6276| 0.6173| 0.5993|
+|sensory → AN/DN  |same cluster       |  342684| 0.4452| 0.5276|
+|AN/DN → effector |same cluster       |  283508| 0.2667| 0.4749|
+|sensory → AN/DN  |different clusters | 4278737| 0.1662| 0.3801|
+|AN/DN → effector |different clusters | 3520396| 0.1055| 0.3344|
 
 Pairwise Wilcoxon across categories (AN/DN → effector)
 ------------------------------------------------------

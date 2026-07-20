@@ -302,13 +302,18 @@ write_diversity_nonparam_summary(
 pairs_both_sc <- pairs_both %>%
   dplyr::mutate(super_cluster = sc_i)
 
-# Fixed super_cluster order (user-supplied, 2026-05-20). Drop any super_clusters
-# present in the data but not in the order vector (e.g. "vibratory", which has
-# no AN/DN seeds in the current cut).
+# Fixed super_cluster order (user-supplied, 2026-05-20). Any super_cluster
+# present in the data but absent from this vector is silently dropped from the
+# facets, so it must list every super_cluster we expect to plot.
+#
+# "vibratory" was excluded on 2026-05-20 on the grounds that it had no AN/DN
+# seeds in that cut. That is no longer true: it now carries 141 proofread AN/DN
+# neurons (139 ascending, 2 descending) spanning 25 cell types, so it is
+# restored here. Grouped with the other mechanosensory clusters.
 sc_order_fixed <- c(
   "flight power", "flight steering 1", "flight steering 2", "head orienting",
   "postural control", "threat response", "proprioceptive", "tactile",
-  "reproduction", "feeding", "taste-touch", "visceral control",
+  "vibratory", "reproduction", "feeding", "taste-touch", "visceral control",
   "probing", "grooming", "walking", "walking steering"
 )
 sc_order_by_median <- intersect(sc_order_fixed, unique(pairs_both_sc$super_cluster))

@@ -1,8 +1,8 @@
 
 Diversity: non-parametric summary
 ---------------------------------
-Date: 2026-05-20 19:17:16
-Observations: 8611764
+Date: 2026-07-20 17:15:43
+Observations: 8438583
 Categories (K): 3
 Groups (G): 2
 Category column: 'category' | Value column: 'cos_sim'
@@ -13,12 +13,12 @@ Group/category medians (descending)
 -----------------------------------
 |group            |category           |       n| median|    iqr|
 |:----------------|:------------------|-------:|------:|------:|
-|sensory → AN/DN  |same cell type     |    6797| 0.7837| 0.4759|
-|AN/DN → effector |same cell type     |    6046| 0.5987| 0.6125|
-|sensory → AN/DN  |same cluster       |  357344| 0.4515| 0.5165|
-|AN/DN → effector |same cluster       |  292033| 0.2603| 0.4596|
-|sensory → AN/DN  |different clusters | 4384224| 0.1981| 0.4098|
-|AN/DN → effector |different clusters | 3565320| 0.1094| 0.3283|
+|sensory → AN/DN  |same cell type     |    6982| 0.7672| 0.4962|
+|AN/DN → effector |same cell type     |    6276| 0.6173| 0.5993|
+|sensory → AN/DN  |same cluster       |  342684| 0.4452| 0.5276|
+|AN/DN → effector |same cluster       |  283508| 0.2667| 0.4749|
+|sensory → AN/DN  |different clusters | 4278737| 0.1662| 0.3801|
+|AN/DN → effector |different clusters | 3520396| 0.1055| 0.3344|
 
 Kruskal–Wallis within group: AN/DN → effector
 ---------------------------------------------
@@ -26,7 +26,7 @@ Kruskal–Wallis within group: AN/DN → effector
 	Kruskal-Wallis rank sum test
 
 data:  df_g[[value_col]] by df_g[[category_col]]
-Kruskal-Wallis chi-squared = 63091, df = 2, p-value <
+Kruskal-Wallis chi-squared = 65625, df = 2, p-value <
 0.00000000000000022
 
 
@@ -44,7 +44,7 @@ Kruskal–Wallis within group: sensory → AN/DN
 	Kruskal-Wallis rank sum test
 
 data:  df_g[[value_col]] by df_g[[category_col]]
-Kruskal-Wallis chi-squared = 127309, df = 2, p-value <
+Kruskal-Wallis chi-squared = 149822, df = 2, p-value <
 0.00000000000000022
 
 
@@ -58,7 +58,7 @@ Pairwise Wilcoxon across categories (sensory → AN/DN)
 
 Within-group legend statements
 ------------------------------
-[1] "[AN/DN → effector] Kruskal–Wallis: H(2) = 63090.69, P < 2.2 × 10^−16. Pairwise Wilcoxon (holm): same cluster–same cell type (P < 2.2 × 10^−16); different clusters–same cell type (P < 2.2 × 10^−16); different clusters–same cluster (P < 2.2 × 10^−16).\n[sensory → AN/DN] Kruskal–Wallis: H(2) = 127308.92, P < 2.2 × 10^−16. Pairwise Wilcoxon (holm): same cluster–same cell type (P < 2.2 × 10^−16); different clusters–same cell type (P < 2.2 × 10^−16); different clusters–same cluster (P < 2.2 × 10^−16)."
+[1] "[AN/DN → effector] Kruskal–Wallis: H(2) = 65625.32, P < 2.2 × 10^−16. Pairwise Wilcoxon (holm): same cluster–same cell type (P < 2.2 × 10^−16); different clusters–same cell type (P < 2.2 × 10^−16); different clusters–same cluster (P < 2.2 × 10^−16).\n[sensory → AN/DN] Kruskal–Wallis: H(2) = 149821.76, P < 2.2 × 10^−16. Pairwise Wilcoxon (holm): same cluster–same cell type (P < 2.2 × 10^−16); different clusters–same cell type (P < 2.2 × 10^−16); different clusters–same cluster (P < 2.2 × 10^−16)."
 
 Between-group Wilcoxon per category (adjusted p)
 ------------------------------------------------

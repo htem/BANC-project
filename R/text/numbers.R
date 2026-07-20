@@ -51,6 +51,17 @@ source("R/startup/banc-startup.R")
 franken.meta <- tryCatch({
   fm <- franken_meta()
   if (is.null(fm) || nrow(fm) == 0) stop("empty result")
+  # 2026-07-20: franken_meta() began returning a reduced 23-column frame with no
+  # `dataset` column, which killed the "Missing types" block below
+  # (dplyr::filter(..., dataset == "FAFB")) and aborted the whole script before
+  # numbers.csv was written. A row-count check alone does not catch a schema
+  # regression, so require the columns we actually consume; failing that, fall
+  # through to franken-meta.R, which supplies the full frame.
+  .fm_need <- c("dataset", "super_class", "flow", "cell_type")
+  if (!all(.fm_need %in% colnames(fm))) {
+    stop(sprintf("missing columns: %s",
+                 paste(setdiff(.fm_need, colnames(fm)), collapse = ", ")))
+  }
   fm
 }, error = function(e) {
   message("franken_meta() failed: ", e$message, " — trying franken-meta.R")
@@ -394,7 +405,7 @@ df <- add_row(df, "postsynaptic_detections", postsynaptic_count,
 # values in the 4,648-row sample of size > 5 v2 synapses that Aelysia
 # reviewed (2024-09-20). Drives var/synapse_v2_sample_fiveorless_{true,
 # false,ambiguous} placeholders in the manuscript.
-.aelysia_csv <- "data/synapses/2024-09-20_aelysia_synapse_sample_complete.csv"
+.aelysia_csv <- "data/synapses/2024-09-20_aelysia_synapse_sample_complete_v2.csv"
 if (file.exists(.aelysia_csv)) {
   .ael <- readr::read_csv(.aelysia_csv, show_col_types = FALSE)
   .tag <- as.character(.ael$Tags)
@@ -414,6 +425,36 @@ if (file.exists(.aelysia_csv)) {
                   .n_true, .n_false, .n_amb, nrow(.ael)))
 } else {
   message("Aelysia synapse review CSV not found: ", .aelysia_csv)
+}
+
+# Aelysia v3 manual review tallies — counterpart to the v2 block above.
+# Source is the v3 review CSV (Aelysia; sample drawn 2026-05-14, full review
+# completed 2026-06-04). Rows with no verdict Tag are dropped.
+# Drives var/synapse_v3_sample_{true,false,ambiguous} placeholders.
+.aelysia_v3_csv <- "data/synapses/2026-05-14_aelysia_synapse_sample_complete_v3.csv"
+if (file.exists(.aelysia_v3_csv)) {
+  .ael3 <- readr::read_csv(.aelysia_v3_csv, show_col_types = FALSE)
+  .tag3 <- as.character(.ael3$Tags)
+  .n_true3  <- sum(.tag3 %in% c("True","TRUE"),   na.rm = TRUE)
+  .n_false3 <- sum(.tag3 %in% c("False","FALSE"), na.rm = TRUE)
+  .n_amb3   <- sum(.tag3 == "Ambiguous",          na.rm = TRUE)
+  .n_rev3   <- .n_true3 + .n_false3 + .n_amb3
+  df <- add_row(df, "synapse_v3_sample_true", .n_true3, "auto",
+                sprintf("Manual review (Aelysia, 2026-05-14): synapses tagged True in the v3 review sample (n_reviewed = %d of %d). Methods: Synapses.",
+                        .n_rev3, nrow(.ael3)))
+  df <- add_row(df, "synapse_v3_sample_false", .n_false3, "auto",
+                sprintf("Manual review (Aelysia, 2026-05-14): synapses tagged False in the v3 review sample (n_reviewed = %d of %d). Methods: Synapses.",
+                        .n_rev3, nrow(.ael3)))
+  df <- add_row(df, "synapse_v3_sample_ambiguous", .n_amb3, "auto",
+                sprintf("Manual review (Aelysia, 2026-05-14): synapses tagged Ambiguous in the v3 review sample (n_reviewed = %d of %d). Methods: Synapses.",
+                        .n_rev3, nrow(.ael3)))
+  df <- add_row(df, "synapse_v3_sample_n_reviewed", .n_rev3, "auto",
+                sprintf("v3 review sample rows with a True/False/Ambiguous Tag set (of %d total sampled). Methods: Synapses.",
+                        nrow(.ael3)))
+  message(sprintf("Aelysia v3 synapse review tally: True=%d, False=%d, Ambiguous=%d (reviewed %d / %d)",
+                  .n_true3, .n_false3, .n_amb3, .n_rev3, nrow(.ael3)))
+} else {
+  message("Aelysia v3 synapse review CSV not found: ", .aelysia_v3_csv)
 }
 
 # Autapses — check from edgelist (already loaded by startup)
@@ -550,7 +591,7 @@ rm(.fig6g_csv)
 # (size <= 5 vs size > 5). Source: master review CSV with both the original
 # size > 5 sample and the 2026-05-06 size <= 5 review merged in.
 .syn_review <- tryCatch({
-  readr::read_csv("data/synapses/2024-09-20_aelysia_synapse_sample_complete.csv",
+  readr::read_csv("data/synapses/2024-09-20_aelysia_synapse_sample_complete_v2.csv",
                   show_col_types = FALSE)
 }, error = function(e) {
   message("  Could not load synapse review CSV: ", conditionMessage(e))
@@ -995,6 +1036,90 @@ df <- add_row(df, "cell_typed_neuron_no_aligned_types_proportion", ct_count / .c
               "Proportion of expected CNS neurons typed (excl alignment). Results: Cell types.")
 rm(.has_ct, .has_alignment, .typed_or_aligned, .is_cb_vnc, .cns_denom)
 
+# ---- Optic-lobe cell-type coverage (FAFB alignment Methods paragraph) ------
+#
+# Feeds the Methods sentence "In the optic lobes specifically, N of M proofread
+# neurons (P%) lacked a human-verified cell type ...". Previously these six
+# numbers lived only as prose in bancpipeline at alignment/method.txt, with no
+# var/ identity and no script emitting them; they drifted until the sentence was
+# arithmetically impossible (the stated left-hand untyped count exceeded the
+# stated total). Tracking them here keeps the doc in sync via the sheet.
+#
+# "Human-verified" mirrors the ground-truth rule in
+# bancpipeline/alignment/presets/optic-lobe/prep.R:152-160 — a type counts only
+# if it is non-blank, not `auto:`-prefixed (those are pipeline output, 56k of
+# them), and not an unknown/fragment/glia placeholder. fafb_alignment_cell_type
+# is deliberately NOT counted as verified: it is a pipeline suggestion awaiting
+# human review, and conflating the two is what produced the original error.
+.human_typed <- function(x) {
+  !is.na(x) & trimws(x) != "" &
+    !grepl("^auto:", x) &
+    !grepl("unknown|fragment|glia", tolower(x))
+}
+
+.optic <- bm %>%
+  dplyr::filter(as.logical(proofread) %in% TRUE |
+                  as.logical(roughly_proofread) %in% TRUE,
+                !super_class %in% c("glia", "trachea", "not_a_neuron"),
+                region == "optic_lobe")
+
+.optic_verified <- .human_typed(.optic$cell_type) |
+                     .human_typed(.optic$fafb_cell_type)
+.optic_suggested <- !is.na(.optic$fafb_alignment_cell_type) &
+                      trimws(.optic$fafb_alignment_cell_type) != ""
+
+df <- add_row(df, "optic_lobe_neuron_count", nrow(.optic), "auto",
+              "Proofread + roughly_proofread optic lobe neurons, excluding glia/trachea/not_a_neuron. Methods: Cross-dataset cell type assignment.")
+df <- add_row(df, "optic_lobe_untyped_count", sum(!.optic_verified), "auto",
+              "Optic lobe neurons with no human-verified cell type (cell_type / fafb_cell_type, excluding auto: and placeholder terms). Methods: Cross-dataset cell type assignment.")
+df <- add_row(df, "optic_lobe_untyped_proportion",
+              sum(!.optic_verified) / nrow(.optic), "auto",
+              "Proportion of optic lobe neurons lacking a human-verified cell type. Methods: Cross-dataset cell type assignment.")
+
+# Guard the side comparison against NA. banc.meta as enriched here carries NA
+# sides for a minority of optic-lobe rows (the GCS cache does not), and a bare
+# `side == "right"` propagates those NAs straight through sum(), turning every
+# per-side figure into NA. Tracked below so that right + left failing to sum to
+# the total is visible rather than silent — that is precisely the flaw that made
+# the original Methods sentence impossible to reconcile.
+for (.sd in c("right", "left")) {
+  .m <- !is.na(.optic$side) & .optic$side == .sd
+  df <- add_row(df, sprintf("optic_lobe_%s_neuron_count", .sd), sum(.m), "auto",
+                sprintf("Proofread + roughly_proofread optic lobe neurons on the %s. Methods: Cross-dataset cell type assignment.", .sd))
+  df <- add_row(df, sprintf("optic_lobe_%s_untyped_count", .sd),
+                sum(!.optic_verified & .m), "auto",
+                sprintf("Optic lobe neurons on the %s with no human-verified cell type. Methods: Cross-dataset cell type assignment.", .sd))
+  df <- add_row(df, sprintf("optic_lobe_%s_untyped_proportion", .sd),
+                sum(!.optic_verified & .m) / sum(.m), "auto",
+                sprintf("Proportion of %s optic lobe neurons lacking a human-verified cell type. Methods: Cross-dataset cell type assignment.", .sd))
+}
+
+df <- add_row(df, "optic_lobe_side_unassigned_count",
+              sum(is.na(.optic$side) | trimws(.optic$side) == ""), "auto",
+              "Optic lobe neurons with no side assignment; the amount by which right + left falls short of the total. Methods: Cross-dataset cell type assignment.")
+
+# Split of the untyped pool into "pipeline has proposed something, awaiting
+# review" versus "nothing at all" — the algorithm's outcome, quoted as a
+# separate sentence so it is never mistaken for the pre-alignment input state.
+df <- add_row(df, "optic_lobe_alignment_suggested_count",
+              sum(!.optic_verified & .optic_suggested), "auto",
+              "Optic lobe neurons with no human-verified type but carrying an unreviewed fafb_alignment_cell_type suggestion. Methods: Cross-dataset cell type assignment.")
+df <- add_row(df, "optic_lobe_no_type_at_all_count",
+              sum(!.optic_verified & !.optic_suggested), "auto",
+              "Optic lobe neurons with neither a human-verified type nor an alignment suggestion. Methods: Cross-dataset cell type assignment.")
+df <- add_row(df, "optic_lobe_no_type_at_all_proportion",
+              sum(!.optic_verified & !.optic_suggested) / nrow(.optic), "auto",
+              "Proportion of optic lobe neurons with no cell type of any kind after alignment. Methods: Cross-dataset cell type assignment.")
+
+# Counted from the FAFB reference set the optic-lobe alignment runs against:
+# distinct non-blank cell_type in
+# bancpipeline/data/optic_lobe/fafb_optic_both_meta.csv. Hardcoded because that
+# file is a bancpipeline artefact, not a BANC-project input.
+df <- add_row(df, "fafb_optic_lobe_type_count", 685, "hardcoded",
+              "Distinct FAFB optic lobe cell types used as alignment targets (bancpipeline/data/optic_lobe/fafb_optic_both_meta.csv). Methods: Cross-dataset cell type assignment.")
+
+rm(.human_typed, .optic, .optic_verified, .optic_suggested)
+
 # Unique cell type count
 total_ct_unique <- bm.neurons %>%
   dplyr::filter(!is.na(cell_type), cell_type != "") %>%
@@ -1263,15 +1388,30 @@ df <- add_row(df, "orphan_effector_count", efferent_count - .eff_with_bp, "auto"
               "Effectors without body_part_effector assignment. Results: Effectors.")
 rm(.eff_with_bp)
 
-# Sensory category coverage
-.sens_with_bp <- bm %>%
+# Sensory category coverage.
+#
+# BUGFIX 2026-07-20: this reported 103.2%, which is impossible for a coverage
+# figure. The numerator was drawn from `bm` (every row in the meta) while the
+# denominator `sensory_count` is restricted to bm.neurons AND to proofread +
+# roughly_proofread. Sensory neurons that are unproofread, or flagged as
+# non-neurons, counted towards the numerator but not the denominator. Both
+# sides are now computed over one set, which also makes the count of
+# still-unassigned sensory neurons meaningful.
+.sens_set <- bm.neurons %>%
   dplyr::filter(grepl("sensory", super_class),
-                !is.na(body_part_sensory), body_part_sensory != "",
-                tolower(body_part_sensory) != "unknown") %>% nrow()
+                as.logical(proofread) %in% TRUE |
+                  as.logical(roughly_proofread) %in% TRUE)
+.sens_known <- !is.na(.sens_set$body_part_sensory) &
+                 .sens_set$body_part_sensory != "" &
+                 tolower(.sens_set$body_part_sensory) != "unknown"
 df <- add_row(df, "sensory_category_pct",
-              paste0(round(100 * .sens_with_bp / sensory_count, 1), "%"), "auto",
-              "Pct sensory neurons with known body_part_sensory. Results: Sensory.")
-rm(.sens_with_bp)
+              paste0(round(100 * sum(.sens_known) / nrow(.sens_set), 1), "%"), "auto",
+              "Pct sensory neurons (PR + RPR) with a known body_part_sensory. Results: Sensory.")
+df <- add_row(df, "sensory_uncategorised_count", sum(!.sens_known), "auto",
+              "Sensory neurons (PR + RPR) with no body_part_sensory assignment. Results: Sensory.")
+# NB: sensory_category_count / effector_category_count are added further down
+# under "Body part categories" — do not duplicate them here.
+rm(.sens_set, .sens_known)
 
 .pr_rpr <- bm.neurons %>%
   dplyr::filter(as.logical(proofread) %in% TRUE |
@@ -1399,7 +1539,7 @@ df <- add_row(df, "visual_projection_count", vpn_count, "auto",
 ###########################
 
 synapse_review_file <- file.path(banc.path, "data", "synapses",
-                                  "2024-09-20_aelysia_synapse_sample_complete.csv")
+                                  "2024-09-20_aelysia_synapse_sample_complete_v2.csv")
 if (file.exists(synapse_review_file)) {
   syn_review <- readr::read_csv(synapse_review_file, show_col_types = FALSE)
   df <- add_row(df, "banc_reviewed_postsynaptic_connections", nrow(syn_review), "auto",
@@ -1598,18 +1738,26 @@ df <- add_row(df, "manc_ct_prop_missing", manc_missing_n / length(manc.cts), "au
 ### Body part categories
 ###########################
 
+# BUGFIX 2026-07-20: both counts previously included the literal placeholder
+# "unknown" as if it were a body part, inflating each by exactly one — the
+# Methods therefore claimed 24 effector and 47 sensory categories where the real
+# taxonomies hold 23 and 46. "unknown" is the absence of an assignment, and the
+# accompanying coverage percentages already exclude it, so counting it here
+# contradicted them.
 if ("body_part_effector" %in% colnames(bm)) {
-  eff_cats <- bm %>% dplyr::filter(!is.na(body_part_effector), body_part_effector != "") %>%
+  eff_cats <- bm %>% dplyr::filter(!is.na(body_part_effector), body_part_effector != "",
+                                   tolower(body_part_effector) != "unknown") %>%
     dplyr::distinct(body_part_effector) %>% nrow()
   df <- add_row(df, "effector_category_count", eff_cats, "auto",
-                "Distinct body part effector categories. Results: Effectors.")
+                "Distinct body part effector categories, excluding the 'unknown' placeholder. Results: Effectors.")
 }
 
 if ("body_part_sensory" %in% colnames(bm)) {
-  sens_cats <- bm %>% dplyr::filter(!is.na(body_part_sensory), body_part_sensory != "") %>%
+  sens_cats <- bm %>% dplyr::filter(!is.na(body_part_sensory), body_part_sensory != "",
+                                    tolower(body_part_sensory) != "unknown") %>%
     dplyr::distinct(body_part_sensory) %>% nrow()
   df <- add_row(df, "sensory_category_count", sens_cats, "auto",
-                "Distinct body part sensory categories. Results: Sensory.")
+                "Distinct body part sensory categories, excluding the 'unknown' placeholder. Results: Sensory.")
 }
 
 if ("neuropil" %in% colnames(bm)) {
@@ -1854,30 +2002,54 @@ rm(.both_fafb, .both_manc, .total_pairs, .agree, .differ_pct)
 ###########################
 
 message("Computing sexual dimorphism numbers...")
-.vnc <- bm %>% dplyr::filter(region == "ventral_nerve_cord")
+# Denominator = proofread + roughly_proofread VNC neurons, matching
+# banc_region_ventral_nerve_cord_count (~24,596). The sexually_dimorphic
+# annotation only exists on (roughly-)proofread neurons, so numerator and
+# denominator must share this population; dividing by the unfiltered VNC would
+# understate the proportion.
+.vnc <- bm %>% dplyr::filter(
+  region == "ventral_nerve_cord",
+  as.logical(proofread) %in% TRUE | as.logical(roughly_proofread) %in% TRUE)
 .vnc_total <- nrow(.vnc)
 if ("sexually_dimorphic" %in% colnames(bm)) {
-  .dimorphic <- .vnc %>%
-    dplyr::filter(!is.na(sexually_dimorphic), sexually_dimorphic != "")
-  # Values are: "dimorphic", "female-specific", "isomorphic"
-  .dimorphic_count <- .dimorphic %>%
-    dplyr::filter(sexually_dimorphic == "dimorphic" | sexually_dimorphic == "female-specific") %>%
-    nrow()
-  .sex_specific_count <- .dimorphic %>%
-    dplyr::filter(sexually_dimorphic == "female-specific") %>%
-    nrow()
-  .dimorphic_pct <- round(100 * .dimorphic_count / .vnc_total, 0)
-  .sex_specific_pct <- round(100 * .sex_specific_count / .vnc_total, 0)
+  # Values are: "dimorphic" (present in both sexes but morphologically
+  # different), "female-specific" (present only in the female), "isomorphic".
+  # Report the two SEPARATELY (do not fold female-specific into dimorphic).
+  .dimorphic_count    <- sum(.vnc$sexually_dimorphic == "dimorphic",       na.rm = TRUE)
+  .sex_specific_count <- sum(.vnc$sexually_dimorphic == "female-specific", na.rm = TRUE)
+  .dimorphic_pct      <- round(100 * .dimorphic_count / .vnc_total, 0)
+  .sex_specific_pct   <- round(100 * .sex_specific_count / .vnc_total, 0)
 
   df <- add_row(df, "vnc_sexually_dimorphic_count", .dimorphic_count, "auto",
-                "VNC neurons estimated sexually dimorphic. Results: Sexual dimorphism.")
+                "Proofread female VNC neurons flagged dimorphic (present in both sexes but different; excludes female-specific). Results: Sexual dimorphism.")
   df <- add_row(df, "vnc_sexually_dimorphic_pct", paste0(.dimorphic_pct, "%"), "auto",
-                "Pct of female VNC that is sexually dimorphic. Results: Sexual dimorphism.")
+                "Pct of proofread female VNC that is sexually dimorphic. Results: Sexual dimorphism.")
   df <- add_row(df, "vnc_sex_specific_count", .sex_specific_count, "auto",
-                "VNC neurons estimated sex-specific. Results: Sexual dimorphism.")
+                "Proofread female VNC neurons flagged female-specific (present only in the female). Results: Sexual dimorphism.")
   df <- add_row(df, "vnc_sex_specific_pct", paste0(.sex_specific_pct, "%"), "auto",
-                "Pct of female VNC that is sex-specific. Results: Sexual dimorphism.")
-  rm(.dimorphic, .dimorphic_count, .sex_specific_count, .dimorphic_pct, .sex_specific_pct)
+                "Pct of proofread female VNC that is sex-specific (female-specific). Results: Sexual dimorphism.")
+
+  # Class breakdown: these counts span all VNC classes, not only intrinsic
+  # interneurons, so tally each flag by super_class category (intrinsic /
+  # ascending / sensory / effector / unclassified). Order matters:
+  # sensory_ascending falls under 'ascending' (checked before 'sensory').
+  .vnc <- .vnc %>% dplyr::mutate(dclass = dplyr::case_when(
+    super_class == "ventral_nerve_cord_intrinsic"           ~ "intrinsic",
+    grepl("ascending", super_class)                         ~ "ascending",
+    grepl("sensory", super_class)                           ~ "sensory",
+    grepl("motor|effector|endocrine|visceral", super_class) ~ "effector",
+    TRUE                                                    ~ "unclassified"))
+  for (.flag in c("dimorphic", "female-specific")) {
+    .tag <- if (.flag == "dimorphic") "sexually_dimorphic" else "sex_specific"
+    .by  <- .vnc %>% dplyr::filter(sexually_dimorphic == .flag) %>% dplyr::count(dclass)
+    for (.cl in c("intrinsic", "sensory", "ascending", "effector", "unclassified")) {
+      .n <- .by$n[.by$dclass == .cl]; .n <- if (length(.n)) .n else 0L
+      df <- add_row(df, sprintf("vnc_%s_%s_count", .tag, .cl), .n, "auto",
+                    sprintf("Proofread female VNC %s neurons of class %s (super_class grouping). Results: Sexual dimorphism.",
+                            .flag, .cl))
+    }
+  }
+  rm(.dimorphic_count, .sex_specific_count, .dimorphic_pct, .sex_specific_pct)
 } else {
   message("  sexually_dimorphic column not found in banc.meta")
 }
@@ -1889,14 +2061,45 @@ rm(.vnc, .vnc_total)
 if (exists("franken.meta") &&
     "sexually_dimorphic" %in% colnames(franken.meta) &&
     "manc_id" %in% colnames(franken.meta)) {
-  .manc <- franken.meta %>% dplyr::filter(!is.na(manc_id))
+  # Distinct MANC neurons: franken.meta can hold >1 row per manc_id from the
+  # matching, so distinct() stops duplicate rows inflating the counts.
+  .manc <- franken.meta %>% dplyr::filter(!is.na(manc_id)) %>%
+    dplyr::distinct(manc_id, .keep_all = TRUE)
+  .manc_total <- nrow(.manc)
   .manc_male_specific <- sum(.manc$sexually_dimorphic == "male-specific", na.rm = TRUE)
   .manc_dimorphic     <- sum(.manc$sexually_dimorphic == "dimorphic",     na.rm = TRUE)
   df <- add_row(df, "manc_sex_specific_male_count", .manc_male_specific, "auto",
-                "Male-specific MANC neurons (franken.meta). Results: Sexual dimorphism.")
+                "Male-specific MANC neurons (distinct manc_id, franken.meta). Results: Sexual dimorphism.")
+  df <- add_row(df, "manc_sex_specific_male_pct",
+                paste0(round(100 * .manc_male_specific / .manc_total, 0), "%"), "auto",
+                "Pct of the male (MANC) VNC that is male-specific. Results: Sexual dimorphism.")
   df <- add_row(df, "manc_dimorphic_male_count", .manc_dimorphic, "auto",
-                "Sexually dimorphic MANC (male) neurons (franken.meta). Results: Sexual dimorphism.")
-  rm(.manc, .manc_male_specific, .manc_dimorphic)
+                "Sexually dimorphic MANC (male) neurons (distinct manc_id, franken.meta). Results: Sexual dimorphism.")
+  df <- add_row(df, "manc_dimorphic_male_pct",
+                paste0(round(100 * .manc_dimorphic / .manc_total, 0), "%"), "auto",
+                "Pct of the male (MANC) VNC that is sexually dimorphic. Results: Sexual dimorphism.")
+
+  # Class breakdown, parallel to the female VNC block above. Note the male set
+  # additionally includes descending neurons (DN axons in the male VNC), which
+  # the female region==ventral_nerve_cord set excludes.
+  .manc <- .manc %>% dplyr::mutate(dclass = dplyr::case_when(
+    grepl("intrinsic", super_class)                         ~ "intrinsic",
+    grepl("ascending", super_class)                         ~ "ascending",
+    grepl("descending", super_class)                        ~ "descending",
+    grepl("sensory", super_class)                           ~ "sensory",
+    grepl("motor|effector|endocrine|visceral", super_class) ~ "effector",
+    TRUE                                                    ~ "unclassified"))
+  for (.flag in c("dimorphic", "male-specific")) {
+    .tag <- if (.flag == "dimorphic") "dimorphic" else "sex_specific"
+    .by  <- .manc %>% dplyr::filter(sexually_dimorphic == .flag) %>% dplyr::count(dclass)
+    for (.cl in c("intrinsic", "sensory", "ascending", "descending", "effector", "unclassified")) {
+      .n <- .by$n[.by$dclass == .cl]; .n <- if (length(.n)) .n else 0L
+      df <- add_row(df, sprintf("manc_%s_male_%s_count", .tag, .cl), .n, "auto",
+                    sprintf("Male (MANC) %s neurons of class %s (super_class grouping). Results: Sexual dimorphism.",
+                            .flag, .cl))
+    }
+  }
+  rm(.manc, .manc_total, .manc_male_specific, .manc_dimorphic)
 }
 
 ###########################
